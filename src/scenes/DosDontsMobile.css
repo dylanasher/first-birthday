@@ -79,3 +79,10 @@ background-position:0 0,clamp(calc(100cqw - var(--sw)), calc(50cqw - var(--sw) *
 .dc-DosDontsMobile .trailp.ts{width:6px;height:6px;border-radius:50%;background:#FFF3C4;box-shadow:0 0 8px 3px rgba(247,216,115,.75)}
 /* until the sliding pill is measured, the selected tab paints its own fill so it always reads correctly */
 .dc-DosDontsMobile .tabs:not(.ready) .tab.on{background:#6D8F62}
+
+/* Chihiro and No-Face stand at the left end of the bridge, as in the desktop painting. A cut-out of the
+   front railing (.rail-front) sits over their legs so they stand on the deck. % of the painting. */
+.dc-DosDontsMobile .chihiro,.dc-DosDontsMobile .noface,.dc-DosDontsMobile .rail-front{position:absolute;height:auto;pointer-events:none;user-select:none}
+.dc-DosDontsMobile .noface{left:35.388%;top:40.431%;width:8.289%}
+.dc-DosDontsMobile .chihiro{left:31.031%;top:42.644%;width:5.526%}
+.dc-DosDontsMobile .rail-front{left:30.393%;top:40.431%;width:13.921%}
