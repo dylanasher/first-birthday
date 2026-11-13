@@ -74,3 +74,29 @@ body {
     overflow: clip !important;
   }
 }
+
+/* The little soot sprite that replaces the sparkle on "Open Invitation" and the arrow on every
+   "next chapter" button. A warm glow keeps it readable on the dark buttons; it hops on hover. */
+.soot-icon {
+  display: block;
+  flex: none;
+  margin: -6px 0;
+  filter: drop-shadow(0 0 2px rgba(255, 244, 214, 0.95)) drop-shadow(0 0 6px rgba(247, 216, 115, 0.55));
+  transform-origin: 50% 90%;
+}
+button:has(.soot-icon),
+a:has(.soot-icon) {
+  white-space: nowrap; /* the sprite is a bit wider than the old arrow; keep labels on one line */
+}
+button:hover .soot-icon,
+a:hover .soot-icon {
+  animation: soot-hop 0.6s ease-in-out infinite;
+}
+@keyframes soot-hop {
+  0%, 100% { transform: translateY(0) scale(1, 1); }
+  35% { transform: translateY(-4px) scale(0.96, 1.05); }
+  70% { transform: translateY(0) scale(1.06, 0.94); }
+}
+@media (prefers-reduced-motion: reduce) {
+  button:hover .soot-icon, a:hover .soot-icon { animation: none; }
+}
