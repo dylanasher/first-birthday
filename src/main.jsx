@@ -7,7 +7,7 @@ import './styles/global.css';
 // No <StrictMode>: the scenes own long-lived GSAP timelines and pointer trails that are set up
 // once per mount, and StrictMode's dev-only double mount would duplicate them.
 createRoot(document.getElementById('root')).render(
-  <BrowserRouter>
+  <BrowserRouter basename={import.meta.env.BASE_URL.replace(/\/$/, '')}>
     <App />
   </BrowserRouter>
 );

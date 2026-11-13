@@ -11,6 +11,14 @@ npm run dev       # http://localhost:5173
 npm run build     # static site in dist/
 ```
 
+## Live site (GitHub Pages)
+
+https://dylanasher.github.io/first-birthday/
+
+Every push to `main` rebuilds and publishes the site (`.github/workflows/deploy.yml`). To connect the
+RSVP sheet on the live site, add its web-app link under the repository's **Settings → Secrets and
+variables → Actions → Variables** as `VITE_RSVP_ENDPOINT`, then re-run the latest deploy.
+
 ## Stack
 
 - **Vite + React 18**: one class component per chapter layout, in `src/scenes/`.
