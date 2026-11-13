@@ -28,6 +28,47 @@ function persist(state) {
   } catch (e) { /* storage unavailable */ }
 }
 
+// ---- RSVP deadline strip ("Moonlight path", HANDOFF-RSVP.md) -------------------------------------
+// A glowing light travels along a night-sky track from "Invites sent" to "RSVP closes".
+// Dates are whole days in Manila time (UTC+8); the deadline counts until the end of that day.
+const RSVP_DEADLINE = '2026-11-30'; // YYYY-MM-DD
+const INVITES_SENT = '2026-11-14';
+const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const parseDay = (v) => { const m = /^(\d{4})-(\d{1,2})-(\d{1,2})$/.exec(String(v || '').trim()); return m ? [+m[1], +m[2] - 1, +m[3]] : null; };
+
+export function rsvpStrip(now = Date.now()) {
+  const dl = parseDay(RSVP_DEADLINE), st = parseDay(INVITES_SENT) || [2026, 10, 14];
+  if (!dl) return { label: '[RSVP deadline]', left: 'Date to come', pct: 0.06, placeholder: true, aria: 'RSVP deadline coming soon' };
+  const end = Date.UTC(dl[0], dl[1], dl[2], 15, 59, 59); // 23:59:59 on the deadline day in Manila
+  const start = Date.UTC(st[0], st[1], st[2], -8, 0, 0); // 00:00 on the invites-sent day in Manila
+  const mn = new Date(now + 8 * 3600000); // "today" in Manila
+  const days = Math.round((Date.UTC(dl[0], dl[1], dl[2]) - Date.UTC(mn.getUTCFullYear(), mn.getUTCMonth(), mn.getUTCDate())) / 86400000);
+  const left = now > end ? 'RSVP closed' : days <= 0 ? 'Last day' : days === 1 ? '1 day left' : days + ' days left';
+  const pct = Math.max(0, Math.min(1, (now - start) / Math.max(1, end - start)));
+  const label = MON[dl[1]] + ' ' + dl[2];
+  return { label, left, pct, placeholder: false, aria: 'Please reply by ' + label + ', ' + left };
+}
+
+function DeadlineStrip() {
+  const [now, setNow] = useState(() => Date.now());
+  useEffect(() => { const t = setInterval(() => setNow(Date.now()), 60000); return () => clearInterval(t); }, []);
+  const s = rsvpStrip(now);
+  const pos = (4 + s.pct * 92).toFixed(1) + '%'; // keeps the light inside the track
+  return (
+    <div className="rb a" role="note" aria-label={s.aria}>
+      <div className="rbtop">
+        <p className={`rbt${s.placeholder ? ' ph2' : ''}`}>Reply by {s.label}</p>
+        <p className="rbl">{s.left}</p>
+      </div>
+      <div className="rbtrack" aria-hidden="true">
+        <span className="rbfill" style={{ width: pos }} />
+        <span className="rbdot" style={{ left: pos }} />
+      </div>
+      <div className="rbends" aria-hidden="true"><span>Invites sent</span><span>RSVP closes</span></div>
+    </div>
+  );
+}
+
 const cleanName = (s) => s.replace(/[^\p{L} ]/gu, '').replace(/ {2,}/g, ' ').slice(0, 60);
 const firstName = (n) => (n || '').trim().split(/\s+/)[0] || '';
 const partyLine = (g) => {
@@ -109,19 +150,8 @@ export default function RsvpFlow({ onStep, onCelebrate }) {
   if (st.step === 'find') {
     return (
       <form className="panel rsvpflow" onSubmit={doSearch} noValidate>
-        <p className="rf-deadline a">
-          {/* a paper wish tag on a ribbon, like the ones tied to the tree above */}
-          <svg className="rf-string" width="40" height="32" viewBox="0 0 40 32" aria-hidden="true">
-            <path d="M33 22 C22 19 12 13 7 3" fill="none" stroke="#E38A9C" strokeWidth="3" strokeLinecap="round" />
-            <path d="M33 22 C24 25 14 27 5 30" fill="none" stroke="#E38A9C" strokeWidth="2.6" strokeLinecap="round" opacity=".9" />
-          </svg>
-          <span className="rf-tag">
-            <span className="rf-hole" aria-hidden="true" />
-            <span className="rf-dl-k">Kindly reply by</span>
-            <span className="rf-dl-d">November 30</span>
-          </span>
-        </p>
-        <p className="p a">Find your invitation to begin.</p>
+        <DeadlineStrip />
+        <p className="p rbafter a">We can't wait to celebrate with you! Find your invitation to begin.</p>
         <label className="lbl a" htmlFor="rs-find">Your name</label>
         <div className="rf-search a">
           <input

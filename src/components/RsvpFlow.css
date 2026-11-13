@@ -1,31 +1,24 @@
 /* Extra pieces for the RSVP find-your-name flow. Everything else reuses Chapter 6's form styles. */
-/* The deadline, as a paper wish tag hanging from a pink ribbon (Chapter 6's tree is hung with them). */
-.rsvpflow .rf-deadline {
-  position: relative; display: inline-block; margin: 6px 0 10px 30px;
-  filter: drop-shadow(0 5px 7px rgba(20, 24, 60, 0.22));
-  transform: rotate(-2deg); transform-origin: 0 50%;
-  animation: rf-sway 5.5s ease-in-out infinite;
-}
-@keyframes rf-sway { 0%, 100% { transform: rotate(-2.2deg); } 50% { transform: rotate(-0.4deg); } }
-@media (prefers-reduced-motion: reduce) { .rsvpflow .rf-deadline { animation: none; } }
-.rsvpflow .rf-string { position: absolute; z-index: 1; left: -17px; top: calc(50% - 22px); overflow: visible; } /* drawn over the tag so it threads through the hole */
-.rsvpflow .rf-tag {
-  position: relative; display: flex; flex-direction: column; padding: 8px 20px 9px 34px;
-  background:
-    radial-gradient(circle at 85% 20%, rgba(255, 236, 170, 0.55), rgba(255, 236, 170, 0) 45%),
-    linear-gradient(165deg, #fffbef 0%, #f8eac8 55%, #efd9a8 100%);
-  clip-path: polygon(16px 0, 100% 0, 100% 100%, 16px 100%, 0 calc(100% - 16px), 0 16px);
-}
-.rsvpflow .rf-tag::after { /* hand stitching */
-  content: ''; position: absolute; inset: 4px 5px 4px 21px; border: 1px dashed rgba(150, 108, 48, 0.45);
-  border-radius: 3px; pointer-events: none;
-}
-.rsvpflow .rf-hole {
-  position: absolute; left: 11px; top: 50%; width: 9px; height: 9px; margin-top: -4.5px; border-radius: 50%;
-  background: rgba(31, 44, 107, 0.55); box-shadow: 0 0 0 2px #e4cb92;
-}
-.rsvpflow .rf-dl-k { font-size: 10.5px; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; color: #7a5a2a; }
-.rsvpflow .rf-dl-d { margin-top: 1px; font-family: 'Pinyon Script', cursive; font-size: 27px; line-height: 1.05; color: #1f2c6b; }
+/* RSVP deadline (HANDOFF-RSVP.md): a night-sky strip where a glowing light travels from "invites sent"
+   toward "RSVP closes". Phone values, then the desktop layout's ~12% larger overrides. */
+.rsvpflow .rb{margin:2px 0 0;padding:12px 14px 13px;border-radius:16px;background:linear-gradient(160deg,rgba(31,44,107,.95),rgba(19,35,94,.92));color:#F5EBD5;box-shadow:inset 0 0 0 1px rgba(247,216,115,.35),0 6px 14px rgba(5,10,35,.2)}
+.rsvpflow .rbtop{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.rsvpflow .rbt{margin:0;font-family:'IM Fell English',Georgia,serif;font-size:18.0px;line-height:1.2;color:#F7D873}
+.rsvpflow .rbt.ph2{font-style:italic;color:#E9E3F5;opacity:.85}
+.rsvpflow .rbl{margin:0;flex:none;font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#E9E3F5;white-space:nowrap}
+.rsvpflow .rbtrack{position:relative;height:6px;border-radius:9px;background:rgba(233,227,245,.18);margin:14px 6px 7px}
+.rsvpflow .rbfill{position:absolute;left:0;top:0;bottom:0;border-radius:9px;background:linear-gradient(90deg,#B88A22,#F7D873)}
+.rsvpflow .rbdot{position:absolute;top:50%;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;background:radial-gradient(circle,#FFF8D6,#F7D873 60%);box-shadow:0 0 14px 4px rgba(247,216,115,.7);animation:rf-rbglow 2.4s ease-in-out infinite}
+.rsvpflow .rbends{display:flex;justify-content:space-between;font-size:10.5px;font-weight:700;color:#C9C3E3}
+.rsvpflow .rbafter{margin-top:10px !important;font-style:italic}
+.dc-RsvpDesktop .rsvpflow .rb{padding:13px 16px 15px}
+.dc-RsvpDesktop .rsvpflow .rbt{font-size:20.2px}
+.dc-RsvpDesktop .rsvpflow .rbl{font-size:11.8px}
+.dc-RsvpDesktop .rsvpflow .rbtrack{margin:16px 6px 7px}
+.dc-RsvpDesktop .rsvpflow .rbdot{width:20px;height:20px;margin:-10px 0 0 -10px}
+.dc-RsvpDesktop .rsvpflow .rbends{font-size:11.8px}
+@keyframes rf-rbglow{0%,100%{box-shadow:0 0 10px 3px rgba(247,216,115,.55)}50%{box-shadow:0 0 18px 6px rgba(247,216,115,.85)}}
+@media (prefers-reduced-motion: reduce){.rsvpflow .rbdot{animation:none}}
 .rsvpflow .rf-search { display: flex; gap: 8px; }
 .rsvpflow .rf-search .in { flex: 1; min-width: 0; }
 .rsvpflow .rf-go {
