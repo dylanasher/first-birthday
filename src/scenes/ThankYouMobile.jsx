@@ -136,6 +136,7 @@ export default class ThankYouMobile extends React.Component {
             <div className="ly clouds" />
             <span className="balloons" />
             <span className="flame" />
+            <img className="totoro" src="/art/totoro-leaf.webp" alt="" draggable="false" />
             <div className="ly flowers" />
           </div>
           <span className="petal" />

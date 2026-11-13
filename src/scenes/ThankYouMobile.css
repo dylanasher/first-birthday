@@ -52,3 +52,7 @@ top:clamp(calc(100cqh - var(--sh)), calc(50cqh - var(--sh) * 0.634), 0px)}
 .dc-ThankYouMobile .trailp{position:absolute;left:0;top:0;pointer-events:none;z-index:95;will-change:transform,opacity}
 .dc-ThankYouMobile .trailp.tl{width:9px;height:9px;border-radius:80% 0 80% 0}
 .dc-ThankYouMobile .trailp.ts{width:6px;height:6px;border-radius:50%;background:#FFF3C4;box-shadow:0 0 8px 3px rgba(247,216,115,.75)}
+
+/* Totoro sits on the blanket at the family's backs (between the cake and the teacup), holding his leaf.
+   Low enough to stay above the message card. Positioned in % of the painting so it holds at every size. */
+.dc-ThankYouMobile .totoro{position:absolute;left:42.3%;top:47.1%;width:24.7%;height:auto;pointer-events:none;user-select:none;filter:drop-shadow(0 6px 5px rgba(40,50,20,.28));transform-origin:50% 100%}
