@@ -86,7 +86,7 @@ background-size:100% 100%,cover;background-position:0 0,35% 12%}
 .dc-OpeningMobile .nogsap.ph-welcome .wi,.dc-OpeningMobile .nogsap.ph-welcome .shade2,.dc-OpeningMobile .nogsap.ph-welcome .awake{opacity:1}
 /* bunny pointer + a trail of tiny leaves and sparkles (mouse/trackpad only) */
 @media (hover:hover) and (pointer:fine){.dc-OpeningMobile .stage,.dc-OpeningMobile .stage *{cursor:none !important}.dc-OpeningMobile .stage input,.dc-OpeningMobile .stage textarea{cursor:text !important}}
-.dc-OpeningMobile .bunnycur{position:absolute;left:0;top:0;width:52px;height:73px;margin:-15px 0 0 -1px;background:url(/art/dbadbf2c44d41f6a5e3b3e01c5391ca4.webp) 0 0/100% 100% no-repeat;pointer-events:none;z-index:96;opacity:0;transform-origin:50% 30%;filter:drop-shadow(0 4px 6px rgba(20,30,20,.3));will-change:transform}
+.dc-OpeningMobile .bunnycur{position:absolute;left:0;top:0;width:54px;height:74px;margin:-14px 0 0 -2px;background:url(/art/cursor-totoro.webp) 0 0/100% 100% no-repeat;pointer-events:none;z-index:96;opacity:0;transform-origin:50% 30%;filter:drop-shadow(0 4px 6px rgba(20,30,20,.3));will-change:transform}
 .dc-OpeningMobile .trailp{position:absolute;left:0;top:0;pointer-events:none;z-index:95;will-change:transform,opacity}
 .dc-OpeningMobile .trailp.tl{width:9px;height:9px;border-radius:80% 0 80% 0}
 .dc-OpeningMobile .trailp.ts{width:6px;height:6px;border-radius:50%;background:#FFF3C4;box-shadow:0 0 8px 3px rgba(247,216,115,.75)}
