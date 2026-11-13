@@ -11,11 +11,11 @@
 /* depth planes */
 .dc-OpeningDesktop .farCam{transform-origin:50% 50%}
 .dc-OpeningDesktop .canopyCam{transform-origin:50% 0%}
-.dc-OpeningDesktop .canopy{-webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 12%,transparent 28%);mask-image:linear-gradient(to bottom,#000 0%,#000 12%,transparent 28%);filter:brightness(.93) saturate(1.05)}
+.dc-OpeningDesktop .canopy{-webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 12%,transparent 28%);mask-image:linear-gradient(to bottom,#000 0%,#000 12%,transparent 28%);background-image:url(/art/forest-sleeping-canopy.webp)}
 .dc-OpeningDesktop .foreLCam{transform-origin:0% 100%}
 .dc-OpeningDesktop .foreRCam{transform-origin:100% 100%}
-.dc-OpeningDesktop .foreL{-webkit-mask-image:radial-gradient(34% 70% at 0% 100%,#000 50%,transparent 80%);mask-image:radial-gradient(34% 70% at 0% 100%,#000 50%,transparent 80%);filter:brightness(.86) saturate(1.08);transform-origin:0% 100%}
-.dc-OpeningDesktop .foreR{-webkit-mask-image:radial-gradient(34% 70% at 100% 100%,#000 50%,transparent 80%);mask-image:radial-gradient(34% 70% at 100% 100%,#000 50%,transparent 80%);filter:brightness(.86) saturate(1.08);transform-origin:100% 100%}
+.dc-OpeningDesktop .foreL{-webkit-mask-image:radial-gradient(34% 70% at 0% 100%,#000 50%,transparent 80%);mask-image:radial-gradient(34% 70% at 0% 100%,#000 50%,transparent 80%);background-image:url(/art/forest-sleeping-fore.webp);transform-origin:0% 100%}
+.dc-OpeningDesktop .foreR{-webkit-mask-image:radial-gradient(34% 70% at 100% 100%,#000 50%,transparent 80%);mask-image:radial-gradient(34% 70% at 100% 100%,#000 50%,transparent 80%);background-image:url(/art/forest-sleeping-fore.webp);transform-origin:100% 100%}
 
 /* atmosphere */
 .dc-OpeningDesktop .halo{position:absolute;left:742px;top:565px;width:420px;height:300px;margin:-150px 0 0 -210px;border-radius:50%;background:radial-gradient(closest-side,rgba(230,245,170,.42),rgba(176,200,124,.16) 55%,rgba(176,200,124,0));mix-blend-mode:screen;filter:blur(4px)}
@@ -71,3 +71,8 @@ background-size:100% 100%,100% 100%,cover,cover,cover,cover,cover,cover;backgrou
 .dc-OpeningDesktop .trailp{position:absolute;left:0;top:0;pointer-events:none;z-index:95;will-change:transform,opacity}
 .dc-OpeningDesktop .trailp.tl{width:9px;height:9px;border-radius:80% 0 80% 0}
 .dc-OpeningDesktop .trailp.ts{width:6px;height:6px;border-radius:50%;background:#FFF3C4;box-shadow:0 0 8px 3px rgba(247,216,115,.75)}
+
+/* Live CSS filters on these large, moving painting layers made Chrome drop GPU tiles during the
+   opening camera push on bigger windows (the forest flashed dark for a frame). The foliage tint is
+   baked into forest-sleeping-canopy/-fore.webp instead, and these soft glows don't need blurring. */
+.dc-OpeningDesktop .mistA,.dc-OpeningDesktop .halo{filter:none}

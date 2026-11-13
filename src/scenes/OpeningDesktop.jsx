@@ -79,7 +79,7 @@ export default class OpeningDesktop extends React.Component {
     } else {
       tl.set(this.root, { pointerEvents: 'none' })
         // 1. text steps aside, forest stirs, camera leans toward Dylan
-        .to(this.q('.intro'), { y: -30, autoAlpha: 0, filter: 'blur(6px)', duration: 0.8, ease: 'power2.in' }, 0)
+        .to(this.q('.intro'), { y: -30, autoAlpha: 0, duration: 0.8, ease: 'power2.in' }, 0)
         .to(this.q('.openwrap'), { y: 30, autoAlpha: 0, duration: 0.6, ease: 'power2.in' }, 0)
         .to(this.q('.topshade'), { opacity: 0.4, duration: 0.9 }, 0.1)
         .to(this.q('.foreLCam'), { xPercent: -3, rotation: -0.8, duration: 1.2, ease: 'sine.inOut' }, 0.1)
@@ -100,7 +100,7 @@ export default class OpeningDesktop extends React.Component {
         // 5. Welcome column fades in on the left
         .set(this.q('.welcome'), { visibility: 'visible' }, 3.9)
         .to(this.q('.shade2'), { opacity: 1, duration: 1.1, ease: 'power2.out' }, 3.7)
-        .fromTo(items, { x: -20, opacity: 0, filter: 'blur(4px)' }, { x: 0, opacity: 1, filter: 'blur(0px)', duration: 1.0, stagger: 0.1, ease: 'expo.out' }, 4.0)
+        .fromTo(items, { x: -20, opacity: 0 }, { x: 0, opacity: 1, duration: 1.0, stagger: 0.1, ease: 'expo.out' }, 4.0)
         .set(this.root, { pointerEvents: 'auto' });
     }
     this.tl = tl;
