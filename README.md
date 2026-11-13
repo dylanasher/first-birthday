@@ -74,7 +74,18 @@ answer. Edits to the **Guests** tab apply straight away. After changing the scri
 Without `VITE_RSVP_ENDPOINT`, `npm run dev` uses a handful of sample guests (try "Pat Solon" or
 "Maria Santos") and logs replies to the browser console instead of saving them.
 
+### Wishes
+
+Wishes sent from Chapter 6's **Leave a wish** tab are saved to a **Wishes** tab in the same sheet
+(Sent | Name | Wish | Show) and shown in Chapter 7, newest first. To hide a wish from the site, set
+its **Show** cell to `FALSE`. Use **File → Download → CSV** on that tab for a copy.
+
+If you set up the sheet before wishes existed, paste in the updated `apps-script/Code.gs`, run
+**setupSheet** once (it only adds the missing tab), then **Deploy → Manage deployments → Edit →
+New version**.
+
+With `npm run dev` and no sheet connected, wishes are saved to `wishes.csv` in the project folder
+instead, with the same columns.
+
 ## Still to fill in
 
-- The **Leave a wish** form shows wishes on screen but doesn't save them yet (`TODO: save the wish` in
-  `src/scenes/Rsvp*.jsx`).

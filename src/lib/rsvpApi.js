@@ -23,6 +23,31 @@ export async function sendRsvp(reply) {
   return data;
 }
 
+// ---- wishes (Chapter 6 sends them, Chapter 7 shows them) -------------------------------------
+// Saved to the sheet's "Wishes" tab. In local development without the sheet, the dev server keeps
+// them in wishes.csv in the project folder instead.
+const WISH_DEV = '/__dev/wishes';
+
+export async function sendWish(wish) {
+  const body = JSON.stringify({ action: 'wish', name: wish.name || '', text: wish.text || '' });
+  let res;
+  if (ENDPOINT) res = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body });
+  else if (import.meta.env.DEV) res = await fetch(WISH_DEV, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body });
+  else throw new Error('Wishes aren\'t connected yet. Please try again later.');
+  const data = await res.json();
+  if (!data.ok) throw new Error(data.error || 'We couldn\'t send your wish. Please try again.');
+  return data;
+}
+
+export async function getWishes() {
+  let res;
+  if (ENDPOINT) res = await fetch(`${ENDPOINT}?action=wishes`);
+  else if (import.meta.env.DEV) res = await fetch(WISH_DEV);
+  else return [];
+  const data = await res.json();
+  return data.ok ? data.wishes || [] : [];
+}
+
 // ---- local development stand-in -------------------------------------------------------------
 // Reads guest-list.csv from the project folder, so the real list can be tried with `npm run dev`
 // before the Google Sheet is connected. The `import.meta.env.DEV ?` guards mean these files are

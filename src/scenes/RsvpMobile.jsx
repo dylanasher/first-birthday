@@ -4,6 +4,7 @@ import React from 'react';
 import { gsap } from 'gsap';
 import { Link } from 'react-router-dom';
 import RsvpFlow from '../components/RsvpFlow.jsx';
+import { sendWish as sendWishApi, getWishes } from '../lib/rsvpApi.js';
 import './RsvpMobile.css';
 
 export default class RsvpMobile extends React.Component {
@@ -18,8 +19,9 @@ export default class RsvpMobile extends React.Component {
     /* the baptism: December 13, 2026, 1:30 PM Manila time (UTC+8) */
     this.target = Date.UTC(2026, 11, 13, 5, 30, 0);
   }
-  componentDidMount() { this.initTrailSoon(); this.boot(); }
-  componentWillUnmount() { if (this.indRO) this.indRO.disconnect(); if (this.onMove && this.root) { this.root.removeEventListener('pointermove', this.onMove); this.root.removeEventListener('pointerleave', this.onLeave); this.root.removeEventListener('pointerdown', this.onDown); } clearTimeout(this.retry); clearInterval(this.tick); if (this.io) this.io.disconnect(); this.tweens.forEach(function (t) { t.kill(); }); }
+  componentDidMount() {
+    var self0 = this; getWishes().then(function (list) { if (!self0.gone) self0.setState({ wishes: list.slice().reverse() }); }).catch(function () {}); this.initTrailSoon(); this.boot(); }
+  componentWillUnmount() { this.gone = true; if (this.indRO) this.indRO.disconnect(); if (this.onMove && this.root) { this.root.removeEventListener('pointermove', this.onMove); this.root.removeEventListener('pointerleave', this.onLeave); this.root.removeEventListener('pointerdown', this.onDown); } clearTimeout(this.retry); clearInterval(this.tick); if (this.io) this.io.disconnect(); this.tweens.forEach(function (t) { t.kill(); }); }
   reduced() { try { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; } }
   countdown() {
     var r = this.root; if (!r) return;
@@ -235,11 +237,17 @@ export default class RsvpMobile extends React.Component {
       sendWish: function (e) {
         var name = self.val('.in-wname'), text = self.val('.in-wtext');
         if (!text) { self.setState({ werr: 'Write a little wish first.' }); return; }
+        if (self.state.wsending) return;
         var btn = (e && e.currentTarget && e.currentTarget.getBoundingClientRect) ? e.currentTarget : self.root.querySelector('.panel .send');
-        self.flyWish(btn);
-        /* TODO: save the wish once the destination is decided */
-        self.setState({ werr: '', wishes: [{ name: name || 'A friend', text: text }].concat(self.state.wishes) });
-        var t1 = self.root.querySelector('.in-wtext'); if (t1) t1.value = '';
+        self.setState({ werr: '', wsending: true });
+        /* saved to the Google Sheet's Wishes tab (wishes.csv in local dev); Chapter 7 shows them */
+        sendWishApi({ name: name, text: text }).then(function (saved) {
+          self.flyWish(btn);
+          self.setState({ wsending: false, wishes: [{ name: saved.name || name || 'A friend', text: saved.text || text }].concat(self.state.wishes) });
+          var t1 = self.root && self.root.querySelector('.in-wtext'); if (t1) t1.value = '';
+        }).catch(function (ex) {
+          self.setState({ wsending: false, werr: (ex && ex.message) || 'We couldn\'t send your wish. Please try again.' });
+        });
       }
     };
   }

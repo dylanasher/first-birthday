@@ -4,6 +4,7 @@ import React from 'react';
 import { gsap } from 'gsap';
 import { Link } from 'react-router-dom';
 import { css } from '../lib/css.js';
+import { getWishes } from '../lib/rsvpApi.js';
 import './WishesDesktop.css';
 
 export default class WishesDesktop extends React.Component {
@@ -11,13 +12,14 @@ export default class WishesDesktop extends React.Component {
 
   constructor(props) {
     super(props);
-    /* wishes sent from Chapter 6 will appear here; these two are samples for now */
-    this.wishes = [{name: 'Tita Maria', text: 'May you grow up kind, brave and always curious. We love you so much, Dylan!'}, {name: 'Ninong Paolo', text: 'Happy 1st birthday, little one! May God guide and bless you every step of the way.'}];
+    /* wishes sent from Chapter 6, loaded from the Google Sheet (wishes.csv in local dev) */
+    this.wishes = [];
     this.state = { i: 0 };
     this.root = null; this.tweens = []; this.tries = 0;
   }
-  componentDidMount() { this.initTrailSoon(); this.boot(); }
-  componentWillUnmount() { if (this.onMove && this.root) { this.root.removeEventListener('pointermove', this.onMove); this.root.removeEventListener('pointerleave', this.onLeave); this.root.removeEventListener('pointerdown', this.onDown); } clearTimeout(this.retry); clearInterval(this.auto); if (this.io) this.io.disconnect(); this.tweens.forEach(function (t) { t.kill(); }); }
+  componentDidMount() {
+    var selfW = this; getWishes().then(function (list) { if (selfW.gone) return; selfW.wishes = list.slice().reverse(); selfW.setState({ i: 0 }); }).catch(function () {});  /* newest first */ this.initTrailSoon(); this.boot(); }
+  componentWillUnmount() { this.gone = true; if (this.onMove && this.root) { this.root.removeEventListener('pointermove', this.onMove); this.root.removeEventListener('pointerleave', this.onLeave); this.root.removeEventListener('pointerdown', this.onDown); } clearTimeout(this.retry); clearInterval(this.auto); if (this.io) this.io.disconnect(); this.tweens.forEach(function (t) { t.kill(); }); }
   reduced() { try { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; } }
   /* the card flutters over like a page in the wind as it shows the next wish */
   show(i, dir) {
