@@ -455,7 +455,9 @@ export default class DosDontsMobile extends React.Component {
             </div>
             <button className="next" type="button" onClick={v.goNext}>
               {"RSVP "}
-              <img className="soot-icon soot-next" src="/art/soot-sprite.webp" width="28" height="28" alt="" aria-hidden="true" draggable="false" />
+              <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+                <path d="M3 8 H12 M8.5 4 L12.5 8 L8.5 12" fill="none" stroke="#F7D873" style={{"strokeWidth":"1.8","strokeLinecap":"round","strokeLinejoin":"round"}} />
+              </svg>
             </button>
             <Link to="/rsvp" className="nextlink" tabIndex="-1" aria-hidden="true">
               Chapter 6

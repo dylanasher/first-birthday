@@ -352,7 +352,9 @@ export default class DressCodeDesktop extends React.Component {
             </div>
             <button className="next" type="button" onClick={v.goNext}>
               {"Next: Do's & Don'ts "}
-              <img className="soot-icon soot-next" src="/art/soot-sprite.webp" width="30" height="30" alt="" aria-hidden="true" draggable="false" />
+              <svg width="18" height="18" viewBox="0 0 16 16" aria-hidden="true">
+                <path d="M3 8 H12 M8.5 4 L12.5 8 L8.5 12" fill="none" stroke="#F5D68A" style={{"strokeWidth":"1.8","strokeLinecap":"round","strokeLinejoin":"round"}} />
+              </svg>
             </button>
             <Link to="/dos-and-donts" className="nextlink" tabIndex="-1" aria-hidden="true">
               Chapter 5

@@ -306,7 +306,9 @@ export default class OpeningDesktop extends React.Component {
         </div>
         <div className="openwrap">
           <button className="magic openbtn" type="button" onClick={v.open}>
-            <img className="soot-icon soot-open" src="/art/soot-sprite.webp" width="36" height="36" alt="" aria-hidden="true" draggable="false" />
+            <svg width="18" height="18" viewBox="0 0 16 16" aria-hidden="true">
+              <path d="M8 1 L9.6 6.4 L15 8 L9.6 9.6 L8 15 L6.4 9.6 L1 8 L6.4 6.4 Z" fill="#F5D68A" />
+            </svg>
             {" Open Invitation"}
           </button>
         </div>
@@ -351,7 +353,9 @@ export default class OpeningDesktop extends React.Component {
           </p>
           <button className="magic wi" type="button" onClick={v.goNext} style={{"marginTop":"28px"}}>
             {"Continue the journey "}
-            <img className="soot-icon soot-next" src="/art/soot-sprite.webp" width="30" height="30" alt="" aria-hidden="true" draggable="false" />
+            <svg width="18" height="18" viewBox="0 0 16 16" aria-hidden="true">
+              <path d="M3 8 H12 M8.5 4 L12.5 8 L8.5 12" fill="none" stroke="#F5D68A" style={{"strokeWidth":"1.8","strokeLinecap":"round","strokeLinejoin":"round"}} />
+            </svg>
           </button>
           <Link to="/details" className="nextlink" tabIndex="-1" aria-hidden="true">
             Chapter 2
