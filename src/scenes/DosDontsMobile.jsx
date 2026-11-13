@@ -195,8 +195,6 @@ export default class DosDontsMobile extends React.Component {
           <div className="scenefit">
             <div className="ly plate" />
             <div className="ly stream2" />
-            <img className="noface" src="/art/noface.webp" alt="" draggable="false" />
-            <img className="rail-front" src="/art/mobile/ch5m-rail-front.webp" alt="" draggable="false" />
             <span className="mistb m1" style={{"left":"58%","top":"37%","width":"50%","height":"9%"}} />
             <span className="mistb m2" style={{"left":"66%","top":"46%","width":"44%","height":"8%"}} />
             <span className="mistb m3" style={{"left":"50%","top":"52%","width":"40%","height":"6%"}} />
