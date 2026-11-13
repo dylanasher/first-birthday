@@ -25,9 +25,8 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* A chapter: the fixed-size artboard is centred and scaled to fit the screen. Whatever the artboard
-   doesn't cover (when the screen is wider or taller than it) shows the chapter's painting, enlarged to
-   fill and softly blurred, so there are no empty bands. */
+/* Desktop: the fixed-size artboard is centred and scaled to fit the window. Whatever it doesn't cover
+   shows the chapter's painting, enlarged to fill and softly blurred, so there are no empty bands. */
 .scene-backdrop {
   position: fixed;
   inset: -40px; /* overscan so the blur has no faded edge */
@@ -38,17 +37,24 @@ body {
   position: fixed;
   inset: 0;
   overflow: hidden;
+}
+.scene-fit--fixed > [class^='dc-'] {
   background: transparent !important; /* let the backdrop show around the artboard */
 }
-.scene-fit > [class^='dc-'] > * {
+.scene-fit--fixed > [class^='dc-'] > * {
   position: absolute !important;
   left: 50%;
   top: 50%;
   width: var(--scene-w) !important;
-  height: var(--scene-h) !important; /* on phones this follows the screen's height */
+  height: var(--scene-h) !important;
   margin: 0;
   transform: translate(-50%, -50%) scale(var(--scene-scale));
   transform-origin: 50% 50%;
+}
+
+/* Phone & tablet portrait: each chapter fills the screen itself (100vw × 100dvh). */
+.scene-fit--fluid > [class^='dc-'] > * {
+  margin: 0;
 }
 
 /* The design-system reference sheet: scaled to width, scrolls vertically. */

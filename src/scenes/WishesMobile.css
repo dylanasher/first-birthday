@@ -1,18 +1,24 @@
-/* WishesMobile: ported from Wishes.dc.html */
+/* WishesMobile: phone layout, ported from the handoff's ch7-wishes-phone.dc.html */
 
 .dc-WishesMobile{margin:0;background:#3A3260}
-.dc-WishesMobile .stage{position:relative;width:390px;height:844px;overflow:hidden;background:#B9B6E6;font-family:'Nunito',system-ui,sans-serif;color:#2E2A4A}
+.dc-WishesMobile .stage{position:relative;width:100vw;height:100vh;height:100dvh;container-type:size;overflow:hidden;background:#B9B6E6;font-family:'Nunito',system-ui,sans-serif;color:#2E2A4A}
 .dc-WishesMobile .layer{position:absolute;inset:0;pointer-events:none}
-.dc-WishesMobile .bg{position:absolute;inset:-20px;background-size:auto 844px;background-position:22% 0;background-repeat:no-repeat;will-change:transform}
-.dc-WishesMobile .far{background-image:url(/art/sky-wishes.webp)}
-.dc-WishesMobile .near{background-image:url(/art/6d67634339c2ed30c2c70f27381a024c.webp)}
+/* responsive scene: the tall sky painting (941x1672) always covers the screen like a photo set to "fill",
+   anchored to the bottom so the hilltop town peeks up just above the footer */
+.dc-WishesMobile .scenefit{position:absolute;--sh:max(105cqh, calc(100cqw * 1672 / 941));--sw:calc(var(--sh) * 941 / 1672);width:var(--sw);height:var(--sh);
+left:clamp(calc(100cqw - var(--sw)), calc(50cqw - var(--sw) * 0.42), 0px);top:calc(100cqh - var(--sh))}
+.dc-WishesMobile .bg{position:absolute;inset:0;background-size:100% 100%;background-repeat:no-repeat;will-change:transform}
+.dc-WishesMobile .far{background-image:url(/art/mobile/ch7m-base.webp)}
+.dc-WishesMobile .near{background-image:url(/art/mobile/ch7m-clouds.webp);transform:scale(1.06);transform-origin:50% 100%}
 .dc-WishesMobile .puff{position:absolute;left:0;top:0;border-radius:50%;background:radial-gradient(ellipse at 50% 60%,rgba(255,246,240,.95),rgba(255,226,222,.6) 45%,rgba(255,226,222,0) 70%);filter:blur(1px);pointer-events:none}
 .dc-WishesMobile .topshade{background:linear-gradient(to bottom,rgba(60,50,100,.35) 0%,rgba(60,50,100,0) 18%)}
 .dc-WishesMobile .script{font-family:'Pinyon Script',cursive;font-weight:400}
 .dc-WishesMobile .lift{text-shadow:0 2px 14px rgba(16,42,32,.75),0 0 2px rgba(16,42,32,.55)}
 .dc-WishesMobile .head{position:absolute;left:0;right:0;top:16px;text-align:center;color:#F5EBD5;z-index:3}
 /* the flyer: girl on her broom, a ribbon from the broom's end, and the wish card hanging from it */
-.dc-WishesMobile .flyer{position:absolute;left:0;top:140px;width:390px;height:600px;z-index:2;will-change:transform}
+/* the flyer is drawn at 390px wide and scaled (--fs, set in code) to fit the screen; centred horizontally */
+.dc-WishesMobile .flyfit{position:absolute;left:calc(50% - 195px);top:var(--ft,140px);width:390px;height:600px;z-index:2;transform:scale(var(--fs,1));transform-origin:50% 0}
+.dc-WishesMobile .flyer{position:absolute;inset:0;will-change:transform}
 .dc-WishesMobile .girl{position:absolute;left:88px;top:0;width:300px;height:175px;background:url(/art/girl-broom.webp) 0 0/100% 100% no-repeat;transform-origin:60% 70%;will-change:transform}
 .dc-WishesMobile .ribbon{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;pointer-events:none}
 .dc-WishesMobile .wcard{position:absolute;left:8px;top:214px;width:300px;box-sizing:border-box;padding:20px 20px 16px;border-radius:22px;background:linear-gradient(160deg,var(--c1,rgba(255,250,240,.72)),var(--c2,rgba(255,240,228,.66)));backdrop-filter:blur(6px) saturate(1.1);-webkit-backdrop-filter:blur(6px) saturate(1.1);transition:background .4s ease;box-shadow:0 22px 46px rgba(60,50,100,.3),inset 0 0 0 1px rgba(255,255,255,.8),0 0 0 1px rgba(233,167,167,.45);transform-origin:295px 1px;pointer-events:auto}
@@ -32,10 +38,24 @@
 .dc-WishesMobile .chap{margin:0;text-shadow:none;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#2E2A4A}
 .dc-WishesMobile .next{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 18px;border:0;border-radius:999px;background:#5B4A7A;color:#FFF9F0;font-family:'IM Fell English',Georgia,serif;font-size:16px;cursor:pointer;box-shadow:0 8px 18px rgba(60,50,100,.3)}
 .dc-WishesMobile .leave{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 12px;border-radius:999px;border:1px solid rgba(255,255,255,.7);background:rgba(255,250,242,.55);color:#3E3466;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;text-decoration:none}
+/* narrow phones: keep the footer on one line */
+@container (max-width: 380px){
+.dc-WishesMobile .foot{padding:10px 12px 14px;gap:8px}
+.dc-WishesMobile .chap{font-size:10px;letter-spacing:.1em;white-space:nowrap}
+.dc-WishesMobile .leave{padding:0 10px;white-space:nowrap}
+.dc-WishesMobile .next{padding:0 14px;font-size:15px;white-space:nowrap}
+}
+/* short phones: a more compact title */
+@container (max-height: 720px){
+.dc-WishesMobile .head{top:10px}
+.dc-WishesMobile .head h1{font-size:34px !important}
+}
 .dc-WishesMobile .nextlink{position:absolute;left:0;top:0;width:1px;height:1px;opacity:0;pointer-events:none}
 .dc-WishesMobile .under8{position:absolute;inset:0;z-index:70;pointer-events:none;display:none;background-color:#8FB6E0;background-repeat:no-repeat;
-background-image:linear-gradient(to bottom,rgba(40,50,80,.5) 0%,rgba(40,50,80,.12) 12%,rgba(40,50,80,0) 18%),url(/art/picnic-full.webp);
-background-size:100% 100%,auto 844px;background-position:0 0,-54px 0}
+background-image:linear-gradient(to bottom,rgba(40,50,80,.5) 0%,rgba(40,50,80,.12) 12%,rgba(40,50,80,0) 18%),url(/art/mobile/ch8m-full.webp);
+--sh:max(105cqh, calc(100cqw * 1672 / 941));--sw:calc(var(--sh) * 941 / 1672);
+background-size:100% 100%,var(--sw) var(--sh);
+background-position:0 0,clamp(calc(100cqw - var(--sw)), calc(50cqw - var(--sw) * 0.5), 0px) clamp(calc(100cqh - var(--sh)), calc(50cqh - var(--sh) * 0.634), 0px)}
 .dc-WishesMobile .tflapwrap{position:absolute;inset:0;z-index:71;pointer-events:none;display:none;filter:drop-shadow(-8px -8px 16px rgba(16,42,32,.45))}
 .dc-WishesMobile .tflap{position:absolute;inset:0;background:linear-gradient(135deg,#E9DCBC 0%,#F8EFD9 55%,#E0D0A8 100%)}
 /* bunny pointer + a trail of tiny leaves and sparkles (mouse/trackpad only) */

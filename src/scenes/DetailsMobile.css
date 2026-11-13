@@ -1,21 +1,26 @@
-/* DetailsMobile: ported from Ch2.dc.html */
+/* DetailsMobile: phone layout, ported from the handoff's ch2-phone.dc.html */
 
 .dc-DetailsMobile{margin:0;background:#102A20}
-.dc-DetailsMobile .stage{position:relative;width:390px;height:844px;overflow:hidden;background:#A9D6DF;font-family:'Nunito',system-ui,sans-serif;color:#102A20}
+.dc-DetailsMobile .stage{position:relative;width:100vw;height:100vh;height:100dvh;container-type:size;--pillt:136px;--pillh:54px;overflow:hidden;background:#A9D6DF;font-family:'Nunito',system-ui,sans-serif;color:#102A20}
 .dc-DetailsMobile .layer{position:absolute;inset:0;pointer-events:none}
-/* the painting is drawn 760px tall; scale it up so it fills the full 844px screen */
-.dc-DetailsMobile .scenefit{position:absolute;inset:0;transform:scale(1.1106);transform-origin:195px 0}
+/* responsive scene: the tall painting (941x1672) always covers the screen like a photo set to "fill",
+   and is anchored so the church sits just under the schedule pill on any phone size */
+.dc-DetailsMobile .scenefit{position:absolute;--sh:max(105cqh, calc(100cqw * 1672 / 941));--sw:calc(var(--sh) * 941 / 1672);width:var(--sw);height:var(--sh);
+left:clamp(calc(100cqw - var(--sw)), calc(44cqw - var(--sw) * 0.404), 0px);
+top:clamp(calc(100cqh - var(--sh)), calc(var(--pillt) + var(--pillh) + 14px - var(--sh) * 0.236), 0px)}
 .dc-DetailsMobile .scene{position:absolute;inset:0;transform-origin:64% 40%;will-change:transform}
 /* painted layers, all on the same canvas so they line up exactly */
-.dc-DetailsMobile .lyr{position:absolute;inset:0;background-size:auto 760px;background-position:41% 0;background-repeat:no-repeat;will-change:transform}
-.dc-DetailsMobile .far{background-image:url(/art/9ff413efc90b8d9aa2232fb97ef3b2fd.webp)}
-.dc-DetailsMobile .trunk{background-image:url(/art/e63248ac61b255880a418b902963d7aa.webp)}
-.dc-DetailsMobile .lva{background-image:url(/art/0a06b84a8b2824ef6369f00717801e42.webp);transform-origin:50% 0}
-.dc-DetailsMobile .lvb{background-image:url(/art/a1c09cf21a45538a9b091e259bb0707c.webp);transform-origin:50% 0}
-.dc-DetailsMobile .lvc{background-image:url(/art/f2d3d418be179c15558fe0f46df41dba.webp);transform-origin:50% 141px}
-.dc-DetailsMobile .flw{background-image:url(/art/c85cec7f7ff2834c55b9210bfdb7fec0.webp);transform-origin:50% 100%}
+.dc-DetailsMobile .lyr{position:absolute;inset:0;background-size:100% 100%;background-position:0 0;background-repeat:no-repeat;will-change:transform}
+.dc-DetailsMobile .far{background-image:url(/art/mobile/ch2m-plate.webp)}
+.dc-DetailsMobile .cld{background-image:url(/art/mobile/ch2m-clouds.webp)}
+.dc-DetailsMobile .chu{background-image:url(/art/mobile/ch2m-church.webp)}
+.dc-DetailsMobile .pth{background-image:url(/art/mobile/ch2m-path.webp)}
+.dc-DetailsMobile .trunk{background-image:url(/art/mobile/ch2m-trunk.webp)}
+.dc-DetailsMobile .lva{background-image:url(/art/mobile/ch2m-leavesB.webp);transform-origin:50% 0}
+.dc-DetailsMobile .lvb{background-image:url(/art/mobile/ch2m-leavesA.webp);transform-origin:50% 0}
+.dc-DetailsMobile .flw{background-image:url(/art/mobile/ch2m-flowers.webp);transform-origin:50% 100%}
 /* church bell hanging in the belfry arch */
-.dc-DetailsMobile .bell{position:absolute;left:253.8px;top:249px;width:25px;height:35.6px;background:url(/art/78e1c483124e31bbd37d3b861cb7fa0f.png) center / 100% 100% no-repeat;transform-origin:50% 4%}
+.dc-DetailsMobile .bell{position:absolute;left:49.735%;top:26.675%;width:2.2317%;height:2.5718%;background:url(/art/mobile/ch2m-bell.png) center / 100% 100% no-repeat;transform-origin:52% 7%}
 .dc-DetailsMobile .leaf svg,.dc-DetailsMobile .bird svg{display:block;width:100%;height:100%;overflow:visible}
 /* leaf gust: arrives covering the screen, then blows away to reveal the chapter */
 .dc-DetailsMobile .gust{position:absolute;inset:0;z-index:60;pointer-events:none;overflow:hidden}
@@ -26,8 +31,10 @@
 /* page turn to Chapter 3: this page curls away, revealing the seaside town */
 .dc-DetailsMobile .nextlink{position:absolute;left:0;top:0;width:1px;height:1px;opacity:0;pointer-events:none}
 .dc-DetailsMobile .under3{position:absolute;inset:0;z-index:70;pointer-events:none;display:none;background-color:#8EC6E6;background-repeat:no-repeat;
-background-image:linear-gradient(to bottom,rgba(16,42,32,.62) 0%,rgba(16,42,32,.25) 12%,rgba(16,42,32,0) 22%),url(/art/014446d475ba3dda05bc0e8e6c885e2b.webp),url(/art/8ee1b855de1fb8ecb9a37badef302a5e.webp),url(/art/2bb637fac4c16bb39c3f3c009ad7d4ff.webp);
-background-size:100% 100%,auto 844px,auto 844px,auto 844px;background-position:0 0,26% 0,26% 0,26% 0}
+--sh:max(111cqh, calc(100cqw * 1672 / 941));--sw:calc(var(--sh) * 941 / 1672);
+background-image:linear-gradient(to bottom,rgba(16,42,32,.62) 0%,rgba(16,42,32,.25) 12%,rgba(16,42,32,0) 22%),url(/art/mobile/ch3m-full.webp);
+background-size:100% 100%,var(--sw) var(--sh);
+background-position:0 0,clamp(calc(100cqw - var(--sw)), calc(50cqw - var(--sw) * 0.605), 0px) clamp(calc(100cqh - var(--sh)), calc(40cqh - var(--sh) * 0.446), 0px)}
 .dc-DetailsMobile .tflapwrap{position:absolute;inset:0;z-index:71;pointer-events:none;display:none;filter:drop-shadow(-8px -8px 16px rgba(16,42,32,.45))}
 .dc-DetailsMobile .tflap{position:absolute;inset:0;background:linear-gradient(135deg,#E9DCBC 0%,#F8EFD9 55%,#E0D0A8 100%)}
 /* storybook page turn: Chapter 1's page curls away from the bottom-right corner */
@@ -52,7 +59,7 @@ background-size:100% 100%,auto 844px,auto 844px,auto 844px;background-position:0
 .dc-DetailsMobile .chtitle{position:absolute;left:0;right:0;top:22px;display:flex;flex-direction:column;align-items:center;text-align:center;color:#F5EBD5}
 
 /* day timeline (glass pill) */
-.dc-DetailsMobile .tline{position:absolute;left:20px;right:20px;top:160px;height:54px;border-radius:18px;background:rgba(16,42,32,.42);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:inset 0 0 0 1px rgba(245,235,213,.22);display:flex;align-items:center;padding:0 14px}
+.dc-DetailsMobile .tline{position:absolute;left:20px;right:20px;top:var(--pillt);height:var(--pillh);max-width:440px;margin:0 auto;border-radius:18px;background:rgba(16,42,32,.42);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:inset 0 0 0 1px rgba(245,235,213,.22);display:flex;align-items:center;padding:0 14px}
 .dc-DetailsMobile .track{position:absolute;left:68px;right:68px;top:11px;height:2px;background:rgba(245,235,213,.25);border-radius:2px}
 .dc-DetailsMobile .trackfill{position:absolute;left:0;top:0;bottom:0;width:100%;background:#F5D68A;border-radius:2px;transform-origin:0 50%}
 .dc-DetailsMobile .step{position:relative;flex:1;display:flex;flex-direction:column;align-items:center;gap:4px}
@@ -61,7 +68,7 @@ background-size:100% 100%,auto 844px,auto 844px,auto 844px;background-position:0
 .dc-DetailsMobile .slbl{margin:0;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#B0C87C;line-height:1}
 
 /* frosted storybook sheet */
-.dc-DetailsMobile .sheet{position:absolute;left:0;right:0;bottom:0;height:476px;display:flex;flex-direction:column;background:rgba(245,235,213,.6);backdrop-filter:blur(7px) saturate(1.1);-webkit-backdrop-filter:blur(7px) saturate(1.1);clip-path:path('M0 14 C30 6 60 18 95 12 C130 6 160 2 195 8 C230 14 262 4 298 8 C330 12 360 4 390 11 L390 476 L0 476 Z')}
+.dc-DetailsMobile .sheet{position:absolute;left:0;right:0;bottom:0;height:clamp(320px, 56.4cqh, 620px);display:flex;flex-direction:column;background:rgba(245,235,213,.6);backdrop-filter:blur(7px) saturate(1.1);-webkit-backdrop-filter:blur(7px) saturate(1.1);clip-path:polygon(0.00% 14.0px, 3.85% 11.5px, 7.74% 11.3px, 11.70% 12.2px, 15.76% 13.4px, 19.97% 13.7px, 24.36% 12.0px, 28.75% 9.2px, 33.00% 7.0px, 37.18% 5.5px, 41.36% 5.0px, 45.61% 5.8px, 50.00% 8.0px, 54.43% 9.8px, 58.78% 9.8px, 63.11% 8.8px, 67.45% 7.6px, 71.87% 7.0px, 76.41% 8.0px, 80.47% 9.1px, 84.46% 9.0px, 88.40% 8.4px, 92.29% 8.0px, 96.15% 8.6px, 100.00% 11.0px, 100% 100%, 0% 100%)}
 .dc-DetailsMobile .sheet::before{content:'';position:absolute;left:0;right:0;top:0;height:40px;background:linear-gradient(to bottom,rgba(255,250,235,.5),rgba(255,250,235,0));pointer-events:none}
 .dc-DetailsMobile .tabs{position:relative;display:flex;gap:6px;padding:22px 16px 10px;flex:none}
 .dc-DetailsMobile .ind{position:absolute;left:0;top:22px;height:44px;width:110px;border-radius:999px;background:#264D35;box-shadow:0 6px 16px rgba(16,42,32,.28)}
@@ -105,5 +112,12 @@ background-size:100% 100%,auto 844px,auto 844px,auto 844px;background-position:0
 .dc-DetailsMobile .trailp{position:absolute;left:0;top:0;pointer-events:none;z-index:95;will-change:transform,opacity}
 .dc-DetailsMobile .trailp.tl{width:9px;height:9px;border-radius:80% 0 80% 0}
 .dc-DetailsMobile .trailp.ts{width:6px;height:6px;border-radius:50%;background:#FFF3C4;box-shadow:0 0 8px 3px rgba(247,216,115,.75)}
+/* short phones (iPhone SE and smaller): a more compact header so the church still shows between the schedule and the panel */
+@container (max-height: 720px){
+.dc-DetailsMobile .scenefit,.dc-DetailsMobile .tline{--pillt:100px;--pillh:48px}
+.dc-DetailsMobile .chtitle{top:14px}
+.dc-DetailsMobile .chtitle h1{font-size:38px !important}
+.dc-DetailsMobile .chtitle .display{font-size:16px !important}
+}
 /* until the sliding pill is measured, the selected tab paints its own fill so it always reads correctly */
 .dc-DetailsMobile .tabs:not(.ready) .tab.on{background:#264D35}

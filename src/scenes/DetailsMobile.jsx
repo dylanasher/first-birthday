@@ -1,5 +1,5 @@
 /* eslint-disable */
-// DetailsMobile: mobile layout, 390×844. Ported from the "Ch2.dc.html" design board.
+// DetailsMobile: phone & tablet-portrait layout, fills the screen. Ported from the handoff's "ch2-phone.dc.html".
 import React from 'react';
 import { gsap } from 'gsap';
 import { Link } from 'react-router-dom';
@@ -89,7 +89,10 @@ export default class DetailsMobile extends React.Component {
       if (self.alive) return;
       self.alive = true;
       self.shine();
-      self.ambient(g, q, qa, t, { k: 0.7, leafX: [10, 190], leafY: [40, 240], fall: [460, 620], drift: [70, 180], birdY: [280, 312], birdTo: 430, scale: 0.85 });
+      // every position below is measured on the painting, then scaled to however big the scene is on this phone
+      var sf = r.querySelector('.scenefit'), f = sf && sf.offsetHeight ? sf.offsetHeight / 886 : 1;
+      var bto = (r.offsetWidth - (sf ? sf.offsetLeft : 0)) + 40;
+      self.ambient(g, q, qa, t, { k: 0.7, leafX: [10 * f, 250 * f], leafY: [30 * f, 200 * f], fall: [480 * f, 640 * f], drift: [60 * f, 160 * f], birdY: [222 * f, 244 * f], birdTo: bto, scale: 0.9 * f });
     }, null, 0.2);
     t.push(intro);
     this.intro = intro;
@@ -103,7 +106,7 @@ export default class DetailsMobile extends React.Component {
      then the branches lift away as the camera steps back into the sunlit valley */
   openWoods(g) {
     var r = this.root, H = r.offsetHeight;
-    var scene = r.querySelector('.scene'), lvs = r.querySelectorAll('.lva, .lvb, .lvc');
+    var scene = r.querySelector('.scene'), lvs = r.querySelectorAll('.lva, .lvb');
     var tl = g.timeline();
     tl.set(r.querySelector('.gust'), { display: 'none' }, 0)
       .fromTo(scene, { scale: 2.5, transformOrigin: '16% 6%', filter: 'brightness(0.8)' }, { scale: 1, filter: 'brightness(1)', duration: 2.8, ease: 'power2.inOut' }, 0)
@@ -269,7 +272,9 @@ export default class DetailsMobile extends React.Component {
     }
     gusts(q('.lva'), 0.7, 2.4, 0);
     gusts(q('.lvb'), 1.1, 2.1, 0.35);
-    gusts(q('.lvc'), 1.0, 1.9, 0.6);
+    // the clouds drift slowly across the sky behind the church
+    var cld = q('.cld');
+    if (cld) t.push(g.to(cld, { x: -16, duration: 22, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
     // grass and flowers ripple in the same wind, from the ground up
     var flw = q('.flw');
     var fw = g.timeline({ repeat: -1, delay: 0.5 });
@@ -290,7 +295,7 @@ export default class DetailsMobile extends React.Component {
     // the chapel bell swings and rings, then rests
     var bell = q('.bell');
     // a slow, steady, never-ending swing from side to side
-    var ring = g.fromTo(bell, { rotation: -18 }, { rotation: 18, duration: 1.8, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+    var ring = g.fromTo(bell, { rotation: -16 }, { rotation: 16, duration: 1.8, ease: 'sine.inOut', yoyo: true, repeat: -1 });
     t.push(ring);
     // a small flock crosses the sky in loose formation
     var flock = [[q('.b1'), 0, 0, 1], [q('.b2'), -26, 12, 0.82], [q('.b3'), -46, -4, 0.7]];
@@ -369,6 +374,8 @@ export default class DetailsMobile extends React.Component {
         <div className="scenefit">
           <div className="scene" aria-hidden="true">
             <div className="lyr far" />
+            <div className="lyr cld" />
+            <div className="lyr chu" />
             <span className="bell" />
             <span className="bird b1">
               <svg viewBox="0 0 20 11">
@@ -388,8 +395,8 @@ export default class DetailsMobile extends React.Component {
                 <path className="wd" d="M0 8.8 C3.4 8 6.5 7 9 5.6 C9.6 4.2 10.4 4.2 11 5.6 C13.5 7 16.6 8 20 8.8 C16.4 9.8 13.4 9.4 11 8.2 C10.4 9.2 9.6 9.2 9 8.2 C6.6 9.4 3.6 9.8 0 8.8 Z" fill="#4C585E" style={{"animationDelay":"-.22s"}} />
               </svg>
             </span>
+            <div className="lyr pth" />
             <div className="lyr trunk" />
-            <div className="lyr lvc" />
             <div className="lyr lvb" />
             <div className="lyr lva" />
             {(v.leaves || []).map((l, l$i) => (

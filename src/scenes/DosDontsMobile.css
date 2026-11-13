@@ -1,23 +1,25 @@
-/* DosDontsMobile: ported from Ch5.dc.html */
+/* DosDontsMobile: phone layout, ported from the handoff's ch5-phone.dc.html */
 
 .dc-DosDontsMobile{margin:0;background:#102A20}
-.dc-DosDontsMobile .stage{position:relative;width:390px;height:844px;overflow:hidden;background:#3D4A8C;font-family:'Nunito',system-ui,sans-serif;color:#23264A}
+.dc-DosDontsMobile .stage{position:relative;width:100vw;height:100vh;height:100dvh;container-type:size;overflow:hidden;background:#3D4A8C;font-family:'Nunito',system-ui,sans-serif;color:#23264A}
 .dc-DosDontsMobile .layer{position:absolute;inset:0;pointer-events:none}
-/* the painted village: every layer sits on the same 1672x941 canvas, scaled to the stage */
-.dc-DosDontsMobile .cv{position:absolute;left:-250px;top:0;width:1672px;height:941px;transform:scale(0.8969);transform-origin:0 0}
+/* responsive scene: the tall lantern-village painting (941x1672) always covers the screen like a photo set to "fill".
+   The bridge railing (49.6% down the painting) sits 45.5% down the screen, just above the panel */
+.dc-DosDontsMobile .scenefit{position:absolute;--sh:max(111cqh, calc(100cqw * 1672 / 941));--sw:calc(var(--sh) * 941 / 1672);width:var(--sw);height:var(--sh);
+left:clamp(calc(100cqw - var(--sw)), calc(50cqw - var(--sw) * 0.56), 0px);
+top:clamp(calc(100cqh - var(--sh)), calc(45.5cqh - var(--sh) * 0.496), 0px)}
 .dc-DosDontsMobile .ly{position:absolute;inset:0;background-size:100% 100%;background-repeat:no-repeat;will-change:transform}
-.dc-DosDontsMobile .plate{background-image:url(/art/937e9ceabdf5dae8015bc472e750590f.webp)}
-.dc-DosDontsMobile .stream{background-image:url(/art/533dccdf6fbb96b835ab38f88d1b1352.webp)}
-.dc-DosDontsMobile .stream2{background-image:url(/art/533dccdf6fbb96b835ab38f88d1b1352.webp);filter:brightness(1.45) saturate(1.1);opacity:.55;
+.dc-DosDontsMobile .plate{background-image:url(/art/mobile/ch5m-base.webp)}
+/* stream shimmer: bright ripples run down the water only */
+.dc-DosDontsMobile .stream2{background-image:url(/art/mobile/ch5m-water.webp);filter:brightness(1.45) saturate(1.1);opacity:.5;
 -webkit-mask-image:repeating-linear-gradient(to bottom,transparent 0,#000 10px,transparent 22px);mask-image:repeating-linear-gradient(to bottom,transparent 0,#000 10px,transparent 22px);
 -webkit-mask-size:100% 44px;mask-size:100% 44px;animation:DosDontsMobile-flow 1.1s linear infinite}
 @keyframes DosDontsMobile-flow{from{-webkit-mask-position:0 0;mask-position:0 0}to{-webkit-mask-position:0 44px;mask-position:0 44px}}
-.dc-DosDontsMobile .mist{background-image:url(/art/64308193ee3f1aadbe13340d6773aa6e.webp)}
-.dc-DosDontsMobile .ropes{background-image:url(/art/52eec3b03662763936ecba87412b3576.webp)}
-.dc-DosDontsMobile .plants{background-image:url(/art/e4c67a8237df2e4e71be3745a7fb05ed.webp);transform-origin:0 941px}
-.dc-DosDontsMobile .lt{position:absolute;background:url(/art/b76f7bb4b9a88e255663fe58f1a3daf3.webp) 0 0/100% 100% no-repeat;transform-origin:50% 4%;will-change:transform}
-.dc-DosDontsMobile .porch{position:absolute;left:166px;top:240px;width:80px;height:106px;background:url(/art/10ff0ceeb4bb4ddc32e578a521b8f554.webp) 0 0/100% 100% no-repeat;transform-origin:40px 6px}
-.dc-DosDontsMobile .glow{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(255,214,130,.55),rgba(255,190,100,.18) 45%,rgba(255,190,100,0) 70%);mix-blend-mode:screen;pointer-events:none}
+/* soft valley mist drifting in front of the far houses */
+.dc-DosDontsMobile .mistb{position:absolute;border-radius:50%;background:radial-gradient(closest-side,rgba(226,222,248,.55),rgba(214,210,244,.25) 55%,rgba(214,210,244,0));filter:blur(6px);pointer-events:none;will-change:transform}
+/* each paper lantern is its own piece, hanging from its hook */
+.dc-DosDontsMobile .lt{position:absolute;background:url(/art/mobile/ch5m-lanterns.png) no-repeat;transform-origin:50% 0;will-change:transform}
+.dc-DosDontsMobile .glow{position:absolute;border-radius:50%;transform:translate(-50%,-50%);aspect-ratio:1;background:radial-gradient(circle,rgba(255,214,130,.55),rgba(255,190,100,.18) 45%,rgba(255,190,100,0) 70%);mix-blend-mode:screen;pointer-events:none}
 .dc-DosDontsMobile .ff{position:absolute;left:0;top:0;width:5px;height:5px;border-radius:50%;background:#FFF4B8;box-shadow:0 0 8px 3px rgba(255,226,120,.75);opacity:0}
 .dc-DosDontsMobile .sky{position:absolute;left:0;top:0;width:11px;height:14px;border-radius:45% 45% 40% 40%;background:radial-gradient(circle at 50% 45%,#FFF1C2,#F7C46A 55%,#D97A5E);box-shadow:0 0 14px 5px rgba(255,200,110,.55);opacity:0}
 .dc-DosDontsMobile .topshade{background:linear-gradient(to bottom,rgba(28,30,70,.55) 0%,rgba(28,30,70,.15) 12%,rgba(28,30,70,0) 18%)}
@@ -25,7 +27,7 @@
 .dc-DosDontsMobile .script{font-family:'Pinyon Script',cursive;font-weight:400}
 .dc-DosDontsMobile .chtitle{position:absolute;left:0;right:0;top:14px;display:flex;flex-direction:column;align-items:center;text-align:center;color:#FFF9F0;z-index:3}
 .dc-DosDontsMobile .lift{text-shadow:0 2px 12px rgba(20,22,60,.75),0 0 2px rgba(20,22,60,.5)}
-.dc-DosDontsMobile .sheet{position:absolute;left:0;right:0;bottom:0;height:430px;display:flex;flex-direction:column;background:rgba(255,249,238,.6);backdrop-filter:blur(7px) saturate(1.1);-webkit-backdrop-filter:blur(7px) saturate(1.1);clip-path:path('M0 14 C30 6 60 18 95 12 C130 6 160 2 195 8 C230 14 262 4 298 8 C330 12 360 4 390 11 L390 430 L0 430 Z')}
+.dc-DosDontsMobile .sheet{position:absolute;left:0;right:0;bottom:0;height:clamp(300px, 51cqh, 580px);display:flex;flex-direction:column;background:rgba(255,249,238,.6);backdrop-filter:blur(7px) saturate(1.1);-webkit-backdrop-filter:blur(7px) saturate(1.1);clip-path:polygon(0.00% 14.0px, 3.85% 11.5px, 7.74% 11.3px, 11.70% 12.2px, 15.76% 13.4px, 19.97% 13.7px, 24.36% 12.0px, 28.75% 9.2px, 33.00% 7.0px, 37.18% 5.5px, 41.36% 5.0px, 45.61% 5.8px, 50.00% 8.0px, 54.43% 9.8px, 58.78% 9.8px, 63.11% 8.8px, 67.45% 7.6px, 71.87% 7.0px, 76.41% 8.0px, 80.47% 9.1px, 84.46% 9.0px, 88.40% 8.4px, 92.29% 8.0px, 96.15% 8.6px, 100.00% 11.0px, 100% 100%, 0% 100%)}
 .dc-DosDontsMobile .tabs{position:relative;display:flex;gap:6px;padding:22px 16px 10px;flex:none}
 .dc-DosDontsMobile .ind{position:absolute;left:0;top:22px;height:44px;width:170px;border-radius:999px;background:#6D8F62;box-shadow:0 6px 16px rgba(20,22,60,.25)}
 .dc-DosDontsMobile .scroll{flex:1;min-height:0;overflow-y:auto;padding:4px 16px 14px}
@@ -55,11 +57,18 @@
 .dc-DosDontsMobile .scroll::-webkit-scrollbar-thumb:hover{border-width:1px}
 .dc-DosDontsMobile .scroll::-webkit-scrollbar-corner{background:transparent}
 @supports not selector(::-webkit-scrollbar){.dc-DosDontsMobile .scroll{scrollbar-width:thin;scrollbar-color:#2F3A78 transparent}}
+/* short phones (iPhone SE and smaller): a slightly smaller title */
+@container (max-height: 720px){
+.dc-DosDontsMobile .chtitle{top:10px}
+.dc-DosDontsMobile .chtitle h1{font-size:32px !important}
+}
 /* page turn to Chapter 6: this page curls away, revealing the wishing shore */
 .dc-DosDontsMobile .nextlink{position:absolute;left:0;top:0;width:1px;height:1px;opacity:0;pointer-events:none}
 .dc-DosDontsMobile .under6{position:absolute;inset:0;z-index:70;pointer-events:none;display:none;background-color:#13235E;background-repeat:no-repeat;
-background-image:linear-gradient(to bottom,rgba(8,14,40,.55) 0%,rgba(8,14,40,.15) 12%,rgba(8,14,40,0) 18%),url(/art/353065ef393ec67bcdcd6b2c03302ab5.webp);
-background-size:100% 100%,auto 844px;background-position:0 0,-10px 0}
+background-image:linear-gradient(to bottom,rgba(8,14,40,.55) 0%,rgba(8,14,40,.15) 12%,rgba(8,14,40,0) 18%),url(/art/mobile/ch6m-full.webp);
+--sh:max(105cqh, calc(100cqw * 1672 / 941));--sw:calc(var(--sh) * 941 / 1672);
+background-size:100% 100%,var(--sw) var(--sh);
+background-position:0 0,clamp(calc(100cqw - var(--sw)), calc(50cqw - var(--sw) * 0.41), 0px) clamp(calc(100cqh - var(--sh)), calc(25cqh - var(--sh) * 0.30), 0px)}
 .dc-DosDontsMobile .tflapwrap{position:absolute;inset:0;z-index:71;pointer-events:none;display:none;filter:drop-shadow(-8px -8px 16px rgba(16,42,32,.45))}
 .dc-DosDontsMobile .tflap{position:absolute;inset:0;background:linear-gradient(135deg,#E9DCBC 0%,#F8EFD9 55%,#E0D0A8 100%)}
 /* bunny pointer + a trail of tiny leaves and sparkles (mouse/trackpad only) */

@@ -1,5 +1,5 @@
 /* eslint-disable */
-// WishesMobile: mobile layout, 390×844. Ported from the "Wishes.dc.html" design board.
+// WishesMobile: phone & tablet-portrait layout, fills the screen. Ported from the handoff's "ch7-wishes-phone.dc.html".
 import React from 'react';
 import { gsap } from 'gsap';
 import { Link } from 'react-router-dom';
@@ -16,8 +16,24 @@ export default class WishesMobile extends React.Component {
     this.state = { i: 0 };
     this.root = null; this.tweens = []; this.tries = 0;
   }
-  componentDidMount() { this.initTrailSoon(); this.boot(); }
-  componentWillUnmount() { if (this.onMove && this.root) { this.root.removeEventListener('pointermove', this.onMove); this.root.removeEventListener('pointerleave', this.onLeave); this.root.removeEventListener('pointerdown', this.onDown); } clearTimeout(this.retry); clearInterval(this.auto); if (this.io) this.io.disconnect(); this.tweens.forEach(function (t) { t.kill(); }); }
+  componentDidMount() { this.initTrailSoon(); this.fit(); this.boot(); }
+  /* scale the girl and her wish card to the screen: fit the width, and leave room for the title above and the footer below */
+  fit() {
+    var self = this, r = this.root;
+    if (!r) { if ((this.fitTries = (this.fitTries || 0) + 1) < 25) setTimeout(function () { self.fit(); }, 120); return; }
+    var go = function () {
+      var W = r.offsetWidth, H = r.offsetHeight; if (!W || !H) return;
+      var card = r.querySelector('.wcard'), foot = r.querySelector('.foot');
+      var content = card ? card.offsetTop + card.offsetHeight + 14 : 480, fh = foot ? foot.offsetHeight + 12 : 84;
+      var top = H < 720 ? 104 : Math.max(140, H * 0.165);
+      var fs = Math.min(1.35, (W - 8) / 390, (H - top - fh) / content);
+      r.style.setProperty('--fs', Math.max(0.6, fs).toFixed(3));
+      r.style.setProperty('--ft', top.toFixed(0) + 'px');
+    };
+    go();
+    if ('ResizeObserver' in window) { this.ro = new ResizeObserver(go); this.ro.observe(r); var c = r.querySelector('.wcard'); if (c) this.ro.observe(c); }
+  }
+  componentWillUnmount() { if (this.onMove && this.root) { this.root.removeEventListener('pointermove', this.onMove); this.root.removeEventListener('pointerleave', this.onLeave); this.root.removeEventListener('pointerdown', this.onDown); } clearTimeout(this.retry); clearInterval(this.auto); if (this.io) this.io.disconnect(); if (this.ro) this.ro.disconnect(); this.tweens.forEach(function (t) { t.kill(); }); }
   reduced() { try { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; } }
   /* the card flutters over like a page in the wind as it shows the next wish */
   show(i, dir) {
@@ -50,8 +66,9 @@ export default class WishesMobile extends React.Component {
   }
   /* flying through the clouds: sky drifts past, the flyer bobs, scarf flutters, card sways on its ribbon, sparkles trail behind */
   ambient(g, q, qa, t) {
-    t.push(g.fromTo(q('.far'), { x: 0 }, { x: -18, duration: 30, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
-    t.push(g.fromTo(q('.near'), { x: 0 }, { x: -40, duration: 18, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    var r = this.root, W = r.offsetWidth, H = r.offsetHeight, sf = q('.scenefit'), f = sf && sf.offsetHeight ? sf.offsetHeight / 886 : 1;
+    // the front cloud bank drifts slowly back and forth
+    t.push(g.fromTo(q('.near'), { x: -10 * f }, { x: 10 * f, duration: 18, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
     var fl = q('.flyer');
     t.push(g.to(fl, { y: -10, duration: 2.6, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
     t.push(g.fromTo(fl, { rotation: -0.8 }, { rotation: 0.8, duration: 3.4, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
@@ -65,8 +82,8 @@ export default class WishesMobile extends React.Component {
     var rnd = function (a, b) { return a + Math.random() * (b - a); };
     Array.prototype.forEach.call(qa('.puff'), function (p, i) {
       (function drift(first) {
-        var w = rnd(110, 200), y = rnd(40, 520);
-        g.set(p, { width: w, height: w * 0.45, x: first ? rnd(0, 390) : 390 + 40, y: y, opacity: rnd(0.18, 0.38) });
+        var w = rnd(110, 200), y = rnd(H * 0.05, H * 0.62);
+        g.set(p, { width: w, height: w * 0.45, x: first ? rnd(0, W) : W + 40, y: y, opacity: rnd(0.18, 0.38) });
         var d = rnd(9, 16);
         t.push(g.to(p, { x: -w - 40, duration: first ? d * 0.6 : d, ease: 'none', delay: first ? 0 : rnd(0, 2), onComplete: function () { drift(false); } }));
       })(true);
@@ -74,7 +91,8 @@ export default class WishesMobile extends React.Component {
     Array.prototype.forEach.call(qa('.spark'), function (s, i) {
       (function fly(first) {
         var fb = fl.getBoundingClientRect(), rr = q('.flyer').parentNode.getBoundingClientRect(), scl = rr.width / q('.flyer').parentNode.offsetWidth || 1;
-        var x0 = 91 + rnd(-6, 6), y0 = 293 + (fb.top - rr.top) / scl - 140 + rnd(-6, 6);
+        var fs = parseFloat(getComputedStyle(r).getPropertyValue('--fs')) || 1;
+        var x0 = (fb.left - rr.left) / scl + 91 * fs + rnd(-6, 6), y0 = (fb.top - rr.top) / scl + 153 * fs + rnd(-6, 6);
         g.set(s, { x: x0, y: y0, opacity: 0, scale: rnd(0.5, 1.1) });
         var tl = g.timeline({ delay: first ? i * 0.5 : rnd(0.1, 1.2), onComplete: function () { fly(false); } });
         tl.to(s, { opacity: 1, duration: 0.25 }).to(s, { x: x0 - rnd(80, 180), y: y0 + rnd(-20, 40), duration: rnd(1.4, 2.2), ease: 'sine.out' }, 0).to(s, { opacity: 0, duration: 0.6 }, '>-0.6');
@@ -183,13 +201,15 @@ export default class WishesMobile extends React.Component {
       <div className="dc-WishesMobile">
       <div className="stage" ref={v.setRoot}>
         <div className="scene layer" aria-hidden="true">
-          <div className="bg far" />
-          <span className="puff" />
-          <span className="puff" />
-          <span className="puff" />
-          <span className="puff" />
-          <span className="puff" />
-          <div className="bg near" />
+          <div className="scenefit">
+            <div className="bg far" />
+            <span className="puff" />
+            <span className="puff" />
+            <span className="puff" />
+            <span className="puff" />
+            <span className="puff" />
+            <div className="bg near" />
+          </div>
         </div>
         <div className="layer topshade" />
         <div className="head">
@@ -203,35 +223,37 @@ export default class WishesMobile extends React.Component {
             Carried across the clouds, one wish at a time
           </p>
         </div>
-        <div className="flyer">
-          <svg className="ribbon" aria-hidden="true" overflow="visible">
-            <path className="rib" d="M91 153 C112 205 236 172 303 215" fill="none" stroke="#E9A7A7" style={{"strokeWidth":"2.4","strokeLinecap":"round"}} />
-          </svg>
-          <div className="girl" role="img" aria-label="A girl flying on a broomstick" />
-          <div className="wcard" style={css(v.cardStyle)} role="region" aria-label="Wishes for Dylan" aria-live="polite">
-            <span className="wq" aria-hidden="true">
-              “
-            </span>
-            <p className="wtext">
-              {v.wishText}
-            </p>
-            <p className="wname">
-              {"— "}{v.wishName}
-            </p>
-            <div className="wnav">
-              <button className="warrow" type="button" onClick={v.prevWish} aria-label="Previous wish">
-                <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
-                  <path d="M10 3 L5 8 L10 13" fill="none" stroke="#5B4A7A" style={{"strokeWidth":"2","strokeLinecap":"round","strokeLinejoin":"round"}} />
-                </svg>
-              </button>
-              <p className="wcount">
-                {"Wish "}{v.wishNum}{" of "}{v.wishTotal}
+        <div className="flyfit">
+          <div className="flyer">
+            <svg className="ribbon" aria-hidden="true" overflow="visible">
+              <path className="rib" d="M91 153 C112 205 236 172 303 215" fill="none" stroke="#E9A7A7" style={{"strokeWidth":"2.4","strokeLinecap":"round"}} />
+            </svg>
+            <div className="girl" role="img" aria-label="A girl flying on a broomstick" />
+            <div className="wcard" style={css(v.cardStyle)} role="region" aria-label="Wishes for Dylan" aria-live="polite">
+              <span className="wq" aria-hidden="true">
+                “
+              </span>
+              <p className="wtext">
+                {v.wishText}
               </p>
-              <button className="warrow" type="button" onClick={v.nextWish} aria-label="Next wish">
-                <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
-                  <path d="M6 3 L11 8 L6 13" fill="none" stroke="#5B4A7A" style={{"strokeWidth":"2","strokeLinecap":"round","strokeLinejoin":"round"}} />
-                </svg>
-              </button>
+              <p className="wname">
+                {"— "}{v.wishName}
+              </p>
+              <div className="wnav">
+                <button className="warrow" type="button" onClick={v.prevWish} aria-label="Previous wish">
+                  <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+                    <path d="M10 3 L5 8 L10 13" fill="none" stroke="#5B4A7A" style={{"strokeWidth":"2","strokeLinecap":"round","strokeLinejoin":"round"}} />
+                  </svg>
+                </button>
+                <p className="wcount">
+                  {"Wish "}{v.wishNum}{" of "}{v.wishTotal}
+                </p>
+                <button className="warrow" type="button" onClick={v.nextWish} aria-label="Next wish">
+                  <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+                    <path d="M6 3 L11 8 L6 13" fill="none" stroke="#5B4A7A" style={{"strokeWidth":"2","strokeLinecap":"round","strokeLinejoin":"round"}} />
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
         </div>

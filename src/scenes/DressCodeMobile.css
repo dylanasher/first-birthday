@@ -1,24 +1,30 @@
-/* DressCodeMobile: ported from Ch4.dc.html */
+/* DressCodeMobile: phone layout, ported from the handoff's ch4-phone.dc.html */
 
 .dc-DressCodeMobile{margin:0;background:#102A20}
-.dc-DressCodeMobile .stage{position:relative;width:390px;height:844px;overflow:hidden;background:#C9B8E6;font-family:'Nunito',system-ui,sans-serif;color:#2A2238}
+.dc-DressCodeMobile .stage{position:relative;width:100vw;height:100vh;height:100dvh;container-type:size;overflow:hidden;background:#C9B8E6;font-family:'Nunito',system-ui,sans-serif;color:#2A2238}
 .dc-DressCodeMobile .layer{position:absolute;inset:0;pointer-events:none}
-.dc-DressCodeMobile .bg{position:absolute;inset:0;background-size:auto 844px;background-position:72% 0;background-repeat:no-repeat}
-.dc-DressCodeMobile .far{background-image:url(/art/900fb868ae88739a3f0d328f2cec93f0.webp)}
-.dc-DressCodeMobile .clouds{background-image:url(/art/c26b9fdece174e831448602e75dd3023.webp);will-change:transform}
-/* the floating house, scaled to fit the phone (same painted layers, drawn at 43%) */
-.dc-DressCodeMobile .house{position:absolute;left:-10px;top:92px;width:719px;height:405px;will-change:transform}
+/* responsive scene: the tall sky-garden painting (941x1672) always covers the screen like a photo set to "fill".
+   The island is centred, with the compass on its roof (17.3% down the painting) sitting 13% down the screen */
+.dc-DressCodeMobile .scenefit{position:absolute;--sh:max(105cqh, calc(100cqw * 1672 / 941));--sw:calc(var(--sh) * 941 / 1672);width:var(--sw);height:var(--sh);
+left:clamp(calc(100cqw - var(--sw)), calc(50cqw - var(--sw) * 0.5), 0px);
+top:clamp(calc(100cqh - var(--sh)), calc(13cqh - var(--sh) * 0.173), 0px)}
+/* the floating island and sky gently bob together; the cloud sea stays in front */
+.dc-DressCodeMobile .back{position:absolute;inset:0;will-change:transform}
 .dc-DressCodeMobile .lyr{position:absolute;inset:0;background-size:100% 100%;background-repeat:no-repeat;will-change:transform}
-.dc-DressCodeMobile .island{background-image:url(/art/1314fd11052d00425fa4e7a840da03fd.webp)}
-.dc-DressCodeMobile .wind{background-image:url(/art/a8b70596119ca258fadbd0f7b8870a41.webp);transform-origin:78px 115.5px}
-.dc-DressCodeMobile .smoke{background-image:url(/art/576d087d15ebc11eddc284658ca4be02.webp);transform-origin:131px 64.5px}
-.dc-DressCodeMobile .flag{background-image:url(/art/9f42504135dfa106b70f880dc828dcf4.webp);transform-origin:265.3px 26.7px}
-.dc-DressCodeMobile .water{background-image:url(/art/0d58ec7798beecd868b60eada641e786.webp)}
-.dc-DressCodeMobile .water2{background-image:url(/art/0d58ec7798beecd868b60eada641e786.webp);filter:brightness(1.35) saturate(1.2);opacity:.6;
+.dc-DressCodeMobile .far{background-image:url(/art/mobile/ch4m-base.webp)}
+.dc-DressCodeMobile .clouds{background-image:url(/art/mobile/ch4m-cloudsea.webp);transform:scale(1.05);transform-origin:50% 100%}
+/* moving parts, placed in % of the painting so they scale with it */
+.dc-DressCodeMobile .part{position:absolute;background-size:100% 100%;background-repeat:no-repeat;will-change:transform}
+.dc-DressCodeMobile .wind{left:13.0712%;top:25.7177%;width:12.9649%;height:7.8947%;background-image:url(/art/mobile/ch4m-blades.png);transform-origin:54.34% 50.15%}
+.dc-DressCodeMobile .flag{left:62.4867%;top:17.8828%;width:17.9596%;height:3.3493%;background-image:url(/art/mobile/ch4m-flag.png);transform-origin:0% 25%}
+.dc-DressCodeMobile .smoke{left:4.3571%;top:10.945%;width:32.1998%;height:9.5096%;background-image:url(/art/mobile/ch4m-smoke.png);transform-origin:92.7% 92.5%}
+/* waterfall shimmer: streaks of light run down inside the waterfall's shape */
+.dc-DressCodeMobile .water2{background-image:url(/art/mobile/ch4m-full.webp);filter:brightness(1.35) saturate(1.2);opacity:.6;
+clip-path:polygon(70.563% 46.950%, 76.089% 46.770%, 76.939% 53.828%, 77.790% 59.809%, 77.683% 65.789%, 68.225% 65.789%, 68.438% 58.612%, 70.988% 51.435%);
 -webkit-mask-image:repeating-linear-gradient(to bottom,transparent 0,#000 8px,transparent 16px);mask-image:repeating-linear-gradient(to bottom,transparent 0,#000 8px,transparent 16px);
 -webkit-mask-size:100% 32px;mask-size:100% 32px;animation:DressCodeMobile-flow 0.9s linear infinite}
 @keyframes DressCodeMobile-flow{from{-webkit-mask-position:0 0;mask-position:0 0}to{-webkit-mask-position:0 32px;mask-position:0 32px}}
-.dc-DressCodeMobile .lantern{position:absolute;width:36px;height:36px;margin:-18px 0 0 -18px;border-radius:50%;background:radial-gradient(circle,rgba(255,226,150,.85),rgba(255,200,110,.3) 40%,rgba(255,200,110,0) 70%);mix-blend-mode:screen}
+.dc-DressCodeMobile .lantern{position:absolute;width:7.4%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(255,226,150,.85),rgba(255,200,110,.3) 40%,rgba(255,200,110,0) 70%);mix-blend-mode:screen}
 .dc-DressCodeMobile .ribbon{position:absolute;left:0;top:0}
 .dc-DressCodeMobile .ribbon svg{display:block;width:100%;height:100%;overflow:visible}
 .dc-DressCodeMobile .ribbon{width:70px;height:30px}
@@ -28,7 +34,7 @@
 .dc-DressCodeMobile .lift{text-shadow:0 2px 12px rgba(60,40,90,.6),0 0 2px rgba(60,40,90,.4)}
 .dc-DressCodeMobile .chtitle{position:absolute;left:0;right:0;top:14px;display:flex;flex-direction:column;align-items:center;text-align:center;color:#FFF9F0;z-index:3}
 
-.dc-DressCodeMobile .sheet{position:absolute;left:0;right:0;bottom:0;height:400px;display:flex;flex-direction:column;background:rgba(255,250,244,.6);backdrop-filter:blur(7px) saturate(1.1);-webkit-backdrop-filter:blur(7px) saturate(1.1);clip-path:path('M0 14 C30 6 60 18 95 12 C130 6 160 2 195 8 C230 14 262 4 298 8 C330 12 360 4 390 11 L390 400 L0 400 Z')}
+.dc-DressCodeMobile .sheet{position:absolute;left:0;right:0;bottom:0;height:clamp(300px, 47.4cqh, 560px);display:flex;flex-direction:column;background:rgba(255,250,244,.6);backdrop-filter:blur(7px) saturate(1.1);-webkit-backdrop-filter:blur(7px) saturate(1.1);clip-path:polygon(0.00% 14.0px, 3.85% 11.5px, 7.74% 11.3px, 11.70% 12.2px, 15.76% 13.4px, 19.97% 13.7px, 24.36% 12.0px, 28.75% 9.2px, 33.00% 7.0px, 37.18% 5.5px, 41.36% 5.0px, 45.61% 5.8px, 50.00% 8.0px, 54.43% 9.8px, 58.78% 9.8px, 63.11% 8.8px, 67.45% 7.6px, 71.87% 7.0px, 76.41% 8.0px, 80.47% 9.1px, 84.46% 9.0px, 88.40% 8.4px, 92.29% 8.0px, 96.15% 8.6px, 100.00% 11.0px, 100% 100%, 0% 100%)}
 .dc-DressCodeMobile .tabs{position:relative;display:flex;gap:6px;padding:22px 16px 10px;flex:none}
 .dc-DressCodeMobile .ind{position:absolute;left:0;top:22px;height:44px;width:170px;border-radius:999px;background:#5B4A7A;box-shadow:0 6px 16px rgba(70,50,100,.28)}
 .dc-DressCodeMobile .tab{position:relative;z-index:1;flex:1;display:flex;align-items:center;justify-content:center;gap:6px;min-height:44px;border-radius:999px;border:1px solid rgba(91,74,122,.25);background:transparent;color:#4A3B66;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:color .3s ease,border-color .3s ease}
@@ -58,11 +64,18 @@
 .dc-DressCodeMobile .next:focus-visible{outline:2px solid #C9A24E;outline-offset:3px}
 .dc-DressCodeMobile .swhex{margin:0;font-size:9.5px;font-weight:600;letter-spacing:.03em;color:#6A5E78;text-align:center}
 .dc-DressCodeMobile .nowhite{display:flex;gap:10px;align-items:center;margin-top:14px;padding:9px 12px;border-radius:14px;background:rgba(233,167,167,.22);border:1px solid rgba(217,122,94,.35)}
+/* short phones (iPhone SE and smaller): a slightly smaller title */
+@container (max-height: 720px){
+.dc-DressCodeMobile .chtitle{top:10px}
+.dc-DressCodeMobile .chtitle h1{font-size:32px !important}
+}
 /* page turn to Chapter 5: this page curls away, revealing the lantern village */
 .dc-DressCodeMobile .nextlink{position:absolute;left:0;top:0;width:1px;height:1px;opacity:0;pointer-events:none}
 .dc-DressCodeMobile .under5{position:absolute;inset:0;z-index:70;pointer-events:none;display:none;background-color:#3D4A8C;background-repeat:no-repeat;
-background-image:linear-gradient(to bottom,rgba(28,30,70,.55) 0%,rgba(28,30,70,.15) 12%,rgba(28,30,70,0) 18%),url(/art/22ccc67ded57a7c30a75430c7ce39721.webp);
-background-size:100% 100%,auto 844px;background-position:0 0,-250px 0}
+--sh:max(111cqh, calc(100cqw * 1672 / 941));--sw:calc(var(--sh) * 941 / 1672);
+background-image:linear-gradient(to bottom,rgba(28,30,70,.55) 0%,rgba(28,30,70,.15) 12%,rgba(28,30,70,0) 18%),url(/art/mobile/ch5m-full.webp);
+background-size:100% 100%,var(--sw) var(--sh);
+background-position:0 0,clamp(calc(100cqw - var(--sw)), calc(50cqw - var(--sw) * 0.56), 0px) clamp(calc(100cqh - var(--sh)), calc(45.5cqh - var(--sh) * 0.496), 0px)}
 .dc-DressCodeMobile .tflapwrap{position:absolute;inset:0;z-index:71;pointer-events:none;display:none;filter:drop-shadow(-8px -8px 16px rgba(16,42,32,.45))}
 .dc-DressCodeMobile .tflap{position:absolute;inset:0;background:linear-gradient(135deg,#E9DCBC 0%,#F8EFD9 55%,#E0D0A8 100%)}
 /* storybook scrollbar: a slim vine line with a glowing pill */

@@ -1,30 +1,39 @@
-/* RsvpMobile: ported from Ch6.dc.html */
+/* RsvpMobile: phone layout, ported from the handoff's ch6-phone.dc.html */
 
 .dc-RsvpMobile{margin:0;background:#0B1433}
-.dc-RsvpMobile .stage{position:relative;width:390px;height:844px;overflow:hidden;background:#13235E;font-family:'Nunito',system-ui,sans-serif;color:#1C2554}
+.dc-RsvpMobile .stage{position:relative;width:100vw;height:100vh;height:100dvh;container-type:size;overflow:hidden;background:#13235E;font-family:'Nunito',system-ui,sans-serif;color:#1C2554}
 .dc-RsvpMobile .layer{position:absolute;inset:0;pointer-events:none}
-/* the painted shore: every layer sits on the same 1672x941 canvas, scaled to the stage */
-.dc-RsvpMobile .cv{position:absolute;left:-10px;top:0;width:1672px;height:941px;transform:scale(0.8969);transform-origin:0 0}
+/* responsive scene: the tall moonlit-beach painting (941x1672) always covers the screen like a photo set to "fill".
+   The moon and the hanging jars (around 30% down the painting) sit in the band between the title and the RSVP panel */
+.dc-RsvpMobile .scenefit{position:absolute;--sh:max(105cqh, calc(100cqw * 1672 / 941));--sw:calc(var(--sh) * 941 / 1672);width:var(--sw);height:var(--sh);
+left:clamp(calc(100cqw - var(--sw)), calc(50cqw - var(--sw) * 0.41), 0px);
+top:clamp(calc(100cqh - var(--sh)), calc(25cqh - var(--sh) * 0.30), 0px)}
 .dc-RsvpMobile .ly{position:absolute;inset:0;background-size:100% 100%;background-repeat:no-repeat;will-change:transform}
-.dc-RsvpMobile .plate{background-image:url(/art/feb9ca705abb6f835c3eb0853d0163ab.webp)}
-.dc-RsvpMobile .sea{background-image:url(/art/38a98b0c1c07945158fecd20d7fb5748.webp)}
-.dc-RsvpMobile .sea2{background-image:url(/art/38a98b0c1c07945158fecd20d7fb5748.webp);filter:brightness(1.7) saturate(1.2);opacity:.4;
+.dc-RsvpMobile .plate{background-image:url(/art/mobile/ch6m-base.webp)}
+.dc-RsvpMobile .sea{background-image:url(/art/mobile/ch6m-sea.webp)}
+.dc-RsvpMobile .sea2{background-image:url(/art/mobile/ch6m-sea.webp);filter:brightness(1.7) saturate(1.2);opacity:.4;
 -webkit-mask-image:repeating-linear-gradient(to bottom,transparent 0,#000 3px,transparent 9px);mask-image:repeating-linear-gradient(to bottom,transparent 0,#000 3px,transparent 9px);
 -webkit-mask-size:100% 18px;mask-size:100% 18px;animation:RsvpMobile-ripple 2.6s linear infinite}
 @keyframes RsvpMobile-ripple{from{-webkit-mask-position:0 0;mask-position:0 0}to{-webkit-mask-position:0 18px;mask-position:0 18px}}
-.dc-RsvpMobile .foam{background-image:url(/art/da78f2bb8e1b75e65556cdb9eb6058ec.webp)}
-.dc-RsvpMobile .clouds{background-image:url(/art/d587e24a0118aeae4217e349bbc49f1c.webp)}
-.dc-RsvpMobile .jars{background-image:url(/art/5ecd429dc2d0d4c5710266eadb8ba063.webp);transform-origin:240px 160px}
-.dc-RsvpMobile .moonglow{position:absolute;left:733px;top:-62px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,190,.38),rgba(255,230,170,.12) 45%,rgba(255,230,170,0) 70%);mix-blend-mode:screen}
-.dc-RsvpMobile .jglow{position:absolute;width:90px;height:90px;border-radius:50%;background:radial-gradient(circle,rgba(255,222,130,.6),rgba(255,200,100,.18) 45%,rgba(255,200,100,0) 70%);mix-blend-mode:screen}
-.dc-RsvpMobile .star{position:absolute;width:18px;height:18px;background:radial-gradient(circle,#FFFBEA 0,rgba(255,246,210,.9) 18%,rgba(255,240,190,0) 60%);border-radius:50%;opacity:.4}
+.dc-RsvpMobile .foam{background-image:url(/art/mobile/ch6m-foam.webp)}
+.dc-RsvpMobile .clouds{background-image:url(/art/mobile/ch6m-clouds.webp)}
+/* each glowing jar hangs on its own string and swings gently */
+.dc-RsvpMobile .jar{position:absolute;background-size:100% 100%;background-repeat:no-repeat;transform-origin:50% 0;will-change:transform}
+.dc-RsvpMobile .moonglow{position:absolute;left:71.73%;top:24.04%;width:38%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(255,240,190,.38),rgba(255,230,170,.12) 45%,rgba(255,230,170,0) 70%);mix-blend-mode:screen}
+.dc-RsvpMobile .jglow{position:absolute;width:11%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(255,222,130,.6),rgba(255,200,100,.18) 45%,rgba(255,200,100,0) 70%);mix-blend-mode:screen}
+.dc-RsvpMobile .star{position:absolute;width:2.2%;aspect-ratio:1;transform:translate(-50%,-50%);background:radial-gradient(circle,#FFFBEA 0,rgba(255,246,210,.9) 18%,rgba(255,240,190,0) 60%);border-radius:50%;opacity:.4}
 .dc-RsvpMobile .orb{position:absolute;left:0;top:0;width:7px;height:7px;border-radius:50%;background:#FFF2C4;box-shadow:0 0 10px 4px rgba(255,214,120,.75);opacity:0;pointer-events:none}
 .dc-RsvpMobile .wishstar{position:absolute;left:0;top:0;width:10px;height:10px;border-radius:50%;background:#FFF8DE;box-shadow:0 0 14px 6px rgba(255,226,150,.8),0 0 2px 1px #fff;pointer-events:none;z-index:4}
 .dc-RsvpMobile .topshade{background:linear-gradient(to bottom,rgba(8,14,40,.55) 0%,rgba(8,14,40,.15) 12%,rgba(8,14,40,0) 18%)}
+/* short phones (iPhone SE and smaller): a slightly smaller title */
+@container (max-height: 720px){
+.dc-RsvpMobile .chtitle{top:10px}
+.dc-RsvpMobile .chtitle h1{font-size:32px !important}
+}
 .dc-RsvpMobile .script{font-family:'Pinyon Script',cursive;font-weight:400}
 .dc-RsvpMobile .chtitle{position:absolute;left:0;right:0;top:14px;display:flex;flex-direction:column;align-items:center;text-align:center;color:#FFF9F0;z-index:3}
 .dc-RsvpMobile .lift{text-shadow:0 2px 12px rgba(5,10,35,.8),0 0 2px rgba(5,10,35,.5)}
-.dc-RsvpMobile .sheet{position:absolute;left:0;right:0;bottom:0;height:520px;display:flex;flex-direction:column;background:rgba(255,249,238,.6);backdrop-filter:blur(7px) saturate(1.1);-webkit-backdrop-filter:blur(7px) saturate(1.1);clip-path:path('M0 14 C30 6 60 18 95 12 C130 6 160 2 195 8 C230 14 262 4 298 8 C330 12 360 4 390 11 L390 520 L0 520 Z')}
+.dc-RsvpMobile .sheet{position:absolute;left:0;right:0;bottom:0;height:clamp(330px, 61.6cqh, 640px);display:flex;flex-direction:column;background:rgba(255,249,238,.6);backdrop-filter:blur(7px) saturate(1.1);-webkit-backdrop-filter:blur(7px) saturate(1.1);clip-path:polygon(0.00% 14.0px, 3.85% 11.5px, 7.74% 11.3px, 11.70% 12.2px, 15.76% 13.4px, 19.97% 13.7px, 24.36% 12.0px, 28.75% 9.2px, 33.00% 7.0px, 37.18% 5.5px, 41.36% 5.0px, 45.61% 5.8px, 50.00% 8.0px, 54.43% 9.8px, 58.78% 9.8px, 63.11% 8.8px, 67.45% 7.6px, 71.87% 7.0px, 76.41% 8.0px, 80.47% 9.1px, 84.46% 9.0px, 88.40% 8.4px, 92.29% 8.0px, 96.15% 8.6px, 100.00% 11.0px, 100% 100%, 0% 100%)}
 .dc-RsvpMobile .cd{flex:none;margin:24px 16px 0}
 .dc-RsvpMobile .tabs{position:relative;display:flex;gap:6px;padding:12px 16px 8px;flex:none}
 .dc-RsvpMobile .ind{position:absolute;left:0;top:12px;height:44px;width:170px;border-radius:999px;background:#1F2C6B;box-shadow:0 6px 16px rgba(5,10,35,.25)}
@@ -75,8 +84,10 @@
 @supports not selector(::-webkit-scrollbar){.dc-RsvpMobile .scroll{scrollbar-width:thin;scrollbar-color:#1F2C6B transparent}}
 .dc-RsvpMobile .nextlink{position:absolute;left:0;top:0;width:1px;height:1px;opacity:0;pointer-events:none}
 .dc-RsvpMobile .under7{position:absolute;inset:0;z-index:70;pointer-events:none;display:none;background-color:#B9B6E6;background-repeat:no-repeat;
-background-image:linear-gradient(to bottom,rgba(60,50,100,.35) 0%,rgba(60,50,100,0) 18%),url(/art/sky-wishes.webp);
-background-size:100% 100%,auto 844px;background-position:0 0,22% 0}
+background-image:linear-gradient(to bottom,rgba(60,50,100,.35) 0%,rgba(60,50,100,0) 18%),url(/art/mobile/ch7m-full.webp);
+--sh:max(105cqh, calc(100cqw * 1672 / 941));--sw:calc(var(--sh) * 941 / 1672);
+background-size:100% 100%,var(--sw) var(--sh);
+background-position:0 0,clamp(calc(100cqw - var(--sw)), calc(50cqw - var(--sw) * 0.42), 0px) calc(100cqh - var(--sh))}
 .dc-RsvpMobile .tflapwrap{position:absolute;inset:0;z-index:71;pointer-events:none;display:none;filter:drop-shadow(-8px -8px 16px rgba(16,42,32,.45))}
 .dc-RsvpMobile .tflap{position:absolute;inset:0;background:linear-gradient(135deg,#E9DCBC 0%,#F8EFD9 55%,#E0D0A8 100%)}
 /* bunny pointer + a trail of tiny leaves and sparkles (mouse/trackpad only) */

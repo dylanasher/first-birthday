@@ -1,5 +1,5 @@
 /* eslint-disable */
-// RsvpMobile: mobile layout, 390×844. Ported from the "Ch6.dc.html" design board.
+// RsvpMobile: phone & tablet-portrait layout, fills the screen. Ported from the handoff's "ch6-phone.dc.html".
 import React from 'react';
 import { gsap } from 'gsap';
 import { Link } from 'react-router-dom';
@@ -91,12 +91,16 @@ export default class RsvpMobile extends React.Component {
   }
   /* the shore at night: clouds drift, moonlight ripples, waves wash in, jars sway and glow, stars twinkle, wish-lights rise */
   ambient(g, q, qa, t) {
-    t.push(g.to(q('.clouds'), { x: 46, duration: 30, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
-    t.push(g.fromTo(q('.foam'), { x: 0, y: 0, opacity: 0.8 }, { x: -6, y: 6, opacity: 1, duration: 3.4, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
-    t.push(g.fromTo(q('.sea'), { y: 0 }, { y: 2, duration: 3.4, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
-    var jars = q('.jars');
-    g.set(jars, { rotation: -0.7 });
-    t.push(g.to(jars, { rotation: 0.7, duration: 3.8, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    var sf = q('.scenefit'), SW = sf ? sf.offsetWidth : 499, SH = sf ? sf.offsetHeight : 886, f = SH / 886;
+    t.push(g.to(q('.clouds'), { x: 24 * f, duration: 30, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    t.push(g.fromTo(q('.foam'), { x: 0, y: 0, opacity: 0.8 }, { x: -3 * f, y: 3 * f, opacity: 1, duration: 3.4, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    t.push(g.fromTo(q('.sea'), { y: 0 }, { y: 1.2 * f, duration: 3.4, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    // each jar swings on its own string, slightly out of step with the others
+    Array.prototype.forEach.call(qa('.jar'), function (j, i) {
+      var a = 2.5 + (i % 2);
+      g.set(j, { rotation: -a });
+      t.push(g.to(j, { rotation: a, duration: 2.6 + i * 0.45, ease: 'sine.inOut', yoyo: true, repeat: -1, delay: i * 0.3 }));
+    });
     Array.prototype.forEach.call(qa('.jglow'), function (l, i) {
       t.push(g.fromTo(l, { opacity: 0.55, scale: 0.88 }, { opacity: 1, scale: 1.15, duration: 1.7 + i * 0.35, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
     });
@@ -104,15 +108,15 @@ export default class RsvpMobile extends React.Component {
     Array.prototype.forEach.call(qa('.star'), function (s) {
       t.push(g.fromTo(s, { opacity: 0.15, scale: 0.6 }, { opacity: 0.95, scale: 1.25, duration: 0.9 + Math.random() * 1.8, ease: 'sine.inOut', yoyo: true, repeat: -1, delay: Math.random() * 3 }));
     });
-    var jp = [(26, 301), (227, 185), (302, 269), (203, 338)], rnd = function (a, b) { return a + Math.random() * (b - a); };
+    var jp = [[0.2412, 0.2846], [0.0319, 0.349], [0.3353, 0.3282], [0.2264, 0.3671]].map(function (p) { return [p[0] * SW, p[1] * SH]; }), rnd = function (a, b) { return a + Math.random() * (b - a); };
     Array.prototype.forEach.call(qa('.orb'), function (o, i) {
       (function rise(first) {
         var p = jp[Math.floor(Math.random() * jp.length)];
         g.set(o, { x: p[0], y: p[1], opacity: 0, scale: rnd(0.6, 1.1) });
         var tl = g.timeline({ delay: first ? i * 1.6 + 0.5 : rnd(0.5, 3), onComplete: function () { rise(false); } });
         tl.to(o, { opacity: rnd(0.7, 1), duration: 0.8 })
-          .to(o, { y: p[1] - rnd(140, 230), duration: rnd(5, 8), ease: 'sine.out' }, 0)
-          .to(o, { x: p[0] + rnd(-50, 90), duration: rnd(5, 8), ease: 'sine.inOut' }, 0)
+          .to(o, { y: p[1] - rnd(75, 125) * f, duration: rnd(5, 8), ease: 'sine.out' }, 0)
+          .to(o, { x: p[0] + rnd(-27, 48) * f, duration: rnd(5, 8), ease: 'sine.inOut' }, 0)
           .to(o, { opacity: 0, duration: 1.6, ease: 'sine.in' }, '>-1.8');
         t.push(tl);
       })(true);
@@ -246,40 +250,37 @@ export default class RsvpMobile extends React.Component {
       <div className="dc-RsvpMobile">
       <div className="stage" ref={v.setRoot}>
         <div className="scene layer" aria-hidden="true">
-          <div className="cv">
+          <div className="scenefit">
             <div className="ly plate" />
+            <span className="star" style={{"left":"39.74%","top":"8.97%"}} />
+            <span className="star" style={{"left":"90.22%","top":"17.40%"}} />
+            <span className="star" style={{"left":"76.30%","top":"14.53%"}} />
+            <span className="star" style={{"left":"21.36%","top":"4.01%"}} />
+            <span className="star" style={{"left":"67.59%","top":"11.54%"}} />
+            <span className="star" style={{"left":"24.34%","top":"9.81%"}} />
+            <span className="star" style={{"left":"31.88%","top":"5.32%"}} />
+            <span className="star" style={{"left":"91.50%","top":"9.15%"}} />
+            <span className="star" style={{"left":"82.25%","top":"13.28%"}} />
+            <span className="star" style={{"left":"83.32%","top":"7.06%"}} />
             <span className="moonglow" />
-            <span className="star" style={{"left":"1345px","top":"55px"}} />
-            <span className="star" style={{"left":"1484px","top":"79px"}} />
-            <span className="star" style={{"left":"1170px","top":"21px"}} />
-            <span className="star" style={{"left":"1063px","top":"40px"}} />
-            <span className="star" style={{"left":"1123px","top":"135px"}} />
-            <span className="star" style={{"left":"1551px","top":"8px"}} />
-            <span className="star" style={{"left":"491px","top":"11px"}} />
-            <span className="star" style={{"left":"653px","top":"11px"}} />
-            <span className="star" style={{"left":"1591px","top":"37px"}} />
-            <span className="star" style={{"left":"1426px","top":"11px"}} />
-            <span className="star" style={{"left":"551px","top":"29px"}} />
-            <span className="star" style={{"left":"1615px","top":"47px"}} />
-            <span className="star" style={{"left":"674px","top":"59px"}} />
-            <span className="star" style={{"left":"620px","top":"81px"}} />
-            <span className="star" style={{"left":"1375px","top":"12px"}} />
-            <span className="star" style={{"left":"663px","top":"136px"}} />
             <div className="ly clouds" />
             <div className="ly sea" />
             <div className="ly sea2" />
             <div className="ly foam" />
-            <div className="ly jars" />
-            <span className="jglow" style={{"left":"-5px","top":"291px"}} />
-            <span className="jglow" style={{"left":"219px","top":"161px"}} />
-            <span className="jglow" style={{"left":"303px","top":"255px"}} />
-            <span className="jglow" style={{"left":"192px","top":"332px"}} />
+            <span className="jglow" style={{"left":"24.12%","top":"28.46%"}} />
+            <span className="jglow" style={{"left":"3.19%","top":"34.90%"}} />
+            <span className="jglow" style={{"left":"33.53%","top":"32.82%"}} />
+            <span className="jglow" style={{"left":"22.64%","top":"36.71%"}} />
+            <i className="jar" style={{"left":"21.785%","top":"25.419%","width":"4.676%","height":"4.904%","backgroundImage":"url(/art/mobile/ch6m-jar0.png)"}} />
+            <i className="jar" style={{"left":"0.744%","top":"31.938%","width":"4.888%","height":"4.785%","backgroundImage":"url(/art/mobile/ch6m-jar1.png)"}} />
+            <i className="jar" style={{"left":"30.393%","top":"29.665%","width":"6.270%","height":"5.084%","backgroundImage":"url(/art/mobile/ch6m-jar2.png)"}} />
+            <i className="jar" style={{"left":"19.979%","top":"33.373%","width":"5.313%","height":"5.383%","backgroundImage":"url(/art/mobile/ch6m-jar3.png)"}} />
+            <span className="orb" />
+            <span className="orb" />
+            <span className="orb" />
+            <span className="orb" />
+            <span className="orb" />
           </div>
-          <span className="orb" />
-          <span className="orb" />
-          <span className="orb" />
-          <span className="orb" />
-          <span className="orb" />
         </div>
         <div className="layer topshade" />
         <div className="chtitle">

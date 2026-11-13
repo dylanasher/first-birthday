@@ -1,5 +1,5 @@
 /* eslint-disable */
-// OpeningMobile: mobile layout, 390×844. Ported from the "Main.dc.html" design board.
+// OpeningMobile: phone & tablet-portrait layout, fills the screen. Ported from the handoff's "ch1-phone.dc.html".
 import React from 'react';
 import { gsap } from 'gsap';
 import { Link } from 'react-router-dom';
@@ -39,6 +39,8 @@ export default class OpeningMobile extends React.Component {
     this.buildOpen();
   }
   q(sel) { return this.root.querySelector(sel); }
+  /* distances were tuned on an 844px-tall phone; scale them to this screen */
+  fk() { return this.root && this.root.offsetHeight ? this.root.offsetHeight / 844 : 1; }
   qa(sel) { return Array.prototype.slice.call(this.root.querySelectorAll(sel)); }
 
   /* sleeping forest: soft light on Dylan breathes, foliage sways, motes and fireflies drift */
@@ -50,7 +52,7 @@ export default class OpeningMobile extends React.Component {
     t.push(g.to(this.q('.foreR'), { rotation: -0.6, scale: 1.01, duration: 7.8, ease: 'sine.inOut', yoyo: true, repeat: -1, delay: -2 }));
     t.push(g.to(this.q('.canopy'), { y: 3, scale: 1.008, duration: 8.5, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
     t.push(g.fromTo(this.q('.halo'), { opacity: 0.55, scale: 0.97 }, { opacity: 0.95, scale: 1.04, duration: 3.6, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
-    t.push(g.to(this.q('.mistA'), { x: 70, duration: 20, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    t.push(g.to(this.q('.mistA'), { x: 70 * this.fk(), duration: 20, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
     this.qa('.mote').forEach(function (m) {
       t.push(g.to(m, { x: 'random(-30, 30)', y: 'random(-40, 16)', opacity: 'random(0.2, 1)', duration: 'random(5, 11)', ease: 'sine.inOut', yoyo: true, repeat: -1, repeatRefresh: true }));
     });
@@ -96,9 +98,9 @@ export default class OpeningMobile extends React.Component {
         .to(this.q('.foreLCam'), { xPercent: -42, yPercent: 16, rotation: -4, scale: 1.55, duration: 1.8, ease: 'power3.inOut' }, 2.9)
         .to(this.q('.foreRCam'), { xPercent: 42, yPercent: 16, rotation: 4, scale: 1.55, duration: 1.8, ease: 'power3.inOut' }, 2.9)
         .to(this.q('.canopyCam'), { yPercent: -32, scale: 1.4, duration: 1.8, ease: 'power3.inOut' }, 2.95)
-        .to(this.q('.farCam'), { scale: 1.35, y: 147, duration: 2.0, ease: 'power3.inOut' }, 2.9)
-        .to(this.q('.fireflies'), { y: 190, scale: 1.2, duration: 2.0, ease: 'power3.inOut' }, 2.9)
-        .to(this.q('.glow'), { y: 200, opacity: 0.25, duration: 2.0, ease: 'power3.inOut' }, 2.9)
+        .to(this.q('.farCam'), { scale: 1.35, y: 147 * this.fk(), duration: 2.0, ease: 'power3.inOut' }, 2.9)
+        .to(this.q('.fireflies'), { y: 190 * this.fk(), scale: 1.2, duration: 2.0, ease: 'power3.inOut' }, 2.9)
+        .to(this.q('.glow'), { y: 200 * this.fk(), opacity: 0.25, duration: 2.0, ease: 'power3.inOut' }, 2.9)
         .to(this.q('.motes'), { scale: 1.25, duration: 2.0, ease: 'power2.inOut' }, 2.9)
         // 5. Welcome arrives above him
         .set(this.q('.welcome'), { visibility: 'visible' }, 3.9)
@@ -197,7 +199,7 @@ export default class OpeningMobile extends React.Component {
       [320,700,4],[30,480,3],[360,560,3],[230,380,3],[180,660,4],[260,280,3],[90,520,3],[330,500,4]
     ];
     var motes = moteSpots.map(function (s) {
-      return { style: 'left:' + s[0] + 'px;top:' + s[1] + 'px;width:' + (s[2] * 2) + 'px;height:' + (s[2] * 2) + 'px;opacity:.65' };
+      return { style: 'left:' + ((s[0] + 608) / 15.59).toFixed(2) + '%;top:' + (s[1] / 8.44).toFixed(2) + '%;width:' + (s[2] * 2) + 'px;height:' + (s[2] * 2) + 'px;opacity:.65' };
     });
     return {
       phase: this.state.phase,
@@ -205,13 +207,13 @@ export default class OpeningMobile extends React.Component {
       accent: this.props.accent ?? '#F5D68A',
       motes: motes,
       fireflies: [
-        { color: '', style: 'left:60px;top:300px' },
-        { color: '', style: 'left:320px;top:260px;scale:.85' },
-        { color: '', style: 'left:300px;top:640px;scale:.8' },
-        { color: '', style: 'left:150px;top:420px;scale:.7' },
-        { color: '', style: 'left:250px;top:520px;scale:.9' },
-        { color: '', style: 'left:40px;top:600px;scale:.75' },
-        { color: '', style: 'left:350px;top:420px;scale:.65' }
+        { color: '', style: 'left:42.85%;top:35.55%' },
+        { color: '', style: 'left:59.53%;top:30.81%;scale:.85' },
+        { color: '', style: 'left:58.24%;top:75.83%;scale:.8' },
+        { color: '', style: 'left:48.62%;top:49.76%;scale:.7' },
+        { color: '', style: 'left:55.04%;top:61.61%;scale:.9' },
+        { color: '', style: 'left:41.57%;top:71.09%;scale:.75' },
+        { color: '', style: 'left:61.45%;top:49.76%;scale:.65' }
       ],
       setRoot: function (el) { self.root = el; },
       goNext: function () { self.goNext(); },
@@ -237,19 +239,25 @@ export default class OpeningMobile extends React.Component {
         <div className="layer">
           <div className="cam farCam">
             <div className="idle far paint" />
-            <div className="layer awake" />
-            <div className="halo" />
+            <div className="ab">
+              <div className="layer awake" />
+              <div className="halo" />
+            </div>
           </div>
         </div>
         <div className="layer mist" aria-hidden="true">
-          <div className="mistA" />
+          <div className="ab">
+            <div className="mistA" />
+          </div>
         </div>
         <div className="layer motes" aria-hidden="true">
-          {(v.motes || []).map((m, m$i) => (
-            <React.Fragment key={m$i}>
-              <span className="mote" style={css(m?.style)} />
-            </React.Fragment>
-          ))}
+          <div className="ab">
+            {(v.motes || []).map((m, m$i) => (
+              <React.Fragment key={m$i}>
+                <span className="mote" style={css(m?.style)} />
+              </React.Fragment>
+            ))}
+          </div>
         </div>
         <div className="layer" aria-hidden="true">
           <div className="cam canopyCam">
@@ -267,18 +275,24 @@ export default class OpeningMobile extends React.Component {
           </div>
         </div>
         <div className="layer fireflies" aria-hidden="true">
-          {(v.fireflies || []).map((b, b$i) => (
-            <React.Fragment key={b$i}>
-              <span className="bfly" style={css(b?.style)}>
-                <span className="bin">
-                  <span className="ffh" />
-                  <span className="ffc" />
+          <div className="ab">
+            {(v.fireflies || []).map((b, b$i) => (
+              <React.Fragment key={b$i}>
+                <span className="bfly" style={css(b?.style)}>
+                  <span className="bin">
+                    <span className="ffh" />
+                    <span className="ffc" />
+                  </span>
                 </span>
-              </span>
-            </React.Fragment>
-          ))}
+              </React.Fragment>
+            ))}
+          </div>
         </div>
-        <div className="glow" />
+        <div className="layer">
+          <div className="ab">
+            <div className="glow" />
+          </div>
+        </div>
         <div className="layer topshade" />
         <div className="layer botshade" />
         <div className="layer shade2" />

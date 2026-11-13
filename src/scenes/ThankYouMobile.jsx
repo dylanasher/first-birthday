@@ -1,5 +1,5 @@
 /* eslint-disable */
-// ThankYouMobile: mobile layout, 390×844. Ported from the "Ch7.dc.html" design board.
+// ThankYouMobile: phone & tablet-portrait layout, fills the screen. Ported from the handoff's "ch8-thankyou-phone.dc.html".
 import React from 'react';
 import { gsap } from 'gsap';
 import { Link } from 'react-router-dom';
@@ -14,7 +14,7 @@ export default class ThankYouMobile extends React.Component {
   reduced() { try { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; } }
   /* a soft burst of confetti in the palette colours, every time the chapter opens */
   confetti(g, qa) {
-    var c = 195, d = 140;
+    var c = this.root.offsetWidth / 2, d = this.root.offsetHeight * 0.17;
     Array.prototype.forEach.call(qa('.conf'), function (el, i) {
       var a = (Math.PI * 2 * i) / qa('.conf').length + Math.random() * 0.4, sp = 130 + Math.random() * 140;
       g.killTweensOf(el);
@@ -44,29 +44,32 @@ export default class ThankYouMobile extends React.Component {
   /* the morning after: sun breathes, clouds drift, balloons bob, candle flickers, flowers sway, petals and dandelion seeds float */
   ambient(g, q, qa, t) {
     t.push(g.fromTo(q('.sun'), { opacity: 0.85, scale: 0.97 }, { opacity: 1, scale: 1.06, duration: 4.5, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
-    t.push(g.to(q('.clouds'), { x: 40, duration: 26, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    var r = this.root, W = r.offsetWidth, H = r.offsetHeight, sf = q('.scenefit'), k = sf && sf.offsetWidth ? sf.offsetWidth / 941 : 0.53, f = k / 0.53;
+    var sx = sf ? sf.offsetLeft : 0, sy = sf ? sf.offsetTop : 0;
+    t.push(g.to(q('.clouds'), { x: 16 * f, duration: 26, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
     var b = q('.balloons');
     g.set(b, { rotation: -1.6, y: 0 });
     t.push(g.to(b, { rotation: 1.6, duration: 3.2, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
-    t.push(g.to(b, { y: -8, duration: 2.3, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    t.push(g.to(b, { y: -5 * f, duration: 2.3, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
     var fl = q('.flame'), flick = function () { t.push(g.to(fl, { opacity: 0.55 + Math.random() * 0.45, scale: 0.85 + Math.random() * 0.3, duration: 0.12 + Math.random() * 0.2, ease: 'sine.inOut', onComplete: flick })); }; flick();
     var f = q('.flowers'); g.set(f, { skewX: -0.8 });
     t.push(g.to(f, { skewX: 0.8, duration: 3, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
     var rnd = function (a, b) { return a + Math.random() * (b - a); };
     Array.prototype.forEach.call(qa('.petal'), function (p, i) {
       (function drift(first) {
-        var y = rnd(60, 420);
+        var y = rnd(H * 0.07, H * 0.48);
         g.set(p, { x: -20, y: y, opacity: 0, rotation: rnd(0, 360) });
         var tl = g.timeline({ delay: first ? i * 1.3 : rnd(0.5, 4), onComplete: function () { drift(false); } });
         var d = rnd(9, 14);
         tl.to(p, { opacity: 0.9, duration: 0.8 }, 0)
-          .to(p, { x: 390 + 20, duration: d, ease: 'none' }, 0)
+          .to(p, { x: W + 20, duration: d, ease: 'none' }, 0)
           .to(p, { y: y + rnd(60, 180), duration: d, ease: 'sine.inOut' }, 0)
           .to(p, { rotation: '+=' + rnd(240, 540), duration: d, ease: 'none' }, 0);
         t.push(tl);
       })(true);
     });
-    var dd = [(1390, 701), (1338, 718), (821, 718), (759, 743)];
+    // dandelion seeds lift off the painted dandelions and float up
+    var dd = [[760, 1440], [692, 1497], [760, 1440]].map(function (p) { return [sx + p[0] * k, sy + p[1] * k]; });
     Array.prototype.forEach.call(qa('.seed'), function (s, i) {
       (function fly(first) {
         var p = dd[Math.floor(Math.random() * dd.length)];
@@ -74,8 +77,8 @@ export default class ThankYouMobile extends React.Component {
         var tl = g.timeline({ delay: first ? i * 1.1 + 1 : rnd(1, 5), onComplete: function () { fly(false); } });
         var d = rnd(6, 10);
         tl.to(s, { opacity: 0.95, duration: 0.6 }, 0)
-          .to(s, { x: p[0] + rnd(120, 320), duration: d, ease: 'sine.out' }, 0)
-          .to(s, { y: p[1] - rnd(220, 420), duration: d, ease: 'sine.inOut' }, 0)
+          .to(s, { x: p[0] - rnd(40, 200), duration: d, ease: 'sine.out' }, 0)
+          .to(s, { y: p[1] - rnd(H * 0.35, H * 0.6), duration: d, ease: 'sine.inOut' }, 0)
           .to(s, { opacity: 0, duration: 1.5 }, d - 1.5);
         t.push(tl);
       })(true);
@@ -127,11 +130,11 @@ export default class ThankYouMobile extends React.Component {
       <div className="dc-ThankYouMobile">
       <div className="stage" ref={v.setRoot}>
         <div className="scene layer" aria-hidden="true">
-          <div className="cv">
+          <div className="scenefit">
             <div className="ly plate" />
-            <div className="ly sun" />
+            <span className="sun" />
             <div className="ly clouds" />
-            <div className="ly balloons" />
+            <span className="balloons" />
             <span className="flame" />
             <div className="ly flowers" />
           </div>

@@ -1,5 +1,5 @@
 /* eslint-disable */
-// DressCodeMobile: mobile layout, 390×844. Ported from the "Ch4.dc.html" design board.
+// DressCodeMobile: phone & tablet-portrait layout, fills the screen. Ported from the handoff's "ch4-phone.dc.html".
 import React from 'react';
 import { gsap } from 'gsap';
 import { Link } from 'react-router-dom';
@@ -59,18 +59,20 @@ export default class DressCodeMobile extends React.Component {
     } else intro.play();
   }
   ambient(g, q, qa, t) {
-    t.push(g.to(q('.house'), { y: -6, duration: 4.2, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    var W = this.root.offsetWidth, sf = q('.scenefit'), f = sf && sf.offsetHeight ? sf.offsetHeight / 886 : 1;
+    // the island and sky float up and down behind the cloud sea
+    t.push(g.to(q('.back'), { y: -6 * f, duration: 4.2, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
     t.push(g.to(q('.wind'), { rotation: 360, duration: 16, ease: 'none', repeat: -1 }));
-    t.push(g.fromTo(q('.smoke'), { opacity: 0.95, scale: 1, x: 0, y: 0 }, { opacity: 0.55, scale: 1.12, x: -6, y: -5, duration: 5, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    t.push(g.fromTo(q('.smoke'), { opacity: 1, scale: 1, x: 0, y: 0 }, { opacity: 0.6, scale: 1.1, x: -6 * f, y: -5 * f, duration: 5, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
     var flag = q('.flag');
     var fl = g.timeline({ repeat: -1 });
     fl.to(flag, { skewY: 6, scaleX: 0.94, duration: 0.7, ease: 'sine.inOut' }).to(flag, { skewY: -4, scaleX: 1.02, duration: 0.8, ease: 'sine.inOut' }).to(flag, { skewY: 3, scaleX: 0.97, duration: 0.6, ease: 'sine.inOut' }).to(flag, { skewY: 0, scaleX: 1, duration: 0.7, ease: 'sine.inOut' });
     t.push(fl);
-    t.push(g.to(q('.clouds'), { x: 20, duration: 22, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    t.push(g.to(q('.clouds'), { x: 14 * f, duration: 22, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
     Array.prototype.forEach.call(qa('.lantern'), function (l, i) {
       t.push(g.fromTo(l, { opacity: 0.55, scale: 0.9 }, { opacity: 1, scale: 1.12, duration: 1.8 + i * 0.4, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
     });
-    t.push(g.fromTo(q('.rb1'), { x: -90, y: 70, rotation: -10 }, { x: 420, y: 30, rotation: 20, duration: 24, ease: 'sine.inOut', repeat: -1, repeatDelay: 6 }));
+    t.push(g.fromTo(q('.rb1'), { x: -90, y: 70, rotation: -10 }, { x: W + 30, y: 30, rotation: 20, duration: 24, ease: 'sine.inOut', repeat: -1, repeatDelay: 6 }));
     t.push(g.to(q('.rb1'), { scaleY: -1, duration: 1.6, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
   }
   /* storybook page turn to Chapter 5: curls from the bottom-right corner, revealing the lantern village */
@@ -178,24 +180,24 @@ export default class DressCodeMobile extends React.Component {
       <div className="dc-DressCodeMobile">
       <div className="stage" ref={v.setRoot}>
         <div className="scene layer" aria-hidden="true">
-          <div className="bg far" />
+          <div className="scenefit">
+            <div className="back">
+              <div className="lyr far" />
+              <span className="part smoke" />
+              <div className="lyr water2" />
+              <span className="part wind" />
+              <span className="part flag" />
+              <span className="lantern" style={{"left":"15.62%","top":"38.28%"}} />
+              <span className="lantern" style={{"left":"74.39%","top":"25.12%"}} />
+              <span className="lantern" style={{"left":"83.63%","top":"37.80%"}} />
+            </div>
+            <div className="lyr clouds" />
+          </div>
           <span className="ribbon rb1">
             <svg viewBox="0 0 90 40">
               <path d="M2 20 C14 2 26 38 40 20 S 66 2 88 22" fill="none" stroke="#EFA9B8" style={{"strokeWidth":"4","strokeLinecap":"round"}} />
             </svg>
           </span>
-          <div className="house">
-            <div className="lyr smoke" />
-            <div className="lyr island" />
-            <div className="lyr water" />
-            <div className="lyr water2" />
-            <div className="lyr wind" />
-            <div className="lyr flag" />
-            <span className="lantern" style={{"left":"60px","top":"181px"}} />
-            <span className="lantern" style={{"left":"310px","top":"80px"}} />
-            <span className="lantern" style={{"left":"345px","top":"176px"}} />
-          </div>
-          <div className="bg clouds" />
         </div>
         <div className="layer topshade" />
         <div className="chtitle">
@@ -288,7 +290,7 @@ export default class DressCodeMobile extends React.Component {
                       <h3>
                         Little ones
                       </h3>
-                      <div className="outfit" role="img" aria-label="A girl in a cream blouse and pink skirt, and a boy in a sage-green shirt and gray trousers" style={{"backgroundImage":"url(/art/outfit-little-ones.webp)","backgroundSize":"auto 72%"}} />
+                      <div className="outfit" role="img" aria-label="A girl in a cream blouse and peach skirt, and a boy in a sage-green shirt and gray trousers" style={{"backgroundImage":"url(/art/outfit-little-ones.webp)","backgroundSize":"auto 72%"}} />
                     </div>
                   </div>
                 </div>

@@ -1,5 +1,5 @@
 /* eslint-disable */
-// DosDontsMobile: mobile layout, 390×844. Ported from the "Ch5.dc.html" design board.
+// DosDontsMobile: phone & tablet-portrait layout, fills the screen. Ported from the handoff's "ch5-phone.dc.html".
 import React from 'react';
 import { gsap } from 'gsap';
 import { Link } from 'react-router-dom';
@@ -65,16 +65,15 @@ export default class DosDontsMobile extends React.Component {
     Array.prototype.forEach.call(qa('.glow'), function (l, i) {
       t.push(g.fromTo(l, { opacity: 0.6, scale: 0.9 }, { opacity: 1, scale: 1.12, duration: 1.6 + (i % 4) * 0.4, ease: 'sine.inOut', yoyo: true, repeat: -1, delay: (i % 6) * 0.3 }));
     });
-    g.set(q('.porch'), { rotation: -2.5 });
-    t.push(g.to(q('.porch'), { rotation: 2.5, duration: 3.2, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
-    t.push(g.fromTo(q('.mist'), { x: 0, opacity: 0.85 }, { x: 36, opacity: 1, duration: 14, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
-    var pl = q('.plants');
-    g.set(pl, { skewX: -0.9 });
-    t.push(g.to(pl, { skewX: 0.9, duration: 3.6, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    var W = this.root.offsetWidth, H = this.root.offsetHeight, sf = q('.scenefit'), f = sf && sf.offsetHeight ? sf.offsetHeight / 936 : 1;
+    // the valley mist drifts slowly back and forth
+    Array.prototype.forEach.call(qa('.mistb'), function (m, i) {
+      t.push(g.fromTo(m, { x: -20 * f, opacity: 0.7 }, { x: (24 + i * 8) * f, opacity: 1, duration: 12 + i * 3, ease: 'sine.inOut', yoyo: true, repeat: -1, delay: i * 1.5 }));
+    });
     var rnd = function (a, b) { return a + Math.random() * (b - a); };
     Array.prototype.forEach.call(qa('.ff'), function (f) {
       (function fly() {
-        var x = rnd(10, 380), y = rnd(240, 430);
+        var x = rnd(W * 0.03, W * 0.97), y = rnd(H * 0.28, H * 0.5);
         g.set(f, { x: x, y: y, opacity: 0, scale: rnd(0.6, 1.1) });
         var tl = g.timeline({ delay: rnd(0, 4), onComplete: fly });
         tl.to(f, { opacity: rnd(0.6, 1), duration: 0.8, ease: 'sine.inOut' })
@@ -86,8 +85,8 @@ export default class DosDontsMobile extends React.Component {
     });
     Array.prototype.forEach.call(qa('.sky'), function (s, i) {
       (function rise(first) {
-        var x = rnd(200, 370);
-        g.set(s, { x: x, y: 300, opacity: 0, scale: rnd(0.7, 1.1), rotation: 0 });
+        var x = rnd(W * 0.5, W * 0.95);
+        g.set(s, { x: x, y: H * 0.36, opacity: 0, scale: rnd(0.7, 1.1), rotation: 0 });
         var tl = g.timeline({ delay: first ? i * 3.5 + 1 : rnd(1, 5), onComplete: function () { rise(false); } });
         tl.to(s, { opacity: 0.95, duration: 1.4, ease: 'sine.out' })
           .to(s, { y: -40, duration: rnd(13, 17), ease: 'none' }, 0)
@@ -193,49 +192,37 @@ export default class DosDontsMobile extends React.Component {
       <div className="dc-DosDontsMobile">
       <div className="stage" ref={v.setRoot}>
         <div className="scene layer" aria-hidden="true">
-          <div className="cv">
+          <div className="scenefit">
             <div className="ly plate" />
-            <div className="ly stream" />
             <div className="ly stream2" />
-            <div className="ly mist" />
-            <div className="ly ropes" />
-            <span className="glow" style={{"left":"420.4px","top":"157.4px","width":"57.2px","height":"57.2px"}} />
-            <i className="lt" style={{"left":"436.6px","top":"168.8px","width":"24.8px","height":"35.1px"}} />
-            <span className="glow" style={{"left":"441.4px","top":"181.4px","width":"57.2px","height":"57.2px"}} />
-            <i className="lt" style={{"left":"457.6px","top":"192.8px","width":"24.8px","height":"35.1px"}} />
-            <span className="glow" style={{"left":"476.4px","top":"204.4px","width":"57.2px","height":"57.2px"}} />
-            <i className="lt" style={{"left":"492.6px","top":"215.8px","width":"24.8px","height":"35.1px"}} />
-            <span className="glow" style={{"left":"512.4px","top":"222.4px","width":"57.2px","height":"57.2px"}} />
-            <i className="lt" style={{"left":"528.6px","top":"233.8px","width":"24.8px","height":"35.1px"}} />
-            <span className="glow" style={{"left":"551.4px","top":"236.4px","width":"57.2px","height":"57.2px"}} />
-            <i className="lt" style={{"left":"567.6px","top":"247.8px","width":"24.8px","height":"35.1px"}} />
-            <span className="glow" style={{"left":"594.4px","top":"242.4px","width":"57.2px","height":"57.2px"}} />
-            <i className="lt" style={{"left":"610.6px","top":"253.8px","width":"24.8px","height":"35.1px"}} />
-            <span className="glow" style={{"left":"638.4px","top":"239.4px","width":"57.2px","height":"57.2px"}} />
-            <i className="lt" style={{"left":"654.6px","top":"250.8px","width":"24.8px","height":"35.1px"}} />
-            <span className="glow" style={{"left":"797.8px","top":"400.8px","width":"36.4px","height":"36.4px"}} />
-            <i className="lt" style={{"left":"808.1px","top":"408.1px","width":"15.8px","height":"22.3px"}} />
-            <span className="glow" style={{"left":"815.8px","top":"406.8px","width":"36.4px","height":"36.4px"}} />
-            <i className="lt" style={{"left":"826.1px","top":"414.1px","width":"15.8px","height":"22.3px"}} />
-            <span className="glow" style={{"left":"838.8px","top":"412.8px","width":"36.4px","height":"36.4px"}} />
-            <i className="lt" style={{"left":"849.1px","top":"420.1px","width":"15.8px","height":"22.3px"}} />
-            <span className="glow" style={{"left":"861.8px","top":"411.8px","width":"36.4px","height":"36.4px"}} />
-            <i className="lt" style={{"left":"872.1px","top":"419.1px","width":"15.8px","height":"22.3px"}} />
-            <span className="glow" style={{"left":"882.8px","top":"405.8px","width":"36.4px","height":"36.4px"}} />
-            <i className="lt" style={{"left":"893.1px","top":"413.1px","width":"15.8px","height":"22.3px"}} />
-            <span className="glow" style={{"left":"901.6px","top":"506.6px","width":"20.8px","height":"20.8px"}} />
-            <i className="lt" style={{"left":"907.5px","top":"510.8px","width":"9.0px","height":"12.8px"}} />
-            <span className="glow" style={{"left":"915.6px","top":"508.6px","width":"20.8px","height":"20.8px"}} />
-            <i className="lt" style={{"left":"921.5px","top":"512.8px","width":"9.0px","height":"12.8px"}} />
-            <span className="glow" style={{"left":"929.6px","top":"509.6px","width":"20.8px","height":"20.8px"}} />
-            <i className="lt" style={{"left":"935.5px","top":"513.8px","width":"9.0px","height":"12.8px"}} />
-            <span className="glow" style={{"left":"942.6px","top":"507.6px","width":"20.8px","height":"20.8px"}} />
-            <i className="lt" style={{"left":"948.5px","top":"511.8px","width":"9.0px","height":"12.8px"}} />
-            <span className="glow" style={{"left":"954.6px","top":"503.6px","width":"20.8px","height":"20.8px"}} />
-            <i className="lt" style={{"left":"960.5px","top":"507.8px","width":"9.0px","height":"12.8px"}} />
-            <span className="glow pglow" style={{"left":"131.0px","top":"223.0px","width":"150px","height":"150px"}} />
-            <i className="porch" />
-            <div className="ly plants" />
+            <span className="mistb m1" style={{"left":"58%","top":"37%","width":"50%","height":"9%"}} />
+            <span className="mistb m2" style={{"left":"66%","top":"46%","width":"44%","height":"8%"}} />
+            <span className="mistb m3" style={{"left":"50%","top":"52%","width":"40%","height":"6%"}} />
+            <span className="glow" style={{"left":"10.786%","top":"36.214%","width":"15.399%"}} />
+            <span className="glow" style={{"left":"24.389%","top":"28.469%","width":"7.577%"}} />
+            <span className="glow" style={{"left":"28.162%","top":"29.994%","width":"7.333%"}} />
+            <span className="glow" style={{"left":"32.040%","top":"31.429%","width":"7.088%"}} />
+            <span className="glow" style={{"left":"36.344%","top":"32.745%","width":"6.844%"}} />
+            <span className="glow" style={{"left":"40.808%","top":"33.164%","width":"8.310%"}} />
+            <span className="glow" style={{"left":"46.015%","top":"34.091%","width":"6.844%"}} />
+            <span className="glow" style={{"left":"51.116%","top":"34.300%","width":"6.844%"}} />
+            <span className="glow" style={{"left":"55.367%","top":"33.971%","width":"6.844%"}} />
+            <span className="glow" style={{"left":"65.834%","top":"42.464%","width":"6.111%"}} />
+            <span className="glow" style={{"left":"68.810%","top":"42.763%","width":"4.644%"}} />
+            <span className="glow" style={{"left":"74.123%","top":"42.494%","width":"4.644%"}} />
+            <i className="lt" style={{"left":"7.439%","top":"33.852%","width":"6.695%","height":"4.725%","backgroundSize":"612.70% 100.00%","backgroundPosition":"0.000% 0%"}} />
+            <i className="lt" style={{"left":"22.742%","top":"27.392%","width":"3.294%","height":"2.153%","backgroundSize":"1245.16% 219.44%","backgroundPosition":"18.310% 0%"}} />
+            <i className="lt" style={{"left":"26.567%","top":"29.007%","width":"3.188%","height":"1.974%","backgroundSize":"1286.67% 239.39%","backgroundPosition":"27.528% 0%"}} />
+            <i className="lt" style={{"left":"30.499%","top":"30.323%","width":"3.082%","height":"2.213%","backgroundSize":"1331.03% 213.51%","backgroundPosition":"36.415% 0%"}} />
+            <i className="lt" style={{"left":"34.857%","top":"31.818%","width":"2.976%","height":"1.854%","backgroundSize":"1378.57% 254.84%","backgroundPosition":"44.972% 0%"}} />
+            <i className="lt" style={{"left":"39.001%","top":"31.878%","width":"3.613%","height":"2.572%","backgroundSize":"1135.29% 183.72%","backgroundPosition":"54.261% 0%"}} />
+            <i className="lt" style={{"left":"44.527%","top":"33.254%","width":"2.976%","height":"1.675%","backgroundSize":"1378.57% 282.14%","backgroundPosition":"63.408% 0%"}} />
+            <i className="lt" style={{"left":"49.628%","top":"33.194%","width":"2.976%","height":"2.213%","backgroundSize":"1378.57% 213.51%","backgroundPosition":"71.788% 0%"}} />
+            <i className="lt" style={{"left":"53.879%","top":"32.895%","width":"2.976%","height":"2.153%","backgroundSize":"1378.57% 219.44%","backgroundPosition":"80.168% 0%"}} />
+            <i className="lt" style={{"left":"64.506%","top":"41.806%","width":"2.657%","height":"1.316%","backgroundSize":"1544.00% 359.09%","backgroundPosition":"87.812% 0%"}} />
+            <i className="lt" style={{"left":"67.800%","top":"42.165%","width":"2.019%","height":"1.196%","backgroundSize":"2031.58% 395.00%","backgroundPosition":"93.733% 0%"}} />
+            <i className="lt" style={{"left":"73.114%","top":"41.746%","width":"2.019%","height":"1.495%","backgroundSize":"2031.58% 316.00%","backgroundPosition":"99.455% 0%"}} />
+            <span className="glow pglow" style={{"left":"12.75%","top":"51.32%","width":"15%"}} />
           </div>
           <span className="sky" />
           <span className="sky" />

@@ -1,5 +1,5 @@
 /* eslint-disable */
-// MilestonesMobile: mobile layout, 390×844. Ported from the "Ch3.dc.html" design board.
+// MilestonesMobile: phone & tablet-portrait layout, fills the screen. Ported from the handoff's "ch3-phone.dc.html".
 import React from 'react';
 import { gsap } from 'gsap';
 import { Link } from 'react-router-dom';
@@ -87,15 +87,28 @@ export default class MilestonesMobile extends React.Component {
       .to(laundry, { skewX: 1, duration: 1.8, ease: 'sine.inOut' })
       .to(laundry, { skewX: 0, duration: 1.2, ease: 'sine.inOut' });
     t.push(lw);
-    var wall = q('.wall');
-    t.push(g.to(wall, { skewX: -0.4, duration: 3.2, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    var W = this.root.offsetWidth, sf = q('.scenefit'), f = sf && sf.offsetHeight ? sf.offsetHeight / 936 : 1;
+    // clouds drift, the sailboats bob and wander, and the sea sparkles twinkle
+    var cld = q('.cld');
+    if (cld) t.push(g.to(cld, { x: -18 * f, duration: 24, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    [[q('.boat1'), 2.6, 0, 7], [q('.boat2'), 3.1, 0.8, 10]].forEach(function (b) {
+      if (!b[0]) return;
+      t.push(g.to(b[0], { rotation: 3, y: -1.2 * f, duration: b[1], ease: 'sine.inOut', yoyo: true, repeat: -1, delay: b[2] }));
+      t.push(g.to(b[0], { x: b[3] * f, duration: 14 + b[1] * 2, ease: 'sine.inOut', yoyo: true, repeat: -1, delay: b[2] }));
+    });
+    var spa = q('.spa'), spb = q('.spb');
+    if (spa && spb) {
+      g.set(spb, { opacity: 0.25 });
+      t.push(g.to(spa, { opacity: 0.25, duration: 1.3, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+      t.push(g.to(spb, { opacity: 1, duration: 1.3, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    }
     [[q('.g1'), 150, 24, 0, 1], [q('.g2'), 190, 30, 7, 0.8]].forEach(function (b) {
       g.set(b[0], { scale: b[4] });
-      t.push(g.fromTo(b[0], { x: 420, y: b[1] }, { x: -60, y: b[1] - 30, duration: b[2], ease: 'none', repeat: -1, repeatDelay: 4, delay: b[3] }));
+      t.push(g.fromTo(b[0], { x: W + 30, y: b[1] }, { x: -60, y: b[1] - 30, duration: b[2], ease: 'none', repeat: -1, repeatDelay: 4, delay: b[3] }));
       t.push(g.to(b[0], { yPercent: 'random(-60,60)', duration: 'random(1.4,2.2)', ease: 'sine.inOut', yoyo: true, repeat: -1, repeatRefresh: true }));
     });
     [[q('.e1'), 92, 26, 2], [q('.e2'), 70, 34, 14]].forEach(function (e) {
-      t.push(g.fromTo(e[0], { x: -40, y: e[1], rotation: -12 }, { x: 430, y: e[1] + 26, rotation: 14, duration: e[2], ease: 'sine.inOut', repeat: -1, repeatDelay: 8, delay: e[3] }));
+      t.push(g.fromTo(e[0], { x: -40, y: e[1], rotation: -12 }, { x: W + 40, y: e[1] + 26, rotation: 14, duration: e[2], ease: 'sine.inOut', repeat: -1, repeatDelay: 8, delay: e[3] }));
     });
   }
   /* floatingPostcards: the answered card is mailed off, the next one flies in */
@@ -280,7 +293,16 @@ export default class MilestonesMobile extends React.Component {
       <div className="dc-MilestonesMobile">
       <div className="stage" ref={v.setRoot}>
         <div className="scene layer" aria-hidden="true">
-          <div className="lyr far" />
+          <div className="scenefit">
+            <div className="lyr far" />
+            <div className="lyr spa" />
+            <div className="lyr spb" />
+            <div className="lyr cld" />
+            <span className="boat boat1" />
+            <span className="boat boat2" />
+            <div className="lyr laundry" />
+            <div className="lyr wall" />
+          </div>
           <span className="gull g1">
             <svg viewBox="0 0 24 12">
               <path className="wu" d="M0 5 C4 1 8 1 11.4 5.6 C14 1 19 1 24 5 C19 4 15 5.2 12.4 8 L11.4 8 C8.6 5.4 4.6 4.2 0 5 Z" fill="#FBF8F0" stroke="#8A9096" style={{"strokeWidth":".6"}} />
@@ -293,7 +315,6 @@ export default class MilestonesMobile extends React.Component {
               <path className="wd" d="M0 9 C4 8.4 8 7.6 11 6 L13 6 C16 7.6 20 8.4 24 9 C20 9.8 16 9.4 12.6 8.4 L11.4 8.4 C8 9.4 4 9.8 0 9 Z" fill="#FBF8F0" stroke="#8A9096" style={{"strokeWidth":".6","animationDelay":"-.2s"}} />
             </svg>
           </span>
-          <div className="lyr laundry" />
           <span className="env e1">
             <svg viewBox="0 0 28 19">
               <rect x="1" y="1" width="26" height="17" rx="1.5" fill="#FFF8E8" stroke="#D9C8A4" style={{"strokeWidth":".8"}} />
@@ -308,7 +329,6 @@ export default class MilestonesMobile extends React.Component {
               <rect x="2.5" y="2.5" width="23" height="14" fill="none" stroke="#3E6EA8" style={{"strokeWidth":"1.4","strokeDasharray":"3 3"}} />
             </svg>
           </span>
-          <div className="lyr wall" />
         </div>
         <div className="layer topshade" />
         <div className="chtitle">

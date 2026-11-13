@@ -1,12 +1,16 @@
-/* OpeningMobile: ported from Main.dc.html */
+/* OpeningMobile: phone layout, ported from the handoff's ch1-phone.dc.html */
 
 .dc-OpeningMobile{margin:0;background:#102A20}
-.dc-OpeningMobile .stage{position:relative;width:390px;height:844px;overflow:hidden;background:#102A20;font-family:'Nunito',system-ui,sans-serif;color:#F5EBD5}
+.dc-OpeningMobile .stage{position:relative;width:100vw;height:100vh;height:100dvh;container-type:size;overflow:hidden;background:#102A20;font-family:'Nunito',system-ui,sans-serif;color:#F5EBD5}
 .dc-OpeningMobile .layer{position:absolute;inset:0;pointer-events:none}
+/* responsive: .ab has exactly the painting's footprint (1705x923, set to "fill" the screen, 52% across), so everything placed
+   inside it in % stays pinned to the same spot in the painting (Dylan sits at 51.83% across, 61.61% down) on any phone */
+.dc-OpeningMobile .ab{position:absolute;--aw:max(100cqw, calc(100cqh * 1705 / 923));--ah:max(100cqh, calc(100cqw * 923 / 1705));width:var(--aw);height:var(--ah);
+left:calc((100cqw - var(--aw)) * 0.52);top:calc((100cqh - var(--ah)) * 0.5)}
 .dc-OpeningMobile .cam,.dc-OpeningMobile .idle{position:absolute;inset:0;will-change:transform}
 .dc-OpeningMobile .paint{background-image:url(/art/forest-sleeping.webp);background-size:cover;background-position:52% 50%;background-repeat:no-repeat}
-.dc-OpeningMobile .awake{background-image:url(/art/forest-awake.webp);background-size:cover;background-position:52% 50%;background-repeat:no-repeat;opacity:0;
--webkit-mask-image:radial-gradient(160px 140px at 200px 520px,#000 55%,transparent 100%);mask-image:radial-gradient(160px 140px at 200px 520px,#000 55%,transparent 100%)}
+.dc-OpeningMobile .awake{background-image:url(/art/forest-awake.webp);background-size:100% 100%;background-repeat:no-repeat;opacity:0;
+-webkit-mask-image:radial-gradient(10.26% 16.59% at 51.83% 61.61%,#000 55%,transparent 100%);mask-image:radial-gradient(10.26% 16.59% at 51.83% 61.61%,#000 55%,transparent 100%)}
 
 /* depth planes: masked copies of the painting */
 .dc-OpeningMobile .farCam{transform-origin:50% 50%}
@@ -18,8 +22,8 @@
 .dc-OpeningMobile .foreR{-webkit-mask-image:radial-gradient(80% 50% at 100% 100%,#000 48%,transparent 78%);mask-image:radial-gradient(80% 50% at 100% 100%,#000 48%,transparent 78%);filter:brightness(.86) saturate(1.08);transform-origin:100% 100%}
 
 /* atmosphere */
-.dc-OpeningMobile .halo{position:absolute;left:200px;top:520px;width:300px;height:240px;margin:-120px 0 0 -150px;border-radius:50%;background:radial-gradient(closest-side,rgba(230,245,170,.45),rgba(176,200,124,.18) 55%,rgba(176,200,124,0));mix-blend-mode:screen;filter:blur(4px)}
-.dc-OpeningMobile .mistA{position:absolute;left:-120px;top:600px;width:520px;height:200px;border-radius:50%;background:radial-gradient(closest-side,rgba(169,214,223,.22),rgba(169,214,223,0));filter:blur(6px)}
+.dc-OpeningMobile .halo{position:absolute;left:51.83%;top:61.61%;width:19.24%;height:28.44%;margin:-7.70% 0 0 -9.62%;border-radius:50%;background:radial-gradient(closest-side,rgba(230,245,170,.45),rgba(176,200,124,.18) 55%,rgba(176,200,124,0));mix-blend-mode:screen;filter:blur(4px)}
+.dc-OpeningMobile .mistA{position:absolute;left:31.30%;top:71.09%;width:33.35%;height:23.70%;border-radius:50%;background:radial-gradient(closest-side,rgba(169,214,223,.22),rgba(169,214,223,0));filter:blur(6px)}
 .dc-OpeningMobile .mote{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(255,246,220,1),rgba(230,240,170,.55) 45%,rgba(230,240,170,0) 72%)}
 .dc-OpeningMobile .bfly{position:absolute;width:12px;height:12px}
 .dc-OpeningMobile .ffh{position:absolute;left:-9px;top:-9px;width:30px;height:30px;border-radius:50%;background:radial-gradient(circle,rgba(255,244,170,.95) 0,rgba(214,240,120,.55) 30%,rgba(200,235,110,0) 70%);mix-blend-mode:screen}
@@ -33,7 +37,7 @@
 .dc-OpeningMobile .topshade{background:linear-gradient(to bottom,rgba(16,42,32,.86) 0%,rgba(16,42,32,.62) 22%,rgba(16,42,32,0) 40%)}
 .dc-OpeningMobile .botshade{background:linear-gradient(to top,rgba(16,42,32,.7) 0%,rgba(16,42,32,0) 16%)}
 .dc-OpeningMobile .shade2{background:linear-gradient(to bottom,rgba(16,42,32,.92) 0%,rgba(16,42,32,.8) 50%,rgba(16,42,32,.3) 66%,rgba(16,42,32,0) 74%);opacity:0}
-.dc-OpeningMobile .glow{position:absolute;left:200px;top:500px;width:360px;height:360px;margin:-180px 0 0 -180px;border-radius:50%;background:radial-gradient(circle,rgba(240,250,200,.6),rgba(176,200,124,.22) 40%,rgba(176,200,124,0) 70%);opacity:0;mix-blend-mode:screen;pointer-events:none}
+.dc-OpeningMobile .glow{position:absolute;left:51.83%;top:59.24%;width:23.09%;aspect-ratio:1;margin:-11.55% 0 0 -11.55%;border-radius:50%;background:radial-gradient(circle,rgba(240,250,200,.6),rgba(176,200,124,.22) 40%,rgba(176,200,124,0) 70%);opacity:0;mix-blend-mode:screen;pointer-events:none}
 
 /* type + controls */
 .dc-OpeningMobile .script{font-family:'Pinyon Script',cursive;font-weight:400}
@@ -45,6 +49,21 @@
 .dc-OpeningMobile .ghost{min-height:44px;padding:0 16px;border:1px solid rgba(245,235,213,.35);background:rgba(16,42,32,.45);color:#F5EBD5;font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;letter-spacing:.04em;cursor:pointer;border-radius:999px}
 .dc-OpeningMobile .ghost:hover{background:rgba(38,77,53,.7)}
 .dc-OpeningMobile .ghost:focus-visible{outline:2px solid #F5D68A}
+/* narrow phones: keep the welcome line and the top bar on one line */
+@container (max-width: 380px){
+.dc-OpeningMobile .welcome > p.script:first-of-type{font-size:31px !important}
+.dc-OpeningMobile .welcome .ghost{padding:0 10px;font-size:11px;white-space:nowrap}
+.dc-OpeningMobile .welcome .wi p{white-space:nowrap;letter-spacing:.14em !important}
+}
+/* short phones (iPhone SE and smaller): tighter title and welcome text */
+@container (max-height: 720px){
+.dc-OpeningMobile .intro{top:30px !important}
+.dc-OpeningMobile .intro h1{font-size:52px !important}
+.dc-OpeningMobile .welcome{padding-top:62px !important}
+.dc-OpeningMobile .welcome h2{font-size:54px !important}
+.dc-OpeningMobile .welcome p[style*="max-width"]{font-size:14px !important;line-height:1.48 !important}
+.dc-OpeningMobile .openwrap{bottom:26px !important}
+}
 .dc-OpeningMobile .intro{position:absolute;left:0;right:0;top:54px;display:flex;flex-direction:column;align-items:center;text-align:center}
 .dc-OpeningMobile .openwrap{position:absolute;left:0;right:0;bottom:40px;display:flex;justify-content:center}
 .dc-OpeningMobile .welcome{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;text-align:center;padding:84px 32px 0;box-sizing:border-box;visibility:hidden}
@@ -54,8 +73,8 @@
 .dc-OpeningMobile .nextlink{position:absolute;left:0;top:0;width:1px;height:1px;opacity:0;pointer-events:none}
 /* storybook page turn: this page curls away from the bottom-right corner, revealing Chapter 2's countryside */
 .dc-OpeningMobile .under{position:absolute;inset:0;z-index:70;pointer-events:none;display:none;background-color:#A9D6DF;background-repeat:no-repeat;
-background-image:linear-gradient(to bottom,rgba(16,42,32,.7) 0%,rgba(16,42,32,.3) 16%,rgba(16,42,32,0) 26%),url(/art/c85cec7f7ff2834c55b9210bfdb7fec0.webp),url(/art/0a06b84a8b2824ef6369f00717801e42.webp),url(/art/a1c09cf21a45538a9b091e259bb0707c.webp),url(/art/f2d3d418be179c15558fe0f46df41dba.webp),url(/art/e63248ac61b255880a418b902963d7aa.webp),url(/art/9ff413efc90b8d9aa2232fb97ef3b2fd.webp);
-background-size:100% 100%,auto 844px,auto 844px,auto 844px,auto 844px,auto 844px,auto 844px;background-position:0 0,-459px 0,-459px 0,-459px 0,-459px 0,-459px 0,-459px 0}
+background-image:linear-gradient(to bottom,rgba(16,42,32,.7) 0%,rgba(16,42,32,.3) 16%,rgba(16,42,32,0) 26%),url(/art/mobile/ch2m-full.webp);
+background-size:100% 100%,cover;background-position:0 0,35% 12%}
 .dc-OpeningMobile .pflapwrap{position:absolute;inset:0;z-index:71;pointer-events:none;display:none;filter:drop-shadow(-8px -8px 16px rgba(16,42,32,.45))}
 .dc-OpeningMobile .pflap{position:absolute;inset:0;background:linear-gradient(135deg,#E9DCBC 0%,#F8EFD9 55%,#E0D0A8 100%)}
 .dc-OpeningMobile .dot{width:6px;height:6px;border-radius:50%;background:rgba(245,235,213,.4)}
