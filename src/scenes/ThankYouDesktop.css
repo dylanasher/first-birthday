@@ -39,6 +39,6 @@
 .dc-ThankYouDesktop .trailp.tl{width:9px;height:9px;border-radius:80% 0 80% 0}
 .dc-ThankYouDesktop .trailp.ts{width:6px;height:6px;border-radius:50%;background:#FFF3C4;box-shadow:0 0 8px 3px rgba(247,216,115,.75)}
 
-/* Totoro sits on the blanket at the family's backs, holding his leaf, covering the painted plush.
+/* Totoro sits on the blanket at the family's backs, holding his leaf, between the cake and the family.
    In front of the painting, behind the foreground flowers. Positioned in % of the painting so it stays put at every size. */
-.dc-ThankYouDesktop .totoro{position:absolute;left:25.12%;top:66.2%;width:9.51%;height:auto;pointer-events:none;user-select:none;filter:drop-shadow(0 6px 5px rgba(40,50,20,.28));transform-origin:50% 100%}
+.dc-ThankYouDesktop .totoro{position:absolute;left:26.63%;top:70.99%;width:7.12%;height:auto;pointer-events:none;user-select:none;filter:drop-shadow(0 6px 5px rgba(40,50,20,.28));transform-origin:50% 100%}
