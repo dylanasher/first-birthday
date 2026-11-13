@@ -197,6 +197,8 @@ export default class DosDontsDesktop extends React.Component {
             <div className="ly plate" />
             <div className="ly stream" />
             <div className="ly stream2" />
+            <img className="noface" src="/art/noface.webp" alt="" draggable="false" />
+            <img className="rail-front" src="/art/ch5d-rail-front.webp" alt="" draggable="false" />
             <div className="ly mist" />
             <div className="ly ropes" />
             <span className="glow" style={{"left":"388.1px","top":"142.9px","width":"66.7px","height":"66.7px"}} />

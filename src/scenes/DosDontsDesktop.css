@@ -71,3 +71,10 @@ background-size:100% 100%,1599px 900px;background-position:0 0,-60px 0}
 .dc-DosDontsDesktop .trailp.ts{width:6px;height:6px;border-radius:50%;background:#FFF3C4;box-shadow:0 0 8px 3px rgba(247,216,115,.75)}
 /* until the sliding pill is measured, the selected tab paints its own fill so it always reads correctly */
 .dc-DosDontsDesktop .tabs:not(.ready) .tab.on{background:#6D8F62}
+
+/* No-Face stands quietly on the bridge, behind its front railing: a cut-out of the railing (.rail-front)
+   sits over his robe so he reads as standing on the deck. Positions are in the painting's own coordinates. */
+.dc-DosDontsDesktop .noface{position:absolute;left:647px;top:307px;width:86px;height:auto;pointer-events:none;user-select:none;transform-origin:50% 100%;animation:DosDontsDesktop-nfSway 6s ease-in-out infinite}
+.dc-DosDontsDesktop .rail-front{position:absolute;left:641px;top:307px;width:98px;height:auto;pointer-events:none;user-select:none}
+@keyframes DosDontsDesktop-nfSway{0%,100%{transform:rotate(-.6deg)}50%{transform:rotate(.6deg) translateY(-1px)}}
+@media (prefers-reduced-motion: reduce){.dc-DosDontsDesktop .noface{animation:none}}
