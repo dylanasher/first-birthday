@@ -49,10 +49,13 @@ export async function getWishes() {
 }
 
 // ---- local development stand-in -------------------------------------------------------------
-// Reads guest-list.csv from the project folder, so the real list can be tried with `npm run dev`
+// Reads guest-list.csv (or the example file) from the project folder, so the real list can be tried with `npm run dev`
 // before the Google Sheet is connected. The `import.meta.env.DEV ?` guards mean these files are
 // left out of the production build entirely: the guest list never ships with the public site.
-const loadCsv = import.meta.env.DEV ? () => import('../../guest-list.csv?raw') : null;
+// guest-list.csv is your real list and is git-ignored (it never goes to GitHub). Without it, the
+// committed guest-list.example.csv (made-up names) is used instead.
+const csvFiles = import.meta.env.DEV ? import.meta.glob(['../../guest-list.csv', '../../guest-list.example.csv'], { query: '?raw' }) : {};
+const loadCsv = () => (csvFiles['../../guest-list.csv'] || csvFiles['../../guest-list.example.csv'])();
 const loadMatcher = import.meta.env.DEV ? () => import('../../apps-script/Match.gs?raw') : null;
 
 function parseCsv(text) {

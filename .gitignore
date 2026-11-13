@@ -2,3 +2,7 @@ node_modules
 dist
 .env
 .DS_Store
+
+# private: the real guest list and the wishes people send (the live site uses the Google Sheet)
+guest-list.csv
+wishes.csv
