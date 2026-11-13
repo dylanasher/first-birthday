@@ -1,0 +1,597 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Dylan — Chapter 3, Milestones and Photoshoot</title>
+<script src="./support.js"></script>
+<script src="/_blob/17d4179414200efbabee22c7746b97ba"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&amp;family=Nunito:wght@400;600;700&amp;family=Pinyon+Script&amp;display=swap">
+<style>
+body{margin:0;background:#102A20}
+.stage{position:relative;width:100vw;height:100vh;height:100dvh;container-type:size;overflow:hidden;background:#8EC6E6;font-family:'Nunito',system-ui,sans-serif;color:#102A20}
+.layer{position:absolute;inset:0;pointer-events:none}
+/* responsive scene: the tall seaside painting (941x1672) always covers the screen like a photo set to "fill".
+   The town (60.5% across the painting) stays centred behind the postcard; the boats (44.6% down) sit just above the panel */
+.scenefit{position:absolute;--sh:max(111cqh, calc(100cqw * 1672 / 941));--sw:calc(var(--sh) * 941 / 1672);width:var(--sw);height:var(--sh);
+left:clamp(calc(100cqw - var(--sw)), calc(50cqw - var(--sw) * 0.605), 0px);
+top:clamp(calc(100cqh - var(--sh)), calc(40cqh - var(--sh) * 0.446), 0px)}
+/* painted seaside layers, all on one canvas so they line up */
+.lyr{position:absolute;inset:0;background-size:100% 100%;background-position:0 0;background-repeat:no-repeat;will-change:transform}
+.far{background-image:url(/_blob/ce538e121fc6040292595e145606773f)}
+.spa{background-image:url(/_blob/ad6a6b9acc6fb37496ed585eddd75f83)}
+.spb{background-image:url(/_blob/4bf65aee733749bac21047118a251af3)}
+.cld{background-image:url(/_blob/726fd04b977a48628c1ea09c24862eb6)}
+.laundry{background-image:url(/_blob/acb3c7551234cadf4a330013ad275fcb);transform-origin:26% 33.5%}
+.wall{background-image:url(/_blob/dc5099cf7876b76b6edc03e87a4d462f)}
+/* the two sailboats, placed in % of the painting so they scale with it */
+.boat{position:absolute;background-size:100% 100%;background-repeat:no-repeat;transform-origin:50% 92%;will-change:transform}
+.boat1{left:73.5388%;top:43.3014%;width:3.2944%;height:2.0933%;background-image:url(/_blob/034201e2fe23b81bb204118308593e1f)}
+.boat2{left:85.8661%;top:43.3014%;width:6.6950%;height:4.4856%;background-image:url(/_blob/c16a27c04caafb0c8f8829700a2f2410)}
+.topshade{background:linear-gradient(to bottom,rgba(16,42,32,.62) 0%,rgba(16,42,32,.25) 12%,rgba(16,42,32,0) 22%)}
+/* seagulls + floating airmail */
+.gull{position:absolute;left:0;top:0;width:24px;height:12px}
+.gull svg,.env svg,.star svg{display:block;width:100%;height:100%;overflow:visible}
+.wu{animation:flapA .5s steps(1) infinite}
+.wd{animation:flapB .5s steps(1) infinite}
+@keyframes flapA{0%{opacity:1}50%{opacity:0}}
+@keyframes flapB{0%{opacity:0}50%{opacity:1}}
+.env{position:absolute;left:0;top:0;width:28px;height:19px;filter:drop-shadow(0 2px 3px rgba(16,42,32,.25))}
+
+.script{font-family:'Pinyon Script',cursive;font-weight:400}
+.display{font-family:'IM Fell English',Georgia,serif;font-weight:400}
+.lift{text-shadow:0 2px 12px rgba(16,42,32,.75),0 0 2px rgba(16,42,32,.5)}
+.chtitle{position:absolute;left:0;right:0;top:18px;display:flex;flex-direction:column;align-items:center;text-align:center;color:#FFFCF4}
+
+/* the postcard */
+.card{position:absolute;left:50%;top:126px;width:206px;margin-left:-103px;padding:10px 10px 8px;box-sizing:border-box;background:#FFFCF4;border-radius:6px;box-shadow:0 16px 30px rgba(16,42,32,.32),0 0 0 1px rgba(201,162,78,.25);transform:rotate(-3deg);z-index:5}
+.card .ph,.card img{display:block;width:186px;height:196px;border-radius:3px;object-fit:cover}
+.cardcap{display:flex;justify-content:space-between;align-items:center;margin-top:5px}
+.stamp{position:absolute;right:-8px;top:-10px;width:34px;height:40px;background:#F6E7C1;border:2px dotted #C9A24E;border-radius:3px;display:flex;align-items:center;justify-content:center;transform:rotate(8deg);box-shadow:0 2px 4px rgba(16,42,32,.2)}
+.ph{background:linear-gradient(135deg,#F3E6C8 0%,#EAD5B2 60%,#E2C9A2 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:#7A5E42;text-align:center}
+.ph p{margin:0;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.star{position:absolute;left:50%;top:246px;width:14px;height:14px;margin:-7px 0 0 -7px;opacity:0;z-index:6;pointer-events:none}
+
+/* frosted sheet */
+.sheet{position:absolute;left:0;right:0;bottom:0;height:clamp(320px, 55.2cqh, 600px);display:flex;flex-direction:column;background:rgba(255,250,238,.6);backdrop-filter:blur(7px) saturate(1.1);-webkit-backdrop-filter:blur(7px) saturate(1.1);clip-path:polygon(0.00% 14.0px, 3.85% 11.5px, 7.74% 11.3px, 11.70% 12.2px, 15.76% 13.4px, 19.97% 13.7px, 24.36% 12.0px, 28.75% 9.2px, 33.00% 7.0px, 37.18% 5.5px, 41.36% 5.0px, 45.61% 5.8px, 50.00% 8.0px, 54.43% 9.8px, 58.78% 9.8px, 63.11% 8.8px, 67.45% 7.6px, 71.87% 7.0px, 76.41% 8.0px, 80.47% 9.1px, 84.46% 9.0px, 88.40% 8.4px, 92.29% 8.0px, 96.15% 8.6px, 100.00% 11.0px, 100% 100%, 0% 100%)}
+.body{flex:1;min-height:0;overflow-y:auto;padding:26px 20px 8px}
+.row{display:flex;justify-content:space-between;align-items:center}
+.lbl{margin:0;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#5E4A36}
+.bar{height:6px;border-radius:3px;background:rgba(38,77,53,.15);margin-top:8px;overflow:hidden}
+.barfill{height:100%;border-radius:3px;background:linear-gradient(90deg,#C9A24E,#E5A85A);transition:width .6s cubic-bezier(.22,1,.36,1)}
+.feedback{margin:12px 0 0;min-height:22px;font-size:15px;font-weight:700;text-align:center}
+.months{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:10px}
+.mbtn{min-height:44px;border-radius:14px;border:1.5px solid rgba(38,77,53,.28);background:rgba(255,252,244,.7);color:#264D35;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:background .25s ease,color .25s ease,border-color .25s ease,transform .15s ease}
+.mbtn:hover{background:#FFFCF4;transform:translateY(-1px)}
+.mbtn:focus-visible{outline:2px solid #C9A24E;outline-offset:2px}
+.mbtn.right{background:#3E7A4C;border-color:#3E7A4C;color:#FFFCF4}
+.mbtn.wrong{background:#E7B7A6;border-color:#C98A74;color:#5A2A1C}
+.mbtn.dim{opacity:.45}
+.primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 22px;border:0;border-radius:999px;background:#264D35;color:#F5EBD5;font-family:'IM Fell English',Georgia,serif;font-size:17px;cursor:pointer;box-shadow:0 6px 14px rgba(16,42,32,.25);transition:transform .2s ease}
+.primary:hover{transform:translateY(-2px)}
+.primary:focus-visible,.ghost:focus-visible,.next:focus-visible,.thumb:focus-visible{outline:2px solid #C9A24E;outline-offset:3px}
+.ghost{min-height:44px;padding:0 14px;border:0;background:transparent;color:#264D35;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.foot{flex:none;display:flex;align-items:center;justify-content:space-between;padding:8px 16px 14px;border-top:1px solid rgba(94,74,54,.18)}
+.dot{width:6px;height:6px;border-radius:50%;background:rgba(38,77,53,.3)}
+.dot.on{width:20px;border-radius:3px;background:#264D35}
+.next{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border:0;border-radius:999px;background:#264D35;color:#F5EBD5;font-family:'IM Fell English',Georgia,serif;font-size:16px;cursor:pointer}
+/* photoshoot carousel */
+.strip{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 4px 14px;margin:10px -20px 0;padding-left:20px;padding-right:20px;-webkit-overflow-scrolling:touch}
+.thumb{flex:none;scroll-snap-align:center;width:210px;padding:8px 8px 10px;border:0;border-radius:6px;background:#FFFCF4;box-shadow:0 10px 20px rgba(16,42,32,.22);cursor:pointer;text-align:left}
+.thumb .ph,.thumb img{display:block;width:194px;height:240px;border-radius:3px;object-fit:cover}
+.thumb p{margin:6px 2px 0;font-size:12px;color:#5E4A36}
+/* enlarged photo */
+.lb{position:absolute;inset:0;z-index:40;background:rgba(16,42,32,.86);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:20px;box-sizing:border-box}
+.lb .ph,.lb img{width:min(330px, 86cqw);height:auto;aspect-ratio:3/4;max-height:68cqh;border-radius:6px;object-fit:cover;box-shadow:0 20px 40px rgba(0,0,0,.4)}
+.lbtn{width:48px;height:48px;border-radius:50%;border:1px solid rgba(245,235,213,.5);background:rgba(16,42,32,.5);color:#F5EBD5;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.lbtn:focus-visible{outline:2px solid #F5D68A}
+/* page turn to Chapter 4: this page curls away, revealing the sky garden */
+.nextlink{position:absolute;left:0;top:0;width:1px;height:1px;opacity:0;pointer-events:none}
+.under4{position:absolute;inset:0;z-index:70;pointer-events:none;display:none;background-color:#C9B8E6;background-repeat:no-repeat;
+--sh:max(105cqh, calc(100cqw * 1672 / 941));--sw:calc(var(--sh) * 941 / 1672);
+background-image:linear-gradient(to bottom,rgba(70,50,100,.45) 0%,rgba(70,50,100,.12) 9%,rgba(70,50,100,0) 14%),url(/_blob/953bd7caa5e105b44d0f66810f86a79b);
+background-size:100% 100%,var(--sw) var(--sh);
+background-position:0 0,clamp(calc(100cqw - var(--sw)), calc(50cqw - var(--sw) * 0.5), 0px) clamp(calc(100cqh - var(--sh)), calc(13cqh - var(--sh) * 0.173), 0px)}
+.tflapwrap{position:absolute;inset:0;z-index:71;pointer-events:none;display:none;filter:drop-shadow(-8px -8px 16px rgba(16,42,32,.45))}
+.tflap{position:absolute;inset:0;background:linear-gradient(135deg,#E9DCBC 0%,#F8EFD9 55%,#E0D0A8 100%)}
+/* storybook scrollbar: a slim vine line with a glowing pill */
+.body::-webkit-scrollbar{width:10px;height:10px}
+.body::-webkit-scrollbar-track{margin:14px 0;background:linear-gradient(to right,transparent 4px,rgba(47,107,62,.22) 4px,rgba(47,107,62,.22) 6px,transparent 6px)}
+.body::-webkit-scrollbar-thumb{border-radius:999px;border:2px solid transparent;background:linear-gradient(180deg,#E5A85A,#2F6B3E) padding-box;box-shadow:inset 0 0 0 1px rgba(255,250,240,.55)}
+.body::-webkit-scrollbar-thumb:hover{border-width:1px}
+.body::-webkit-scrollbar-corner{background:transparent}
+@supports not selector(::-webkit-scrollbar){.body{scrollbar-width:thin;scrollbar-color:#2F6B3E transparent}}
+.strip::-webkit-scrollbar{width:10px;height:10px}
+.strip::-webkit-scrollbar-track{margin:0 20px;background:linear-gradient(to bottom,transparent 4px,rgba(47,107,62,.22) 4px,rgba(47,107,62,.22) 6px,transparent 6px)}
+.strip::-webkit-scrollbar-thumb{border-radius:999px;border:2px solid transparent;background:linear-gradient(90deg,#E5A85A,#2F6B3E) padding-box;box-shadow:inset 0 0 0 1px rgba(255,250,240,.55)}
+.strip::-webkit-scrollbar-thumb:hover{border-width:1px}
+.strip::-webkit-scrollbar-corner{background:transparent}
+@supports not selector(::-webkit-scrollbar){.strip{scrollbar-width:thin;scrollbar-color:#2F6B3E transparent}}
+/* bunny pointer + a trail of tiny leaves and sparkles (mouse/trackpad only) */
+@media (hover:hover) and (pointer:fine){.stage,.stage *{cursor:none !important}.stage input,.stage textarea{cursor:text !important}}
+.bunnycur{position:absolute;left:0;top:0;width:52px;height:73px;margin:-15px 0 0 -1px;background:url(/_blob/dbadbf2c44d41f6a5e3b3e01c5391ca4) 0 0/100% 100% no-repeat;pointer-events:none;z-index:96;opacity:0;transform-origin:50% 30%;filter:drop-shadow(0 4px 6px rgba(20,30,20,.3));will-change:transform}
+.trailp{position:absolute;left:0;top:0;pointer-events:none;z-index:95;will-change:transform,opacity}
+.trailp.tl{width:9px;height:9px;border-radius:80% 0 80% 0}
+.trailp.ts{width:6px;height:6px;border-radius:50%;background:#FFF3C4;box-shadow:0 0 8px 3px rgba(247,216,115,.75)}
+/* short phones (iPhone SE and smaller): smaller title and postcard so it clears the panel */
+@container (max-height: 720px){
+.chtitle{top:10px}
+.chtitle h1{font-size:26px !important;line-height:1.02 !important}
+.card{top:96px;scale:.72;transform-origin:50% 0}
+.star{top:186px}
+}
+.mbtn.soon{opacity:.5;border-style:dashed;cursor:default;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.1}
+.mbtn.soon:hover{transform:none;background:rgba(255,252,244,.7)}
+.mbtn.soon::after{content:'soon';font-size:9.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#8A6D4F}
+.soonbox{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;border-radius:22px;background:linear-gradient(135deg,rgba(243,230,200,.92),rgba(234,213,178,.92));box-shadow:inset 0 0 0 2px rgba(255,252,244,.7),0 14px 34px rgba(40,50,30,.25);color:#5E4A36}
+.soonbox .sooncam{display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,252,244,.75);box-shadow:0 6px 14px rgba(94,74,54,.18)}
+.soonbox .soont{margin:4px 0 0;font-family:'Pinyon Script',cursive;line-height:1.05;color:#3E6E3A}
+.soonbox .soonp{margin:0;line-height:1.55;color:#4A3A2A}
+.soonbox{margin:12px 0 4px;padding:20px 18px 18px}
+.soonbox .sooncam{width:58px;height:58px}
+.soonbox .soont{font-size:40px}
+.soonbox .soonp{font-size:14px}
+.trailbox{margin-top:14px}
+.vine{display:block;width:100%;height:18px;opacity:.9}
+.stamps{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:5px;margin-top:8px}
+.stp{position:relative;aspect-ratio:4/5;border-radius:4px;display:flex;align-items:center;justify-content:center;background:rgba(255,252,244,.55);border:1.5px dashed rgba(94,74,54,.35);color:transparent;transition:background .35s ease,border-color .35s ease,transform .35s ease}
+.stp svg{width:62%;height:62%}
+.stp::after{content:'';position:absolute;inset:2px;border-radius:2px;border:1px solid rgba(255,255,255,.45);pointer-events:none}
+.stp.cur{border-style:solid;border-color:#C9A24E;background:rgba(247,216,115,.35);animation:stpPulse 1.6s ease-in-out infinite}
+.stp.right{border-style:solid;border-color:#3E7A4C;background:#6D8F62;color:#FFFCF4;transform:rotate(-4deg)}
+.stp.wrong{border-style:solid;border-color:#C98A74;background:#E7B7A6;color:#7A3B26;transform:rotate(3deg)}
+@keyframes stpPulse{0%,100%{box-shadow:0 0 0 0 rgba(247,216,115,.0)}50%{box-shadow:0 0 0 4px rgba(247,216,115,.45)}}
+.trailtip{margin:10px 0 0;text-align:center;font-family:'Pinyon Script',cursive;font-size:19px;line-height:1.2;color:#5E4A36}
+</style>
+</helmet>
+
+<div class="stage" ref="{{setRoot}}">
+
+<!-- painted seaside town -->
+<div class="scene layer" aria-hidden="true">
+<div class="scenefit">
+<div class="lyr far"></div>
+<div class="lyr spa"></div>
+<div class="lyr spb"></div>
+<div class="lyr cld"></div>
+<span class="boat boat1"></span>
+<span class="boat boat2"></span>
+<div class="lyr laundry"></div>
+<div class="lyr wall"></div>
+</div>
+<span class="gull g1"><svg viewBox="0 0 24 12"><path class="wu" d="M0 5 C4 1 8 1 11.4 5.6 C14 1 19 1 24 5 C19 4 15 5.2 12.4 8 L11.4 8 C8.6 5.4 4.6 4.2 0 5 Z" fill="#FBF8F0" stroke="#8A9096" style="stroke-width: .6"></path><path class="wd" d="M0 9 C4 8.4 8 7.6 11 6 L13 6 C16 7.6 20 8.4 24 9 C20 9.8 16 9.4 12.6 8.4 L11.4 8.4 C8 9.4 4 9.8 0 9 Z" fill="#FBF8F0" stroke="#8A9096" style="stroke-width: .6"></path></svg></span>
+<span class="gull g2"><svg viewBox="0 0 24 12"><path class="wu" d="M0 5 C4 1 8 1 11.4 5.6 C14 1 19 1 24 5 C19 4 15 5.2 12.4 8 L11.4 8 C8.6 5.4 4.6 4.2 0 5 Z" fill="#FBF8F0" stroke="#8A9096" style="stroke-width: .6; animation-delay: -.2s"></path><path class="wd" d="M0 9 C4 8.4 8 7.6 11 6 L13 6 C16 7.6 20 8.4 24 9 C20 9.8 16 9.4 12.6 8.4 L11.4 8.4 C8 9.4 4 9.8 0 9 Z" fill="#FBF8F0" stroke="#8A9096" style="stroke-width: .6; animation-delay: -.2s"></path></svg></span>
+<span class="env e1"><svg viewBox="0 0 28 19"><rect x="1" y="1" width="26" height="17" rx="1.5" fill="#FFF8E8" stroke="#D9C8A4" style="stroke-width: .8"></rect><path d="M1 1 L14 11 L27 1" fill="none" stroke="#D9C8A4" style="stroke-width: .8"></path><rect x="2.5" y="2.5" width="23" height="14" fill="none" stroke="#C0504D" style="stroke-width: 1.4; stroke-dasharray: 3 3"></rect></svg></span>
+<span class="env e2"><svg viewBox="0 0 28 19"><rect x="1" y="1" width="26" height="17" rx="1.5" fill="#FFF8E8" stroke="#D9C8A4" style="stroke-width: .8"></rect><path d="M1 1 L14 11 L27 1" fill="none" stroke="#D9C8A4" style="stroke-width: .8"></path><rect x="2.5" y="2.5" width="23" height="14" fill="none" stroke="#3E6EA8" style="stroke-width: 1.4; stroke-dasharray: 3 3"></rect></svg></span>
+</div>
+<div class="layer topshade"></div>
+
+<div class="chtitle">
+<p class="lift ca" style="margin: 0; font-size: 11px; font-weight: 700; letter-spacing: .26em; text-transform: uppercase">Chapter III · Little Moments</p>
+<sc-if value="{{inGallery}}" hint-placeholder-val="{{ false }}">
+<h1 class="script lift ca" style="margin: 2px 0 0; font-size: 38px; line-height: 1.1; color: #F5D68A">Pre-Birthday Photoshoot</h1>
+</sc-if>
+<sc-if value="{{notGallery}}" hint-placeholder-val="{{ true }}">
+<h1 class="script lift ca" style="margin: 2px 0 0; font-size: 36px; line-height: 1.05; color: #F5D68A">Can You Guess<br>Dylan's Month?</h1>
+</sc-if>
+</div>
+
+<!-- the postcard with the mystery photo -->
+<sc-if value="{{inGame}}" hint-placeholder-val="{{ true }}">
+<div class="card">
+<span class="stamp" aria-hidden="true"><svg width="20" height="22" viewBox="0 0 20 22"><path d="M10 3 C6 6 4 10 6 15 C8 19 13 19 15 15 C17 10 14 6 10 3 Z" fill="#7FA552"></path><path d="M10 5 L10 18" stroke="#3E6E3A" style="stroke-width: 1"></path></svg></span>
+<sc-if value="{{cur.hasSrc}}" hint-placeholder-val="{{ false }}">
+<img src="{{cur.src}}" alt="Mystery milestone photo of Dylan">
+</sc-if>
+<sc-if value="{{cur.noSrc}}" hint-placeholder-val="{{ true }}">
+<div class="ph" role="img" aria-label="Placeholder for a milestone photo">
+<svg width="34" height="28" viewBox="0 0 34 28" aria-hidden="true" fill="none" stroke="#7A5E42" style="stroke-width: 1.8; stroke-linejoin: round"><rect x="2" y="6" width="30" height="20" rx="4"></rect><path d="M11 6 L13.5 2 H20.5 L23 6"></path><circle cx="17" cy="16" r="5.5"></circle></svg>
+<p>Milestone photo</p>
+<p style="font-weight: 600; letter-spacing: 0; text-transform: none">mystery #{{cur.num}}</p>
+</div>
+</sc-if>
+<div class="cardcap"><span class="script" style="font-size: 20px; color: #5E4A36">Which month is this?</span><span style="font-size: 11px; color: #8A6D4F">#{{cur.num}}</span></div>
+</div>
+</sc-if>
+<sc-for list="{{stars}}" as="s" hint-placeholder-count="10">
+<span class="star"><svg viewBox="0 0 14 14"><path d="M7 0 L8.6 5.4 L14 7 L8.6 8.6 L7 14 L5.4 8.6 L0 7 L5.4 5.4 Z" fill="{{s.color}}"></path></svg></span>
+</sc-for>
+
+<!-- frosted sheet -->
+<div class="sheet">
+<div class="body">
+
+<sc-if value="{{inGame}}" hint-placeholder-val="{{ true }}">
+<div class="gamebox">
+<div class="row"><p class="lbl">Photo {{cur.num}} of {{total}}</p><p class="lbl" style="color: #264D35">Score {{score}}</p></div>
+<div class="bar" aria-hidden="true"><div class="barfill" style="{{barStyle}}"></div></div>
+<p class="feedback" role="status" style="{{fbStyle}}">{{feedback}}</p>
+<div class="months" role="group" aria-label="Choose the month">
+<sc-for list="{{months}}" as="m" hint-placeholder-count="12">
+<button class="mbtn {{m.cls}}" type="button" onClick="{{m.pick}}" aria-label="Month {{m.n}}">{{m.label}}</button>
+</sc-for>
+</div>
+<div style="display: flex; justify-content: center; align-items: center; gap: 6px; margin-top: 14px; min-height: 46px">
+<sc-if value="{{answered}}" hint-placeholder-val="{{ false }}">
+<button class="primary" type="button" onClick="{{nextPhoto}}">{{nextLabel}}</button>
+</sc-if>
+<sc-if value="{{notAnswered}}" hint-placeholder-val="{{ true }}">
+<p style="margin: 0; font-size: 13px; color: #5E4A36">Tap the month you think it is</p>
+</sc-if>
+</div>
+
+<div class="trailbox">
+<svg class="vine" viewBox="0 0 320 22" aria-hidden="true" preserveAspectRatio="none"><path d="M2 12 C40 2 70 20 110 11 S 180 3 210 12 S 280 20 318 10" fill="none" stroke="#7FA552" style="stroke-width: 1.6; stroke-linecap: round"></path><path d="M60 11 C56 4 48 4 46 8 C50 12 56 13 60 11 Z M160 9 C164 2 172 2 174 6 C170 10 164 11 160 9 Z M250 14 C246 7 238 7 236 11 C240 15 246 16 250 14 Z" fill="#A9C46A"></path><circle cx="110" cy="11" r="3" fill="#E9A7A7"></circle><circle cx="210" cy="12" r="3" fill="#F7D873"></circle></svg>
+<div class="row" style="margin-top: 8px"><p class="lbl">Your postcard trail</p><p class="lbl" style="color: #8A6D4F">{{trailNote}}</p></div>
+<div class="stamps" role="list" aria-label="Your guesses so far">
+<sc-for list="{{trail}}" as="t" hint-placeholder-count="10">
+<span class="stp {{t.cls}}" role="listitem" aria-label="{{t.label}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="{{t.icon}}" fill="none" stroke="currentColor" style="stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round"></path></svg></span>
+</sc-for>
+</div>
+<p class="trailtip">Every postcard is a little piece of Dylan's first year.</p>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{inDone}}" hint-placeholder-val="{{ false }}">
+<div class="donebox" style="text-align: center; padding-top: 4px">
+<p class="lbl">All {{total}} photos guessed</p>
+<p class="display" style="margin: 6px 0 0; font-size: 64px; line-height: 1; color: #264D35">{{score}}<span style="font-size: 30px; color: #8A6D4F"> / {{total}}</span></p>
+<p class="script" style="margin: 6px 0 0; font-size: 26px; color: #5E4A36">{{doneMsg}}</p>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px; margin-top: 16px">
+<button class="primary" type="button" onClick="{{toGallery}}">See the pre-birthday photoshoot</button>
+<button class="ghost" type="button" onClick="{{replay}}">Play again</button>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{inGallery}}" hint-placeholder-val="{{ false }}">
+<div class="gallerybox">
+<div class="row"><p class="lbl">{{photoLabel}}</p><button class="ghost" type="button" onClick="{{backToGame}}">Back to the game</button></div>
+<sc-if value="{{hasPhotos}}" hint-placeholder-val="{{ false }}">
+<div class="strip" role="list" aria-label="Pre-birthday photos">
+<sc-for list="{{photos}}" as="p" hint-placeholder-count="4">
+<button class="thumb" type="button" role="listitem" onClick="{{p.open}}" aria-label="Enlarge photo {{p.num}}">
+<sc-if value="{{p.hasSrc}}" hint-placeholder-val="{{ false }}"><img src="{{p.src}}" alt="{{p.alt}}" loading="lazy"></sc-if>
+<sc-if value="{{p.noSrc}}" hint-placeholder-val="{{ true }}"><span class="ph"><svg width="30" height="25" viewBox="0 0 34 28" aria-hidden="true" fill="none" stroke="#7A5E42" style="stroke-width: 1.8; stroke-linejoin: round"><rect x="2" y="6" width="30" height="20" rx="4"></rect><path d="M11 6 L13.5 2 H20.5 L23 6"></path><circle cx="17" cy="16" r="5.5"></circle></svg><p>Photoshoot photo {{p.num}}</p></span></sc-if>
+<p>{{p.caption}}</p>
+</button>
+</sc-for>
+</div>
+</sc-if>
+<sc-if value="{{noPhotos}}" hint-placeholder-val="{{ true }}">
+<div class="soonbox" role="status">
+<span class="sooncam"><svg width="30" height="25" viewBox="0 0 34 28" aria-hidden="true" fill="none" stroke="#7A5E42" style="stroke-width: 1.8; stroke-linejoin: round"><rect x="2" y="6" width="30" height="20" rx="4"></rect><path d="M11 6 L13.5 2 H20.5 L23 6"></path><circle cx="17" cy="16" r="5.5"></circle></svg></span>
+<p class="soont">Coming soon</p>
+<p class="soonp">Dylan's pre-birthday photoshoot is on its way. Check back soon for a peek at his big-day portraits!</p>
+</div>
+</sc-if>
+</div>
+</sc-if>
+
+</div>
+<div class="foot">
+<div style="display: flex; flex-direction: column; gap: 5px">
+<div aria-hidden="true" style="display: flex; gap: 6px; align-items: center"><span class="dot"></span><span class="dot"></span><span class="dot on"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+<sc-if value="{{inGame}}" hint-placeholder-val="{{ true }}">
+<button class="ghost" type="button" onClick="{{toGallery}}" style="padding: 0; min-height: 28px; text-align: left">Skip to the photoshoot</button>
+</sc-if>
+<sc-if value="{{notInGame}}" hint-placeholder-val="{{ false }}">
+<p style="margin: 0; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #2F4B2C">Chapter 3 of 8</p>
+</sc-if>
+</div>
+<button class="next" type="button" onClick="{{goNext}}">Dress code
+<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8 H12 M8.5 4 L12.5 8 L8.5 12" fill="none" stroke="#F5D68A" style="stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"></path></svg>
+</button>
+<a class="nextlink" href="Ch4.dc.html" tabindex="-1" aria-hidden="true">Chapter 4</a>
+</div>
+</div>
+
+<!-- enlarged photoshoot photo -->
+<sc-if value="{{lbOpen}}" hint-placeholder-val="{{ false }}">
+<div class="lb" role="dialog" aria-modal="true" aria-label="Enlarged photo">
+<sc-if value="{{lbPhoto.hasSrc}}" hint-placeholder-val="{{ false }}"><img src="{{lbPhoto.src}}" alt="{{lbPhoto.alt}}"></sc-if>
+<sc-if value="{{lbPhoto.noSrc}}" hint-placeholder-val="{{ true }}"><div class="ph" role="img" aria-label="Placeholder photo"><p>Photoshoot photo {{lbPhoto.num}}</p></div></sc-if>
+<p style="margin: 0; min-height: 18px; font-size: 14px; color: #F5EBD5">{{lbPhoto.caption}}</p>
+<div style="display: flex; gap: 14px; align-items: center">
+<button class="lbtn" type="button" onClick="{{lbPrev}}" aria-label="Previous photo"><svg width="18" height="18" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 L5 8 L10 13" fill="none" stroke="#F5EBD5" style="stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"></path></svg></button>
+<p style="margin: 0; font-size: 13px; font-weight: 700; color: #F5EBD5">{{lbPhoto.num}} / {{photoCount}}</p>
+<button class="lbtn" type="button" onClick="{{lbNext}}" aria-label="Next photo"><svg width="18" height="18" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3 L11 8 L6 13" fill="none" stroke="#F5EBD5" style="stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"></path></svg></button>
+<button class="lbtn" type="button" onClick="{{lbClose}}" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3 L13 13 M13 3 L3 13" fill="none" stroke="#F5EBD5" style="stroke-width: 1.8; stroke-linecap: round"></path></svg></button>
+</div>
+</div>
+</sc-if>
+
+
+<!-- page turn to Chapter 4 -->
+<div class="under4" aria-hidden="true"></div>
+<div class="tflapwrap" aria-hidden="true"><div class="tflap"></div></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    /* ---- configuration: Dylan's photos go here ----
+       milestones: one entry per month; src = photo URL (leave '' for a placeholder).
+       The month is only ever read here, never shown in file names or labels. */
+    this.milestones = [
+      { month: 1, src: '/_blob/3e6ad7deac198dc7f38926d4475ca167' },
+      { month: 2, src: '/_blob/ebeac125673e2785a9b2d0277f5f7a2d' },
+      { month: 3, src: '/_blob/18b2d4effa1f29553e18e8102b00c0d4' },
+      { month: 4, src: '/_blob/03ec9255faa2454ca76f8d88fb4025d9' },
+      { month: 5, src: '/_blob/7deaec151f466773c37a71fa21f9f922' },
+      { month: 6, src: '/_blob/607f4fc287f66fc87e179705b3da9d1b' },
+      { month: 7, src: '/_blob/1d77c1275d8796f32aa10535f3e9fab3' },
+      { month: 8, src: '/_blob/a08581802e960add7958fee1ff91ec6a' },
+      { month: 9, src: '/_blob/97eeccc20ce320136540afe19782045a' },
+      { month: 10, src: '/_blob/5da28a7eb117b12fbc4bbf87d17294f8' },
+      { month: 11, src: '' },   // photo to follow
+      { month: 12, src: '' }    // photo to follow
+    ];
+    /* months that haven't happened yet: shown greyed out with a "soon" tag and left out of the game */
+    this.soonMonths = [12];
+    var soon = this.soonMonths;
+    /* only months that have a photo (and aren't "soon") become postcards in the game */
+    this.playable = [];
+    for (var mi = 0; mi < this.milestones.length; mi++) { if (this.milestones[mi].src && soon.indexOf(this.milestones[mi].month) < 0) this.playable.push(mi); }
+    /* photoshoot: any number of photos, optional captions */
+    this.photoshoot = [];
+    for (var p = 1; p <= 10; p++) this.photoshoot.push({ src: '', caption: '' });
+
+    this.state = { view: 'game', order: this.shuffle(), qi: 0, picked: null, score: 0, lb: null, results: [] };
+    this.root = null;
+    this.tweens = [];
+    this.tries = 0;
+  }
+  shuffle() {
+    var a = (this.playable || []).slice();
+    for (var j = a.length - 1; j > 0; j--) { var k = Math.floor(Math.random() * (j + 1)); var t = a[j]; a[j] = a[k]; a[k] = t; }
+    return a;
+  }
+  componentDidMount() { this.initTrailSoon(); this.boot(); }
+  componentWillUnmount() { if (this.onMove && this.root) { this.root.removeEventListener('pointermove', this.onMove); this.root.removeEventListener('pointerleave', this.onLeave); this.root.removeEventListener('pointerdown', this.onDown); }
+    clearTimeout(this.retry);
+    if (this.io) this.io.disconnect();
+    this.tweens.forEach(function (t) { t.kill(); });
+  }
+  reduced() { try { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; } }
+  g() { return window.gsap; }
+  boot() {
+    var self = this;
+    if (!this.root || !window.gsap) { if (this.tries++ < 25) this.retry = setTimeout(function () { self.boot(); }, 120); return; }
+    if (this.reduced()) return;
+    var g = window.gsap, r = this.root, t = this.tweens;
+    var q = function (s) { return r.querySelector(s); }, qa = function (s) { return r.querySelectorAll(s); };
+    /* entrance (the countryside page has just turned to reveal this town) */
+    var intro = g.timeline({ paused: true });
+    intro.from(qa('.ca'), { y: -14, opacity: 0, filter: 'blur(4px)', duration: 0.9, stagger: 0.12, ease: 'expo.out' }, 0.2)
+      .from(q('.card'), { x: 260, y: 40, rotation: 16, opacity: 0, duration: 1.1, ease: 'back.out(1.3)' }, 0.5)
+      .from(q('.sheet'), { yPercent: 100, duration: 1.1, ease: 'expo.out' }, 0.4)
+      .from(qa('.body > * , .foot'), { y: 14, opacity: 0, duration: 0.8, ease: 'expo.out' }, 0.9)
+      .from(qa('.mbtn'), { y: 10, opacity: 0, duration: 0.5, stagger: 0.03, ease: 'back.out(2)' }, 1.0)
+      .call(function () { if (!self.alive) { self.alive = true; self.ambient(g, q, qa, t); } }, null, 1.6);
+    t.push(intro);
+    this.intro = intro;
+    if ('IntersectionObserver' in window) {
+      this.io = new IntersectionObserver(function (es) { es.forEach(function (en) { if (en.isIntersecting) { if (!self.seen) { self.seen = true; intro.restart(); } } else self.seen = false; }); }, { threshold: 0.15 });
+      this.io.observe(r);
+    } else intro.play();
+  }
+  /* the seaside breathes: laundry flutters, gulls glide, airmail drifts by, potted flowers sway */
+  ambient(g, q, qa, t) {
+    var laundry = q('.laundry');
+    var lw = g.timeline({ repeat: -1 });
+    lw.to(laundry, { skewX: -3, duration: 1.6, ease: 'sine.inOut' })
+      .to(laundry, { skewX: -1, duration: 0.9, ease: 'sine.inOut' })
+      .to(laundry, { skewX: -4, duration: 1.1, ease: 'sine.inOut' })
+      .to(laundry, { skewX: 1, duration: 1.8, ease: 'sine.inOut' })
+      .to(laundry, { skewX: 0, duration: 1.2, ease: 'sine.inOut' });
+    t.push(lw);
+    var W = this.root.offsetWidth, sf = q('.scenefit'), f = sf && sf.offsetHeight ? sf.offsetHeight / 936 : 1;
+    // clouds drift, the sailboats bob and wander, and the sea sparkles twinkle
+    var cld = q('.cld');
+    if (cld) t.push(g.to(cld, { x: -18 * f, duration: 24, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    [[q('.boat1'), 2.6, 0, 7], [q('.boat2'), 3.1, 0.8, 10]].forEach(function (b) {
+      if (!b[0]) return;
+      t.push(g.to(b[0], { rotation: 3, y: -1.2 * f, duration: b[1], ease: 'sine.inOut', yoyo: true, repeat: -1, delay: b[2] }));
+      t.push(g.to(b[0], { x: b[3] * f, duration: 14 + b[1] * 2, ease: 'sine.inOut', yoyo: true, repeat: -1, delay: b[2] }));
+    });
+    var spa = q('.spa'), spb = q('.spb');
+    if (spa && spb) {
+      g.set(spb, { opacity: 0.25 });
+      t.push(g.to(spa, { opacity: 0.25, duration: 1.3, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+      t.push(g.to(spb, { opacity: 1, duration: 1.3, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    }
+    [[q('.g1'), 150, 24, 0, 1], [q('.g2'), 190, 30, 7, 0.8]].forEach(function (b) {
+      g.set(b[0], { scale: b[4] });
+      t.push(g.fromTo(b[0], { x: W + 30, y: b[1] }, { x: -60, y: b[1] - 30, duration: b[2], ease: 'none', repeat: -1, repeatDelay: 4, delay: b[3] }));
+      t.push(g.to(b[0], { yPercent: 'random(-60,60)', duration: 'random(1.4,2.2)', ease: 'sine.inOut', yoyo: true, repeat: -1, repeatRefresh: true }));
+    });
+    [[q('.e1'), 92, 26, 2], [q('.e2'), 70, 34, 14]].forEach(function (e) {
+      t.push(g.fromTo(e[0], { x: -40, y: e[1], rotation: -12 }, { x: W + 40, y: e[1] + 26, rotation: 14, duration: e[2], ease: 'sine.inOut', repeat: -1, repeatDelay: 8, delay: e[3] }));
+    });
+  }
+  /* floatingPostcards: the answered card is mailed off, the next one flies in */
+  swapCard(apply) {
+    var self = this, g = this.g(), card = this.root && this.root.querySelector('.card');
+    if (!g || !card || this.reduced()) { apply(); return; }
+    g.to(card, { x: -280, y: -150, rotation: -24, opacity: 0, duration: 0.55, ease: 'power2.in', onComplete: function () {
+      apply();
+      setTimeout(function () {
+        var c2 = self.root.querySelector('.card');
+        if (c2) g.fromTo(c2, { x: 300, y: 40, rotation: 16, opacity: 0 }, { x: 0, y: 0, rotation: -3, opacity: 1, duration: 0.85, ease: 'back.out(1.3)' });
+      }, 30);
+    } });
+  }
+  celebrate() {
+    var g = this.g(); if (!g || this.reduced()) return;
+    var stars = this.root.querySelectorAll('.star');
+    g.fromTo(stars, { x: 0, y: 0, scale: 0.4, opacity: 1, rotation: 0 }, {
+      x: function (i) { return Math.cos(i / stars.length * Math.PI * 2) * g.utils.random(80, 130); },
+      y: function (i) { return Math.sin(i / stars.length * Math.PI * 2) * g.utils.random(70, 120); },
+      scale: 1.2, rotation: 180, opacity: 0, duration: 1.1, ease: 'power2.out' });
+    var card = this.root.querySelector('.card');
+    if (card) g.fromTo(card, { scale: 1 }, { scale: 1.05, duration: 0.18, yoyo: true, repeat: 1, ease: 'sine.inOut' });
+  }
+  wobble() {
+    var g = this.g(), card = this.root && this.root.querySelector('.card'); if (!g || !card || this.reduced()) return;
+    g.fromTo(card, { x: -10 }, { x: 0, duration: 0.7, ease: 'elastic.out(1, 0.3)' });
+  }
+  /* storybook page turn to Chapter 4: curls from the bottom-right corner, revealing the sky garden */
+  goNext() {
+    var self = this, r = this.root;
+    if (!r) return;
+    var link = r.querySelector('.nextlink'), g = window.gsap;
+    if (!g || this.reduced()) { if (link) link.click(); return; }
+    if (this.turning) return;
+    this.turning = true;
+    var W = r.offsetWidth, H = r.offsetHeight;
+    var under = r.querySelector('.under4'), wrap = r.querySelector('.tflapwrap'), flap = r.querySelector('.tflap');
+    function clip(poly, c) {
+      var out = [];
+      for (var i = 0; i < poly.length; i++) {
+        var a = poly[i], b = poly[(i + 1) % poly.length];
+        var fa = a[0] + a[1] - c, fb = b[0] + b[1] - c, inA = fa >= 0, inB = fb >= 0;
+        if (inA) out.push(a);
+        if (inA !== inB) { var k = fa / (fa - fb); out.push([a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k]); }
+      }
+      return out;
+    }
+    function css(pts) {
+      if (pts.length < 3) return 'polygon(0px 0px, 0px 0px, 0px 0px)';
+      return 'polygon(' + pts.map(function (p) { return p[0].toFixed(1) + 'px ' + p[1].toFixed(1) + 'px'; }).join(', ') + ')';
+    }
+    var rect = [[0, 0], [W, 0], [W, H], [0, H]], st = { c: W + H };
+    function draw() {
+      var c = st.c, turned = clip(rect, c);
+      under.style.clipPath = css(turned);
+      flap.style.clipPath = css(turned.map(function (p) { return [c - p[1], c - p[0]]; }));
+    }
+    draw();
+    under.style.display = 'block';
+    wrap.style.display = 'block';
+    g.set(r, { pointerEvents: 'none' });
+    g.to(st, { c: -40, duration: 2.0, ease: 'power2.inOut', onUpdate: draw, onComplete: function () {
+      if (link) link.click();
+      setTimeout(function () { under.style.display = 'none'; wrap.style.display = 'none'; g.set(r, { pointerEvents: 'auto' }); self.turning = false; }, 800);
+    } });
+  }
+  /* bunny pointer trail: tiny leaves and golden sparkles drift down from the pointer */
+  initTrail() {
+    var self = this;
+    try { if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches || this.reduced()) return; } catch (e) { return; }
+    var r = this.root; if (!r || this.trailOn) return; this.trailOn = true;
+    var cols = ['#A8CF7E', '#6D8F62', '#94B85E', '#E9A7A7', '#C9C46A'], last = 0, n = 0, live = 0;
+    this.onTrail = function (ev) {
+      var g = window.gsap; if (!g) return;
+      var now = Date.now(); if (now - last < 28 || live > 46) return; last = now;
+      var rr = r.getBoundingClientRect(), sc = rr.width / r.offsetWidth || 1;
+      var x = (ev.clientX - rr.left) / sc, y = (ev.clientY - rr.top) / sc;
+      var leaf = (n++ % 3) !== 2, p = document.createElement('span');
+      p.className = 'trailp ' + (leaf ? 'tl' : 'ts');
+      if (leaf) p.style.background = cols[n % cols.length];
+      r.appendChild(p); live++;
+      g.set(p, { x: x + 18 + Math.random() * 16, y: y + 52, rotation: Math.random() * 360, scale: 0.6 + Math.random() * 0.6, opacity: 0.95 });
+      g.to(p, { x: '+=' + (Math.random() * 40 - 20), y: '+=' + (leaf ? 30 + Math.random() * 40 : 10 + Math.random() * 20), rotation: '+=' + (Math.random() * 220 - 110), scale: leaf ? 0.4 : 0.2, opacity: 0, duration: leaf ? 1.1 + Math.random() * 0.6 : 0.7 + Math.random() * 0.4, ease: 'sine.out', onComplete: function () { if (p.parentNode) p.parentNode.removeChild(p); live--; } });
+    };
+    /* the bunny follows the pointer, leaning into the direction it moves */
+    var bun = document.createElement('span'); bun.className = 'bunnycur'; bun.setAttribute('aria-hidden', 'true'); r.appendChild(bun); this.bun = bun;
+    var g0 = window.gsap, mx = g0.quickTo(bun, 'x', { duration: 0.18, ease: 'power3.out' }), my = g0.quickTo(bun, 'y', { duration: 0.18, ease: 'power3.out' }), rot = g0.quickTo(bun, 'rotation', { duration: 0.5, ease: 'power2.out' }), px = null;
+    this.onMove = function (ev) {
+      var rr = r.getBoundingClientRect(), sc = rr.width / r.offsetWidth || 1;
+      var x = (ev.clientX - rr.left) / sc, y = (ev.clientY - rr.top) / sc;
+      if (px === null) { g0.set(bun, { x: x, y: y }); }
+      mx(x); my(y); rot(px === null ? 0 : Math.max(-14, Math.min(14, (x - px) * 1.2))); px = x;
+      g0.to(bun, { opacity: 1, duration: 0.2, overwrite: 'auto' });
+      clearTimeout(self.rotT); self.rotT = setTimeout(function () { rot(0); }, 120);
+      self.onTrail(ev);
+    };
+    this.onLeave = function () { px = null; g0.to(bun, { opacity: 0, duration: 0.2, overwrite: 'auto' }); };
+    this.onDown = function () { g0.fromTo(bun, { scaleX: 1.12, scaleY: 0.86 }, { scaleX: 1, scaleY: 1, duration: 0.5, ease: 'elastic.out(1, 0.4)' }); };
+    r.addEventListener('pointermove', this.onMove);
+    r.addEventListener('pointerleave', this.onLeave);
+    r.addEventListener('pointerdown', this.onDown);
+  }
+  initTrailSoon() { var self = this, tries = 0; (function go() { if (self.root && window.gsap) self.initTrail(); else if (tries++ < 30) setTimeout(go, 150); })(); }
+
+  renderVals() {
+    var self = this, s = this.state;
+    var total = this.playable.length || 1;
+    var curItem = this.milestones[s.order[s.qi]] || this.milestones[0];
+    var picked = s.picked, answered = picked !== null;
+    var months = [];
+    for (var n = 1; n <= 12; n++) {
+      (function (n) {
+        var isSoon = self.soonMonths.indexOf(n) >= 0;
+        var cls = isSoon ? 'soon' : '';
+        if (answered && !isSoon) cls = n === curItem.month ? 'right' : (n === picked ? 'wrong' : 'dim');
+        months.push({ n: n, label: 'Month ' + n, cls: cls, pick: function () {
+          if (isSoon || self.state.picked !== null) return;
+          var ok = n === curItem.month;
+          self.setState({ picked: n, score: self.state.score + (ok ? 1 : 0), results: (self.state.results || []).concat([ok ? 'right' : 'wrong']) });
+          if (ok) self.celebrate(); else self.wobble();
+        } });
+      })(n);
+    }
+    var ok = answered && picked === curItem.month;
+    var score = s.score;
+    var doneMsg = score === total ? 'Perfect! You know Dylan by heart.' : score >= Math.round(total * 0.75) ? "Wonderful! You've watched him grow." : score >= Math.round(total * 0.4) ? 'Lovely guesses! Every month was a new adventure.' : 'Every month brought a new surprise!';
+    var photos = this.photoshoot.map(function (p, i) {
+      return { num: i + 1, src: p.src, hasSrc: !!p.src, noSrc: !p.src, caption: p.caption || '', alt: p.caption || ('Pre-birthday photo ' + (i + 1)),
+        open: function () { self.setState({ lb: i }); } };
+    });
+    var hasPhotos = this.photoshoot.some(function (p) { return !!p.src; });
+    if (!hasPhotos) photos = [];
+    var lbi = s.lb === null ? 0 : s.lb;
+    var stars = ['#F5D68A', '#E5A85A', '#FFFCF4', '#A9C46A', '#F5D68A', '#EFC3B4', '#FFFCF4', '#F5D68A', '#A9D6DF', '#E5A85A'].map(function (c) { return { color: c }; });
+    return {
+      setRoot: function (el) { self.root = el; },
+      goNext: function () { self.goNext(); },
+      inGame: s.view === 'game', inDone: s.view === 'done', inGallery: s.view === 'gallery',
+      notGallery: s.view !== 'gallery', notInGame: s.view !== 'game',
+      cur: { num: s.qi + 1, src: curItem.src, hasSrc: !!curItem.src, noSrc: !curItem.src },
+      score: score,
+      barStyle: 'width:' + Math.round(((s.qi + (answered ? 1 : 0)) / total) * 100) + '%',
+      months: months,
+      answered: answered, notAnswered: !answered,
+      feedback: !answered ? '' : (ok ? 'Yes! Month ' + curItem.month + '. Well spotted!' : 'So close! This was month ' + curItem.month + '.'),
+      fbStyle: ok ? 'color:#2F6B3E' : 'color:#8A3B26',
+      nextLabel: s.qi === total - 1 ? 'See my score' : 'Next photo',
+      nextPhoto: function () {
+        if (self.state.qi >= total - 1) { self.swapCard(function () { self.setState({ view: 'done' }); }); return; }
+        self.swapCard(function () { self.setState({ qi: self.state.qi + 1, picked: null }); });
+      },
+      doneMsg: doneMsg,
+      replay: function () { self.setState({ view: 'game', order: self.shuffle(), qi: 0, picked: null, score: 0, results: [] }); },
+      toGallery: function () { self.setState({ view: 'gallery' }); },
+      backToGame: function () { self.setState({ view: s.qi === total - 1 && s.picked !== null ? 'done' : 'game' }); },
+      trail: (function () {
+        var res = s.results || [], out = [];
+        for (var ti = 0; ti < total; ti++) {
+          var st = res[ti] || (ti === s.qi ? 'cur' : '');
+          out.push({ cls: st, label: 'Postcard ' + (ti + 1) + (st === 'right' ? ': guessed right' : st === 'wrong' ? ': missed' : st === 'cur' ? ': now playing' : ': coming up'),
+            icon: st === 'right' ? 'M6 12.5 L10.5 17 L18 8' : st === 'wrong' ? 'M8 8 L16 16 M16 8 L8 16' : '' });
+        }
+        return out;
+      })(),
+      trailNote: (s.results || []).length ? (s.results || []).filter(function (x) { return x === 'right'; }).length + ' of ' + (s.results || []).length + ' right' : 'Let\'s begin!',
+      photos: photos, photoCount: photos.length, total: total,
+      hasPhotos: hasPhotos, noPhotos: !hasPhotos, galleryStrip: s.view === 'gallery' && hasPhotos, gallerySoon: s.view === 'gallery' && !hasPhotos,
+      photoLabel: hasPhotos ? photos.length + ' photos' : 'Coming soon',
+      lbOpen: s.lb !== null,
+      lbPhoto: photos[lbi],
+      lbPrev: function () { self.setState({ lb: (lbi - 1 + photos.length) % photos.length }); },
+      lbNext: function () { self.setState({ lb: (lbi + 1) % photos.length }); },
+      lbClose: function () { self.setState({ lb: null }); },
+      stars: stars
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Dylan — Chapter 6, RSVP and Wishes</title>
+<script src="./support.js"></script>
+<script src="/_blob/17d4179414200efbabee22c7746b97ba"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&amp;family=Nunito:wght@400;600;700&amp;family=Pinyon+Script&amp;display=swap">
+<style>
+body{margin:0;background:#0B1433}
+.stage{position:relative;width:100vw;height:100vh;height:100dvh;container-type:size;overflow:hidden;background:#13235E;font-family:'Nunito',system-ui,sans-serif;color:#1C2554}
+.layer{position:absolute;inset:0;pointer-events:none}
+/* responsive scene: the tall moonlit-beach painting (941x1672) always covers the screen like a photo set to "fill".
+   The moon and the hanging jars (around 30% down the painting) sit in the band between the title and the RSVP panel */
+.scenefit{position:absolute;--sh:max(105cqh, calc(100cqw * 1672 / 941));--sw:calc(var(--sh) * 941 / 1672);width:var(--sw);height:var(--sh);
+left:clamp(calc(100cqw - var(--sw)), calc(50cqw - var(--sw) * 0.41), 0px);
+top:clamp(calc(100cqh - var(--sh)), calc(25cqh - var(--sh) * 0.30), 0px)}
+.ly{position:absolute;inset:0;background-size:100% 100%;background-repeat:no-repeat;will-change:transform}
+.plate{background-image:url(/_blob/2a706cdcc6d2a3e1c55d1977c41ab409)}
+.sea{background-image:url(/_blob/483794721c1718e408e1a85efc203449)}
+.sea2{background-image:url(/_blob/483794721c1718e408e1a85efc203449);filter:brightness(1.7) saturate(1.2);opacity:.4;
+-webkit-mask-image:repeating-linear-gradient(to bottom,transparent 0,#000 3px,transparent 9px);mask-image:repeating-linear-gradient(to bottom,transparent 0,#000 3px,transparent 9px);
+-webkit-mask-size:100% 18px;mask-size:100% 18px;animation:ripple 2.6s linear infinite}
+@keyframes ripple{from{-webkit-mask-position:0 0;mask-position:0 0}to{-webkit-mask-position:0 18px;mask-position:0 18px}}
+.foam{background-image:url(/_blob/eee8bf8f7224f00e9e4b24034187e5cd)}
+.clouds{background-image:url(/_blob/44b1e60a1146f9954362c02bd59e2e85)}
+/* each glowing jar hangs on its own string and swings gently */
+.jar{position:absolute;background-size:100% 100%;background-repeat:no-repeat;transform-origin:50% 0;will-change:transform}
+.moonglow{position:absolute;left:71.73%;top:24.04%;width:38%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(255,240,190,.38),rgba(255,230,170,.12) 45%,rgba(255,230,170,0) 70%);mix-blend-mode:screen}
+.jglow{position:absolute;width:11%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(255,222,130,.6),rgba(255,200,100,.18) 45%,rgba(255,200,100,0) 70%);mix-blend-mode:screen}
+.star{position:absolute;width:2.2%;aspect-ratio:1;transform:translate(-50%,-50%);background:radial-gradient(circle,#FFFBEA 0,rgba(255,246,210,.9) 18%,rgba(255,240,190,0) 60%);border-radius:50%;opacity:.4}
+.orb{position:absolute;left:0;top:0;width:7px;height:7px;border-radius:50%;background:#FFF2C4;box-shadow:0 0 10px 4px rgba(255,214,120,.75);opacity:0;pointer-events:none}
+.wishstar{position:absolute;left:0;top:0;width:10px;height:10px;border-radius:50%;background:#FFF8DE;box-shadow:0 0 14px 6px rgba(255,226,150,.8),0 0 2px 1px #fff;pointer-events:none;z-index:4}
+.topshade{background:linear-gradient(to bottom,rgba(8,14,40,.55) 0%,rgba(8,14,40,.15) 12%,rgba(8,14,40,0) 18%)}
+/* short phones (iPhone SE and smaller): a slightly smaller title */
+@container (max-height: 720px){
+.chtitle{top:10px}
+.chtitle h1{font-size:32px !important}
+}
+.script{font-family:'Pinyon Script',cursive;font-weight:400}
+.chtitle{position:absolute;left:0;right:0;top:14px;display:flex;flex-direction:column;align-items:center;text-align:center;color:#FFF9F0;z-index:3}
+.lift{text-shadow:0 2px 12px rgba(5,10,35,.8),0 0 2px rgba(5,10,35,.5)}
+.sheet{position:absolute;left:0;right:0;bottom:0;height:clamp(330px, 61.6cqh, 640px);display:flex;flex-direction:column;background:rgba(255,249,238,.6);backdrop-filter:blur(7px) saturate(1.1);-webkit-backdrop-filter:blur(7px) saturate(1.1);clip-path:polygon(0.00% 14.0px, 3.85% 11.5px, 7.74% 11.3px, 11.70% 12.2px, 15.76% 13.4px, 19.97% 13.7px, 24.36% 12.0px, 28.75% 9.2px, 33.00% 7.0px, 37.18% 5.5px, 41.36% 5.0px, 45.61% 5.8px, 50.00% 8.0px, 54.43% 9.8px, 58.78% 9.8px, 63.11% 8.8px, 67.45% 7.6px, 71.87% 7.0px, 76.41% 8.0px, 80.47% 9.1px, 84.46% 9.0px, 88.40% 8.4px, 92.29% 8.0px, 96.15% 8.6px, 100.00% 11.0px, 100% 100%, 0% 100%)}
+.cd{flex:none;margin:24px 16px 0}
+.tabs{position:relative;display:flex;gap:6px;padding:12px 16px 8px;flex:none}
+.ind{position:absolute;left:0;top:12px;height:44px;width:170px;border-radius:999px;background:#1F2C6B;box-shadow:0 6px 16px rgba(5,10,35,.25)}
+.scroll{flex:1;min-height:0;overflow-y:auto;padding:4px 16px 14px}
+.foot{flex:none;display:flex;align-items:center;justify-content:space-between;padding:10px 16px 14px;border-top:1px solid rgba(28,37,84,.14)}
+.cdrow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
+.cdbox{display:flex;flex-direction:column;align-items:center;padding:8px 0 6px;border-radius:14px;background:linear-gradient(160deg,rgba(31,44,107,.92),rgba(19,35,94,.88));box-shadow:inset 0 0 0 1px rgba(247,216,115,.35),0 6px 14px rgba(5,10,35,.25)}
+.cdnum{margin:0;font-family:'IM Fell English',Georgia,serif;font-size:26px;line-height:1;color:#F7D873;font-variant-numeric:tabular-nums;text-shadow:0 0 12px rgba(247,216,115,.45)}
+.cdlbl{margin:4px 0 0;font-size:9.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#E9E3F5}
+.cdcap{margin:7px 0 0;text-align:center;font-size:12px;font-weight:600;color:#2B3770}
+.tab{position:relative;z-index:1;flex:1;display:flex;align-items:center;justify-content:center;gap:8px;min-height:44px;border-radius:999px;border:1px solid rgba(28,37,84,.22);background:transparent;color:#1C2554;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:color .3s ease,border-color .3s ease}
+.tab.on{color:#FFF9F0;border-color:transparent}
+.tab:focus-visible,.choice:focus-visible,.step:focus-visible,.send:focus-visible,.ghost:focus-visible,.in:focus-visible{outline:2px solid #F7D873;outline-offset:2px}
+.p{margin:2px 0 0;font-size:13.5px;line-height:1.5;color:#2B3260}
+.ph{color:#6A6390;font-style:italic}
+.lbl{display:block;margin:12px 0 6px;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#2B3770}
+.in{box-sizing:border-box;width:100%;min-height:44px;padding:10px 14px;border-radius:14px;border:1px solid rgba(28,37,84,.22);background:rgba(255,253,248,.75);font-family:'Nunito',sans-serif;font-size:16px;color:#1C2554}
+textarea.in{min-height:76px;resize:none;line-height:1.45}
+.in::placeholder{color:#7C7A98}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.choice{display:flex;align-items:center;justify-content:center;gap:8px;min-height:44px;border-radius:14px;border:1px solid rgba(28,37,84,.22);background:rgba(255,253,248,.55);color:#1C2554;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:background-color .25s ease,color .25s ease,border-color .25s ease}
+.choice.yes.on{background:#6D8F62;border-color:#6D8F62;color:#FFF9F0}
+.choice.no.on{background:#D97A5E;border-color:#D97A5E;color:#FFF9F0}
+.stepper{display:inline-flex;align-items:center;gap:6px;padding:4px;border-radius:999px;background:rgba(255,253,248,.6);box-shadow:inset 0 0 0 1px rgba(28,37,84,.18)}
+.step{width:40px;height:40px;border-radius:50%;border:0;background:#1F2C6B;color:#FFF9F0;font-size:20px;font-weight:700;line-height:1;cursor:pointer}
+.step.off{opacity:.35;cursor:default}
+.count{min-width:46px;margin:0;text-align:center;font-family:'IM Fell English',Georgia,serif;font-size:24px;color:#1C2554}
+.send{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:48px;margin-top:14px;border:0;border-radius:999px;background:linear-gradient(135deg,#2B3B8A,#1F2C6B);color:#FFF9F0;font-family:'IM Fell English',Georgia,serif;font-size:17px;cursor:pointer;box-shadow:0 8px 18px rgba(5,10,35,.25)}
+.err{margin:8px 0 0;min-height:18px;font-size:13px;font-weight:700;color:#A8452B}
+.done{display:flex;flex-direction:column;align-items:center;text-align:center;padding:14px 6px}
+.donebadge{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle,#FFF6D6,#F7D873);box-shadow:0 0 24px rgba(247,216,115,.6)}
+.donet{margin:12px 0 0;font-family:'Pinyon Script',cursive;font-size:34px;line-height:1.1;color:#1F2C6B}
+.ghost{min-height:44px;margin-top:10px;padding:0 14px;border:0;background:transparent;color:#2B3770;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.wishes{display:flex;flex-direction:column;gap:10px;margin:14px 0 0;padding:0;list-style:none}
+.wish{padding:12px 14px;border-radius:16px;background:rgba(255,252,245,.55);box-shadow:inset 0 0 0 1px rgba(28,37,84,.1)}
+.wish p{margin:0;font-size:14px;line-height:1.5;color:#2B3260}
+.wish .by{margin-top:4px;font-size:12.5px;font-weight:700;letter-spacing:.04em;color:#6A4E6E}
+.empty{margin:14px 0 0;text-align:center;font-size:13px;font-style:italic;color:#4A4F7A}
+.dot{width:6px;height:6px;border-radius:50%;background:rgba(28,37,84,.28)}
+.dot.on{width:20px;border-radius:4px;background:#1F2C6B}
+.next{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border:0;border-radius:999px;background:#1F2C6B;color:#FFF9F0;font-family:'IM Fell English',Georgia,serif;font-size:16px;cursor:pointer}
+.next:focus-visible{outline:2px solid #F7D873;outline-offset:3px}
+/* storybook scrollbar: a slim vine line with a glowing pill */
+.scroll::-webkit-scrollbar{width:10px;height:10px}
+.scroll::-webkit-scrollbar-track{margin:14px 0;background:linear-gradient(to right,transparent 4px,rgba(31,44,107,.22) 4px,rgba(31,44,107,.22) 6px,transparent 6px)}
+.scroll::-webkit-scrollbar-thumb{border-radius:999px;border:2px solid transparent;background:linear-gradient(180deg,#F7D873,#1F2C6B) padding-box;box-shadow:inset 0 0 0 1px rgba(255,250,240,.55)}
+.scroll::-webkit-scrollbar-thumb:hover{border-width:1px}
+@supports not selector(::-webkit-scrollbar){.scroll{scrollbar-width:thin;scrollbar-color:#1F2C6B transparent}}
+.nextlink{position:absolute;left:0;top:0;width:1px;height:1px;opacity:0;pointer-events:none}
+.under7{position:absolute;inset:0;z-index:70;pointer-events:none;display:none;background-color:#B9B6E6;background-repeat:no-repeat;
+background-image:linear-gradient(to bottom,rgba(60,50,100,.35) 0%,rgba(60,50,100,0) 18%),url(/_blob/e4065b54823638dce3d2b55f9461bb69);
+--sh:max(105cqh, calc(100cqw * 1672 / 941));--sw:calc(var(--sh) * 941 / 1672);
+background-size:100% 100%,var(--sw) var(--sh);
+background-position:0 0,clamp(calc(100cqw - var(--sw)), calc(50cqw - var(--sw) * 0.42), 0px) calc(100cqh - var(--sh))}
+.tflapwrap{position:absolute;inset:0;z-index:71;pointer-events:none;display:none;filter:drop-shadow(-8px -8px 16px rgba(16,42,32,.45))}
+.tflap{position:absolute;inset:0;background:linear-gradient(135deg,#E9DCBC 0%,#F8EFD9 55%,#E0D0A8 100%)}
+/* bunny pointer + a trail of tiny leaves and sparkles (mouse/trackpad only) */
+@media (hover:hover) and (pointer:fine){.stage,.stage *{cursor:none !important}.stage input,.stage textarea{cursor:text !important}}
+.bunnycur{position:absolute;left:0;top:0;width:52px;height:73px;margin:-15px 0 0 -1px;background:url(/_blob/dbadbf2c44d41f6a5e3b3e01c5391ca4) 0 0/100% 100% no-repeat;pointer-events:none;z-index:96;opacity:0;transform-origin:50% 30%;filter:drop-shadow(0 4px 6px rgba(20,30,20,.3));will-change:transform}
+.trailp{position:absolute;left:0;top:0;pointer-events:none;z-index:95;will-change:transform,opacity}
+.trailp.tl{width:9px;height:9px;border-radius:80% 0 80% 0}
+.trailp.ts{width:6px;height:6px;border-radius:50%;background:#FFF3C4;box-shadow:0 0 8px 3px rgba(247,216,115,.75)}
+/* until the sliding pill is measured, the selected tab paints its own fill so it always reads correctly */
+.tabs:not(.ready) .tab.on{background:#1F2C6B}
+</style>
+</helmet>
+
+<div class="stage" ref="{{setRoot}}">
+<div class="scene layer" aria-hidden="true">
+<div class="scenefit">
+<div class="ly plate"></div>
+<span class="star" style="left: 39.74%; top: 8.97%"></span>
+<span class="star" style="left: 90.22%; top: 17.40%"></span>
+<span class="star" style="left: 76.30%; top: 14.53%"></span>
+<span class="star" style="left: 21.36%; top: 4.01%"></span>
+<span class="star" style="left: 67.59%; top: 11.54%"></span>
+<span class="star" style="left: 24.34%; top: 9.81%"></span>
+<span class="star" style="left: 31.88%; top: 5.32%"></span>
+<span class="star" style="left: 91.50%; top: 9.15%"></span>
+<span class="star" style="left: 82.25%; top: 13.28%"></span>
+<span class="star" style="left: 83.32%; top: 7.06%"></span>
+<span class="moonglow"></span>
+<div class="ly clouds"></div>
+<div class="ly sea"></div>
+<div class="ly sea2"></div>
+<div class="ly foam"></div>
+<span class="jglow" style="left: 24.12%; top: 28.46%"></span>
+<span class="jglow" style="left: 3.19%; top: 34.90%"></span>
+<span class="jglow" style="left: 33.53%; top: 32.82%"></span>
+<span class="jglow" style="left: 22.64%; top: 36.71%"></span>
+<i class="jar" style="left: 21.785%; top: 25.419%; width: 4.676%; height: 4.904%; background-image: url(/_blob/670958ef80968cc79471874ea5dc47ff)"></i>
+<i class="jar" style="left: 0.744%; top: 31.938%; width: 4.888%; height: 4.785%; background-image: url(/_blob/fdb226f5e82e3b31b32568527f21ffa1)"></i>
+<i class="jar" style="left: 30.393%; top: 29.665%; width: 6.270%; height: 5.084%; background-image: url(/_blob/716505f31211fcffa7e4508cc547c444)"></i>
+<i class="jar" style="left: 19.979%; top: 33.373%; width: 5.313%; height: 5.383%; background-image: url(/_blob/ce1a5cb6d4c86fd4281809bfa079acdc)"></i>
+<span class="orb"></span>
+<span class="orb"></span>
+<span class="orb"></span>
+<span class="orb"></span>
+<span class="orb"></span>
+</div>
+</div>
+<div class="layer topshade"></div>
+<div class="chtitle">
+<p class="lift ca" style="margin: 0; font-size: 11px; font-weight: 700; letter-spacing: .26em; text-transform: uppercase">Chapter VI · The Wishing Shore</p>
+<h1 class="script lift ca" style="margin: 0; font-size: 38px; line-height: 1.1; color: #FFF0C8">RSVP &amp; Wishes</h1>
+</div>
+<div class="sheet">
+<div class="cd ca" role="timer" aria-label="Countdown to the baptism">
+<div class="cdrow">
+<div class="cdbox"><p class="cdnum cd-d">--</p><p class="cdlbl">Days</p></div>
+<div class="cdbox"><p class="cdnum cd-h">--</p><p class="cdlbl">Hours</p></div>
+<div class="cdbox"><p class="cdnum cd-m">--</p><p class="cdlbl">Minutes</p></div>
+<div class="cdbox"><p class="cdnum cd-s">--</p><p class="cdlbl">Seconds</p></div>
+</div>
+<p class="cdcap cd-cap">until Dylan's baptism · Dec 13, 1:30 PM</p>
+</div>
+<div class="tabs" role="group" aria-label="RSVP or wishes">
+<span class="ind" aria-hidden="true"></span>
+<button class="tab t-rsvp {{tabRsvp}}" type="button" aria-pressed="{{pressRsvp}}" onClick="{{showRsvp}}"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M4 6 H20 V18 H4 Z M4 7 L12 13 L20 7"></path></svg>RSVP</button>
+<button class="tab t-wish {{tabWish}}" type="button" aria-pressed="{{pressWish}}" onClick="{{showWish}}"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M12 3 L14.2 9 L20.5 9.3 L15.5 13.2 L17.3 19.5 L12 15.8 L6.7 19.5 L8.5 13.2 L3.5 9.3 L9.8 9 Z"></path></svg>Leave a wish</button>
+</div>
+<div class="scroll">
+<sc-if value="{{isRsvpForm}}" hint-placeholder-val="{{ true }}">
+<div class="panel">
+<p class="p a">Kindly reply by <span class="ph">[RSVP deadline]</span>. We can't wait to celebrate with you!</p>
+<label class="lbl a" for="rs-name">Your name</label>
+<input class="in a in-name" id="rs-name" type="text" autocomplete="name" placeholder="e.g. Tita Maria">
+<p class="lbl a">Will you be there?</p>
+<div class="choices a" role="group" aria-label="Will you be there?">
+<button class="choice yes {{yesOn}}" type="button" aria-pressed="{{yesPressed}}" onClick="{{pickYes}}"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M5 12.5 L10 17 L19 7"></path></svg>Joyfully yes</button>
+<button class="choice no {{noOn}}" type="button" aria-pressed="{{noPressed}}" onClick="{{pickNo}}">Sadly can't</button>
+</div>
+<sc-if value="{{showCount}}" hint-placeholder-val="{{ true }}">
+<p class="lbl a">How many in your party, including you?</p>
+<div class="stepper a"><button class="step {{minCls}}" type="button" aria-label="One fewer" onClick="{{minus}}">−</button><p class="count" aria-live="polite">{{count}}</p><button class="step {{maxCls}}" type="button" aria-label="One more" onClick="{{plus}}">+</button></div>
+</sc-if>
+<label class="lbl a" for="rs-note">A note for us <span style="text-transform: none; letter-spacing: 0; font-weight: 600">(optional)</span></label>
+<textarea class="in a in-note" id="rs-note" placeholder="Dietary needs, kids' names, or just hello"></textarea>
+<button class="send a" type="button" onClick="{{sendRsvp}}">Send RSVP <svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M4 12 L20 4 L14 20 L11 13 Z"></path></svg></button>
+<p class="err" role="alert">{{err}}</p>
+</div>
+</sc-if>
+<sc-if value="{{isRsvpDone}}" hint-placeholder-val="{{ false }}">
+<div class="done panel">
+<span class="donebadge a"><svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#1F2C6B" style="stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round"><path d="M5 12.5 L10 17 L19 7"></path></svg></span>
+<p class="donet a">{{doneTitle}}</p>
+<p class="p a" style="text-align: center">{{doneText}}</p>
+<button class="ghost a" type="button" onClick="{{editRsvp}}">Change my reply</button>
+</div>
+</sc-if>
+<sc-if value="{{isWish}}" hint-placeholder-val="{{ false }}">
+<div class="panel">
+<p class="p a">Leave a little wish for Dylan. Watch it float up to join the stars.</p>
+<label class="lbl a" for="ws-name">From</label>
+<input class="in a in-wname" id="ws-name" type="text" autocomplete="name" placeholder="Your name">
+<label class="lbl a" for="ws-text">Your wish</label>
+<textarea class="in a in-wtext" id="ws-text" placeholder="May you always…"></textarea>
+<button class="send a" type="button" onClick="{{sendWish}}">Send my wish <svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M12 3 L14.2 9 L20.5 9.3 L15.5 13.2 L17.3 19.5 L12 15.8 L6.7 19.5 L8.5 13.2 L3.5 9.3 L9.8 9 Z"></path></svg></button>
+<p class="err" role="alert">{{werr}}</p>
+<sc-if value="{{noWishes}}" hint-placeholder-val="{{ true }}"><p class="empty a">No wishes yet. Be the first to send one!</p></sc-if>
+<ul class="wishes" aria-label="Wishes for Dylan">
+<sc-for list="{{wishes}}" as="w" hint-placeholder-count="0">
+<li class="wish"><p>{{w.text}}</p><p class="by">— {{w.name}}</p></li>
+</sc-for>
+</ul>
+</div>
+</sc-if>
+</div>
+<div class="foot">
+<div style="display: flex; flex-direction: column; gap: 5px">
+<div aria-hidden="true" style="display: flex; gap: 6px; align-items: center"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot on"></span><span class="dot"></span><span class="dot"></span></div>
+<p style="margin: 0; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #1C2554">Chapter 6 of 8</p>
+</div>
+<button class="next" type="button" onClick="{{goNext}}">Wishes <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8 H12 M8.5 4 L12.5 8 L8.5 12" fill="none" stroke="#F7D873" style="stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"></path></svg></button>
+<a class="nextlink" href="Wishes.dc.html" tabindex="-1" aria-hidden="true">Next chapter</a>
+</div>
+</div>
+
+<div class="under7" aria-hidden="true"></div>
+<div class="tflapwrap" aria-hidden="true"><div class="tflap"></div></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { tab: 'rsvp', dir: 1, attend: 'yes', count: 1, sent: false, sentName: '', sentAttend: 'yes', sentCount: 1, err: '', werr: '', wishes: [] };
+    this.root = null;
+    this.tweens = [];
+    this.tries = 0;
+    /* the baptism: December 13, 2026, 1:30 PM Manila time (UTC+8) */
+    this.target = Date.UTC(2026, 11, 13, 5, 30, 0);
+  }
+  componentDidMount() { this.initTrailSoon(); this.boot(); }
+  componentWillUnmount() { if (this.indRO) this.indRO.disconnect(); if (this.onMove && this.root) { this.root.removeEventListener('pointermove', this.onMove); this.root.removeEventListener('pointerleave', this.onLeave); this.root.removeEventListener('pointerdown', this.onDown); } clearTimeout(this.retry); clearInterval(this.tick); if (this.io) this.io.disconnect(); this.tweens.forEach(function (t) { t.kill(); }); }
+  reduced() { try { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; } }
+  countdown() {
+    var r = this.root; if (!r) return;
+    var ms = Math.max(0, this.target - Date.now()), sec = Math.floor(ms / 1000);
+    var pad = function (n) { return (n < 10 ? '0' : '') + n; };
+    var vals = { d: Math.floor(sec / 86400), h: pad(Math.floor(sec / 3600) % 24), m: pad(Math.floor(sec / 60) % 60), s: pad(sec % 60) };
+    ['d', 'h', 'm', 's'].forEach(function (k) { var el = r.querySelector('.cd-' + k); if (el && el.textContent !== String(vals[k])) el.textContent = vals[k]; });
+    if (ms === 0) { var c = r.querySelector('.cd-cap'); if (c) c.textContent = "It's Dylan's big day!"; }
+  }
+  moveIndicator(animate) {
+    var btn = this.root && this.root.querySelector('.t-' + this.state.tab), ind = this.root && this.root.querySelector('.ind');
+    if (!btn || !ind || !window.gsap) return;
+    /* wait until the tabs are really laid out (the board can mount while hidden), then keep the pill in sync if they resize */
+    if (!btn.offsetWidth) { var me = this; if ((this.indTries = (this.indTries || 0) + 1) < 60) setTimeout(function () { me.moveIndicator(false); }, 150); return; }
+    this.indTries = 0;
+    if (btn.parentNode && btn.parentNode.classList) btn.parentNode.classList.add('ready');
+    if (!this.indRO && window.ResizeObserver && btn.parentNode) { var me2 = this; this.indRO = new ResizeObserver(function () { me2.moveIndicator(false); }); this.indRO.observe(btn.parentNode); }
+    var p = { x: btn.offsetLeft, width: btn.offsetWidth };
+    if (animate && !this.reduced()) window.gsap.to(ind, Object.assign(p, { duration: 0.55, ease: 'expo.out' })); else window.gsap.set(ind, p);
+  }
+  afterTab() {
+    if (!this.root || !window.gsap) return;
+    this.moveIndicator(true);
+    if (this.reduced()) return;
+    window.gsap.fromTo(this.root.querySelectorAll('.panel .a'), { x: 22 * this.state.dir, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, stagger: 0.03, ease: 'expo.out', clearProps: 'transform' });
+    var sc = this.root.querySelector('.scroll'); if (sc) sc.scrollTop = 0;
+  }
+  pop() {
+    var self = this;
+    setTimeout(function () {
+      if (!self.root || !window.gsap || self.reduced()) return;
+      window.gsap.fromTo(self.root.querySelectorAll('.panel .a'), { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, stagger: 0.06, ease: 'expo.out', clearProps: 'transform' });
+    }, 30);
+  }
+  /* a sent wish flies from the button up into the sky and stays there as a new star */
+  flyWish(btn) {
+    var r = this.root, g = window.gsap; if (!r || !btn) return;
+    var rr = r.getBoundingClientRect(), b = btn.getBoundingClientRect(), sc = rr.width / r.offsetWidth || 1;
+    var x0 = (b.left - rr.left) / sc + b.width / 2, y0 = (b.top - rr.top) / sc;
+    var st = document.createElement('span'); st.className = 'wishstar'; st.setAttribute('aria-hidden', 'true');
+    r.querySelector('.scene').appendChild(st);
+    var tx = 40 + Math.random() * 330, ty = 24 + Math.random() * 110;
+    if (!g || this.reduced()) { st.style.transform = 'translate(' + tx + 'px,' + ty + 'px)'; return; }
+    g.set(st, { x: x0, y: y0, scale: 0.4 });
+    var tl = g.timeline();
+    tl.to(st, { x: tx, duration: 2.2, ease: 'sine.inOut' }, 0).to(st, { y: ty, duration: 2.2, ease: 'power2.out' }, 0).to(st, { scale: 1.6, duration: 0.5, ease: 'back.out(3)' }, 2.1).to(st, { scale: 0.9, duration: 0.6 }, 2.6);
+    this.tweens.push(g.to(st, { opacity: 0.55, duration: 1.4 + Math.random(), ease: 'sine.inOut', yoyo: true, repeat: -1, delay: 3.2 }));
+  }
+  boot() {
+    var self = this;
+    if (!this.root || !window.gsap) { if (this.tries++ < 25) this.retry = setTimeout(function () { self.boot(); }, 120); return; }
+    var g = window.gsap, r = this.root, t = this.tweens;
+    this.countdown(); this.tick = setInterval(function () { self.countdown(); }, 1000);
+    this.moveIndicator(false);
+    try { document.fonts.ready.then(function () { self.moveIndicator(false); }); } catch (e) {}
+    if (this.reduced()) return;
+    var q = function (s) { return r.querySelector(s); }, qa = function (s) { return r.querySelectorAll(s); };
+    var intro = g.timeline({ paused: true });
+    intro.from(qa('.ca'), { y: -12, opacity: 0, filter: 'blur(4px)', duration: 0.9, stagger: 0.12, ease: 'expo.out' }, 0.3).from(q('.sheet'), { yPercent: 100, duration: 1.1, ease: 'expo.out' }, 0.4)
+      .from(qa('.cdbox'), { y: 14, opacity: 0, scale: 0.9, duration: 0.7, stagger: 0.08, ease: 'back.out(1.8)' }, 0.75)
+      .from(qa('.tab, .ind'), { y: 12, opacity: 0, duration: 0.7, stagger: 0.06, ease: 'expo.out' }, 0.95)
+      .from(qa('.panel .a, .foot'), { y: 16, opacity: 0, duration: 0.8, stagger: 0.04, ease: 'expo.out' }, 1.05)
+      .call(function () { if (!self.alive) { self.alive = true; self.ambient(g, q, qa, t); } }, null, 0.2);
+    t.push(intro);
+    if ('IntersectionObserver' in window) {
+      this.io = new IntersectionObserver(function (es) { es.forEach(function (en) { if (en.isIntersecting) { if (!self.seen) { self.seen = true; intro.restart(); } } else self.seen = false; }); }, { threshold: 0.15 });
+      this.io.observe(r);
+    } else intro.play();
+  }
+  /* the shore at night: clouds drift, moonlight ripples, waves wash in, jars sway and glow, stars twinkle, wish-lights rise */
+  ambient(g, q, qa, t) {
+    var sf = q('.scenefit'), SW = sf ? sf.offsetWidth : 499, SH = sf ? sf.offsetHeight : 886, f = SH / 886;
+    t.push(g.to(q('.clouds'), { x: 24 * f, duration: 30, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    t.push(g.fromTo(q('.foam'), { x: 0, y: 0, opacity: 0.8 }, { x: -3 * f, y: 3 * f, opacity: 1, duration: 3.4, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    t.push(g.fromTo(q('.sea'), { y: 0 }, { y: 1.2 * f, duration: 3.4, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    // each jar swings on its own string, slightly out of step with the others
+    Array.prototype.forEach.call(qa('.jar'), function (j, i) {
+      var a = 2.5 + (i % 2);
+      g.set(j, { rotation: -a });
+      t.push(g.to(j, { rotation: a, duration: 2.6 + i * 0.45, ease: 'sine.inOut', yoyo: true, repeat: -1, delay: i * 0.3 }));
+    });
+    Array.prototype.forEach.call(qa('.jglow'), function (l, i) {
+      t.push(g.fromTo(l, { opacity: 0.55, scale: 0.88 }, { opacity: 1, scale: 1.15, duration: 1.7 + i * 0.35, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    });
+    t.push(g.fromTo(q('.moonglow'), { opacity: 0.75, scale: 0.96 }, { opacity: 1, scale: 1.05, duration: 5, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    Array.prototype.forEach.call(qa('.star'), function (s) {
+      t.push(g.fromTo(s, { opacity: 0.15, scale: 0.6 }, { opacity: 0.95, scale: 1.25, duration: 0.9 + Math.random() * 1.8, ease: 'sine.inOut', yoyo: true, repeat: -1, delay: Math.random() * 3 }));
+    });
+    var jp = [[0.2412, 0.2846], [0.0319, 0.349], [0.3353, 0.3282], [0.2264, 0.3671]].map(function (p) { return [p[0] * SW, p[1] * SH]; }), rnd = function (a, b) { return a + Math.random() * (b - a); };
+    Array.prototype.forEach.call(qa('.orb'), function (o, i) {
+      (function rise(first) {
+        var p = jp[Math.floor(Math.random() * jp.length)];
+        g.set(o, { x: p[0], y: p[1], opacity: 0, scale: rnd(0.6, 1.1) });
+        var tl = g.timeline({ delay: first ? i * 1.6 + 0.5 : rnd(0.5, 3), onComplete: function () { rise(false); } });
+        tl.to(o, { opacity: rnd(0.7, 1), duration: 0.8 })
+          .to(o, { y: p[1] - rnd(75, 125) * f, duration: rnd(5, 8), ease: 'sine.out' }, 0)
+          .to(o, { x: p[0] + rnd(-27, 48) * f, duration: rnd(5, 8), ease: 'sine.inOut' }, 0)
+          .to(o, { opacity: 0, duration: 1.6, ease: 'sine.in' }, '>-1.8');
+        t.push(tl);
+      })(true);
+    });
+  }
+  /* storybook page turn to the next chapter: curls from the bottom-right corner, revealing its scene */
+  goNext() {
+    var self = this, r = this.root;
+    if (!r) return;
+    var link = r.querySelector('.nextlink'), g = window.gsap;
+    if (!g || this.reduced()) { if (link) link.click(); return; }
+    if (this.turning) return;
+    this.turning = true;
+    var W = r.offsetWidth, H = r.offsetHeight;
+    var under = r.querySelector('.under7'), wrap = r.querySelector('.tflapwrap'), flap = r.querySelector('.tflap');
+    function clip(poly, c) {
+      var out = [];
+      for (var i = 0; i < poly.length; i++) {
+        var a = poly[i], b = poly[(i + 1) % poly.length];
+        var fa = a[0] + a[1] - c, fb = b[0] + b[1] - c, inA = fa >= 0, inB = fb >= 0;
+        if (inA) out.push(a);
+        if (inA !== inB) { var k = fa / (fa - fb); out.push([a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k]); }
+      }
+      return out;
+    }
+    function css(pts) {
+      if (pts.length < 3) return 'polygon(0px 0px, 0px 0px, 0px 0px)';
+      return 'polygon(' + pts.map(function (p) { return p[0].toFixed(1) + 'px ' + p[1].toFixed(1) + 'px'; }).join(', ') + ')';
+    }
+    var rect = [[0, 0], [W, 0], [W, H], [0, H]], st = { c: W + H };
+    function draw() {
+      var c = st.c, turned = clip(rect, c);
+      under.style.clipPath = css(turned);
+      flap.style.clipPath = css(turned.map(function (p) { return [c - p[1], c - p[0]]; }));
+    }
+    draw();
+    under.style.display = 'block';
+    wrap.style.display = 'block';
+    g.set(r, { pointerEvents: 'none' });
+    g.to(st, { c: -40, duration: 2.0, ease: 'power2.inOut', onUpdate: draw, onComplete: function () {
+      if (link) link.click();
+      setTimeout(function () { under.style.display = 'none'; wrap.style.display = 'none'; g.set(r, { pointerEvents: 'auto' }); self.turning = false; }, 800);
+    } });
+  }
+
+  val(sel) { var el = this.root && this.root.querySelector(sel); return el ? String(el.value || '').trim() : ''; }
+  /* bunny pointer trail: tiny leaves and golden sparkles drift down from the pointer */
+  initTrail() {
+    var self = this;
+    try { if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches || this.reduced()) return; } catch (e) { return; }
+    var r = this.root; if (!r || this.trailOn) return; this.trailOn = true;
+    var cols = ['#A8CF7E', '#6D8F62', '#94B85E', '#E9A7A7', '#C9C46A'], last = 0, n = 0, live = 0;
+    this.onTrail = function (ev) {
+      var g = window.gsap; if (!g) return;
+      var now = Date.now(); if (now - last < 28 || live > 46) return; last = now;
+      var rr = r.getBoundingClientRect(), sc = rr.width / r.offsetWidth || 1;
+      var x = (ev.clientX - rr.left) / sc, y = (ev.clientY - rr.top) / sc;
+      var leaf = (n++ % 3) !== 2, p = document.createElement('span');
+      p.className = 'trailp ' + (leaf ? 'tl' : 'ts');
+      if (leaf) p.style.background = cols[n % cols.length];
+      r.appendChild(p); live++;
+      g.set(p, { x: x + 18 + Math.random() * 16, y: y + 52, rotation: Math.random() * 360, scale: 0.6 + Math.random() * 0.6, opacity: 0.95 });
+      g.to(p, { x: '+=' + (Math.random() * 40 - 20), y: '+=' + (leaf ? 30 + Math.random() * 40 : 10 + Math.random() * 20), rotation: '+=' + (Math.random() * 220 - 110), scale: leaf ? 0.4 : 0.2, opacity: 0, duration: leaf ? 1.1 + Math.random() * 0.6 : 0.7 + Math.random() * 0.4, ease: 'sine.out', onComplete: function () { if (p.parentNode) p.parentNode.removeChild(p); live--; } });
+    };
+    /* the bunny follows the pointer, leaning into the direction it moves */
+    var bun = document.createElement('span'); bun.className = 'bunnycur'; bun.setAttribute('aria-hidden', 'true'); r.appendChild(bun); this.bun = bun;
+    var g0 = window.gsap, mx = g0.quickTo(bun, 'x', { duration: 0.18, ease: 'power3.out' }), my = g0.quickTo(bun, 'y', { duration: 0.18, ease: 'power3.out' }), rot = g0.quickTo(bun, 'rotation', { duration: 0.5, ease: 'power2.out' }), px = null;
+    this.onMove = function (ev) {
+      var rr = r.getBoundingClientRect(), sc = rr.width / r.offsetWidth || 1;
+      var x = (ev.clientX - rr.left) / sc, y = (ev.clientY - rr.top) / sc;
+      if (px === null) { g0.set(bun, { x: x, y: y }); }
+      mx(x); my(y); rot(px === null ? 0 : Math.max(-14, Math.min(14, (x - px) * 1.2))); px = x;
+      g0.to(bun, { opacity: 1, duration: 0.2, overwrite: 'auto' });
+      clearTimeout(self.rotT); self.rotT = setTimeout(function () { rot(0); }, 120);
+      self.onTrail(ev);
+    };
+    this.onLeave = function () { px = null; g0.to(bun, { opacity: 0, duration: 0.2, overwrite: 'auto' }); };
+    this.onDown = function () { g0.fromTo(bun, { scaleX: 1.12, scaleY: 0.86 }, { scaleX: 1, scaleY: 1, duration: 0.5, ease: 'elastic.out(1, 0.4)' }); };
+    r.addEventListener('pointermove', this.onMove);
+    r.addEventListener('pointerleave', this.onLeave);
+    r.addEventListener('pointerdown', this.onDown);
+  }
+  initTrailSoon() { var self = this, tries = 0; (function go() { if (self.root && window.gsap) self.initTrail(); else if (tries++ < 30) setTimeout(go, 150); })(); }
+
+  renderVals() {
+    var self = this, s = this.state;
+    function set(tb) { return function () { if (self.state.tab === tb) return; self.setState({ tab: tb, dir: tb === 'wish' ? 1 : -1, err: '', werr: '' }); setTimeout(function () { self.afterTab(); }, 30); }; }
+    var firstName = (s.sentName || '').split(' ')[0];
+    return {
+      setRoot: function (el) { self.root = el; },
+      goNext: function () { self.goNext(); },
+      tabRsvp: s.tab === 'rsvp' ? 'on' : '', tabWish: s.tab === 'wish' ? 'on' : '',
+      pressRsvp: s.tab === 'rsvp' ? 'true' : 'false', pressWish: s.tab === 'wish' ? 'true' : 'false',
+      showRsvp: set('rsvp'), showWish: set('wish'),
+      isRsvpForm: s.tab === 'rsvp' && !s.sent, isRsvpDone: s.tab === 'rsvp' && s.sent, isWish: s.tab === 'wish',
+      yesOn: s.attend === 'yes' ? 'on' : '', noOn: s.attend === 'no' ? 'on' : '',
+      yesPressed: s.attend === 'yes' ? 'true' : 'false', noPressed: s.attend === 'no' ? 'true' : 'false',
+      pickYes: function () { self.setState({ attend: 'yes' }); },
+      pickNo: function () { self.setState({ attend: 'no' }); },
+      showCount: s.attend === 'yes', count: s.count,
+      minCls: s.count <= 1 ? 'off' : '', maxCls: s.count >= 6 ? 'off' : '',
+      minus: function () { if (self.state.count > 1) self.setState({ count: self.state.count - 1 }); },
+      plus: function () { if (self.state.count < 6) self.setState({ count: self.state.count + 1 }); },
+      err: s.err, werr: s.werr,
+      sendRsvp: function () {
+        var name = self.val('.in-name');
+        if (!name) { self.setState({ err: 'Please add your name so we know who is coming.' }); var el = self.root.querySelector('.in-name'); if (el) el.focus(); return; }
+        /* TODO: save the reply (name, attend, count, note) once the RSVP destination is decided */
+        self.setState({ sent: true, err: '', sentName: name, sentAttend: self.state.attend, sentCount: self.state.count }); self.pop();
+      },
+      doneTitle: s.sentAttend === 'yes' ? 'See you there, ' + firstName + '!' : 'We\'ll miss you, ' + firstName,
+      doneText: s.sentAttend === 'yes' ? (s.sentCount > 1 ? 'We\'ve saved ' + s.sentCount + ' seats for your party. Dylan can\'t wait!' : 'We\'ve saved a seat for you. Dylan can\'t wait!') : 'Thank you for letting us know. Please leave Dylan a wish so you\'re still part of his day.',
+      editRsvp: function () { self.setState({ sent: false }); self.pop(); },
+      noWishes: s.wishes.length === 0, wishes: s.wishes,
+      sendWish: function (e) {
+        var name = self.val('.in-wname'), text = self.val('.in-wtext');
+        if (!text) { self.setState({ werr: 'Write a little wish first.' }); return; }
+        var btn = (e && e.currentTarget && e.currentTarget.getBoundingClientRect) ? e.currentTarget : self.root.querySelector('.panel .send');
+        self.flyWish(btn);
+        /* TODO: save the wish once the destination is decided */
+        self.setState({ werr: '', wishes: [{ name: name || 'A friend', text: text }].concat(self.state.wishes) });
+        var t1 = self.root.querySelector('.in-wtext'); if (t1) t1.value = '';
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

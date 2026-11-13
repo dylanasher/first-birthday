@@ -1,0 +1,109 @@
+/* DetailsMobile: ported from Ch2.dc.html */
+
+.dc-DetailsMobile{margin:0;background:#102A20}
+.dc-DetailsMobile .stage{position:relative;width:390px;height:844px;overflow:hidden;background:#A9D6DF;font-family:'Nunito',system-ui,sans-serif;color:#102A20}
+.dc-DetailsMobile .layer{position:absolute;inset:0;pointer-events:none}
+/* the painting is drawn 760px tall; scale it up so it fills the full 844px screen */
+.dc-DetailsMobile .scenefit{position:absolute;inset:0;transform:scale(1.1106);transform-origin:195px 0}
+.dc-DetailsMobile .scene{position:absolute;inset:0;transform-origin:64% 40%;will-change:transform}
+/* painted layers, all on the same canvas so they line up exactly */
+.dc-DetailsMobile .lyr{position:absolute;inset:0;background-size:auto 760px;background-position:41% 0;background-repeat:no-repeat;will-change:transform}
+.dc-DetailsMobile .far{background-image:url(/art/9ff413efc90b8d9aa2232fb97ef3b2fd.webp)}
+.dc-DetailsMobile .trunk{background-image:url(/art/e63248ac61b255880a418b902963d7aa.webp)}
+.dc-DetailsMobile .lva{background-image:url(/art/0a06b84a8b2824ef6369f00717801e42.webp);transform-origin:50% 0}
+.dc-DetailsMobile .lvb{background-image:url(/art/a1c09cf21a45538a9b091e259bb0707c.webp);transform-origin:50% 0}
+.dc-DetailsMobile .lvc{background-image:url(/art/f2d3d418be179c15558fe0f46df41dba.webp);transform-origin:50% 141px}
+.dc-DetailsMobile .flw{background-image:url(/art/c85cec7f7ff2834c55b9210bfdb7fec0.webp);transform-origin:50% 100%}
+/* church bell hanging in the belfry arch */
+.dc-DetailsMobile .bell{position:absolute;left:253.8px;top:249px;width:25px;height:35.6px;background:url(/art/78e1c483124e31bbd37d3b861cb7fa0f.png) center / 100% 100% no-repeat;transform-origin:50% 4%}
+.dc-DetailsMobile .leaf svg,.dc-DetailsMobile .bird svg{display:block;width:100%;height:100%;overflow:visible}
+/* leaf gust: arrives covering the screen, then blows away to reveal the chapter */
+.dc-DetailsMobile .gust{position:absolute;inset:0;z-index:60;pointer-events:none;overflow:hidden}
+.dc-DetailsMobile .gust-bg{position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 50%,#3E6B45 0%,#264D35 45%,#102A20 100%)}
+.dc-DetailsMobile .gleaf{position:absolute;left:0;top:0;opacity:0;filter:drop-shadow(0 1px 1px rgba(16,42,32,.3))}
+.dc-DetailsMobile .gvein{fill:none;stroke:rgba(38,60,30,.55);stroke-width:.7;stroke-linecap:round}
+.dc-DetailsMobile .gleaf svg{display:block;width:100%;height:100%}
+/* page turn to Chapter 3: this page curls away, revealing the seaside town */
+.dc-DetailsMobile .nextlink{position:absolute;left:0;top:0;width:1px;height:1px;opacity:0;pointer-events:none}
+.dc-DetailsMobile .under3{position:absolute;inset:0;z-index:70;pointer-events:none;display:none;background-color:#8EC6E6;background-repeat:no-repeat;
+background-image:linear-gradient(to bottom,rgba(16,42,32,.62) 0%,rgba(16,42,32,.25) 12%,rgba(16,42,32,0) 22%),url(/art/014446d475ba3dda05bc0e8e6c885e2b.webp),url(/art/8ee1b855de1fb8ecb9a37badef302a5e.webp),url(/art/2bb637fac4c16bb39c3f3c009ad7d4ff.webp);
+background-size:100% 100%,auto 844px,auto 844px,auto 844px;background-position:0 0,26% 0,26% 0,26% 0}
+.dc-DetailsMobile .tflapwrap{position:absolute;inset:0;z-index:71;pointer-events:none;display:none;filter:drop-shadow(-8px -8px 16px rgba(16,42,32,.45))}
+.dc-DetailsMobile .tflap{position:absolute;inset:0;background:linear-gradient(135deg,#E9DCBC 0%,#F8EFD9 55%,#E0D0A8 100%)}
+/* storybook page turn: Chapter 1's page curls away from the bottom-right corner */
+.dc-DetailsMobile .page{position:absolute;inset:0;z-index:61;pointer-events:none;display:none}
+.dc-DetailsMobile .pfront{position:absolute;inset:0;background:url(/art/forest-awake.webp) 52% 50% / cover no-repeat}
+.dc-DetailsMobile .pfront::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(16,42,32,.85) 0%,rgba(16,42,32,.45) 55%,rgba(16,42,32,.15) 100%)}
+.dc-DetailsMobile .pflapwrap{position:absolute;inset:0;filter:drop-shadow(-8px -8px 16px rgba(16,42,32,.4))}
+.dc-DetailsMobile .pflap{position:absolute;inset:0;background:linear-gradient(135deg,#E9DCBC 0%,#F8EFD9 55%,#E0D0A8 100%)}
+/* falling leaves */
+.dc-DetailsMobile .leaf{position:absolute;left:0;top:0;width:11px;height:11px;opacity:0;filter:drop-shadow(0 1px 1px rgba(16,42,32,.25))}
+.dc-DetailsMobile .vein{fill:none;stroke:rgba(38,60,30,.55);stroke-width:.7;stroke-linecap:round}
+/* painted birds */
+.dc-DetailsMobile .bird{position:absolute;left:0;top:0;width:20px;height:11px;filter:blur(.2px)}
+.dc-DetailsMobile .wu{animation:DetailsMobile-flapA .34s steps(1) infinite}
+.dc-DetailsMobile .wd{animation:DetailsMobile-flapB .34s steps(1) infinite}
+@keyframes DetailsMobile-flapA{0%{opacity:1}50%{opacity:0}}
+@keyframes DetailsMobile-flapB{0%{opacity:0}50%{opacity:1}}
+.dc-DetailsMobile .topshade{background:linear-gradient(to bottom,rgba(16,42,32,.7) 0%,rgba(16,42,32,.3) 16%,rgba(16,42,32,0) 26%)}
+.dc-DetailsMobile .script{font-family:'Pinyon Script',cursive;font-weight:400}
+.dc-DetailsMobile .display{font-family:'IM Fell English',Georgia,serif;font-weight:400}
+.dc-DetailsMobile .lift{text-shadow:0 2px 12px rgba(16,42,32,.8),0 0 2px rgba(16,42,32,.6)}
+.dc-DetailsMobile .chtitle{position:absolute;left:0;right:0;top:22px;display:flex;flex-direction:column;align-items:center;text-align:center;color:#F5EBD5}
+
+/* day timeline (glass pill) */
+.dc-DetailsMobile .tline{position:absolute;left:20px;right:20px;top:160px;height:54px;border-radius:18px;background:rgba(16,42,32,.42);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:inset 0 0 0 1px rgba(245,235,213,.22);display:flex;align-items:center;padding:0 14px}
+.dc-DetailsMobile .track{position:absolute;left:68px;right:68px;top:11px;height:2px;background:rgba(245,235,213,.25);border-radius:2px}
+.dc-DetailsMobile .trackfill{position:absolute;left:0;top:0;bottom:0;width:100%;background:#F5D68A;border-radius:2px;transform-origin:0 50%}
+.dc-DetailsMobile .step{position:relative;flex:1;display:flex;flex-direction:column;align-items:center;gap:4px}
+.dc-DetailsMobile .sdot{width:12px;height:12px;border-radius:50%;background:#F5D68A;box-shadow:0 0 0 3px rgba(245,214,138,.25),0 0 12px rgba(245,214,138,.6)}
+.dc-DetailsMobile .stime{margin:0;font-size:12px;font-weight:700;color:#F5EBD5;line-height:1}
+.dc-DetailsMobile .slbl{margin:0;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#B0C87C;line-height:1}
+
+/* frosted storybook sheet */
+.dc-DetailsMobile .sheet{position:absolute;left:0;right:0;bottom:0;height:476px;display:flex;flex-direction:column;background:rgba(245,235,213,.6);backdrop-filter:blur(7px) saturate(1.1);-webkit-backdrop-filter:blur(7px) saturate(1.1);clip-path:path('M0 14 C30 6 60 18 95 12 C130 6 160 2 195 8 C230 14 262 4 298 8 C330 12 360 4 390 11 L390 476 L0 476 Z')}
+.dc-DetailsMobile .sheet::before{content:'';position:absolute;left:0;right:0;top:0;height:40px;background:linear-gradient(to bottom,rgba(255,250,235,.5),rgba(255,250,235,0));pointer-events:none}
+.dc-DetailsMobile .tabs{position:relative;display:flex;gap:6px;padding:22px 16px 10px;flex:none}
+.dc-DetailsMobile .ind{position:absolute;left:0;top:22px;height:44px;width:110px;border-radius:999px;background:#264D35;box-shadow:0 6px 16px rgba(16,42,32,.28)}
+.dc-DetailsMobile .tab{position:relative;z-index:1;flex:1;display:flex;align-items:center;justify-content:center;gap:6px;min-height:44px;border-radius:999px;border:1px solid rgba(38,77,53,.22);background:transparent;color:#264D35;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:color .3s ease,border-color .3s ease}
+.dc-DetailsMobile .tab.on{color:#F5EBD5;border-color:transparent}
+.dc-DetailsMobile .tab:focus-visible{outline:2px solid #C9A24E;outline-offset:2px}
+.dc-DetailsMobile .scroll{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;padding:4px 22px 18px;-webkit-overflow-scrolling:touch}
+.dc-DetailsMobile .eyebrow{margin:0;font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#5E4A36}
+.dc-DetailsMobile .venue{margin:4px 0 0;font-family:'IM Fell English',Georgia,serif;font-size:27px;line-height:1.12;color:#102A20}
+.dc-DetailsMobile .sub{margin:2px 0 0;font-size:13px;color:#2F4B2C;font-style:italic}
+.dc-DetailsMobile .row{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed rgba(94,74,54,.3)}
+.dc-DetailsMobile .ico{flex:none;width:34px;height:34px;border-radius:50%;background:rgba(245,235,213,.75);box-shadow:inset 0 0 0 1px rgba(86,119,71,.3);display:flex;align-items:center;justify-content:center}
+.dc-DetailsMobile .lbl{margin:0;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#5E4A36}
+.dc-DetailsMobile .val{margin:2px 0 0;font-size:15px;line-height:1.45;color:#102A20}
+.dc-DetailsMobile .maps{display:flex;gap:10px;margin-top:14px}
+.dc-DetailsMobile .btn{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;border-radius:999px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;text-decoration:none;transition:transform .2s ease,box-shadow .2s ease,background .2s ease}
+.dc-DetailsMobile .btn:hover{transform:translateY(-2px)}
+.dc-DetailsMobile .btn.primary{background:#264D35;color:#F5EBD5;box-shadow:0 6px 14px rgba(16,42,32,.25)}
+.dc-DetailsMobile .btn.primary:hover{background:#1B3A27;box-shadow:0 10px 20px rgba(16,42,32,.3)}
+.dc-DetailsMobile .btn.secondary{border:1.5px solid #264D35;color:#264D35;background:rgba(245,235,213,.5)}
+.dc-DetailsMobile .btn:focus-visible{outline:2px solid #C9A24E;outline-offset:3px}
+.dc-DetailsMobile .note{position:relative;overflow:hidden;margin-top:16px;padding:14px 16px;border-radius:16px;background:rgba(245,214,138,.45);border:1px solid rgba(201,162,78,.5)}
+.dc-DetailsMobile .note p{position:relative;margin:0;font-size:14px;line-height:1.55;color:#102A20}
+.dc-DetailsMobile .shine{position:absolute;top:0;bottom:0;left:-40%;width:35%;background:linear-gradient(100deg,rgba(255,255,255,0),rgba(255,255,255,.55),rgba(255,255,255,0));transform:skewX(-18deg)}
+.dc-DetailsMobile .foot{flex:none;display:flex;align-items:center;justify-content:space-between;padding:10px 16px 16px;border-top:1px solid rgba(94,74,54,.18)}
+.dc-DetailsMobile .dot{width:6px;height:6px;border-radius:50%;background:rgba(38,77,53,.3)}
+.dc-DetailsMobile .dot.on{width:20px;border-radius:3px;background:#264D35}
+.dc-DetailsMobile .next{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border:0;border-radius:999px;background:#264D35;color:#F5EBD5;font-family:'IM Fell English',Georgia,serif;font-size:16px;cursor:pointer;transition:transform .2s ease}
+.dc-DetailsMobile .next:hover{transform:translateX(3px)}
+.dc-DetailsMobile .next:focus-visible{outline:2px solid #C9A24E;outline-offset:3px}
+/* storybook scrollbar: a slim vine line with a glowing pill */
+.dc-DetailsMobile .scroll::-webkit-scrollbar{width:10px;height:10px}
+.dc-DetailsMobile .scroll::-webkit-scrollbar-track{margin:14px 0;background:linear-gradient(to right,transparent 4px,rgba(47,91,58,.22) 4px,rgba(47,91,58,.22) 6px,transparent 6px)}
+.dc-DetailsMobile .scroll::-webkit-scrollbar-thumb{border-radius:999px;border:2px solid transparent;background:linear-gradient(180deg,#C9A24E,#2F5B3A) padding-box;box-shadow:inset 0 0 0 1px rgba(255,250,240,.55)}
+.dc-DetailsMobile .scroll::-webkit-scrollbar-thumb:hover{border-width:1px}
+.dc-DetailsMobile .scroll::-webkit-scrollbar-corner{background:transparent}
+@supports not selector(::-webkit-scrollbar){.dc-DetailsMobile .scroll{scrollbar-width:thin;scrollbar-color:#2F5B3A transparent}}
+/* bunny pointer + a trail of tiny leaves and sparkles (mouse/trackpad only) */
+@media (hover:hover) and (pointer:fine){.dc-DetailsMobile .stage,.dc-DetailsMobile .stage *{cursor:none !important}.dc-DetailsMobile .stage input,.dc-DetailsMobile .stage textarea{cursor:text !important}}
+.dc-DetailsMobile .bunnycur{position:absolute;left:0;top:0;width:52px;height:73px;margin:-15px 0 0 -1px;background:url(/art/dbadbf2c44d41f6a5e3b3e01c5391ca4.webp) 0 0/100% 100% no-repeat;pointer-events:none;z-index:96;opacity:0;transform-origin:50% 30%;filter:drop-shadow(0 4px 6px rgba(20,30,20,.3));will-change:transform}
+.dc-DetailsMobile .trailp{position:absolute;left:0;top:0;pointer-events:none;z-index:95;will-change:transform,opacity}
+.dc-DetailsMobile .trailp.tl{width:9px;height:9px;border-radius:80% 0 80% 0}
+.dc-DetailsMobile .trailp.ts{width:6px;height:6px;border-radius:50%;background:#FFF3C4;box-shadow:0 0 8px 3px rgba(247,216,115,.75)}
+/* until the sliding pill is measured, the selected tab paints its own fill so it always reads correctly */
+.dc-DetailsMobile .tabs:not(.ready) .tab.on{background:#264D35}

@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Dylan — Opening and Welcome</title>
+<script src="./support.js"></script>
+<script src="/_blob/17d4179414200efbabee22c7746b97ba"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&amp;family=Nunito:wght@400;600;700&amp;family=Pinyon+Script&amp;display=swap">
+<style>
+body{margin:0;background:#102A20}
+.stage{position:relative;width:100vw;height:100vh;height:100dvh;container-type:size;overflow:hidden;background:#102A20;font-family:'Nunito',system-ui,sans-serif;color:#F5EBD5}
+.layer{position:absolute;inset:0;pointer-events:none}
+/* responsive: .ab has exactly the painting's footprint (1705x923, set to "fill" the screen, 52% across), so everything placed
+   inside it in % stays pinned to the same spot in the painting (Dylan sits at 51.83% across, 61.61% down) on any phone */
+.ab{position:absolute;--aw:max(100cqw, calc(100cqh * 1705 / 923));--ah:max(100cqh, calc(100cqw * 923 / 1705));width:var(--aw);height:var(--ah);
+left:calc((100cqw - var(--aw)) * 0.52);top:calc((100cqh - var(--ah)) * 0.5)}
+.cam,.idle{position:absolute;inset:0;will-change:transform}
+.paint{background-image:url(/_blob/fa7cc6e093f67a92d135a726963602be);background-size:cover;background-position:52% 50%;background-repeat:no-repeat}
+.awake{background-image:url(/_blob/3f084f2a66b4f2eff1b82c339c615f07);background-size:100% 100%;background-repeat:no-repeat;opacity:0;
+-webkit-mask-image:radial-gradient(10.26% 16.59% at 51.83% 61.61%,#000 55%,transparent 100%);mask-image:radial-gradient(10.26% 16.59% at 51.83% 61.61%,#000 55%,transparent 100%)}
+
+/* depth planes: masked copies of the painting */
+.farCam{transform-origin:50% 50%}
+.canopyCam{transform-origin:50% 0%}
+.canopy{-webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 12%,transparent 26%);mask-image:linear-gradient(to bottom,#000 0%,#000 12%,transparent 26%);filter:brightness(.93) saturate(1.05)}
+.foreLCam{transform-origin:0% 100%}
+.foreRCam{transform-origin:100% 100%}
+.foreL{-webkit-mask-image:radial-gradient(75% 48% at 0% 100%,#000 48%,transparent 78%);mask-image:radial-gradient(75% 48% at 0% 100%,#000 48%,transparent 78%);filter:brightness(.86) saturate(1.08);transform-origin:0% 100%}
+.foreR{-webkit-mask-image:radial-gradient(80% 50% at 100% 100%,#000 48%,transparent 78%);mask-image:radial-gradient(80% 50% at 100% 100%,#000 48%,transparent 78%);filter:brightness(.86) saturate(1.08);transform-origin:100% 100%}
+
+/* atmosphere */
+.halo{position:absolute;left:51.83%;top:61.61%;width:19.24%;height:28.44%;margin:-7.70% 0 0 -9.62%;border-radius:50%;background:radial-gradient(closest-side,rgba(230,245,170,.45),rgba(176,200,124,.18) 55%,rgba(176,200,124,0));mix-blend-mode:screen;filter:blur(4px)}
+.mistA{position:absolute;left:31.30%;top:71.09%;width:33.35%;height:23.70%;border-radius:50%;background:radial-gradient(closest-side,rgba(169,214,223,.22),rgba(169,214,223,0));filter:blur(6px)}
+.mote{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(255,246,220,1),rgba(230,240,170,.55) 45%,rgba(230,240,170,0) 72%)}
+.bfly{position:absolute;width:12px;height:12px}
+.ffh{position:absolute;left:-9px;top:-9px;width:30px;height:30px;border-radius:50%;background:radial-gradient(circle,rgba(255,244,170,.95) 0,rgba(214,240,120,.55) 30%,rgba(200,235,110,0) 70%);mix-blend-mode:screen}
+.ffc{position:absolute;left:3px;top:3px;width:6px;height:6px;border-radius:50%;background:#FFFBD6;box-shadow:0 0 6px 2px rgba(240,250,150,.9)}
+
+.bin{position:absolute;inset:0;filter:drop-shadow(0 2px 3px rgba(16,42,32,.35))}
+.bin svg{width:100%;height:100%;display:block;overflow:visible}
+.wing{transform-box:fill-box}
+.wingL{transform-origin:100% 50%}
+.wingR{transform-origin:0% 50%}
+.topshade{background:linear-gradient(to bottom,rgba(16,42,32,.86) 0%,rgba(16,42,32,.62) 22%,rgba(16,42,32,0) 40%)}
+.botshade{background:linear-gradient(to top,rgba(16,42,32,.7) 0%,rgba(16,42,32,0) 16%)}
+.shade2{background:linear-gradient(to bottom,rgba(16,42,32,.92) 0%,rgba(16,42,32,.8) 50%,rgba(16,42,32,.3) 66%,rgba(16,42,32,0) 74%);opacity:0}
+.glow{position:absolute;left:51.83%;top:59.24%;width:23.09%;aspect-ratio:1;margin:-11.55% 0 0 -11.55%;border-radius:50%;background:radial-gradient(circle,rgba(240,250,200,.6),rgba(176,200,124,.22) 40%,rgba(176,200,124,0) 70%);opacity:0;mix-blend-mode:screen;pointer-events:none}
+
+/* type + controls */
+.script{font-family:'Pinyon Script',cursive;font-weight:400}
+.display{font-family:'IM Fell English',Georgia,serif;font-weight:400}
+.lift{text-shadow:0 2px 14px rgba(16,42,32,.85),0 0 2px rgba(16,42,32,.6)}
+.magic{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:52px;padding:0 30px;border-radius:999px;border:1px solid rgba(245,214,138,.7);background:rgba(16,42,32,.55);color:#F5EBD5;font-family:'IM Fell English',Georgia,serif;font-size:19px;letter-spacing:.04em;cursor:pointer;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);box-shadow:0 0 22px rgba(245,214,138,.35),inset 0 0 12px rgba(245,214,138,.12)}
+.magic:hover{background:rgba(38,77,53,.8)}
+.magic:focus-visible{outline:2px solid #F5D68A;outline-offset:4px}
+.ghost{min-height:44px;padding:0 16px;border:1px solid rgba(245,235,213,.35);background:rgba(16,42,32,.45);color:#F5EBD5;font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;letter-spacing:.04em;cursor:pointer;border-radius:999px}
+.ghost:hover{background:rgba(38,77,53,.7)}
+.ghost:focus-visible{outline:2px solid #F5D68A}
+/* narrow phones: keep the welcome line and the top bar on one line */
+@container (max-width: 380px){
+.welcome > p.script:first-of-type{font-size:31px !important}
+.welcome .ghost{padding:0 10px;font-size:11px;white-space:nowrap}
+.welcome .wi p{white-space:nowrap;letter-spacing:.14em !important}
+}
+/* short phones (iPhone SE and smaller): tighter title and welcome text */
+@container (max-height: 720px){
+.intro{top:30px !important}
+.intro h1{font-size:52px !important}
+.welcome{padding-top:62px !important}
+.welcome h2{font-size:54px !important}
+.welcome p[style*="max-width"]{font-size:14px !important;line-height:1.48 !important}
+.openwrap{bottom:26px !important}
+}
+.intro{position:absolute;left:0;right:0;top:54px;display:flex;flex-direction:column;align-items:center;text-align:center}
+.openwrap{position:absolute;left:0;right:0;bottom:40px;display:flex;justify-content:center}
+.welcome{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;text-align:center;padding:84px 32px 0;box-sizing:border-box;visibility:hidden}
+.wi{opacity:0}
+/* safety net: once the welcome has arrived, every line of it stays visible even if the page re-renders a line */
+.ph-welcome .welcome .wi{opacity:1 !important;filter:none !important;transform:none !important}
+.nextlink{position:absolute;left:0;top:0;width:1px;height:1px;opacity:0;pointer-events:none}
+/* storybook page turn: this page curls away from the bottom-right corner, revealing Chapter 2's countryside */
+.under{position:absolute;inset:0;z-index:70;pointer-events:none;display:none;background-color:#A9D6DF;background-repeat:no-repeat;
+background-image:linear-gradient(to bottom,rgba(16,42,32,.7) 0%,rgba(16,42,32,.3) 16%,rgba(16,42,32,0) 26%),url(/_blob/cc1e599ddd429adffeca6f117b9235b6);
+background-size:100% 100%,cover;background-position:0 0,35% 12%}
+.pflapwrap{position:absolute;inset:0;z-index:71;pointer-events:none;display:none;filter:drop-shadow(-8px -8px 16px rgba(16,42,32,.45))}
+.pflap{position:absolute;inset:0;background:linear-gradient(135deg,#E9DCBC 0%,#F8EFD9 55%,#E0D0A8 100%)}
+.dot{width:6px;height:6px;border-radius:50%;background:rgba(245,235,213,.4)}
+.dot.on{width:20px;border-radius:3px;background:#F5D68A}
+
+/* fallback when the animation library is unavailable */
+.nogsap.ph-welcome .intro,.nogsap.ph-welcome .openwrap{visibility:hidden}
+.nogsap.ph-welcome .welcome{visibility:visible}
+.nogsap.ph-welcome .wi,.nogsap.ph-welcome .shade2,.nogsap.ph-welcome .awake{opacity:1}
+/* bunny pointer + a trail of tiny leaves and sparkles (mouse/trackpad only) */
+@media (hover:hover) and (pointer:fine){.stage,.stage *{cursor:none !important}.stage input,.stage textarea{cursor:text !important}}
+.bunnycur{position:absolute;left:0;top:0;width:52px;height:73px;margin:-15px 0 0 -1px;background:url(/_blob/dbadbf2c44d41f6a5e3b3e01c5391ca4) 0 0/100% 100% no-repeat;pointer-events:none;z-index:96;opacity:0;transform-origin:50% 30%;filter:drop-shadow(0 4px 6px rgba(20,30,20,.3));will-change:transform}
+.trailp{position:absolute;left:0;top:0;pointer-events:none;z-index:95;will-change:transform,opacity}
+.trailp.tl{width:9px;height:9px;border-radius:80% 0 80% 0}
+.trailp.ts{width:6px;height:6px;border-radius:50%;background:#FFF3C4;box-shadow:0 0 8px 3px rgba(247,216,115,.75)}
+</style>
+</helmet>
+
+<div class="stage ph-{{phase}} {{engine}}" ref="{{setRoot}}">
+
+<!-- L0 painting: sleeping frame + awake frame (crossfaded only around Dylan) -->
+<div class="layer"><div class="cam farCam">
+<div class="idle far paint"></div>
+<div class="ab">
+<div class="layer awake"></div>
+<div class="halo"></div>
+</div>
+</div></div>
+
+<!-- L1 atmosphere -->
+<div class="layer mist" aria-hidden="true"><div class="ab"><div class="mistA"></div></div></div>
+<div class="layer motes" aria-hidden="true"><div class="ab">
+<sc-for list="{{motes}}" as="m" hint-placeholder-count="16">
+<span class="mote" style="{{m.style}}"></span>
+</sc-for>
+</div></div>
+
+<!-- L2 foreground planes -->
+<div class="layer" aria-hidden="true"><div class="cam canopyCam"><div class="idle canopy paint"></div></div></div>
+<div class="layer" aria-hidden="true"><div class="cam foreLCam"><div class="idle foreL paint"></div></div></div>
+<div class="layer" aria-hidden="true"><div class="cam foreRCam"><div class="idle foreR paint"></div></div></div>
+
+<!-- L3 fireflies that gather around Dylan when he wakes -->
+<div class="layer fireflies" aria-hidden="true"><div class="ab">
+<sc-for list="{{fireflies}}" as="b" hint-placeholder-count="7">
+<span class="bfly" style="{{b.style}}">
+<span class="bin"><span class="ffh"></span><span class="ffc"></span></span>
+</span>
+</sc-for>
+</div></div>
+
+<div class="layer"><div class="ab"><div class="glow"></div></div></div>
+<div class="layer topshade"></div>
+<div class="layer botshade"></div>
+<div class="layer shade2"></div>
+
+<!-- UI: opening title (top) + button (below Dylan) -->
+<div class="intro">
+<p class="script lift" style="margin: 0; font-size: 40px; line-height: 1.15; color: {{accent}}">You're Invited</p>
+<h1 class="display lift" style="margin: 4px 0 0; font-size: 62px; line-height: .95; color: #F5EBD5; letter-spacing: .01em">Dylan's</h1>
+<p class="display lift" style="margin: 6px 0 0; font-size: 22px; font-style: italic; color: #F5EBD5">Baptism &amp; First Birthday</p>
+<div aria-hidden="true" style="display: flex; align-items: center; gap: 10px; margin-top: 12px">
+<span style="width: 44px; height: 1px; background: rgba(245,214,138,.7)"></span>
+<p class="lift" style="margin: 0; font-size: 12px; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; color: #F5D68A">December 13, 2026</p>
+<span style="width: 44px; height: 1px; background: rgba(245,214,138,.7)"></span>
+</div>
+</div>
+<div class="openwrap">
+<button class="magic openbtn" type="button" onClick="{{open}}">
+<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1 L9.6 6.4 L15 8 L9.6 9.6 L8 15 L6.4 9.6 L1 8 L6.4 6.4 Z" fill="#F5D68A"></path></svg>
+Open Invitation
+</button>
+</div>
+
+<!-- UI: welcome scene (Chapter 1, second state) -->
+<div class="welcome">
+<div class="wi" style="display: flex; width: 100%; justify-content: space-between; align-items: center; position: absolute; top: 14px; left: 0; padding: 0 12px 0 18px; box-sizing: border-box">
+<div style="display: flex; flex-direction: column; gap: 6px; align-items: flex-start">
+<div aria-hidden="true" style="display: flex; gap: 6px; align-items: center"><span class="dot on"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+<p style="margin: 0; font-size: 10.5px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: #B0C87C">Chapter 1 of 8 · Welcome</p>
+</div>
+<button class="ghost" type="button" onClick="{{replay}}">Replay opening</button>
+</div>
+<p class="script wi" style="margin: 0; font-size: 36px; line-height: 1.15; color: {{accent}}">Welcome, dear friends</p>
+<h2 class="display wi" style="margin: 2px 0 0; font-size: 66px; line-height: .95; color: #F5EBD5">Dylan</h2>
+<p class="wi" style="margin: 8px 0 0; font-size: 12px; font-weight: 700; letter-spacing: .26em; text-transform: uppercase; color: #B0C87C">Baptism &amp; First Birthday</p>
+<p class="wi" style="margin: 16px 0 0; max-width: 316px; font-size: 15px; line-height: 1.58; color: #F5EBD5">A year ago, a tiny explorer wandered into our lives and filled every day with wonder. Please join us as Dylan is welcomed into the faith and celebrates his very first birthday.</p>
+<p class="script wi" style="margin: 12px 0 0; font-size: 26px; color: #F5D68A">With all our love,</p>
+<p class="display wi" style="margin: 0; font-size: 20px; color: #F5EBD5">Dave &amp; Alyana</p>
+<button class="magic wi" type="button" onClick="{{goNext}}" style="margin-top: 18px">
+Continue the journey
+<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8 H12 M8.5 4 L12.5 8 L8.5 12" fill="none" stroke="#F5D68A" style="stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"></path></svg>
+</button>
+<a class="nextlink" href="Ch2.dc.html" tabindex="-1" aria-hidden="true">Chapter 2</a>
+</div>
+
+
+<!-- page turn: Chapter 2 underneath + the curling back of this page -->
+<div class="under" aria-hidden="true"></div>
+<div class="pflapwrap" aria-hidden="true"><div class="pflap"></div></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#F5D68A","options":["#F5D68A","#F5EBD5","#B0C87C"]},"reducedMotion":{"editor":"boolean","default":false},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { phase: 'idle', hasGsap: true };
+    this.root = null;
+    this.idleTweens = [];
+    this.tl = null;
+    this.tries = 0;
+    this.retry = null;
+  }
+  componentDidMount() { this.initTrailSoon(); this.boot(); }
+  componentWillUnmount() { if (this.onMove && this.root) { this.root.removeEventListener('pointermove', this.onMove); this.root.removeEventListener('pointerleave', this.onLeave); this.root.removeEventListener('pointerdown', this.onDown); }
+    clearTimeout(this.retry);
+    this.idleTweens.forEach(function (t) { t.kill(); });
+    if (this.tl) this.tl.kill();
+  }
+  reduced() {
+    if (this.props.reducedMotion) return true;
+    try { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; }
+  }
+  boot() {
+    var self = this;
+    if (!this.root || !window.gsap) {
+      if (this.tries++ < 25) { this.retry = setTimeout(function () { self.boot(); }, 120); }
+      else { this.setState({ hasGsap: false }); }
+      return;
+    }
+    this.startIdle();
+    this.buildOpen();
+  }
+  q(sel) { return this.root.querySelector(sel); }
+  /* distances were tuned on an 844px-tall phone; scale them to this screen */
+  fk() { return this.root && this.root.offsetHeight ? this.root.offsetHeight / 844 : 1; }
+  qa(sel) { return Array.prototype.slice.call(this.root.querySelectorAll(sel)); }
+
+  /* sleeping forest: soft light on Dylan breathes, foliage sways, motes and fireflies drift */
+  startIdle() {
+    var g = window.gsap, t = this.idleTweens;
+    if (this.reduced()) return;
+    t.push(g.to(this.q('.far'), { scale: 1.03, duration: 14, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    t.push(g.to(this.q('.foreL'), { rotation: 0.6, scale: 1.01, duration: 6.5, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    t.push(g.to(this.q('.foreR'), { rotation: -0.6, scale: 1.01, duration: 7.8, ease: 'sine.inOut', yoyo: true, repeat: -1, delay: -2 }));
+    t.push(g.to(this.q('.canopy'), { y: 3, scale: 1.008, duration: 8.5, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    t.push(g.fromTo(this.q('.halo'), { opacity: 0.55, scale: 0.97 }, { opacity: 0.95, scale: 1.04, duration: 3.6, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    t.push(g.to(this.q('.mistA'), { x: 70 * this.fk(), duration: 20, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    this.qa('.mote').forEach(function (m) {
+      t.push(g.to(m, { x: 'random(-30, 30)', y: 'random(-40, 16)', opacity: 'random(0.2, 1)', duration: 'random(5, 11)', ease: 'sine.inOut', yoyo: true, repeat: -1, repeatRefresh: true }));
+    });
+    this.qa('.bin').forEach(function (b, i) {
+      t.push(g.fromTo(b.querySelector('.ffh'), { opacity: 0.15, scale: 0.6 }, { opacity: 1, scale: 1.2, duration: 'random(0.7, 1.6)', ease: 'sine.inOut', yoyo: true, repeat: -1, repeatRefresh: true, delay: i * 0.37 }));
+      t.push(g.fromTo(b.querySelector('.ffc'), { opacity: 0.35 }, { opacity: 1, duration: 'random(0.5, 1.2)', ease: 'sine.inOut', yoyo: true, repeat: -1, repeatRefresh: true, delay: i * 0.37 }));
+      t.push(g.to(b, { x: 'random(-40, 40)', y: 'random(-40, 30)', duration: 'random(3.5, 6)', ease: 'sine.inOut', yoyo: true, repeat: -1, repeatRefresh: true }));
+    });
+    t.push(g.to(this.q('.openbtn'), { boxShadow: '0 0 40px rgba(245,214,138,.7), inset 0 0 16px rgba(245,214,138,.25)', duration: 1.6, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+  }
+
+  /* wake-up: forest stirs, fireflies gather, Dylan opens his eyes and smiles, camera settles into Welcome */
+  buildOpen() {
+    var g = window.gsap, self = this;
+    var items = this.qa('.wi');
+    var flies = this.qa('.bfly');
+    var targets = [[10, 80], [-30, 130], [0, -80]];
+    var tl = g.timeline({ paused: true,
+      onComplete: function () { self.setState({ phase: 'welcome' }); },
+      onReverseComplete: function () { self.setState({ phase: 'idle' }); } });
+    if (this.reduced()) {
+      tl.to([this.q('.intro'), this.q('.openwrap')], { autoAlpha: 0, duration: 0.35 })
+        .to(this.q('.awake'), { opacity: 1, duration: 0.35 }, '<')
+        .set(this.q('.welcome'), { visibility: 'visible' })
+        .to(this.q('.shade2'), { opacity: 1, duration: 0.35 }, '<')
+        .to(items, { opacity: 1, duration: 0.35 }, '<');
+    } else {
+      tl.set(this.root, { pointerEvents: 'none' })
+        // 1. the invitation text steps aside, the forest stirs
+        .to(this.q('.intro'), { y: -24, autoAlpha: 0, filter: 'blur(6px)', duration: 0.8, ease: 'power2.in' }, 0)
+        .to(this.q('.openwrap'), { y: 24, autoAlpha: 0, duration: 0.6, ease: 'power2.in' }, 0)
+        .to(this.q('.topshade'), { opacity: 0.4, duration: 0.9 }, 0.1)
+        .to(this.q('.foreLCam'), { xPercent: -4, rotation: -1.2, duration: 1.2, ease: 'sine.inOut' }, 0.1)
+        .to(this.q('.foreRCam'), { xPercent: 4, rotation: 1.2, duration: 1.2, ease: 'sine.inOut' }, 0.1)
+        .to(this.q('.farCam'), { scale: 1.08, duration: 2.2, ease: 'power2.inOut' }, 0.1)
+        // 2. fireflies gather near Dylan
+        .to(flies, { x: function (i) { var t = targets[i % targets.length]; return t[0] + (i >= targets.length ? (i * 53) % 90 - 45 : 0); }, y: function (i) { var t = targets[i % targets.length]; return t[1] + (i >= targets.length ? (i * 37) % 70 - 35 : 0); }, duration: 1.6, ease: 'sine.inOut', stagger: 0.12 }, 0.3)
+        // 3. a soft glow, then he opens his eyes and smiles
+        .to(this.q('.glow'), { opacity: 1, scale: 1.1, duration: 0.9, ease: 'sine.out' }, 0.9)
+        .to(this.q('.awake'), { opacity: 1, duration: 0.7, ease: 'sine.inOut' }, 1.2)
+        .to(this.q('.glow'), { opacity: 0.35, scale: 1.3, duration: 1.2, ease: 'sine.inOut' }, 1.9)
+        // 4. hold on his smile, then the camera settles low and the near foliage parts
+        .to(this.q('.foreLCam'), { xPercent: -42, yPercent: 16, rotation: -4, scale: 1.55, duration: 1.8, ease: 'power3.inOut' }, 2.9)
+        .to(this.q('.foreRCam'), { xPercent: 42, yPercent: 16, rotation: 4, scale: 1.55, duration: 1.8, ease: 'power3.inOut' }, 2.9)
+        .to(this.q('.canopyCam'), { yPercent: -32, scale: 1.4, duration: 1.8, ease: 'power3.inOut' }, 2.95)
+        .to(this.q('.farCam'), { scale: 1.35, y: 147 * this.fk(), duration: 2.0, ease: 'power3.inOut' }, 2.9)
+        .to(this.q('.fireflies'), { y: 190 * this.fk(), scale: 1.2, duration: 2.0, ease: 'power3.inOut' }, 2.9)
+        .to(this.q('.glow'), { y: 200 * this.fk(), opacity: 0.25, duration: 2.0, ease: 'power3.inOut' }, 2.9)
+        .to(this.q('.motes'), { scale: 1.25, duration: 2.0, ease: 'power2.inOut' }, 2.9)
+        // 5. Welcome arrives above him
+        .set(this.q('.welcome'), { visibility: 'visible' }, 3.9)
+        .to(this.q('.shade2'), { opacity: 1, duration: 1.0, ease: 'power2.out' }, 3.8)
+        .fromTo(items, { y: 18, opacity: 0, filter: 'blur(4px)' }, { y: 0, opacity: 1, filter: 'blur(0px)', duration: 1.0, stagger: 0.1, ease: 'expo.out' }, 4.0)
+        .set(this.root, { pointerEvents: 'auto' });
+    }
+    this.tl = tl;
+  }
+  /* storybook page turn: the page you're looking at curls away from the bottom-right corner,
+     revealing Chapter 2's countryside, then Chapter 2 continues from that exact view */
+  goNext() {
+    var self = this, r = this.root;
+    if (!r) return;
+    var link = r.querySelector('.nextlink'), g = window.gsap;
+    if (!g || this.reduced()) { if (link) link.click(); return; }
+    if (this.turning) return;
+    this.turning = true;
+    var W = r.offsetWidth, H = r.offsetHeight;
+    var under = r.querySelector('.under'), wrap = r.querySelector('.pflapwrap'), flap = r.querySelector('.pflap');
+    function clip(poly, keepBelow, c) {
+      var out = [];
+      for (var i = 0; i < poly.length; i++) {
+        var a = poly[i], b = poly[(i + 1) % poly.length];
+        var fa = a[0] + a[1] - c, fb = b[0] + b[1] - c;
+        var inA = keepBelow ? fa <= 0 : fa >= 0, inB = keepBelow ? fb <= 0 : fb >= 0;
+        if (inA) out.push(a);
+        if (inA !== inB) { var k = fa / (fa - fb); out.push([a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k]); }
+      }
+      return out;
+    }
+    function css(pts) {
+      if (pts.length < 3) return 'polygon(0px 0px, 0px 0px, 0px 0px)';
+      return 'polygon(' + pts.map(function (p) { return p[0].toFixed(1) + 'px ' + p[1].toFixed(1) + 'px'; }).join(', ') + ')';
+    }
+    var rect = [[0, 0], [W, 0], [W, H], [0, H]];
+    var st = { c: W + H };
+    function draw() {
+      var c = st.c, turned = clip(rect, false, c);
+      under.style.clipPath = css(turned);
+      // the turned-over corner shows the cream back of the page, mirrored across the fold
+      flap.style.clipPath = css(turned.map(function (p) { return [c - p[1], c - p[0]]; }));
+    }
+    draw();
+    under.style.display = 'block';
+    wrap.style.display = 'block';
+    g.set(r, { pointerEvents: 'none' });
+    g.to(st, { c: -40, duration: 2.0, ease: 'power2.inOut', onUpdate: draw, onComplete: function () {
+      if (link) link.click();
+      // tidy up so this page looks normal again if you come back to it
+      setTimeout(function () { under.style.display = 'none'; wrap.style.display = 'none'; g.set(r, { pointerEvents: 'auto' }); self.turning = false; }, 800);
+    } });
+  }
+  /* bunny pointer trail: tiny leaves and golden sparkles drift down from the pointer */
+  initTrail() {
+    var self = this;
+    try { if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches || this.reduced()) return; } catch (e) { return; }
+    var r = this.root; if (!r || this.trailOn) return; this.trailOn = true;
+    var cols = ['#A8CF7E', '#6D8F62', '#94B85E', '#E9A7A7', '#C9C46A'], last = 0, n = 0, live = 0;
+    this.onTrail = function (ev) {
+      var g = window.gsap; if (!g) return;
+      var now = Date.now(); if (now - last < 28 || live > 46) return; last = now;
+      var rr = r.getBoundingClientRect(), sc = rr.width / r.offsetWidth || 1;
+      var x = (ev.clientX - rr.left) / sc, y = (ev.clientY - rr.top) / sc;
+      var leaf = (n++ % 3) !== 2, p = document.createElement('span');
+      p.className = 'trailp ' + (leaf ? 'tl' : 'ts');
+      if (leaf) p.style.background = cols[n % cols.length];
+      r.appendChild(p); live++;
+      g.set(p, { x: x + 18 + Math.random() * 16, y: y + 52, rotation: Math.random() * 360, scale: 0.6 + Math.random() * 0.6, opacity: 0.95 });
+      g.to(p, { x: '+=' + (Math.random() * 40 - 20), y: '+=' + (leaf ? 30 + Math.random() * 40 : 10 + Math.random() * 20), rotation: '+=' + (Math.random() * 220 - 110), scale: leaf ? 0.4 : 0.2, opacity: 0, duration: leaf ? 1.1 + Math.random() * 0.6 : 0.7 + Math.random() * 0.4, ease: 'sine.out', onComplete: function () { if (p.parentNode) p.parentNode.removeChild(p); live--; } });
+    };
+    /* the bunny follows the pointer, leaning into the direction it moves */
+    var bun = document.createElement('span'); bun.className = 'bunnycur'; bun.setAttribute('aria-hidden', 'true'); r.appendChild(bun); this.bun = bun;
+    var g0 = window.gsap, mx = g0.quickTo(bun, 'x', { duration: 0.18, ease: 'power3.out' }), my = g0.quickTo(bun, 'y', { duration: 0.18, ease: 'power3.out' }), rot = g0.quickTo(bun, 'rotation', { duration: 0.5, ease: 'power2.out' }), px = null;
+    this.onMove = function (ev) {
+      var rr = r.getBoundingClientRect(), sc = rr.width / r.offsetWidth || 1;
+      var x = (ev.clientX - rr.left) / sc, y = (ev.clientY - rr.top) / sc;
+      if (px === null) { g0.set(bun, { x: x, y: y }); }
+      mx(x); my(y); rot(px === null ? 0 : Math.max(-14, Math.min(14, (x - px) * 1.2))); px = x;
+      g0.to(bun, { opacity: 1, duration: 0.2, overwrite: 'auto' });
+      clearTimeout(self.rotT); self.rotT = setTimeout(function () { rot(0); }, 120);
+      self.onTrail(ev);
+    };
+    this.onLeave = function () { px = null; g0.to(bun, { opacity: 0, duration: 0.2, overwrite: 'auto' }); };
+    this.onDown = function () { g0.fromTo(bun, { scaleX: 1.12, scaleY: 0.86 }, { scaleX: 1, scaleY: 1, duration: 0.5, ease: 'elastic.out(1, 0.4)' }); };
+    r.addEventListener('pointermove', this.onMove);
+    r.addEventListener('pointerleave', this.onLeave);
+    r.addEventListener('pointerdown', this.onDown);
+  }
+  initTrailSoon() { var self = this, tries = 0; (function go() { if (self.root && window.gsap) self.initTrail(); else if (tries++ < 30) setTimeout(go, 150); })(); }
+
+  renderVals() {
+    var self = this;
+    var moteSpots = [
+      [52,330,4],[96,410,3],[140,300,3],[300,320,5],[340,420,4],[270,600,3],[70,620,4],[120,700,3],
+      [320,700,4],[30,480,3],[360,560,3],[230,380,3],[180,660,4],[260,280,3],[90,520,3],[330,500,4]
+    ];
+    var motes = moteSpots.map(function (s) {
+      return { style: 'left:' + ((s[0] + 608) / 15.59).toFixed(2) + '%;top:' + (s[1] / 8.44).toFixed(2) + '%;width:' + (s[2] * 2) + 'px;height:' + (s[2] * 2) + 'px;opacity:.65' };
+    });
+    return {
+      phase: this.state.phase,
+      engine: this.state.hasGsap ? 'gsap' : 'nogsap',
+      accent: this.props.accent ?? '#F5D68A',
+      motes: motes,
+      fireflies: [
+        { color: '', style: 'left:42.85%;top:35.55%' },
+        { color: '', style: 'left:59.53%;top:30.81%;scale:.85' },
+        { color: '', style: 'left:58.24%;top:75.83%;scale:.8' },
+        { color: '', style: 'left:48.62%;top:49.76%;scale:.7' },
+        { color: '', style: 'left:55.04%;top:61.61%;scale:.9' },
+        { color: '', style: 'left:41.57%;top:71.09%;scale:.75' },
+        { color: '', style: 'left:61.45%;top:49.76%;scale:.65' }
+      ],
+      setRoot: function (el) { self.root = el; },
+      goNext: function () { self.goNext(); },
+      open: function () {
+        if (self.state.phase !== 'idle') return;
+        if (!self.tl) { self.setState({ phase: 'welcome' }); return; }
+        self.setState({ phase: 'opening' });
+        self.tl.timeScale(1).play();
+      },
+      replay: function () {
+        if (!self.tl) { self.setState({ phase: 'idle' }); return; }
+        self.setState({ phase: 'rewinding' });
+        self.tl.timeScale(2).reverse();
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

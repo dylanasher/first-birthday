@@ -1,0 +1,46 @@
+/* WishesDesktop: ported from WishesDesktop.dc.html */
+
+.dc-WishesDesktop{margin:0;background:#3A3260}
+.dc-WishesDesktop .stage{position:relative;width:1440px;height:900px;overflow:hidden;background:#B9B6E6;font-family:'Nunito',system-ui,sans-serif;color:#2E2A4A}
+.dc-WishesDesktop .layer{position:absolute;inset:0;pointer-events:none}
+.dc-WishesDesktop .bg{position:absolute;inset:-20px;background-size:cover;background-position:50% 60%;background-repeat:no-repeat;will-change:transform}
+.dc-WishesDesktop .far{background-image:url(/art/sky-wishes.webp)}
+.dc-WishesDesktop .near{background-image:url(/art/6d67634339c2ed30c2c70f27381a024c.webp)}
+.dc-WishesDesktop .puff{position:absolute;left:0;top:0;border-radius:50%;background:radial-gradient(ellipse at 50% 60%,rgba(255,246,240,.95),rgba(255,226,222,.6) 45%,rgba(255,226,222,0) 70%);filter:blur(1px);pointer-events:none}
+.dc-WishesDesktop .topshade{background:linear-gradient(to bottom,rgba(60,50,100,.35) 0%,rgba(60,50,100,0) 22%)}
+.dc-WishesDesktop .script{font-family:'Pinyon Script',cursive;font-weight:400}
+.dc-WishesDesktop .lift{text-shadow:0 2px 14px rgba(16,42,32,.75),0 0 2px rgba(16,42,32,.55)}
+.dc-WishesDesktop .head{position:absolute;left:64px;top:52px;text-align:left;color:#F5EBD5;z-index:3}
+/* the flyer: girl on her broom, a ribbon from the broom's end, and the wish card hanging from it */
+.dc-WishesDesktop .flyer{position:absolute;left:180px;top:40px;width:1100px;height:700px;z-index:2;will-change:transform}
+.dc-WishesDesktop .girl{position:absolute;left:470px;top:0;width:600px;height:349px;background:url(/art/girl-broom.webp) 0 0/100% 100% no-repeat;transform-origin:60% 70%;will-change:transform}
+.dc-WishesDesktop .ribbon{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.dc-WishesDesktop .wcard{position:absolute;left:0;top:330px;width:460px;box-sizing:border-box;padding:30px 34px 22px;border-radius:22px;background:linear-gradient(160deg,var(--c1,rgba(255,250,240,.72)),var(--c2,rgba(255,240,228,.66)));backdrop-filter:blur(6px) saturate(1.1);-webkit-backdrop-filter:blur(6px) saturate(1.1);transition:background .4s ease;box-shadow:0 22px 46px rgba(60,50,100,.3),inset 0 0 0 1px rgba(255,255,255,.8),0 0 0 1px rgba(233,167,167,.45);transform-origin:455px 1px;pointer-events:auto}
+.dc-WishesDesktop .wcard::before{content:'';position:absolute;right:-2px;top:-6px;width:14px;height:14px;border-radius:50%;background:var(--pin,#E9A7A7);box-shadow:0 0 0 3px #FFF3DD}
+.dc-WishesDesktop .wq{display:block;color:var(--pin,#E9A7A7) !important;font-family:'IM Fell English',Georgia,serif;font-size:70px;line-height:.6;color:#E9A7A7;height:26px}
+.dc-WishesDesktop .wtext{margin:0;font-family:'IM Fell English',Georgia,serif;font-size:25px;line-height:1.38;color:#2E2A4A;min-height:104px}
+.dc-WishesDesktop .wname{margin:10px 0 0;font-family:'Pinyon Script',cursive;font-size:34px;line-height:1.1;color:#5B4A7A;text-align:right}
+.dc-WishesDesktop .wnav{display:flex;align-items:center;justify-content:space-between;margin-top:12px;padding-top:12px;border-top:1px dashed rgba(91,74,122,.25)}
+.dc-WishesDesktop .warrow{width:44px;height:44px;border-radius:50%;border:1px solid rgba(91,74,122,.25);background:rgba(255,255,255,.7);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.dc-WishesDesktop .warrow:focus-visible,.dc-WishesDesktop .next:focus-visible,.dc-WishesDesktop .leave:focus-visible{outline:2px solid #5B4A7A;outline-offset:3px}
+.dc-WishesDesktop .wcount{margin:0;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#5B4A7A}
+.dc-WishesDesktop .spark{position:absolute;left:0;top:0;width:8px;height:8px;border-radius:50%;background:#FFF6D6;box-shadow:0 0 10px 4px rgba(247,216,115,.7);opacity:0;pointer-events:none}
+.dc-WishesDesktop .foot{position:absolute;right:56px;bottom:44px;left:auto;display:flex;align-items:center;justify-content:space-between;gap:22px;z-index:4}
+.dc-WishesDesktop .dots{display:flex;gap:6px;align-items:center}
+.dc-WishesDesktop .dot{width:7px;height:7px;border-radius:50%;background:rgba(255,249,240,.55)}
+.dc-WishesDesktop .dot.on{width:22px;border-radius:4px;background:#FFF9F0}
+.dc-WishesDesktop .chap{margin:0;text-shadow:0 1px 8px rgba(60,50,100,.6);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#FFF9F0}
+.dc-WishesDesktop .next{display:inline-flex;align-items:center;gap:10px;min-height:50px;padding:0 24px;border:0;border-radius:999px;background:#5B4A7A;color:#FFF9F0;font-family:'IM Fell English',Georgia,serif;font-size:18px;cursor:pointer;box-shadow:0 8px 18px rgba(60,50,100,.3)}
+.dc-WishesDesktop .leave{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 18px;border-radius:999px;border:1px solid rgba(255,255,255,.7);background:rgba(255,250,242,.55);color:#3E3466;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;text-decoration:none}
+.dc-WishesDesktop .nextlink{position:absolute;left:0;top:0;width:1px;height:1px;opacity:0;pointer-events:none}
+.dc-WishesDesktop .under8{position:absolute;inset:0;z-index:70;pointer-events:none;display:none;background-color:#8FB6E0;background-repeat:no-repeat;
+background-image:url(/art/picnic-full.webp);
+background-size:1599px 900px;background-position:0 0}
+.dc-WishesDesktop .tflapwrap{position:absolute;inset:0;z-index:71;pointer-events:none;display:none;filter:drop-shadow(-10px -10px 20px rgba(16,42,32,.45))}
+.dc-WishesDesktop .tflap{position:absolute;inset:0;background:linear-gradient(135deg,#E9DCBC 0%,#F8EFD9 55%,#E0D0A8 100%)}
+/* bunny pointer + a trail of tiny leaves and sparkles (mouse/trackpad only) */
+@media (hover:hover) and (pointer:fine){.dc-WishesDesktop .stage,.dc-WishesDesktop .stage *{cursor:none !important}.dc-WishesDesktop .stage input,.dc-WishesDesktop .stage textarea{cursor:text !important}}
+.dc-WishesDesktop .bunnycur{position:absolute;left:0;top:0;width:52px;height:73px;margin:-15px 0 0 -1px;background:url(/art/dbadbf2c44d41f6a5e3b3e01c5391ca4.webp) 0 0/100% 100% no-repeat;pointer-events:none;z-index:96;opacity:0;transform-origin:50% 30%;filter:drop-shadow(0 4px 6px rgba(20,30,20,.3));will-change:transform}
+.dc-WishesDesktop .trailp{position:absolute;left:0;top:0;pointer-events:none;z-index:95;will-change:transform,opacity}
+.dc-WishesDesktop .trailp.tl{width:9px;height:9px;border-radius:80% 0 80% 0}
+.dc-WishesDesktop .trailp.ts{width:6px;height:6px;border-radius:50%;background:#FFF3C4;box-shadow:0 0 8px 3px rgba(247,216,115,.75)}

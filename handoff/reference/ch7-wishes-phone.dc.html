@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Dylan — Chapter 7, Wishes for Dylan</title>
+<script src="./support.js"></script>
+<script src="/_blob/17d4179414200efbabee22c7746b97ba"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&amp;family=Nunito:wght@400;600;700&amp;family=Pinyon+Script&amp;display=swap">
+<style>
+body{margin:0;background:#3A3260}
+.stage{position:relative;width:100vw;height:100vh;height:100dvh;container-type:size;overflow:hidden;background:#B9B6E6;font-family:'Nunito',system-ui,sans-serif;color:#2E2A4A}
+.layer{position:absolute;inset:0;pointer-events:none}
+/* responsive scene: the tall sky painting (941x1672) always covers the screen like a photo set to "fill",
+   anchored to the bottom so the hilltop town peeks up just above the footer */
+.scenefit{position:absolute;--sh:max(105cqh, calc(100cqw * 1672 / 941));--sw:calc(var(--sh) * 941 / 1672);width:var(--sw);height:var(--sh);
+left:clamp(calc(100cqw - var(--sw)), calc(50cqw - var(--sw) * 0.42), 0px);top:calc(100cqh - var(--sh))}
+.bg{position:absolute;inset:0;background-size:100% 100%;background-repeat:no-repeat;will-change:transform}
+.far{background-image:url(/_blob/f429be1cd055e6b6ec5b67924d8b0085)}
+.near{background-image:url(/_blob/8de0413aa4e1f7fe5e8dbf302cff75c4);transform:scale(1.06);transform-origin:50% 100%}
+.puff{position:absolute;left:0;top:0;border-radius:50%;background:radial-gradient(ellipse at 50% 60%,rgba(255,246,240,.95),rgba(255,226,222,.6) 45%,rgba(255,226,222,0) 70%);filter:blur(1px);pointer-events:none}
+.topshade{background:linear-gradient(to bottom,rgba(60,50,100,.35) 0%,rgba(60,50,100,0) 18%)}
+.script{font-family:'Pinyon Script',cursive;font-weight:400}
+.lift{text-shadow:0 2px 14px rgba(16,42,32,.75),0 0 2px rgba(16,42,32,.55)}
+.head{position:absolute;left:0;right:0;top:16px;text-align:center;color:#F5EBD5;z-index:3}
+/* the flyer: girl on her broom, a ribbon from the broom's end, and the wish card hanging from it */
+/* the flyer is drawn at 390px wide and scaled (--fs, set in code) to fit the screen; centred horizontally */
+.flyfit{position:absolute;left:calc(50% - 195px);top:var(--ft,140px);width:390px;height:600px;z-index:2;transform:scale(var(--fs,1));transform-origin:50% 0}
+.flyer{position:absolute;inset:0;will-change:transform}
+.girl{position:absolute;left:88px;top:0;width:300px;height:175px;background:url(/_blob/f2052fc9876a19c9e41b71a3b2d3b63c) 0 0/100% 100% no-repeat;transform-origin:60% 70%;will-change:transform}
+.ribbon{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.wcard{position:absolute;left:8px;top:214px;width:300px;box-sizing:border-box;padding:20px 20px 16px;border-radius:22px;background:linear-gradient(160deg,var(--c1,rgba(255,250,240,.72)),var(--c2,rgba(255,240,228,.66)));backdrop-filter:blur(6px) saturate(1.1);-webkit-backdrop-filter:blur(6px) saturate(1.1);transition:background .4s ease;box-shadow:0 22px 46px rgba(60,50,100,.3),inset 0 0 0 1px rgba(255,255,255,.8),0 0 0 1px rgba(233,167,167,.45);transform-origin:295px 1px;pointer-events:auto}
+.wcard::before{content:'';position:absolute;right:-2px;top:-6px;width:14px;height:14px;border-radius:50%;background:var(--pin,#E9A7A7);box-shadow:0 0 0 3px #FFF3DD}
+.wq{display:block;color:var(--pin,#E9A7A7) !important;font-family:'IM Fell English',Georgia,serif;font-size:52px;line-height:.6;color:#E9A7A7;height:20px}
+.wtext{margin:0;font-family:'IM Fell English',Georgia,serif;font-size:18px;line-height:1.38;color:#2E2A4A;min-height:76px}
+.wname{margin:8px 0 0;font-family:'Pinyon Script',cursive;font-size:26px;line-height:1.1;color:#5B4A7A;text-align:right}
+.wnav{display:flex;align-items:center;justify-content:space-between;margin-top:8px;padding-top:8px;border-top:1px dashed rgba(91,74,122,.25)}
+.warrow{width:44px;height:44px;border-radius:50%;border:1px solid rgba(91,74,122,.25);background:rgba(255,255,255,.7);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.warrow:focus-visible,.next:focus-visible,.leave:focus-visible{outline:2px solid #5B4A7A;outline-offset:3px}
+.wcount{margin:0;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#5B4A7A}
+.spark{position:absolute;left:0;top:0;width:8px;height:8px;border-radius:50%;background:#FFF6D6;box-shadow:0 0 10px 4px rgba(247,216,115,.7);opacity:0;pointer-events:none}
+.foot{position:absolute;left:0;right:0;bottom:0;padding:12px 16px 16px;background:rgba(255,249,242,.6);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);border-top:1px solid rgba(255,255,255,.6);display:flex;align-items:center;justify-content:space-between;gap:10px;z-index:4}
+.dots{display:flex;gap:6px;align-items:center}
+.dot{width:6px;height:6px;border-radius:50%;background:rgba(46,42,74,.28)}
+.dot.on{width:20px;border-radius:4px;background:#5B4A7A}
+.chap{margin:0;text-shadow:none;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#2E2A4A}
+.next{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 18px;border:0;border-radius:999px;background:#5B4A7A;color:#FFF9F0;font-family:'IM Fell English',Georgia,serif;font-size:16px;cursor:pointer;box-shadow:0 8px 18px rgba(60,50,100,.3)}
+.leave{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 12px;border-radius:999px;border:1px solid rgba(255,255,255,.7);background:rgba(255,250,242,.55);color:#3E3466;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;text-decoration:none}
+/* narrow phones: keep the footer on one line */
+@container (max-width: 380px){
+.foot{padding:10px 12px 14px;gap:8px}
+.chap{font-size:10px;letter-spacing:.1em;white-space:nowrap}
+.leave{padding:0 10px;white-space:nowrap}
+.next{padding:0 14px;font-size:15px;white-space:nowrap}
+}
+/* short phones: a more compact title */
+@container (max-height: 720px){
+.head{top:10px}
+.head h1{font-size:34px !important}
+}
+.nextlink{position:absolute;left:0;top:0;width:1px;height:1px;opacity:0;pointer-events:none}
+.under8{position:absolute;inset:0;z-index:70;pointer-events:none;display:none;background-color:#8FB6E0;background-repeat:no-repeat;
+background-image:linear-gradient(to bottom,rgba(40,50,80,.5) 0%,rgba(40,50,80,.12) 12%,rgba(40,50,80,0) 18%),url(/_blob/a4592b3b2bc94169cdab0c8b8c21aef1);
+--sh:max(105cqh, calc(100cqw * 1672 / 941));--sw:calc(var(--sh) * 941 / 1672);
+background-size:100% 100%,var(--sw) var(--sh);
+background-position:0 0,clamp(calc(100cqw - var(--sw)), calc(50cqw - var(--sw) * 0.5), 0px) clamp(calc(100cqh - var(--sh)), calc(50cqh - var(--sh) * 0.634), 0px)}
+.tflapwrap{position:absolute;inset:0;z-index:71;pointer-events:none;display:none;filter:drop-shadow(-8px -8px 16px rgba(16,42,32,.45))}
+.tflap{position:absolute;inset:0;background:linear-gradient(135deg,#E9DCBC 0%,#F8EFD9 55%,#E0D0A8 100%)}
+/* bunny pointer + a trail of tiny leaves and sparkles (mouse/trackpad only) */
+@media (hover:hover) and (pointer:fine){.stage,.stage *{cursor:none !important}.stage input,.stage textarea{cursor:text !important}}
+.bunnycur{position:absolute;left:0;top:0;width:52px;height:73px;margin:-15px 0 0 -1px;background:url(/_blob/dbadbf2c44d41f6a5e3b3e01c5391ca4) 0 0/100% 100% no-repeat;pointer-events:none;z-index:96;opacity:0;transform-origin:50% 30%;filter:drop-shadow(0 4px 6px rgba(20,30,20,.3));will-change:transform}
+.trailp{position:absolute;left:0;top:0;pointer-events:none;z-index:95;will-change:transform,opacity}
+.trailp.tl{width:9px;height:9px;border-radius:80% 0 80% 0}
+.trailp.ts{width:6px;height:6px;border-radius:50%;background:#FFF3C4;box-shadow:0 0 8px 3px rgba(247,216,115,.75)}
+</style>
+</helmet>
+
+<div class="stage" ref="{{setRoot}}">
+<div class="scene layer" aria-hidden="true">
+<div class="scenefit">
+<div class="bg far"></div>
+<span class="puff"></span>
+<span class="puff"></span>
+<span class="puff"></span>
+<span class="puff"></span>
+<span class="puff"></span>
+<div class="bg near"></div>
+</div>
+</div>
+<div class="layer topshade"></div>
+<div class="head">
+<p class="lift ca" style="margin: 0; font-size: 11px; font-weight: 700; letter-spacing: .26em; text-transform: uppercase">Chapter VII · Wishes in the Sky</p>
+<h1 class="script lift ca" style="margin: 0; font-size: 40px; line-height: 1.1; color: #F5D68A">Wishes for Dylan</h1>
+<p class="lift ca" style="margin: 2px 0 0; font-size: 13px; font-weight: 600">Carried across the clouds, one wish at a time</p>
+</div>
+<div class="flyfit">
+<div class="flyer">
+<svg class="ribbon" aria-hidden="true" overflow="visible"><path class="rib" d="M91 153 C112 205 236 172 303 215" fill="none" stroke="#E9A7A7" style="stroke-width: 2.4; stroke-linecap: round"></path></svg>
+<div class="girl" role="img" aria-label="A girl flying on a broomstick"></div>
+<div class="wcard" style="{{cardStyle}}" role="region" aria-label="Wishes for Dylan" aria-live="polite">
+<span class="wq" aria-hidden="true">“</span>
+<p class="wtext">{{wishText}}</p>
+<p class="wname">— {{wishName}}</p>
+<div class="wnav">
+<button class="warrow" type="button" onClick="{{prevWish}}" aria-label="Previous wish"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 L5 8 L10 13" fill="none" stroke="#5B4A7A" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"></path></svg></button>
+<p class="wcount">Wish {{wishNum}} of {{wishTotal}}</p>
+<button class="warrow" type="button" onClick="{{nextWish}}" aria-label="Next wish"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3 L11 8 L6 13" fill="none" stroke="#5B4A7A" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"></path></svg></button>
+</div>
+</div>
+</div>
+</div>
+<span class="spark"></span>
+<span class="spark"></span>
+<span class="spark"></span>
+<span class="spark"></span>
+<span class="spark"></span>
+<div class="foot">
+<div style="display: flex; flex-direction: column; gap: 5px"><div class="dots" aria-hidden="true"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot on"></span><span class="dot"></span></div><p class="chap">Chapter 7 of 8</p></div>
+<a class="leave" href="Ch6.dc.html">Add yours</a>
+<button class="next" type="button" onClick="{{goNext}}">Thank you <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8 H12 M8.5 4 L12.5 8 L8.5 12" fill="none" stroke="#F7D873" style="stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"></path></svg></button>
+<a class="nextlink" href="Ch7.dc.html" tabindex="-1" aria-hidden="true">Next chapter</a>
+</div>
+
+<div class="under8" aria-hidden="true"></div>
+<div class="tflapwrap" aria-hidden="true"><div class="tflap"></div></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    /* wishes sent from Chapter 6 will appear here; these two are samples for now */
+    this.wishes = [{name: 'Tita Maria', text: 'May you grow up kind, brave and always curious. We love you so much, Dylan!'}, {name: 'Ninong Paolo', text: 'Happy 1st birthday, little one! May God guide and bless you every step of the way.'}];
+    this.state = { i: 0 };
+    this.root = null; this.tweens = []; this.tries = 0;
+  }
+  componentDidMount() { this.initTrailSoon(); this.fit(); this.boot(); }
+  /* scale the girl and her wish card to the screen: fit the width, and leave room for the title above and the footer below */
+  fit() {
+    var self = this, r = this.root;
+    if (!r) { if ((this.fitTries = (this.fitTries || 0) + 1) < 25) setTimeout(function () { self.fit(); }, 120); return; }
+    var go = function () {
+      var W = r.offsetWidth, H = r.offsetHeight; if (!W || !H) return;
+      var card = r.querySelector('.wcard'), foot = r.querySelector('.foot');
+      var content = card ? card.offsetTop + card.offsetHeight + 14 : 480, fh = foot ? foot.offsetHeight + 12 : 84;
+      var top = H < 720 ? 104 : Math.max(140, H * 0.165);
+      var fs = Math.min(1.35, (W - 8) / 390, (H - top - fh) / content);
+      r.style.setProperty('--fs', Math.max(0.6, fs).toFixed(3));
+      r.style.setProperty('--ft', top.toFixed(0) + 'px');
+    };
+    go();
+    if ('ResizeObserver' in window) { this.ro = new ResizeObserver(go); this.ro.observe(r); var c = r.querySelector('.wcard'); if (c) this.ro.observe(c); }
+  }
+  componentWillUnmount() { if (this.onMove && this.root) { this.root.removeEventListener('pointermove', this.onMove); this.root.removeEventListener('pointerleave', this.onLeave); this.root.removeEventListener('pointerdown', this.onDown); } clearTimeout(this.retry); clearInterval(this.auto); if (this.io) this.io.disconnect(); if (this.ro) this.ro.disconnect(); this.tweens.forEach(function (t) { t.kill(); }); }
+  reduced() { try { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; } }
+  /* the card flutters over like a page in the wind as it shows the next wish */
+  show(i, dir) {
+    var self = this, n = this.wishes.length; if (n < 2) return;
+    var to = (i + n) % n, card = this.root && this.root.querySelector('.wcard'), g = window.gsap;
+    if (!card || !g || this.reduced()) { this.setState({ i: to }); return; }
+    if (this.flipping) return; this.flipping = true;
+    g.to(card, { rotationY: 90 * dir, duration: 0.35, ease: 'power2.in', onComplete: function () {
+      self.setState({ i: to });
+      g.fromTo(card, { rotationY: -90 * dir }, { rotationY: 0, duration: 0.55, ease: 'back.out(1.6)', onComplete: function () { self.flipping = false; } });
+    } });
+  }
+  restartAuto() { var self = this; clearInterval(this.auto); this.auto = setInterval(function () { self.show(self.state.i + 1, 1); }, 8000); }
+  boot() {
+    var self = this;
+    if (!this.root || !window.gsap) { if (this.tries++ < 25) this.retry = setTimeout(function () { self.boot(); }, 120); return; }
+    var g = window.gsap, r = this.root, t = this.tweens;
+    this.restartAuto();
+    if (this.reduced()) return;
+    var q = function (s) { return r.querySelector(s); }, qa = function (s) { return r.querySelectorAll(s); };
+    g.set(q('.wcard'), { transformPerspective: 900 });
+    var intro = g.timeline({ paused: true });
+    intro.from(qa('.ca'), { y: -14, opacity: 0, filter: 'blur(5px)', duration: 1, stagger: 0.14, ease: 'expo.out' }, 0.2).from(q('.flyer'), { x: -420, y: 80, rotation: -6, duration: 2, ease: 'power3.out' }, 0.3).from(q('.foot'), { yPercent: 100, duration: 0.9, ease: 'expo.out' }, 1.4)
+      .call(function () { if (!self.alive) { self.alive = true; self.ambient(g, q, qa, t); } }, null, 0.2);
+    t.push(intro);
+    if ('IntersectionObserver' in window) {
+      this.io = new IntersectionObserver(function (es) { es.forEach(function (en) { if (en.isIntersecting) { if (!self.seen) { self.seen = true; intro.restart(); } } else self.seen = false; }); }, { threshold: 0.15 });
+      this.io.observe(r);
+    } else intro.play();
+  }
+  /* flying through the clouds: sky drifts past, the flyer bobs, scarf flutters, card sways on its ribbon, sparkles trail behind */
+  ambient(g, q, qa, t) {
+    var r = this.root, W = r.offsetWidth, H = r.offsetHeight, sf = q('.scenefit'), f = sf && sf.offsetHeight ? sf.offsetHeight / 886 : 1;
+    // the front cloud bank drifts slowly back and forth
+    t.push(g.fromTo(q('.near'), { x: -10 * f }, { x: 10 * f, duration: 18, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    var fl = q('.flyer');
+    t.push(g.to(fl, { y: -10, duration: 2.6, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    t.push(g.fromTo(fl, { rotation: -0.8 }, { rotation: 0.8, duration: 3.4, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    t.push(g.fromTo(q('.wcard'), { rotation: -2 }, { rotation: 2, duration: 2.4, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    t.push(g.fromTo(q('.girl'), { rotation: -1.5, y: 0 }, { rotation: 1.5, y: -4, duration: 1.3, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    var rib = q('.rib'), base = rib.getAttribute('d'), wob = { v: 0 };
+    t.push(g.to(wob, { v: 1, duration: 1.2, ease: 'sine.inOut', yoyo: true, repeat: -1, onUpdate: function () {
+      var d = (wob.v - 0.5) * 18;
+      rib.setAttribute('d', base.replace(/C(\S+) (\S+) (\S+) (\S+)/, function (m, a, b, c, e) { return 'C' + a + ' ' + (parseFloat(b) + d) + ' ' + c + ' ' + (parseFloat(e) - d); }));
+    } }));
+    var rnd = function (a, b) { return a + Math.random() * (b - a); };
+    Array.prototype.forEach.call(qa('.puff'), function (p, i) {
+      (function drift(first) {
+        var w = rnd(110, 200), y = rnd(H * 0.05, H * 0.62);
+        g.set(p, { width: w, height: w * 0.45, x: first ? rnd(0, W) : W + 40, y: y, opacity: rnd(0.18, 0.38) });
+        var d = rnd(9, 16);
+        t.push(g.to(p, { x: -w - 40, duration: first ? d * 0.6 : d, ease: 'none', delay: first ? 0 : rnd(0, 2), onComplete: function () { drift(false); } }));
+      })(true);
+    });
+    Array.prototype.forEach.call(qa('.spark'), function (s, i) {
+      (function fly(first) {
+        var fb = fl.getBoundingClientRect(), rr = q('.flyer').parentNode.getBoundingClientRect(), scl = rr.width / q('.flyer').parentNode.offsetWidth || 1;
+        var fs = parseFloat(getComputedStyle(r).getPropertyValue('--fs')) || 1;
+        var x0 = (fb.left - rr.left) / scl + 91 * fs + rnd(-6, 6), y0 = (fb.top - rr.top) / scl + 153 * fs + rnd(-6, 6);
+        g.set(s, { x: x0, y: y0, opacity: 0, scale: rnd(0.5, 1.1) });
+        var tl = g.timeline({ delay: first ? i * 0.5 : rnd(0.1, 1.2), onComplete: function () { fly(false); } });
+        tl.to(s, { opacity: 1, duration: 0.25 }).to(s, { x: x0 - rnd(80, 180), y: y0 + rnd(-20, 40), duration: rnd(1.4, 2.2), ease: 'sine.out' }, 0).to(s, { opacity: 0, duration: 0.6 }, '>-0.6');
+        t.push(tl);
+      })(true);
+    });
+  }
+  /* storybook page turn to the next chapter: curls from the bottom-right corner, revealing its scene */
+  goNext() {
+    var self = this, r = this.root;
+    if (!r) return;
+    var link = r.querySelector('.nextlink'), g = window.gsap;
+    if (!g || this.reduced()) { if (link) link.click(); return; }
+    if (this.turning) return;
+    this.turning = true;
+    var W = r.offsetWidth, H = r.offsetHeight;
+    var under = r.querySelector('.under8'), wrap = r.querySelector('.tflapwrap'), flap = r.querySelector('.tflap');
+    function clip(poly, c) {
+      var out = [];
+      for (var i = 0; i < poly.length; i++) {
+        var a = poly[i], b = poly[(i + 1) % poly.length];
+        var fa = a[0] + a[1] - c, fb = b[0] + b[1] - c, inA = fa >= 0, inB = fb >= 0;
+        if (inA) out.push(a);
+        if (inA !== inB) { var k = fa / (fa - fb); out.push([a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k]); }
+      }
+      return out;
+    }
+    function css(pts) {
+      if (pts.length < 3) return 'polygon(0px 0px, 0px 0px, 0px 0px)';
+      return 'polygon(' + pts.map(function (p) { return p[0].toFixed(1) + 'px ' + p[1].toFixed(1) + 'px'; }).join(', ') + ')';
+    }
+    var rect = [[0, 0], [W, 0], [W, H], [0, H]], st = { c: W + H };
+    function draw() {
+      var c = st.c, turned = clip(rect, c);
+      under.style.clipPath = css(turned);
+      flap.style.clipPath = css(turned.map(function (p) { return [c - p[1], c - p[0]]; }));
+    }
+    draw();
+    under.style.display = 'block';
+    wrap.style.display = 'block';
+    g.set(r, { pointerEvents: 'none' });
+    g.to(st, { c: -40, duration: 2.0, ease: 'power2.inOut', onUpdate: draw, onComplete: function () {
+      if (link) link.click();
+      setTimeout(function () { under.style.display = 'none'; wrap.style.display = 'none'; g.set(r, { pointerEvents: 'auto' }); self.turning = false; }, 800);
+    } });
+  }
+
+  /* bunny pointer trail: tiny leaves and golden sparkles drift down from the pointer */
+  initTrail() {
+    var self = this;
+    try { if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches || this.reduced()) return; } catch (e) { return; }
+    var r = this.root; if (!r || this.trailOn) return; this.trailOn = true;
+    var cols = ['#A8CF7E', '#6D8F62', '#94B85E', '#E9A7A7', '#C9C46A'], last = 0, n = 0, live = 0;
+    this.onTrail = function (ev) {
+      var g = window.gsap; if (!g) return;
+      var now = Date.now(); if (now - last < 28 || live > 46) return; last = now;
+      var rr = r.getBoundingClientRect(), sc = rr.width / r.offsetWidth || 1;
+      var x = (ev.clientX - rr.left) / sc, y = (ev.clientY - rr.top) / sc;
+      var leaf = (n++ % 3) !== 2, p = document.createElement('span');
+      p.className = 'trailp ' + (leaf ? 'tl' : 'ts');
+      if (leaf) p.style.background = cols[n % cols.length];
+      r.appendChild(p); live++;
+      g.set(p, { x: x + 18 + Math.random() * 16, y: y + 52, rotation: Math.random() * 360, scale: 0.6 + Math.random() * 0.6, opacity: 0.95 });
+      g.to(p, { x: '+=' + (Math.random() * 40 - 20), y: '+=' + (leaf ? 30 + Math.random() * 40 : 10 + Math.random() * 20), rotation: '+=' + (Math.random() * 220 - 110), scale: leaf ? 0.4 : 0.2, opacity: 0, duration: leaf ? 1.1 + Math.random() * 0.6 : 0.7 + Math.random() * 0.4, ease: 'sine.out', onComplete: function () { if (p.parentNode) p.parentNode.removeChild(p); live--; } });
+    };
+    /* the bunny follows the pointer, leaning into the direction it moves */
+    var bun = document.createElement('span'); bun.className = 'bunnycur'; bun.setAttribute('aria-hidden', 'true'); r.appendChild(bun); this.bun = bun;
+    var g0 = window.gsap, mx = g0.quickTo(bun, 'x', { duration: 0.18, ease: 'power3.out' }), my = g0.quickTo(bun, 'y', { duration: 0.18, ease: 'power3.out' }), rot = g0.quickTo(bun, 'rotation', { duration: 0.5, ease: 'power2.out' }), px = null;
+    this.onMove = function (ev) {
+      var rr = r.getBoundingClientRect(), sc = rr.width / r.offsetWidth || 1;
+      var x = (ev.clientX - rr.left) / sc, y = (ev.clientY - rr.top) / sc;
+      if (px === null) { g0.set(bun, { x: x, y: y }); }
+      mx(x); my(y); rot(px === null ? 0 : Math.max(-14, Math.min(14, (x - px) * 1.2))); px = x;
+      g0.to(bun, { opacity: 1, duration: 0.2, overwrite: 'auto' });
+      clearTimeout(self.rotT); self.rotT = setTimeout(function () { rot(0); }, 120);
+      self.onTrail(ev);
+    };
+    this.onLeave = function () { px = null; g0.to(bun, { opacity: 0, duration: 0.2, overwrite: 'auto' }); };
+    this.onDown = function () { g0.fromTo(bun, { scaleX: 1.12, scaleY: 0.86 }, { scaleX: 1, scaleY: 1, duration: 0.5, ease: 'elastic.out(1, 0.4)' }); };
+    r.addEventListener('pointermove', this.onMove);
+    r.addEventListener('pointerleave', this.onLeave);
+    r.addEventListener('pointerdown', this.onDown);
+  }
+  initTrailSoon() { var self = this, tries = 0; (function go() { if (self.root && window.gsap) self.initTrail(); else if (tries++ < 30) setTimeout(go, 150); })(); }
+
+  renderVals() {
+    var self = this, n = this.wishes.length, w = this.wishes[this.state.i] || { text: 'No wishes yet. Be the first to leave one!', name: 'Dylan' };
+    return {
+      setRoot: function (el) { self.root = el; },
+      goNext: function () { self.goNext(); },
+      cardStyle: (function () {
+        /* each wish gets its own pastel card from the invitation palette */
+        var tints = [['rgba(249,226,226,.72)','rgba(239,198,200,.62)','#D98C8C'], ['rgba(221,236,248,.74)','rgba(186,215,240,.62)','#5E9BD0'], ['rgba(252,240,200,.74)','rgba(247,222,140,.6)','#C9A24E'], ['rgba(226,238,218,.74)','rgba(192,214,180,.62)','#6D8F62'], ['rgba(252,228,214,.74)','rgba(240,196,172,.62)','#D97A5E'], ['rgba(234,226,246,.74)','rgba(206,192,234,.62)','#8A72B8']];
+        var c = tints[self.state.i % tints.length];
+        return '--c1:' + c[0] + ';--c2:' + c[1] + ';--pin:' + c[2];
+      })(),
+      wishText: w.text, wishName: w.name, wishNum: Math.min(this.state.i + 1, n || 1), wishTotal: n || 1,
+      prevWish: function () { self.show(self.state.i - 1, -1); self.restartAuto(); },
+      nextWish: function () { self.show(self.state.i + 1, 1); self.restartAuto(); }
+    };
+  }
+}
+</script>
+</body>
+</html>

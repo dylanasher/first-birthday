@@ -1,0 +1,15 @@
+/* DesignSystem: ported from DesignSystem.dc.html */
+
+.dc-DesignSystem{margin:0}
+.dc-DesignSystem .ds{font-family:'Nunito',system-ui,sans-serif;color:#F7EBD0}
+.dc-DesignSystem .script{font-family:'Parisienne',cursive}
+.dc-DesignSystem .display{font-family:'Cormorant Garamond',Georgia,serif}
+.dc-DesignSystem .eyebrow{margin:0;font-size:12px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#A6C79C}
+.dc-DesignSystem .h2{margin:6px 0 0;font-family:'Cormorant Garamond',Georgia,serif;font-size:40px;font-weight:600;color:#F7EBD0}
+.dc-DesignSystem .rule{height:1px;background:rgba(219,199,125,.28)}
+.dc-DesignSystem .mono{font-family:ui-monospace,Menlo,monospace;font-size:12px}
+.dc-DesignSystem .th{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#A6C79C}
+.dc-DesignSystem .td{font-size:14px;color:#F7EBD0;line-height:1.45}
+.dc-DesignSystem .muted{color:#A6C79C}
+.dc-DesignSystem .bar{position:absolute;top:6px;height:20px;border-radius:10px}
+.dc-DesignSystem .magic{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 26px;border-radius:999px;border:0;background:rgba(7,27,21,.62);color:#F4DD82;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;font-weight:600;letter-spacing:.06em;box-shadow:0 0 0 1px rgba(244,221,130,.5),0 0 26px rgba(244,221,130,.3)}

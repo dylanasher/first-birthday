@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Dylan — Chapter 2, Event Details</title>
+<script src="./support.js"></script>
+<script src="/_blob/17d4179414200efbabee22c7746b97ba"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&amp;family=Nunito:wght@400;600;700&amp;family=Pinyon+Script&amp;display=swap">
+<style>
+body{margin:0;background:#102A20}
+.stage{position:relative;width:100vw;height:100vh;height:100dvh;container-type:size;--pillt:136px;--pillh:54px;overflow:hidden;background:#A9D6DF;font-family:'Nunito',system-ui,sans-serif;color:#102A20}
+.layer{position:absolute;inset:0;pointer-events:none}
+/* responsive scene: the tall painting (941x1672) always covers the screen like a photo set to "fill",
+   and is anchored so the church sits just under the schedule pill on any phone size */
+.scenefit{position:absolute;--sh:max(105cqh, calc(100cqw * 1672 / 941));--sw:calc(var(--sh) * 941 / 1672);width:var(--sw);height:var(--sh);
+left:clamp(calc(100cqw - var(--sw)), calc(44cqw - var(--sw) * 0.404), 0px);
+top:clamp(calc(100cqh - var(--sh)), calc(var(--pillt) + var(--pillh) + 14px - var(--sh) * 0.236), 0px)}
+.scene{position:absolute;inset:0;transform-origin:64% 40%;will-change:transform}
+/* painted layers, all on the same canvas so they line up exactly */
+.lyr{position:absolute;inset:0;background-size:100% 100%;background-position:0 0;background-repeat:no-repeat;will-change:transform}
+.far{background-image:url(/_blob/72c356d7d259618bde4193ecf6240365)}
+.cld{background-image:url(/_blob/9e52d324bad2e1607ee8916df64bc151)}
+.chu{background-image:url(/_blob/78a05963408625e04f8a7707066f2cc3)}
+.pth{background-image:url(/_blob/06d11f418dd2e8e4c2f844c667c2f54d)}
+.trunk{background-image:url(/_blob/61604aff2feed06d2793a5e3c9b5f307)}
+.lva{background-image:url(/_blob/cfa48c44b21e3ef8f983e5fc852214f4);transform-origin:50% 0}
+.lvb{background-image:url(/_blob/1ec6003f880faba7de29fbec7332a116);transform-origin:50% 0}
+.flw{background-image:url(/_blob/4283156db777ac5979dd91a8427e2c3f);transform-origin:50% 100%}
+/* church bell hanging in the belfry arch */
+.bell{position:absolute;left:49.735%;top:26.675%;width:2.2317%;height:2.5718%;background:url(/_blob/f56ae184439f25c623b15199243c4e7c) center / 100% 100% no-repeat;transform-origin:52% 7%}
+.leaf svg,.bird svg{display:block;width:100%;height:100%;overflow:visible}
+/* leaf gust: arrives covering the screen, then blows away to reveal the chapter */
+.gust{position:absolute;inset:0;z-index:60;pointer-events:none;overflow:hidden}
+.gust-bg{position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 50%,#3E6B45 0%,#264D35 45%,#102A20 100%)}
+.gleaf{position:absolute;left:0;top:0;opacity:0;filter:drop-shadow(0 1px 1px rgba(16,42,32,.3))}
+.gvein{fill:none;stroke:rgba(38,60,30,.55);stroke-width:.7;stroke-linecap:round}
+.gleaf svg{display:block;width:100%;height:100%}
+/* page turn to Chapter 3: this page curls away, revealing the seaside town */
+.nextlink{position:absolute;left:0;top:0;width:1px;height:1px;opacity:0;pointer-events:none}
+.under3{position:absolute;inset:0;z-index:70;pointer-events:none;display:none;background-color:#8EC6E6;background-repeat:no-repeat;
+--sh:max(111cqh, calc(100cqw * 1672 / 941));--sw:calc(var(--sh) * 941 / 1672);
+background-image:linear-gradient(to bottom,rgba(16,42,32,.62) 0%,rgba(16,42,32,.25) 12%,rgba(16,42,32,0) 22%),url(/_blob/4cb5408397a369014048bcbdd00e2f3b);
+background-size:100% 100%,var(--sw) var(--sh);
+background-position:0 0,clamp(calc(100cqw - var(--sw)), calc(50cqw - var(--sw) * 0.605), 0px) clamp(calc(100cqh - var(--sh)), calc(40cqh - var(--sh) * 0.446), 0px)}
+.tflapwrap{position:absolute;inset:0;z-index:71;pointer-events:none;display:none;filter:drop-shadow(-8px -8px 16px rgba(16,42,32,.45))}
+.tflap{position:absolute;inset:0;background:linear-gradient(135deg,#E9DCBC 0%,#F8EFD9 55%,#E0D0A8 100%)}
+/* storybook page turn: Chapter 1's page curls away from the bottom-right corner */
+.page{position:absolute;inset:0;z-index:61;pointer-events:none;display:none}
+.pfront{position:absolute;inset:0;background:url(/_blob/3f084f2a66b4f2eff1b82c339c615f07) 52% 50% / cover no-repeat}
+.pfront::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(16,42,32,.85) 0%,rgba(16,42,32,.45) 55%,rgba(16,42,32,.15) 100%)}
+.pflapwrap{position:absolute;inset:0;filter:drop-shadow(-8px -8px 16px rgba(16,42,32,.4))}
+.pflap{position:absolute;inset:0;background:linear-gradient(135deg,#E9DCBC 0%,#F8EFD9 55%,#E0D0A8 100%)}
+/* falling leaves */
+.leaf{position:absolute;left:0;top:0;width:11px;height:11px;opacity:0;filter:drop-shadow(0 1px 1px rgba(16,42,32,.25))}
+.vein{fill:none;stroke:rgba(38,60,30,.55);stroke-width:.7;stroke-linecap:round}
+/* painted birds */
+.bird{position:absolute;left:0;top:0;width:20px;height:11px;filter:blur(.2px)}
+.wu{animation:flapA .34s steps(1) infinite}
+.wd{animation:flapB .34s steps(1) infinite}
+@keyframes flapA{0%{opacity:1}50%{opacity:0}}
+@keyframes flapB{0%{opacity:0}50%{opacity:1}}
+.topshade{background:linear-gradient(to bottom,rgba(16,42,32,.7) 0%,rgba(16,42,32,.3) 16%,rgba(16,42,32,0) 26%)}
+.script{font-family:'Pinyon Script',cursive;font-weight:400}
+.display{font-family:'IM Fell English',Georgia,serif;font-weight:400}
+.lift{text-shadow:0 2px 12px rgba(16,42,32,.8),0 0 2px rgba(16,42,32,.6)}
+.chtitle{position:absolute;left:0;right:0;top:22px;display:flex;flex-direction:column;align-items:center;text-align:center;color:#F5EBD5}
+
+/* day timeline (glass pill) */
+.tline{position:absolute;left:20px;right:20px;top:var(--pillt);height:var(--pillh);max-width:440px;margin:0 auto;border-radius:18px;background:rgba(16,42,32,.42);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:inset 0 0 0 1px rgba(245,235,213,.22);display:flex;align-items:center;padding:0 14px}
+.track{position:absolute;left:68px;right:68px;top:11px;height:2px;background:rgba(245,235,213,.25);border-radius:2px}
+.trackfill{position:absolute;left:0;top:0;bottom:0;width:100%;background:#F5D68A;border-radius:2px;transform-origin:0 50%}
+.step{position:relative;flex:1;display:flex;flex-direction:column;align-items:center;gap:4px}
+.sdot{width:12px;height:12px;border-radius:50%;background:#F5D68A;box-shadow:0 0 0 3px rgba(245,214,138,.25),0 0 12px rgba(245,214,138,.6)}
+.stime{margin:0;font-size:12px;font-weight:700;color:#F5EBD5;line-height:1}
+.slbl{margin:0;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#B0C87C;line-height:1}
+
+/* frosted storybook sheet */
+.sheet{position:absolute;left:0;right:0;bottom:0;height:clamp(320px, 56.4cqh, 620px);display:flex;flex-direction:column;background:rgba(245,235,213,.6);backdrop-filter:blur(7px) saturate(1.1);-webkit-backdrop-filter:blur(7px) saturate(1.1);clip-path:polygon(0.00% 14.0px, 3.85% 11.5px, 7.74% 11.3px, 11.70% 12.2px, 15.76% 13.4px, 19.97% 13.7px, 24.36% 12.0px, 28.75% 9.2px, 33.00% 7.0px, 37.18% 5.5px, 41.36% 5.0px, 45.61% 5.8px, 50.00% 8.0px, 54.43% 9.8px, 58.78% 9.8px, 63.11% 8.8px, 67.45% 7.6px, 71.87% 7.0px, 76.41% 8.0px, 80.47% 9.1px, 84.46% 9.0px, 88.40% 8.4px, 92.29% 8.0px, 96.15% 8.6px, 100.00% 11.0px, 100% 100%, 0% 100%)}
+.sheet::before{content:'';position:absolute;left:0;right:0;top:0;height:40px;background:linear-gradient(to bottom,rgba(255,250,235,.5),rgba(255,250,235,0));pointer-events:none}
+.tabs{position:relative;display:flex;gap:6px;padding:22px 16px 10px;flex:none}
+.ind{position:absolute;left:0;top:22px;height:44px;width:110px;border-radius:999px;background:#264D35;box-shadow:0 6px 16px rgba(16,42,32,.28)}
+.tab{position:relative;z-index:1;flex:1;display:flex;align-items:center;justify-content:center;gap:6px;min-height:44px;border-radius:999px;border:1px solid rgba(38,77,53,.22);background:transparent;color:#264D35;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:color .3s ease,border-color .3s ease}
+.tab.on{color:#F5EBD5;border-color:transparent}
+.tab:focus-visible{outline:2px solid #C9A24E;outline-offset:2px}
+.scroll{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;padding:4px 22px 18px;-webkit-overflow-scrolling:touch}
+.eyebrow{margin:0;font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#5E4A36}
+.venue{margin:4px 0 0;font-family:'IM Fell English',Georgia,serif;font-size:27px;line-height:1.12;color:#102A20}
+.sub{margin:2px 0 0;font-size:13px;color:#2F4B2C;font-style:italic}
+.row{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed rgba(94,74,54,.3)}
+.ico{flex:none;width:34px;height:34px;border-radius:50%;background:rgba(245,235,213,.75);box-shadow:inset 0 0 0 1px rgba(86,119,71,.3);display:flex;align-items:center;justify-content:center}
+.lbl{margin:0;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#5E4A36}
+.val{margin:2px 0 0;font-size:15px;line-height:1.45;color:#102A20}
+.maps{display:flex;gap:10px;margin-top:14px}
+.btn{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;border-radius:999px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;text-decoration:none;transition:transform .2s ease,box-shadow .2s ease,background .2s ease}
+.btn:hover{transform:translateY(-2px)}
+.btn.primary{background:#264D35;color:#F5EBD5;box-shadow:0 6px 14px rgba(16,42,32,.25)}
+.btn.primary:hover{background:#1B3A27;box-shadow:0 10px 20px rgba(16,42,32,.3)}
+.btn.secondary{border:1.5px solid #264D35;color:#264D35;background:rgba(245,235,213,.5)}
+.btn:focus-visible{outline:2px solid #C9A24E;outline-offset:3px}
+.note{position:relative;overflow:hidden;margin-top:16px;padding:14px 16px;border-radius:16px;background:rgba(245,214,138,.45);border:1px solid rgba(201,162,78,.5)}
+.note p{position:relative;margin:0;font-size:14px;line-height:1.55;color:#102A20}
+.shine{position:absolute;top:0;bottom:0;left:-40%;width:35%;background:linear-gradient(100deg,rgba(255,255,255,0),rgba(255,255,255,.55),rgba(255,255,255,0));transform:skewX(-18deg)}
+.foot{flex:none;display:flex;align-items:center;justify-content:space-between;padding:10px 16px 16px;border-top:1px solid rgba(94,74,54,.18)}
+.dot{width:6px;height:6px;border-radius:50%;background:rgba(38,77,53,.3)}
+.dot.on{width:20px;border-radius:3px;background:#264D35}
+.next{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border:0;border-radius:999px;background:#264D35;color:#F5EBD5;font-family:'IM Fell English',Georgia,serif;font-size:16px;cursor:pointer;transition:transform .2s ease}
+.next:hover{transform:translateX(3px)}
+.next:focus-visible{outline:2px solid #C9A24E;outline-offset:3px}
+/* storybook scrollbar: a slim vine line with a glowing pill */
+.scroll::-webkit-scrollbar{width:10px;height:10px}
+.scroll::-webkit-scrollbar-track{margin:14px 0;background:linear-gradient(to right,transparent 4px,rgba(47,91,58,.22) 4px,rgba(47,91,58,.22) 6px,transparent 6px)}
+.scroll::-webkit-scrollbar-thumb{border-radius:999px;border:2px solid transparent;background:linear-gradient(180deg,#C9A24E,#2F5B3A) padding-box;box-shadow:inset 0 0 0 1px rgba(255,250,240,.55)}
+.scroll::-webkit-scrollbar-thumb:hover{border-width:1px}
+.scroll::-webkit-scrollbar-corner{background:transparent}
+@supports not selector(::-webkit-scrollbar){.scroll{scrollbar-width:thin;scrollbar-color:#2F5B3A transparent}}
+/* bunny pointer + a trail of tiny leaves and sparkles (mouse/trackpad only) */
+@media (hover:hover) and (pointer:fine){.stage,.stage *{cursor:none !important}.stage input,.stage textarea{cursor:text !important}}
+.bunnycur{position:absolute;left:0;top:0;width:52px;height:73px;margin:-15px 0 0 -1px;background:url(/_blob/dbadbf2c44d41f6a5e3b3e01c5391ca4) 0 0/100% 100% no-repeat;pointer-events:none;z-index:96;opacity:0;transform-origin:50% 30%;filter:drop-shadow(0 4px 6px rgba(20,30,20,.3));will-change:transform}
+.trailp{position:absolute;left:0;top:0;pointer-events:none;z-index:95;will-change:transform,opacity}
+.trailp.tl{width:9px;height:9px;border-radius:80% 0 80% 0}
+.trailp.ts{width:6px;height:6px;border-radius:50%;background:#FFF3C4;box-shadow:0 0 8px 3px rgba(247,216,115,.75)}
+/* short phones (iPhone SE and smaller): a more compact header so the church still shows between the schedule and the panel */
+@container (max-height: 720px){
+.scenefit,.tline{--pillt:100px;--pillh:48px}
+.chtitle{top:14px}
+.chtitle h1{font-size:38px !important}
+.chtitle .display{font-size:16px !important}
+}
+/* until the sliding pill is measured, the selected tab paints its own fill so it always reads correctly */
+.tabs:not(.ready) .tab.on{background:#264D35}
+</style>
+</helmet>
+
+<div class="stage" ref="{{setRoot}}">
+
+<!-- painted countryside: base painting, the big tree as its own layer, bell, birds, leaves -->
+<div class="scenefit">
+<div class="scene" aria-hidden="true">
+<div class="lyr far"></div>
+<div class="lyr cld"></div>
+<div class="lyr chu"></div>
+<span class="bell"></span>
+<span class="bird b1"><svg viewBox="0 0 20 11"><path class="wu" d="M0 3.5 C3 1 6.5 1.2 9.2 5.4 C9.6 3 10.4 3 10.8 5.4 C13.5 1.2 17 1 20 3.5 C16.5 3.4 13.5 4.8 11 7.6 C10.4 8.6 9.6 8.6 9 7.6 C6.5 4.8 3.5 3.4 0 3.5 Z" fill="#3E4A50"></path><path class="wd" d="M0 8.8 C3.4 8 6.5 7 9 5.6 C9.6 4.2 10.4 4.2 11 5.6 C13.5 7 16.6 8 20 8.8 C16.4 9.8 13.4 9.4 11 8.2 C10.4 9.2 9.6 9.2 9 8.2 C6.6 9.4 3.6 9.8 0 8.8 Z" fill="#3E4A50"></path></svg></span>
+<span class="bird b2"><svg viewBox="0 0 20 11"><path class="wu" d="M0 3.5 C3 1 6.5 1.2 9.2 5.4 C9.6 3 10.4 3 10.8 5.4 C13.5 1.2 17 1 20 3.5 C16.5 3.4 13.5 4.8 11 7.6 C10.4 8.6 9.6 8.6 9 7.6 C6.5 4.8 3.5 3.4 0 3.5 Z" fill="#46525A" style="animation-delay: -.12s"></path><path class="wd" d="M0 8.8 C3.4 8 6.5 7 9 5.6 C9.6 4.2 10.4 4.2 11 5.6 C13.5 7 16.6 8 20 8.8 C16.4 9.8 13.4 9.4 11 8.2 C10.4 9.2 9.6 9.2 9 8.2 C6.6 9.4 3.6 9.8 0 8.8 Z" fill="#46525A" style="animation-delay: -.12s"></path></svg></span>
+<span class="bird b3"><svg viewBox="0 0 20 11"><path class="wu" d="M0 3.5 C3 1 6.5 1.2 9.2 5.4 C9.6 3 10.4 3 10.8 5.4 C13.5 1.2 17 1 20 3.5 C16.5 3.4 13.5 4.8 11 7.6 C10.4 8.6 9.6 8.6 9 7.6 C6.5 4.8 3.5 3.4 0 3.5 Z" fill="#4C585E" style="animation-delay: -.22s"></path><path class="wd" d="M0 8.8 C3.4 8 6.5 7 9 5.6 C9.6 4.2 10.4 4.2 11 5.6 C13.5 7 16.6 8 20 8.8 C16.4 9.8 13.4 9.4 11 8.2 C10.4 9.2 9.6 9.2 9 8.2 C6.6 9.4 3.6 9.8 0 8.8 Z" fill="#4C585E" style="animation-delay: -.22s"></path></svg></span>
+<div class="lyr pth"></div>
+<div class="lyr trunk"></div>
+<div class="lyr lvb"></div>
+<div class="lyr lva"></div>
+<sc-for list="{{leaves}}" as="l" hint-placeholder-count="8">
+<span class="leaf"><svg viewBox="0 0 12 12"><path d="M1 11 C1 5 5 1 11 1 C11 7 7 11 1 11 Z" fill="{{l.color}}"></path><path class="vein" d="M1.5 10.5 L9.5 2.5"></path></svg></span>
+</sc-for>
+<div class="lyr flw"></div>
+</div>
+</div>
+<div class="layer topshade"></div>
+
+<div class="chtitle">
+<p class="lift ca" style="margin: 0; font-size: 11px; font-weight: 700; letter-spacing: .26em; text-transform: uppercase">Chapter II · The Journey</p>
+<h1 class="script lift ca" style="margin: 4px 0 0; font-size: 46px; line-height: 1.1; color: #F5D68A">Where &amp; When</h1>
+<p class="display lift ca" style="margin: 2px 0 0; font-size: 18px; font-style: italic">Sunday, December 13, 2026</p>
+</div>
+
+<!-- the afternoon at a glance -->
+<div class="tline" aria-label="Schedule: Godparents arrive 1:00 PM, Baptism 1:30 PM, Reception 2:00 PM">
+<div class="track" aria-hidden="true"><div class="trackfill"></div></div>
+<div class="step"><span class="sdot"></span><p class="stime">1:00 PM</p><p class="slbl">Godparents</p></div>
+<div class="step"><span class="sdot"></span><p class="stime">1:30 PM</p><p class="slbl">Baptism</p></div>
+<div class="step"><span class="sdot"></span><p class="stime">2:00 PM</p><p class="slbl">Reception</p></div>
+</div>
+
+<!-- frosted sheet with the details -->
+<div class="sheet">
+<div class="tabs" role="group" aria-label="Event details sections">
+<span class="ind" aria-hidden="true"></span>
+<button class="tab t-ceremony {{tabCer}}" type="button" aria-pressed="{{pressCer}}" onClick="{{showCer}}">
+<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" style="stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"><path d="M12 2v5M9.5 4.5h5M5 21V11l7-4 7 4v10M9 21v-5a3 3 0 0 1 6 0v5M3 21h18"></path></svg>
+Ceremony
+</button>
+<button class="tab t-reception {{tabRec}}" type="button" aria-pressed="{{pressRec}}" onClick="{{showRec}}">
+<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" style="stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"><path d="M4 21h16M5 21v-7h14v7M5 14c1.5 1 3 1 4.5 0s3-1 4.5 0 3 1 4.5 0M8 14V11M12 14v-4M16 14v-3M12 6c.8-.8.8-2 0-3-.8 1-.8 2.2 0 3z"></path></svg>
+Reception
+</button>
+<button class="tab t-parking {{tabPark}}" type="button" aria-pressed="{{pressPark}}" onClick="{{showPark}}">
+<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" style="stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"><rect x="3" y="3" width="18" height="18" rx="4"></rect><path d="M10 17V7h3.5a3 3 0 0 1 0 6H10"></path></svg>
+Parking
+</button>
+</div>
+
+<div class="scroll">
+
+<sc-if value="{{isCer}}" hint-placeholder-val="{{ true }}">
+<div class="panel">
+<p class="eyebrow a">Holy Baptism</p>
+<h2 class="venue a">Santuario de San Antonio Parish</h2>
+<p class="sub a">Archdiocese of Manila</p>
+<div style="margin-top: 8px">
+<div class="row a"><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#264D35" style="stroke-width: 1.8; stroke-linecap: round"><rect x="3" y="5" width="18" height="16" rx="3"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg></span><div><p class="lbl">Date</p><p class="val">Sunday, December 13, 2026</p></div></div>
+<div class="row a"><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#264D35" style="stroke-width: 1.8; stroke-linecap: round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></span><div><p class="lbl">Ceremony begins</p><p class="val">1:30 PM</p></div></div>
+<div class="row a" style="border-bottom: 0"><span class="ico pin"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#264D35" style="stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg></span><div><p class="lbl">Address</p><p class="val">3117 McKinley Road, Forbes Park, Makati City</p></div></div>
+</div>
+<div class="maps a">
+<a class="btn primary" href="https://maps.app.goo.gl/Tag57jheAtuJ8mD97" target="_blank" rel="noopener">Google Maps</a>
+<a class="btn secondary" href="https://waze.com/ul?q=Santuario%20de%20San%20Antonio%20Parish%2C%20Forbes%20Park%2C%20Makati&amp;navigate=yes" target="_blank" rel="noopener">Waze</a>
+</div>
+<div class="note a">
+<span class="shine" aria-hidden="true"></span>
+<p><span class="script" style="font-size: 22px; color: #5E4A36">To our dear Godparents,</span><br>Kindly arrive at the church by <strong>1:00 PM</strong>, at least 30 minutes before the ceremony, for the baptismal preparations and briefing.</p>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{isRec}}" hint-placeholder-val="{{ false }}">
+<div class="panel">
+<p class="eyebrow a">First Birthday Celebration</p>
+<h2 class="venue a">Santuario de San Antonio Social Hall</h2>
+<p class="sub a">Same address as the church</p>
+<div style="margin-top: 8px">
+<div class="row a"><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#264D35" style="stroke-width: 1.8; stroke-linecap: round"><rect x="3" y="5" width="18" height="16" rx="3"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg></span><div><p class="lbl">Date</p><p class="val">Sunday, December 13, 2026</p></div></div>
+<div class="row a"><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#264D35" style="stroke-width: 1.8; stroke-linecap: round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></span><div><p class="lbl">Reception begins</p><p class="val">2:00 PM, right after the baptism</p></div></div>
+<div class="row a" style="border-bottom: 0"><span class="ico pin"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#264D35" style="stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg></span><div><p class="lbl">Address</p><p class="val">3117 McKinley Road, Forbes Park, Makati City</p></div></div>
+</div>
+<div class="maps a">
+<a class="btn primary" href="https://maps.app.goo.gl/WQ3vXG6wVcAmGwUY6" target="_blank" rel="noopener">Google Maps</a>
+<a class="btn secondary" href="https://waze.com/ul?q=Santuario%20de%20San%20Antonio%20Parish%2C%20Forbes%20Park%2C%20Makati&amp;navigate=yes" target="_blank" rel="noopener">Waze</a>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{isPark}}" hint-placeholder-val="{{ false }}">
+<div class="panel">
+<p class="eyebrow a">Church &amp; Reception</p>
+<h2 class="venue a">Parking &amp; Arrival</h2>
+<p class="sub a">Both venues share the same premises</p>
+<div style="margin-top: 8px">
+<div class="row a"><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#264D35" style="stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"><rect x="3" y="3" width="18" height="18" rx="4"></rect><path d="M10 17V7h3.5a3 3 0 0 1 0 6H10"></path></svg></span><div><p class="lbl">Where to park</p><p class="val">Within the church premises</p></div></div>
+<div class="row a"><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#264D35" style="stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"><path d="M4 12h13M13 7l5 5-5 5M20 4v16"></path></svg></span><div><p class="lbl">Vehicle entrance</p><p class="val">Via McKinley Road</p></div></div>
+<div class="row a" style="border-bottom: 0"><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#264D35" style="stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"><circle cx="12" cy="6" r="2.5"></circle><path d="M12 9v6M8 21l4-6 4 6M7 12h10"></path></svg></span><div><p class="lbl">Parking &amp; drop-off</p><p class="val">Please follow the parking attendants' directions for parking and drop-off areas.</p></div></div>
+</div>
+<div class="note a">
+<span class="shine" aria-hidden="true"></span>
+<p><strong>Tip:</strong> We recommend arriving early to secure a spot, especially our Godparents arriving by 1:00 PM.</p>
+</div>
+<div class="maps a">
+<a class="btn primary" href="https://maps.app.goo.gl/Tag57jheAtuJ8mD97" target="_blank" rel="noopener">Directions to the church</a>
+</div>
+</div>
+</sc-if>
+
+</div>
+
+<div class="foot">
+<div style="display: flex; flex-direction: column; gap: 5px">
+<div aria-hidden="true" style="display: flex; gap: 6px; align-items: center"><span class="dot"></span><span class="dot on"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+<p style="margin: 0; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #2F4B2C">Chapter 2 of 8</p>
+</div>
+<button class="next" type="button" onClick="{{goNext}}">Milestones
+<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8 H12 M8.5 4 L12.5 8 L8.5 12" fill="none" stroke="#F5D68A" style="stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"></path></svg>
+</button>
+<a class="nextlink" href="Ch3.dc.html" tabindex="-1" aria-hidden="true">Chapter 3</a>
+</div>
+</div>
+
+<!-- page-turn overlay (transition option 4) -->
+<div class="page" aria-hidden="true"><div class="pfront"></div><div class="pflapwrap"><div class="pflap"></div></div></div>
+
+<!-- leaf gust carried over from Chapter 1 -->
+<div class="gust" aria-hidden="true">
+<sc-for list="{{gustLeaves}}" as="gl" hint-placeholder-count="40">
+<span class="gleaf" style="{{gl.style}}"><svg viewBox="0 0 12 12"><path d="M1 11 C1 5 5 1 11 1 C11 7 7 11 1 11 Z" fill="{{gl.color}}"></path><path class="gvein" d="M1.5 10.5 L9.5 2.5"></path></svg></span>
+</sc-for>
+</div>
+
+<!-- page turn to Chapter 3: the seaside town underneath + the curling back of this page -->
+<div class="under3" aria-hidden="true"></div>
+<div class="tflapwrap" aria-hidden="true"><div class="tflap"></div></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"startTab":{"editor":"enum","options":["ceremony","reception","parking"],"default":"ceremony"},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { tab: null, dir: 1 };
+    this.root = null;
+    this.tweens = [];
+    this.tries = 0;
+    this.order = ['ceremony', 'reception', 'parking'];
+  }
+  componentDidMount() { this.initTrailSoon(); this.boot(); }
+  componentWillUnmount() { if (this.indRO) this.indRO.disconnect(); if (this.onMove && this.root) { this.root.removeEventListener('pointermove', this.onMove); this.root.removeEventListener('pointerleave', this.onLeave); this.root.removeEventListener('pointerdown', this.onDown); }
+    if (this.io) this.io.disconnect();
+    clearTimeout(this.retry);
+    this.tweens.forEach(function (t) { t.kill(); });
+  }
+  current() { return this.state.tab || this.props.startTab || 'ceremony'; }
+  reduced() {
+    try { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; }
+  }
+  afterTab() {
+    if (!this.root || !window.gsap) return;
+    this.moveIndicator(true);
+    if (this.reduced()) return;
+    var items = this.root.querySelectorAll('.panel .a');
+    window.gsap.fromTo(items, { x: 22 * this.state.dir, opacity: 0 }, { x: 0, opacity: 1, duration: 0.55, stagger: 0.05, ease: 'expo.out', clearProps: 'transform' });
+    var sc = this.root.querySelector('.scroll'); if (sc) sc.scrollTop = 0;
+    this.shine();
+  }
+  moveIndicator(animate) {
+    var btn = this.root.querySelector('.t-' + this.current());
+    var ind = this.root.querySelector('.ind');
+    if (!btn || !ind) return;
+    /* wait until the tabs are really laid out (the board can mount while hidden), then keep the pill in sync if they resize */
+    if (!btn.offsetWidth) { var me = this; if ((this.indTries = (this.indTries || 0) + 1) < 60) setTimeout(function () { me.moveIndicator(false); }, 150); return; }
+    this.indTries = 0;
+    if (btn.parentNode && btn.parentNode.classList) btn.parentNode.classList.add('ready');
+    if (!this.indRO && window.ResizeObserver && btn.parentNode) { var me2 = this; this.indRO = new ResizeObserver(function () { me2.moveIndicator(false); }); this.indRO.observe(btn.parentNode); }
+    var props = { x: btn.offsetLeft, width: btn.offsetWidth };
+    if (animate && !this.reduced()) window.gsap.to(ind, Object.assign(props, { duration: 0.55, ease: 'expo.out' }));
+    else window.gsap.set(ind, props);
+  }
+  shine() {
+    var s = this.root.querySelector('.panel .shine');
+    if (s && !this.reduced()) window.gsap.fromTo(s, { left: '-40%' }, { left: '130%', duration: 1.4, ease: 'power2.inOut', delay: 0.5 });
+  }
+  boot() {
+    var self = this;
+    if (!this.root || !window.gsap) {
+      if (this.tries++ < 25) this.retry = setTimeout(function () { self.boot(); }, 120);
+      else this.hideGust();
+      return;
+    }
+    var g = window.gsap, r = this.root, t = this.tweens;
+    this.moveIndicator(false);
+    try { document.fonts.ready.then(function () { self.moveIndicator(false); }); } catch (e) {}
+    if (this.reduced()) { this.hideGust(); return; }
+    var q = function (s) { return r.querySelector(s); };
+    var qa = function (s) { return r.querySelectorAll(s); };
+
+    /* entrance: the scene settles, title floats in, schedule draws, the page rises */
+    // 1. the leaves that carried us here blow away, then 2. the chapter makes its entrance
+    var intro = g.timeline({ paused: true });
+    intro.add(this.openGust(g), 0);
+    // 3. then the details slowly appear (the whole entrance plays at a gentler pace)
+    var tl = g.timeline();
+    tl.timeScale(0.7);
+    tl.from(q('.scene'), this.mode() === 'leaves' ? { scale: 1.1, y: 20, duration: 2.0, ease: 'power3.out' } : { duration: 0.01 }, 0)
+      .from(qa('.ca'), { y: -16, opacity: 0, filter: 'blur(4px)', duration: 0.9, stagger: 0.12, ease: 'expo.out' }, 0.3)
+      .from(q('.tline'), { y: 14, opacity: 0, duration: 0.8, ease: 'expo.out' }, 0.7)
+      .from(q('.trackfill'), { scaleX: 0, duration: 1.4, ease: 'power2.inOut' }, 1.0)
+      .from(qa('.sdot'), { scale: 0, duration: 0.5, stagger: 0.45, ease: 'back.out(3)' }, 1.0)
+      .from(q('.sheet'), { yPercent: 100, duration: 1.15, ease: 'expo.out' }, 0.55)
+      .from(qa('.tab, .ind'), { y: 12, opacity: 0, duration: 0.7, stagger: 0.06, ease: 'expo.out' }, 1.0)
+      .from(qa('.panel .a, .foot'), { y: 14, opacity: 0, duration: 0.8, stagger: 0.05, ease: 'expo.out' }, 1.15)
+      .from(qa('.panel .pin svg'), { y: -14, duration: 0.7, ease: 'bounce.out' }, 1.6);
+    intro.add(tl, this.revealEnd || 4.0);
+    // 4. once the page has settled, the countryside comes alive: wind, falling leaves, bell, birds
+    intro.call(function () {
+      if (self.alive) return;
+      self.alive = true;
+      self.shine();
+      // every position below is measured on the painting, then scaled to however big the scene is on this phone
+      var sf = r.querySelector('.scenefit'), f = sf && sf.offsetHeight ? sf.offsetHeight / 886 : 1;
+      var bto = (r.offsetWidth - (sf ? sf.offsetLeft : 0)) + 40;
+      self.ambient(g, q, qa, t, { k: 0.7, leafX: [10 * f, 250 * f], leafY: [30 * f, 200 * f], fall: [480 * f, 640 * f], drift: [60 * f, 160 * f], birdY: [222 * f, 244 * f], birdTo: bto, scale: 0.9 * f });
+    }, null, 0.2);
+    t.push(intro);
+    this.intro = intro;
+    // the intro waits until this chapter is actually on screen, and replays each time you arrive
+    this.watchVisibility();
+    t.push(g.to(qa('.sdot'), { boxShadow: '0 0 0 5px rgba(245,214,138,.15), 0 0 18px rgba(245,214,138,.9)', duration: 1.6, stagger: 0.5, ease: 'sine.inOut', yoyo: true, repeat: -1, delay: 3 }));
+  }
+  // the page turn now happens on Chapter 1 itself, so this chapter just continues from the revealed view
+  mode() { return 'none'; }
+  /* Option 1, stepping out of the woods: we start pressed up against the big tree's leaves,
+     then the branches lift away as the camera steps back into the sunlit valley */
+  openWoods(g) {
+    var r = this.root, H = r.offsetHeight;
+    var scene = r.querySelector('.scene'), lvs = r.querySelectorAll('.lva, .lvb');
+    var tl = g.timeline();
+    tl.set(r.querySelector('.gust'), { display: 'none' }, 0)
+      .fromTo(scene, { scale: 2.5, transformOrigin: '16% 6%', filter: 'brightness(0.8)' }, { scale: 1, filter: 'brightness(1)', duration: 2.8, ease: 'power2.inOut' }, 0)
+      .fromTo(lvs, { y: H * 0.3, scale: 1.45 }, { y: 0, scale: 1, duration: 2.6, ease: 'power2.inOut', stagger: 0.12 }, 0)
+      .set(scene, { filter: 'none' }, 2.85);
+    this.revealEnd = 2.3;
+    return tl;
+  }
+  /* Option 4, storybook page turn: Chapter 1's page curls away from the bottom-right corner */
+  openPage(g) {
+    var r = this.root, W = r.offsetWidth, H = r.offsetHeight;
+    var page = r.querySelector('.page'), front = r.querySelector('.pfront'), flap = r.querySelector('.pflap');
+    function clip(poly, keepBelow, c) {
+      var out = [];
+      for (var i = 0; i < poly.length; i++) {
+        var a = poly[i], b = poly[(i + 1) % poly.length];
+        var fa = a[0] + a[1] - c, fb = b[0] + b[1] - c;
+        var inA = keepBelow ? fa <= 0 : fa >= 0, inB = keepBelow ? fb <= 0 : fb >= 0;
+        if (inA) out.push(a);
+        if (inA !== inB) { var k = fa / (fa - fb); out.push([a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k]); }
+      }
+      return out;
+    }
+    function css(pts) {
+      if (pts.length < 3) return 'polygon(0px 0px, 0px 0px, 0px 0px)';
+      return 'polygon(' + pts.map(function (p) { return p[0].toFixed(1) + 'px ' + p[1].toFixed(1) + 'px'; }).join(', ') + ')';
+    }
+    var rect = [[0, 0], [W, 0], [W, H], [0, H]];
+    var st = { c: W + H };
+    function draw() {
+      var c = st.c;
+      front.style.clipPath = css(clip(rect, true, c));
+      // the folded-over part is mirrored across the fold line, showing the cream back of the page
+      flap.style.clipPath = css(clip(rect, false, c).map(function (p) { return [c - p[1], c - p[0]]; }));
+    }
+    draw();
+    var tl = g.timeline();
+    tl.set(r.querySelector('.gust'), { display: 'none' }, 0)
+      .set(page, { display: 'block' }, 0)
+      .set(st, { c: W + H, onComplete: draw }, 0)
+      .to(st, { c: -40, duration: 1.9, ease: 'power2.inOut', onUpdate: draw }, 0.35)
+      .set(page, { display: 'none' }, 2.3);
+    this.revealEnd = 1.8;
+    return tl;
+  }
+  /* storybook page turn to Chapter 3: this page curls away from the bottom-right corner,
+     revealing the seaside town, then Chapter 3 continues from that exact view */
+  goNext() {
+    var self = this, r = this.root;
+    if (!r) return;
+    var link = r.querySelector('.nextlink'), g = window.gsap;
+    if (!g || this.reduced()) { if (link) link.click(); return; }
+    if (this.turning) return;
+    this.turning = true;
+    var W = r.offsetWidth, H = r.offsetHeight;
+    var under = r.querySelector('.under3'), wrap = r.querySelector('.tflapwrap'), flap = r.querySelector('.tflap');
+    function clip(poly, keepBelow, c) {
+      var out = [];
+      for (var i = 0; i < poly.length; i++) {
+        var a = poly[i], b = poly[(i + 1) % poly.length];
+        var fa = a[0] + a[1] - c, fb = b[0] + b[1] - c;
+        var inA = keepBelow ? fa <= 0 : fa >= 0, inB = keepBelow ? fb <= 0 : fb >= 0;
+        if (inA) out.push(a);
+        if (inA !== inB) { var k = fa / (fa - fb); out.push([a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k]); }
+      }
+      return out;
+    }
+    function css(pts) {
+      if (pts.length < 3) return 'polygon(0px 0px, 0px 0px, 0px 0px)';
+      return 'polygon(' + pts.map(function (p) { return p[0].toFixed(1) + 'px ' + p[1].toFixed(1) + 'px'; }).join(', ') + ')';
+    }
+    var rect = [[0, 0], [W, 0], [W, H], [0, H]];
+    var st = { c: W + H };
+    function draw() {
+      var c = st.c, turned = clip(rect, false, c);
+      under.style.clipPath = css(turned);
+      flap.style.clipPath = css(turned.map(function (p) { return [c - p[1], c - p[0]]; }));
+    }
+    draw();
+    under.style.display = 'block';
+    wrap.style.display = 'block';
+    g.set(r, { pointerEvents: 'none' });
+    g.to(st, { c: -40, duration: 2.0, ease: 'power2.inOut', onUpdate: draw, onComplete: function () {
+      if (link) link.click();
+      setTimeout(function () { under.style.display = 'none'; wrap.style.display = 'none'; g.set(r, { pointerEvents: 'auto' }); self.turning = false; }, 800);
+    } });
+  }
+  watchVisibility() {
+    var self = this, r = this.root;
+    if (!('IntersectionObserver' in window)) { this.intro.play(); return; }
+    this.io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { if (!self.seen) { self.seen = true; self.intro.restart(); } }
+        else self.seen = false;
+      });
+    }, { threshold: 0.15 });
+    this.io.observe(r);
+  }
+  gustData(n, min, range) {
+    var pal = ['#7FA552', '#A9C46A', '#5E8A45', '#C9C46A', '#94B85E', '#6F9A4C', '#B5C977', '#86AD58'];
+    var out = [];
+    for (var i = 0; i < n; i++) { var s = min + ((i * 37) % range); out.push({ color: pal[i % pal.length], style: 'width:' + s + 'px;height:' + s + 'px' }); }
+    return out;
+  }
+  hideGust() {
+    var gu = this.root && this.root.querySelector('.gust');
+    if (gu) gu.style.display = 'none';
+  }
+  /* leafCurtainTransition (in): a gust of leaves crosses the faded countryside, then the scene comes up to full */
+  openGust(g) {
+    if (this.mode() === 'none') {
+      var t0 = g.timeline();
+      t0.set(this.root.querySelector('.gust'), { display: 'none' }, 0);
+      this.revealEnd = 0.3;
+      return t0;
+    }
+    if (this.mode() === 'woods') return this.openWoods(g);
+    if (this.mode() === 'pageturn') return this.openPage(g);
+    this.revealEnd = 4.0;
+    var r = this.root, W = r.offsetWidth, H = r.offsetHeight;
+    var leaves = r.querySelectorAll('.gleaf'), scene = r.querySelector('.scene');
+    var each = W > 800 ? 0.011 : 0.02;
+    var tl = g.timeline();
+    tl.set(r.querySelector('.gust'), { display: 'block' }, 0).set(scene, { filter: 'blur(14px)' }, 0);
+    // 1. leaves fall from above, tumbling and drifting with the breeze, over the faded countryside
+    tl.fromTo(leaves, {
+      // leaves let go from the big tree in the upper-left corner
+      x: function () { return g.utils.random(-W * 0.25, W * 0.4); },
+      y: function () { return g.utils.random(-H * 0.45, H * 0.1); },
+      rotation: function () { return g.utils.random(0, 360); },
+      scale: function () { return g.utils.random(0.8, 1.3); },
+      opacity: 1
+    }, {
+      // ...and drift diagonally down and to the right with the breeze
+      y: function () { return '+=' + g.utils.random(H * 0.9, H * 1.3); },
+      x: function () { return '+=' + g.utils.random(W * 0.35, W * 0.85); },
+      rotation: '+=300',
+      duration: function () { return g.utils.random(2.2, 3.0); },
+      ease: 'none',
+      stagger: { each: each, from: 'random' }
+    }, 0)
+      .to(r.querySelectorAll('.gleaf svg'), { scaleX: -1, x: 'random(-12, 12)', duration: 0.34, ease: 'sine.inOut', yoyo: true, repeat: 11, stagger: { each: each, from: 'random' } }, 0)
+      .to(leaves, { opacity: 0, duration: 0.6, ease: 'power1.in' }, 3.6)
+      // 2. after the leaves have fallen, the countryside slowly comes into focus
+      .to(scene, { filter: 'blur(0px)', duration: 2.0, ease: 'power1.inOut' }, 2.8)
+      .set(scene, { filter: 'none' }, 4.85)
+      .set(r.querySelector('.gust'), { display: 'none' }, 4.3);
+    return tl;
+  }
+  /* the countryside breathes: wind in the big tree, falling leaves, the chapel bell, a small flock */
+  ambient(g, q, qa, t, o) {
+    // wind: the trunk stays still; each leaf cluster sways on its own timing in uneven gusts
+    var k = o.k;
+    function gusts(el, amp, base, delay) {
+      var w = g.timeline({ repeat: -1, delay: delay });
+      // the canopy hangs from the top edge: skewing about the top keeps that edge fixed, so no gap opens
+      w.to(el, { skewX: -amp * k, duration: base, ease: 'sine.inOut' })
+        .to(el, { skewX: -amp * 0.3 * k, duration: base * 0.6, ease: 'sine.inOut' })
+        .to(el, { skewX: -amp * 1.25 * k, duration: base * 0.7, ease: 'sine.inOut' })
+        .to(el, { skewX: amp * 0.35 * k, duration: base * 1.2, ease: 'sine.inOut' })
+        .to(el, { skewX: 0, duration: base * 0.9, ease: 'sine.inOut' });
+      t.push(w);
+    }
+    gusts(q('.lva'), 0.7, 2.4, 0);
+    gusts(q('.lvb'), 1.1, 2.1, 0.35);
+    // the clouds drift slowly across the sky behind the church
+    var cld = q('.cld');
+    if (cld) t.push(g.to(cld, { x: -16, duration: 22, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    // grass and flowers ripple in the same wind, from the ground up
+    var flw = q('.flw');
+    var fw = g.timeline({ repeat: -1, delay: 0.5 });
+    fw.to(flw, { skewX: -0.9 * k, duration: 2.3, ease: 'sine.inOut' })
+      .to(flw, { skewX: 0.35 * k, duration: 2.6, ease: 'sine.inOut' })
+      .to(flw, { skewX: -0.5 * k, duration: 1.8, ease: 'sine.inOut' })
+      .to(flw, { skewX: 0, duration: 2.2, ease: 'sine.inOut' });
+    t.push(fw);
+    // a few leaves let go and drift down with the breeze
+    Array.prototype.forEach.call(qa('.leaf'), function (leaf, i) {
+      var lt = g.timeline({ repeat: -1, repeatRefresh: true, delay: 1.2 + i * 1.6, repeatDelay: 1.5 });
+      lt.fromTo(leaf, { x: 'random(' + o.leafX[0] + ',' + o.leafX[1] + ')', y: 'random(' + o.leafY[0] + ',' + o.leafY[1] + ')', rotation: 'random(0,360)', opacity: 0 }, { opacity: 1, duration: 0.6, ease: 'none' })
+        .to(leaf, { y: '+=random(' + o.fall[0] + ',' + o.fall[1] + ')', x: '+=random(' + o.drift[0] + ',' + o.drift[1] + ')', rotation: '+=random(240,560)', duration: 'random(7,10)', ease: 'none' }, 0)
+        .to(leaf, { opacity: 0, duration: 1.2, ease: 'none' }, '>-1.2');
+      t.push(lt);
+      t.push(g.to(leaf.querySelector('svg'), { scaleX: -1, x: 'random(-10,10)', duration: 'random(0.6,1.1)', ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    });
+    // the chapel bell swings and rings, then rests
+    var bell = q('.bell');
+    // a slow, steady, never-ending swing from side to side
+    var ring = g.fromTo(bell, { rotation: -16 }, { rotation: 16, duration: 1.8, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+    t.push(ring);
+    // a small flock crosses the sky in loose formation
+    var flock = [[q('.b1'), 0, 0, 1], [q('.b2'), -26, 12, 0.82], [q('.b3'), -46, -4, 0.7]];
+    flock.forEach(function (b, i) {
+      g.set(b[0], { scale: b[3] * o.scale });
+      t.push(g.fromTo(b[0], { x: -60 + b[1], y: o.birdY[0] + b[2] }, { x: o.birdTo + b[1], y: o.birdY[1] + b[2] - 40, duration: 16, ease: 'none', repeat: -1, repeatDelay: 6, delay: 1 }));
+      t.push(g.to(b[0], { yPercent: 'random(-40,40)', duration: 'random(1.2,2)', ease: 'sine.inOut', yoyo: true, repeat: -1, repeatRefresh: true }));
+    });
+  }
+  /* bunny pointer trail: tiny leaves and golden sparkles drift down from the pointer */
+  initTrail() {
+    var self = this;
+    try { if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches || this.reduced()) return; } catch (e) { return; }
+    var r = this.root; if (!r || this.trailOn) return; this.trailOn = true;
+    var cols = ['#A8CF7E', '#6D8F62', '#94B85E', '#E9A7A7', '#C9C46A'], last = 0, n = 0, live = 0;
+    this.onTrail = function (ev) {
+      var g = window.gsap; if (!g) return;
+      var now = Date.now(); if (now - last < 28 || live > 46) return; last = now;
+      var rr = r.getBoundingClientRect(), sc = rr.width / r.offsetWidth || 1;
+      var x = (ev.clientX - rr.left) / sc, y = (ev.clientY - rr.top) / sc;
+      var leaf = (n++ % 3) !== 2, p = document.createElement('span');
+      p.className = 'trailp ' + (leaf ? 'tl' : 'ts');
+      if (leaf) p.style.background = cols[n % cols.length];
+      r.appendChild(p); live++;
+      g.set(p, { x: x + 18 + Math.random() * 16, y: y + 52, rotation: Math.random() * 360, scale: 0.6 + Math.random() * 0.6, opacity: 0.95 });
+      g.to(p, { x: '+=' + (Math.random() * 40 - 20), y: '+=' + (leaf ? 30 + Math.random() * 40 : 10 + Math.random() * 20), rotation: '+=' + (Math.random() * 220 - 110), scale: leaf ? 0.4 : 0.2, opacity: 0, duration: leaf ? 1.1 + Math.random() * 0.6 : 0.7 + Math.random() * 0.4, ease: 'sine.out', onComplete: function () { if (p.parentNode) p.parentNode.removeChild(p); live--; } });
+    };
+    /* the bunny follows the pointer, leaning into the direction it moves */
+    var bun = document.createElement('span'); bun.className = 'bunnycur'; bun.setAttribute('aria-hidden', 'true'); r.appendChild(bun); this.bun = bun;
+    var g0 = window.gsap, mx = g0.quickTo(bun, 'x', { duration: 0.18, ease: 'power3.out' }), my = g0.quickTo(bun, 'y', { duration: 0.18, ease: 'power3.out' }), rot = g0.quickTo(bun, 'rotation', { duration: 0.5, ease: 'power2.out' }), px = null;
+    this.onMove = function (ev) {
+      var rr = r.getBoundingClientRect(), sc = rr.width / r.offsetWidth || 1;
+      var x = (ev.clientX - rr.left) / sc, y = (ev.clientY - rr.top) / sc;
+      if (px === null) { g0.set(bun, { x: x, y: y }); }
+      mx(x); my(y); rot(px === null ? 0 : Math.max(-14, Math.min(14, (x - px) * 1.2))); px = x;
+      g0.to(bun, { opacity: 1, duration: 0.2, overwrite: 'auto' });
+      clearTimeout(self.rotT); self.rotT = setTimeout(function () { rot(0); }, 120);
+      self.onTrail(ev);
+    };
+    this.onLeave = function () { px = null; g0.to(bun, { opacity: 0, duration: 0.2, overwrite: 'auto' }); };
+    this.onDown = function () { g0.fromTo(bun, { scaleX: 1.12, scaleY: 0.86 }, { scaleX: 1, scaleY: 1, duration: 0.5, ease: 'elastic.out(1, 0.4)' }); };
+    r.addEventListener('pointermove', this.onMove);
+    r.addEventListener('pointerleave', this.onLeave);
+    r.addEventListener('pointerdown', this.onDown);
+  }
+  initTrailSoon() { var self = this, tries = 0; (function go() { if (self.root && window.gsap) self.initTrail(); else if (tries++ < 30) setTimeout(go, 150); })(); }
+
+  renderVals() {
+    var self = this;
+    var tab = this.current();
+    function set(t) {
+      return function () {
+        var from = self.order.indexOf(self.current()), to = self.order.indexOf(t);
+        if (from === to) return;
+        self.setState({ tab: t, dir: to > from ? 1 : -1 });
+        setTimeout(function () { self.afterTab(); }, 30);
+      };
+    }
+    return {
+      setRoot: function (el) { self.root = el; },
+      gustLeaves: self.gustData(70, 13, 9),
+      leaves: [{ color: '#7FA552' }, { color: '#A9C46A' }, { color: '#5E8A45' }, { color: '#C9C46A' }, { color: '#94B85E' }, { color: '#6F9A4C' }, { color: '#B5C977' }, { color: '#86AD58' }],
+      isCer: tab === 'ceremony', isRec: tab === 'reception', isPark: tab === 'parking',
+      tabCer: tab === 'ceremony' ? 'on' : '', tabRec: tab === 'reception' ? 'on' : '', tabPark: tab === 'parking' ? 'on' : '',
+      pressCer: tab === 'ceremony' ? 'true' : 'false', pressRec: tab === 'reception' ? 'true' : 'false', pressPark: tab === 'parking' ? 'true' : 'false',
+      showCer: set('ceremony'), showRec: set('reception'), showPark: set('parking'),
+      goNext: function () { self.goNext(); }
+    };
+  }
+}
+</script>
+</body>
+</html>

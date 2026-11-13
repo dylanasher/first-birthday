@@ -1,0 +1,104 @@
+/* DressCodeMobile: ported from Ch4.dc.html */
+
+.dc-DressCodeMobile{margin:0;background:#102A20}
+.dc-DressCodeMobile .stage{position:relative;width:390px;height:844px;overflow:hidden;background:#C9B8E6;font-family:'Nunito',system-ui,sans-serif;color:#2A2238}
+.dc-DressCodeMobile .layer{position:absolute;inset:0;pointer-events:none}
+.dc-DressCodeMobile .bg{position:absolute;inset:0;background-size:auto 844px;background-position:72% 0;background-repeat:no-repeat}
+.dc-DressCodeMobile .far{background-image:url(/art/900fb868ae88739a3f0d328f2cec93f0.webp)}
+.dc-DressCodeMobile .clouds{background-image:url(/art/c26b9fdece174e831448602e75dd3023.webp);will-change:transform}
+/* the floating house, scaled to fit the phone (same painted layers, drawn at 43%) */
+.dc-DressCodeMobile .house{position:absolute;left:-10px;top:92px;width:719px;height:405px;will-change:transform}
+.dc-DressCodeMobile .lyr{position:absolute;inset:0;background-size:100% 100%;background-repeat:no-repeat;will-change:transform}
+.dc-DressCodeMobile .island{background-image:url(/art/1314fd11052d00425fa4e7a840da03fd.webp)}
+.dc-DressCodeMobile .wind{background-image:url(/art/a8b70596119ca258fadbd0f7b8870a41.webp);transform-origin:78px 115.5px}
+.dc-DressCodeMobile .smoke{background-image:url(/art/576d087d15ebc11eddc284658ca4be02.webp);transform-origin:131px 64.5px}
+.dc-DressCodeMobile .flag{background-image:url(/art/9f42504135dfa106b70f880dc828dcf4.webp);transform-origin:265.3px 26.7px}
+.dc-DressCodeMobile .water{background-image:url(/art/0d58ec7798beecd868b60eada641e786.webp)}
+.dc-DressCodeMobile .water2{background-image:url(/art/0d58ec7798beecd868b60eada641e786.webp);filter:brightness(1.35) saturate(1.2);opacity:.6;
+-webkit-mask-image:repeating-linear-gradient(to bottom,transparent 0,#000 8px,transparent 16px);mask-image:repeating-linear-gradient(to bottom,transparent 0,#000 8px,transparent 16px);
+-webkit-mask-size:100% 32px;mask-size:100% 32px;animation:DressCodeMobile-flow 0.9s linear infinite}
+@keyframes DressCodeMobile-flow{from{-webkit-mask-position:0 0;mask-position:0 0}to{-webkit-mask-position:0 32px;mask-position:0 32px}}
+.dc-DressCodeMobile .lantern{position:absolute;width:36px;height:36px;margin:-18px 0 0 -18px;border-radius:50%;background:radial-gradient(circle,rgba(255,226,150,.85),rgba(255,200,110,.3) 40%,rgba(255,200,110,0) 70%);mix-blend-mode:screen}
+.dc-DressCodeMobile .ribbon{position:absolute;left:0;top:0}
+.dc-DressCodeMobile .ribbon svg{display:block;width:100%;height:100%;overflow:visible}
+.dc-DressCodeMobile .ribbon{width:70px;height:30px}
+.dc-DressCodeMobile .topshade{background:linear-gradient(to bottom,rgba(70,50,100,.45) 0%,rgba(70,50,100,.12) 9%,rgba(70,50,100,0) 14%)}
+
+.dc-DressCodeMobile .script{font-family:'Pinyon Script',cursive;font-weight:400}
+.dc-DressCodeMobile .lift{text-shadow:0 2px 12px rgba(60,40,90,.6),0 0 2px rgba(60,40,90,.4)}
+.dc-DressCodeMobile .chtitle{position:absolute;left:0;right:0;top:14px;display:flex;flex-direction:column;align-items:center;text-align:center;color:#FFF9F0;z-index:3}
+
+.dc-DressCodeMobile .sheet{position:absolute;left:0;right:0;bottom:0;height:400px;display:flex;flex-direction:column;background:rgba(255,250,244,.6);backdrop-filter:blur(7px) saturate(1.1);-webkit-backdrop-filter:blur(7px) saturate(1.1);clip-path:path('M0 14 C30 6 60 18 95 12 C130 6 160 2 195 8 C230 14 262 4 298 8 C330 12 360 4 390 11 L390 400 L0 400 Z')}
+.dc-DressCodeMobile .tabs{position:relative;display:flex;gap:6px;padding:22px 16px 10px;flex:none}
+.dc-DressCodeMobile .ind{position:absolute;left:0;top:22px;height:44px;width:170px;border-radius:999px;background:#5B4A7A;box-shadow:0 6px 16px rgba(70,50,100,.28)}
+.dc-DressCodeMobile .tab{position:relative;z-index:1;flex:1;display:flex;align-items:center;justify-content:center;gap:6px;min-height:44px;border-radius:999px;border:1px solid rgba(91,74,122,.25);background:transparent;color:#4A3B66;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:color .3s ease,border-color .3s ease}
+.dc-DressCodeMobile .tab.on{color:#FFF9F0;border-color:transparent}
+.dc-DressCodeMobile .tab:focus-visible{outline:2px solid #C9A24E;outline-offset:2px}
+.dc-DressCodeMobile .scroll{flex:1;min-height:0;overflow-y:auto;padding:4px 20px 16px}
+.dc-DressCodeMobile .lbl{margin:0;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#6A4E6E}
+.dc-DressCodeMobile .title{margin:4px 0 0;font-family:'IM Fell English',Georgia,serif;font-size:26px;line-height:1.12;color:#2A2238}
+.dc-DressCodeMobile .p{margin:6px 0 0;font-size:14.5px;line-height:1.55;color:#3E3352}
+.dc-DressCodeMobile .ph{color:#8A6D8E;font-style:italic}
+.dc-DressCodeMobile .swatches{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin-top:10px}
+.dc-DressCodeMobile .sw{display:flex;flex-direction:column;align-items:center;gap:4px}
+.dc-DressCodeMobile .chip{display:block;flex:none;border:1px solid rgba(91,74,122,.18);box-sizing:border-box;width:42px;height:42px;border-radius:50%;box-shadow:inset 0 0 0 2px rgba(255,255,255,.7),0 4px 10px rgba(70,50,100,.2)}
+.dc-DressCodeMobile .swname{margin:0;text-align:center;line-height:1.2;font-size:10.5px;font-weight:700;color:#3E3352}
+.dc-DressCodeMobile .tag{display:inline-block;margin-left:6px;padding:2px 7px;border-radius:999px;background:rgba(201,162,78,.2);font-size:9.5px;font-weight:700;letter-spacing:.04em;text-transform:none;color:#7A5E2A;vertical-align:middle}
+.dc-DressCodeMobile .cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
+.dc-DressCodeMobile .card{padding:12px 13px;border-radius:16px;background:rgba(255,255,255,.62);box-shadow:inset 0 0 0 1px rgba(91,74,122,.14)}
+.dc-DressCodeMobile .card h3{margin:6px 0 0;font-family:'IM Fell English',Georgia,serif;font-size:18px;font-weight:400;color:#2A2238}
+.dc-DressCodeMobile .card p{margin:3px 0 0;font-size:13px;line-height:1.45;color:#3E3352}
+.dc-DressCodeMobile .ico{width:32px;height:32px;border-radius:50%;background:rgba(201,184,230,.45);display:flex;align-items:center;justify-content:center}
+.dc-DressCodeMobile .note{display:flex;gap:10px;align-items:flex-start;margin-top:12px;padding:12px 14px;border-radius:16px;background:rgba(245,214,138,.35);border:1px solid rgba(201,162,78,.45)}
+.dc-DressCodeMobile .quote{margin:2px 0 0;font-family:'Pinyon Script',cursive;font-size:28px;line-height:1.2;color:#5B4A7A;text-align:center}
+.dc-DressCodeMobile .foot{flex:none;display:flex;align-items:center;justify-content:space-between;padding:10px 16px 14px;border-top:1px solid rgba(91,74,122,.15)}
+.dc-DressCodeMobile .dot{width:6px;height:6px;border-radius:50%;background:rgba(91,74,122,.3)}
+.dc-DressCodeMobile .dot.on{width:20px;border-radius:3px;background:#5B4A7A}
+.dc-DressCodeMobile .next{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border:0;border-radius:999px;background:#5B4A7A;color:#FFF9F0;font-family:'IM Fell English',Georgia,serif;font-size:16px;cursor:pointer}
+.dc-DressCodeMobile .next:focus-visible{outline:2px solid #C9A24E;outline-offset:3px}
+.dc-DressCodeMobile .swhex{margin:0;font-size:9.5px;font-weight:600;letter-spacing:.03em;color:#6A5E78;text-align:center}
+.dc-DressCodeMobile .nowhite{display:flex;gap:10px;align-items:center;margin-top:14px;padding:9px 12px;border-radius:14px;background:rgba(233,167,167,.22);border:1px solid rgba(217,122,94,.35)}
+/* page turn to Chapter 5: this page curls away, revealing the lantern village */
+.dc-DressCodeMobile .nextlink{position:absolute;left:0;top:0;width:1px;height:1px;opacity:0;pointer-events:none}
+.dc-DressCodeMobile .under5{position:absolute;inset:0;z-index:70;pointer-events:none;display:none;background-color:#3D4A8C;background-repeat:no-repeat;
+background-image:linear-gradient(to bottom,rgba(28,30,70,.55) 0%,rgba(28,30,70,.15) 12%,rgba(28,30,70,0) 18%),url(/art/22ccc67ded57a7c30a75430c7ce39721.webp);
+background-size:100% 100%,auto 844px;background-position:0 0,-250px 0}
+.dc-DressCodeMobile .tflapwrap{position:absolute;inset:0;z-index:71;pointer-events:none;display:none;filter:drop-shadow(-8px -8px 16px rgba(16,42,32,.45))}
+.dc-DressCodeMobile .tflap{position:absolute;inset:0;background:linear-gradient(135deg,#E9DCBC 0%,#F8EFD9 55%,#E0D0A8 100%)}
+/* storybook scrollbar: a slim vine line with a glowing pill */
+.dc-DressCodeMobile .scroll::-webkit-scrollbar{width:10px;height:10px}
+.dc-DressCodeMobile .scroll::-webkit-scrollbar-track{margin:14px 0;background:linear-gradient(to right,transparent 4px,rgba(91,74,122,.22) 4px,rgba(91,74,122,.22) 6px,transparent 6px)}
+.dc-DressCodeMobile .scroll::-webkit-scrollbar-thumb{border-radius:999px;border:2px solid transparent;background:linear-gradient(180deg,#E9A7A7,#5B4A7A) padding-box;box-shadow:inset 0 0 0 1px rgba(255,250,240,.55)}
+.dc-DressCodeMobile .scroll::-webkit-scrollbar-thumb:hover{border-width:1px}
+.dc-DressCodeMobile .scroll::-webkit-scrollbar-corner{background:transparent}
+@supports not selector(::-webkit-scrollbar){.dc-DressCodeMobile .scroll{scrollbar-width:thin;scrollbar-color:#5B4A7A transparent}}
+/* bunny pointer + a trail of tiny leaves and sparkles (mouse/trackpad only) */
+@media (hover:hover) and (pointer:fine){.dc-DressCodeMobile .stage,.dc-DressCodeMobile .stage *{cursor:none !important}.dc-DressCodeMobile .stage input,.dc-DressCodeMobile .stage textarea{cursor:text !important}}
+.dc-DressCodeMobile .bunnycur{position:absolute;left:0;top:0;width:52px;height:73px;margin:-15px 0 0 -1px;background:url(/art/dbadbf2c44d41f6a5e3b3e01c5391ca4.webp) 0 0/100% 100% no-repeat;pointer-events:none;z-index:96;opacity:0;transform-origin:50% 30%;filter:drop-shadow(0 4px 6px rgba(20,30,20,.3));will-change:transform}
+.dc-DressCodeMobile .trailp{position:absolute;left:0;top:0;pointer-events:none;z-index:95;will-change:transform,opacity}
+.dc-DressCodeMobile .trailp.tl{width:9px;height:9px;border-radius:80% 0 80% 0}
+.dc-DressCodeMobile .trailp.ts{width:6px;height:6px;border-radius:50%;background:#FFF3C4;box-shadow:0 0 8px 3px rgba(247,216,115,.75)}
+/* until the sliding pill is measured, the selected tab paints its own fill so it always reads correctly */
+.dc-DressCodeMobile .tabs:not(.ready) .tab.on{background:#5B4A7A}
+.dc-DressCodeMobile .outfit{display:block;width:100%;height:168px;background:center bottom/contain no-repeat;margin:6px 0 2px;filter:drop-shadow(0 6px 8px rgba(70,50,100,.18));transition:transform .35s ease}
+.dc-DressCodeMobile .card:hover .outfit{transform:translateY(-3px) scale(1.03)}
+/* palette: each colour glows in its own hue on hover, focus or tap */
+.dc-DressCodeMobile .sw{cursor:pointer;outline:none;border-radius:14px;padding:4px 0}
+.dc-DressCodeMobile .chip{position:relative;overflow:hidden;transition:transform .35s cubic-bezier(.3,1.6,.5,1),box-shadow .35s ease}
+.dc-DressCodeMobile .chip::after{content:'';position:absolute;top:-30%;left:-80%;width:50%;height:160%;background:linear-gradient(100deg,rgba(255,255,255,0),rgba(255,255,255,.75),rgba(255,255,255,0));transform:rotate(18deg);transition:left .6s ease}
+.dc-DressCodeMobile .sw:hover .chip,.dc-DressCodeMobile .sw:focus-visible .chip,.dc-DressCodeMobile .sw:active .chip{transform:translateY(-5px) scale(1.14);box-shadow:inset 0 0 0 2px rgba(255,255,255,.75),0 0 0 4px color-mix(in srgb,var(--c) 30%,transparent),0 0 18px 6px var(--c)}
+.dc-DressCodeMobile .sw:hover .chip::after,.dc-DressCodeMobile .sw:focus-visible .chip::after,.dc-DressCodeMobile .sw:active .chip::after{left:130%}
+.dc-DressCodeMobile .sw:hover .swname,.dc-DressCodeMobile .sw:focus-visible .swname{color:#2A2238}
+.dc-DressCodeMobile .sw:focus-visible{box-shadow:0 0 0 2px #C9A24E}
+.dc-DressCodeMobile .swname{transition:color .3s ease}
+/* palette as little flame friends: they sway gently, and dance when hovered or tapped */
+.dc-DressCodeMobile .chip{width:40px !important;height:52px !important;background:none !important;border:0 !important;border-radius:0 !important;box-shadow:none !important;overflow:visible !important}
+.dc-DressCodeMobile .chip::after{display:none !important}
+.dc-DressCodeMobile .fl{display:block;width:100%;height:100%;overflow:visible;background:center bottom/contain no-repeat;transform-origin:50% 96%;animation:DressCodeMobile-flIdle 3.2s ease-in-out infinite;filter:drop-shadow(0 4px 6px rgba(60,50,40,.2));transition:filter .3s ease}
+.dc-DressCodeMobile .fo{fill:var(--c);stroke:rgba(70,60,50,.28);stroke-width:1}
+@keyframes DressCodeMobile-flIdle{0%,100%{transform:rotate(-2deg) scaleY(1)}50%{transform:rotate(2deg) scaleY(1.03)}}
+@keyframes DressCodeMobile-flDance{0%{transform:scaleY(1) skewX(0)}25%{transform:scaleY(1.14) skewX(-7deg)}50%{transform:scaleY(.94) skewX(4deg)}75%{transform:scaleY(1.1) skewX(6deg)}100%{transform:scaleY(1) skewX(0)}}
+.dc-DressCodeMobile .sw:hover .chip,.dc-DressCodeMobile .sw:focus-visible .chip,.dc-DressCodeMobile .sw:active .chip{box-shadow:none !important}
+.dc-DressCodeMobile .sw:hover .fl,.dc-DressCodeMobile .sw:focus-visible .fl,.dc-DressCodeMobile .sw:active .fl{animation:DressCodeMobile-flDance .55s ease-in-out infinite;filter:drop-shadow(0 0 9px var(--c)) drop-shadow(0 4px 6px rgba(60,50,40,.2))}
+.dc-DressCodeMobile .swatches .sw:nth-child(2) .fl{animation-delay:-.6s}.dc-DressCodeMobile .swatches .sw:nth-child(3) .fl{animation-delay:-1.2s}.dc-DressCodeMobile .swatches .sw:nth-child(4) .fl{animation-delay:-1.8s}.dc-DressCodeMobile .swatches .sw:nth-child(5) .fl{animation-delay:-2.4s}
+@media (prefers-reduced-motion: reduce){.dc-DressCodeMobile .fl{animation:none !important}}

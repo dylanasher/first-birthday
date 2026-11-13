@@ -1,0 +1,93 @@
+/* RsvpDesktop: ported from Ch6Desktop.dc.html */
+
+.dc-RsvpDesktop{margin:0;background:#0B1433}
+.dc-RsvpDesktop .stage{position:relative;width:1440px;height:900px;overflow:hidden;background:#13235E;font-family:'Nunito',system-ui,sans-serif;color:#1C2554}
+.dc-RsvpDesktop .layer{position:absolute;inset:0;pointer-events:none}
+/* the painted shore: every layer sits on the same 1672x941 canvas, scaled to the stage */
+.dc-RsvpDesktop .cv{position:absolute;left:-60px;top:0;width:1672px;height:941px;transform:scale(0.9564);transform-origin:0 0}
+.dc-RsvpDesktop .ly{position:absolute;inset:0;background-size:100% 100%;background-repeat:no-repeat;will-change:transform}
+.dc-RsvpDesktop .plate{background-image:url(/art/feb9ca705abb6f835c3eb0853d0163ab.webp)}
+.dc-RsvpDesktop .sea{background-image:url(/art/38a98b0c1c07945158fecd20d7fb5748.webp)}
+.dc-RsvpDesktop .sea2{background-image:url(/art/38a98b0c1c07945158fecd20d7fb5748.webp);filter:brightness(1.7) saturate(1.2);opacity:.4;
+-webkit-mask-image:repeating-linear-gradient(to bottom,transparent 0,#000 3px,transparent 9px);mask-image:repeating-linear-gradient(to bottom,transparent 0,#000 3px,transparent 9px);
+-webkit-mask-size:100% 18px;mask-size:100% 18px;animation:RsvpDesktop-ripple 2.6s linear infinite}
+@keyframes RsvpDesktop-ripple{from{-webkit-mask-position:0 0;mask-position:0 0}to{-webkit-mask-position:0 18px;mask-position:0 18px}}
+.dc-RsvpDesktop .foam{background-image:url(/art/da78f2bb8e1b75e65556cdb9eb6058ec.webp)}
+.dc-RsvpDesktop .clouds{background-image:url(/art/d587e24a0118aeae4217e349bbc49f1c.webp)}
+.dc-RsvpDesktop .jars{background-image:url(/art/5ecd429dc2d0d4c5710266eadb8ba063.webp);transform-origin:240px 160px}
+.dc-RsvpDesktop .moonglow{position:absolute;left:733px;top:-62px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,190,.38),rgba(255,230,170,.12) 45%,rgba(255,230,170,0) 70%);mix-blend-mode:screen}
+.dc-RsvpDesktop .jglow{position:absolute;width:90px;height:90px;border-radius:50%;background:radial-gradient(circle,rgba(255,222,130,.6),rgba(255,200,100,.18) 45%,rgba(255,200,100,0) 70%);mix-blend-mode:screen}
+.dc-RsvpDesktop .star{position:absolute;width:18px;height:18px;background:radial-gradient(circle,#FFFBEA 0,rgba(255,246,210,.9) 18%,rgba(255,240,190,0) 60%);border-radius:50%;opacity:.4}
+.dc-RsvpDesktop .orb{position:absolute;left:0;top:0;width:9px;height:9px;border-radius:50%;background:#FFF2C4;box-shadow:0 0 10px 4px rgba(255,214,120,.75);opacity:0;pointer-events:none}
+.dc-RsvpDesktop .wishstar{position:absolute;left:0;top:0;width:12px;height:12px;border-radius:50%;background:#FFF8DE;box-shadow:0 0 14px 6px rgba(255,226,150,.8),0 0 2px 1px #fff;pointer-events:none;z-index:4}
+.dc-RsvpDesktop .rightshade{background:linear-gradient(to left,rgba(8,14,40,.4) 0%,rgba(8,14,40,0) 45%)}
+.dc-RsvpDesktop .script{font-family:'Pinyon Script',cursive;font-weight:400}
+.dc-RsvpDesktop .sheet{position:absolute;right:44px;top:32px;bottom:32px;width:500px;display:flex;flex-direction:column;border-radius:32px;background:rgba(255,249,238,.6);backdrop-filter:blur(7px) saturate(1.1);-webkit-backdrop-filter:blur(7px) saturate(1.1);box-shadow:0 30px 70px rgba(5,10,35,.45),inset 0 0 0 1px rgba(255,250,240,.6),0 0 0 1px rgba(247,216,115,.35);overflow:hidden}
+.dc-RsvpDesktop .head{flex:none;padding:24px 34px 0}
+.dc-RsvpDesktop .eyebrow{margin:0;font-size:12px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#2B3770}
+.dc-RsvpDesktop .cd{flex:none;margin:12px 34px 0}
+.dc-RsvpDesktop .tabs{position:relative;display:flex;gap:10px;padding:14px 34px 10px;flex:none}
+.dc-RsvpDesktop .ind{position:absolute;left:0;top:14px;height:46px;width:200px;border-radius:999px;background:#1F2C6B;box-shadow:0 8px 18px rgba(5,10,35,.28)}
+.dc-RsvpDesktop .scroll{flex:1;min-height:0;overflow-y:auto;padding:6px 34px 18px}
+.dc-RsvpDesktop .foot{flex:none;display:flex;align-items:center;justify-content:space-between;padding:14px 34px 18px;border-top:1px solid rgba(28,37,84,.14)}
+.dc-RsvpDesktop .cdrow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.dc-RsvpDesktop .cdbox{display:flex;flex-direction:column;align-items:center;padding:10px 0 8px;border-radius:16px;background:linear-gradient(160deg,rgba(31,44,107,.92),rgba(19,35,94,.88));box-shadow:inset 0 0 0 1px rgba(247,216,115,.35),0 6px 14px rgba(5,10,35,.25)}
+.dc-RsvpDesktop .cdnum{margin:0;font-family:'IM Fell English',Georgia,serif;font-size:34px;line-height:1;color:#F7D873;font-variant-numeric:tabular-nums;text-shadow:0 0 12px rgba(247,216,115,.45)}
+.dc-RsvpDesktop .cdlbl{margin:4px 0 0;font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#E9E3F5}
+.dc-RsvpDesktop .cdcap{margin:7px 0 0;text-align:center;font-size:13px;font-weight:600;color:#2B3770}
+.dc-RsvpDesktop .tab{position:relative;z-index:1;flex:1;display:flex;align-items:center;justify-content:center;gap:8px;min-height:46px;border-radius:999px;border:1px solid rgba(28,37,84,.22);background:transparent;color:#1C2554;font-family:'Nunito',sans-serif;font-size:15.5px;font-weight:700;cursor:pointer;transition:color .3s ease,border-color .3s ease}
+.dc-RsvpDesktop .tab.on{color:#FFF9F0;border-color:transparent}
+.dc-RsvpDesktop .tab:focus-visible,.dc-RsvpDesktop .choice:focus-visible,.dc-RsvpDesktop .step:focus-visible,.dc-RsvpDesktop .send:focus-visible,.dc-RsvpDesktop .ghost:focus-visible,.dc-RsvpDesktop .in:focus-visible{outline:2px solid #F7D873;outline-offset:2px}
+.dc-RsvpDesktop .p{margin:2px 0 0;font-size:15px;line-height:1.5;color:#2B3260}
+.dc-RsvpDesktop .ph{color:#6A6390;font-style:italic}
+.dc-RsvpDesktop .lbl{display:block;margin:14px 0 6px;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#2B3770}
+.dc-RsvpDesktop .in{box-sizing:border-box;width:100%;min-height:46px;padding:10px 14px;border-radius:14px;border:1px solid rgba(28,37,84,.22);background:rgba(255,253,248,.75);font-family:'Nunito',sans-serif;font-size:16px;color:#1C2554}
+.dc-RsvpDesktop textarea.in{min-height:84px;resize:none;line-height:1.45}
+.dc-RsvpDesktop .in::placeholder{color:#7C7A98}
+.dc-RsvpDesktop .choices{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.dc-RsvpDesktop .choice{display:flex;align-items:center;justify-content:center;gap:8px;min-height:48px;border-radius:14px;border:1px solid rgba(28,37,84,.22);background:rgba(255,253,248,.55);color:#1C2554;font-family:'Nunito',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:background-color .25s ease,color .25s ease,border-color .25s ease}
+.dc-RsvpDesktop .choice.yes.on{background:#6D8F62;border-color:#6D8F62;color:#FFF9F0}
+.dc-RsvpDesktop .choice.no.on{background:#D97A5E;border-color:#D97A5E;color:#FFF9F0}
+.dc-RsvpDesktop .stepper{display:inline-flex;align-items:center;gap:6px;padding:4px;border-radius:999px;background:rgba(255,253,248,.6);box-shadow:inset 0 0 0 1px rgba(28,37,84,.18)}
+.dc-RsvpDesktop .step{width:40px;height:40px;border-radius:50%;border:0;background:#1F2C6B;color:#FFF9F0;font-size:20px;font-weight:700;line-height:1;cursor:pointer}
+.dc-RsvpDesktop .step.off{opacity:.35;cursor:default}
+.dc-RsvpDesktop .count{min-width:46px;margin:0;text-align:center;font-family:'IM Fell English',Georgia,serif;font-size:24px;color:#1C2554}
+.dc-RsvpDesktop .send{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:50px;margin-top:16px;border:0;border-radius:999px;background:linear-gradient(135deg,#2B3B8A,#1F2C6B);color:#FFF9F0;font-family:'IM Fell English',Georgia,serif;font-size:19px;cursor:pointer;box-shadow:0 8px 18px rgba(5,10,35,.25)}
+.dc-RsvpDesktop .err{margin:8px 0 0;min-height:18px;font-size:13px;font-weight:700;color:#A8452B}
+.dc-RsvpDesktop .done{display:flex;flex-direction:column;align-items:center;text-align:center;padding:18px 8px}
+.dc-RsvpDesktop .donebadge{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle,#FFF6D6,#F7D873);box-shadow:0 0 24px rgba(247,216,115,.6)}
+.dc-RsvpDesktop .donet{margin:12px 0 0;font-family:'Pinyon Script',cursive;font-size:40px;line-height:1.1;color:#1F2C6B}
+.dc-RsvpDesktop .ghost{min-height:44px;margin-top:10px;padding:0 14px;border:0;background:transparent;color:#2B3770;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.dc-RsvpDesktop .wishes{display:flex;flex-direction:column;gap:10px;margin:18px 0 0;padding:0;list-style:none}
+.dc-RsvpDesktop .wish{padding:14px 16px;border-radius:16px;background:rgba(255,252,245,.55);box-shadow:inset 0 0 0 1px rgba(28,37,84,.1)}
+.dc-RsvpDesktop .wish p{margin:0;font-size:15px;line-height:1.5;color:#2B3260}
+.dc-RsvpDesktop .wish .by{margin-top:4px;font-size:12.5px;font-weight:700;letter-spacing:.04em;color:#6A4E6E}
+.dc-RsvpDesktop .empty{margin:18px 0 0;text-align:center;font-size:14px;font-style:italic;color:#4A4F7A}
+.dc-RsvpDesktop .dot{width:7px;height:7px;border-radius:50%;background:rgba(28,37,84,.28)}
+.dc-RsvpDesktop .dot.on{width:22px;border-radius:4px;background:#1F2C6B}
+.dc-RsvpDesktop .next{display:inline-flex;align-items:center;gap:10px;min-height:50px;padding:0 24px;border:0;border-radius:999px;background:#1F2C6B;color:#FFF9F0;font-family:'IM Fell English',Georgia,serif;font-size:18px;cursor:pointer}
+.dc-RsvpDesktop .next:focus-visible{outline:2px solid #F7D873;outline-offset:3px}
+/* storybook scrollbar: a slim vine line with a glowing pill */
+.dc-RsvpDesktop .scroll::-webkit-scrollbar{width:10px;height:10px}
+.dc-RsvpDesktop .scroll::-webkit-scrollbar-track{margin:14px 0;background:linear-gradient(to right,transparent 4px,rgba(31,44,107,.22) 4px,rgba(31,44,107,.22) 6px,transparent 6px)}
+.dc-RsvpDesktop .scroll::-webkit-scrollbar-thumb{border-radius:999px;border:2px solid transparent;background:linear-gradient(180deg,#F7D873,#1F2C6B) padding-box;box-shadow:inset 0 0 0 1px rgba(255,250,240,.55)}
+.dc-RsvpDesktop .scroll::-webkit-scrollbar-thumb:hover{border-width:1px}
+@supports not selector(::-webkit-scrollbar){.dc-RsvpDesktop .scroll{scrollbar-width:thin;scrollbar-color:#1F2C6B transparent}}
+.dc-RsvpDesktop .nextlink{position:absolute;left:0;top:0;width:1px;height:1px;opacity:0;pointer-events:none}
+.dc-RsvpDesktop .under7{position:absolute;inset:0;z-index:70;pointer-events:none;display:none;background-color:#B9B6E6;background-repeat:no-repeat;
+background-image:url(/art/sky-wishes.webp);
+background-size:cover;background-position:50% 60%}
+.dc-RsvpDesktop .tflapwrap{position:absolute;inset:0;z-index:71;pointer-events:none;display:none;filter:drop-shadow(-10px -10px 20px rgba(16,42,32,.45))}
+.dc-RsvpDesktop .tflap{position:absolute;inset:0;background:linear-gradient(135deg,#E9DCBC 0%,#F8EFD9 55%,#E0D0A8 100%)}
+/* bunny pointer + a trail of tiny leaves and sparkles (mouse/trackpad only) */
+@media (hover:hover) and (pointer:fine){.dc-RsvpDesktop .stage,.dc-RsvpDesktop .stage *{cursor:none !important}.dc-RsvpDesktop .stage input,.dc-RsvpDesktop .stage textarea{cursor:text !important}}
+.dc-RsvpDesktop .bunnycur{position:absolute;left:0;top:0;width:52px;height:73px;margin:-15px 0 0 -1px;background:url(/art/dbadbf2c44d41f6a5e3b3e01c5391ca4.webp) 0 0/100% 100% no-repeat;pointer-events:none;z-index:96;opacity:0;transform-origin:50% 30%;filter:drop-shadow(0 4px 6px rgba(20,30,20,.3));will-change:transform}
+.dc-RsvpDesktop .trailp{position:absolute;left:0;top:0;pointer-events:none;z-index:95;will-change:transform,opacity}
+.dc-RsvpDesktop .trailp.tl{width:9px;height:9px;border-radius:80% 0 80% 0}
+.dc-RsvpDesktop .trailp.ts{width:6px;height:6px;border-radius:50%;background:#FFF3C4;box-shadow:0 0 8px 3px rgba(247,216,115,.75)}
+/* until the sliding pill is measured, the selected tab paints its own fill so it always reads correctly */
+.dc-RsvpDesktop .tabs:not(.ready) .tab.on{background:#1F2C6B}
+
+/* Two children sitting on the sand, watching the sea. Placed in the painting's own coordinates (1672×941),
+   above the waves and below the tree, bottom edge resting on the beach. */
+.dc-RsvpDesktop .kids{position:absolute;left:520px;top:668px;width:420px;height:auto;pointer-events:none;user-select:none;filter:drop-shadow(0 8px 6px rgba(40,25,10,.28))}

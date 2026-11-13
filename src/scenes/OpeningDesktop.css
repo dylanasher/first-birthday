@@ -1,0 +1,73 @@
+/* OpeningDesktop: ported from Desktop.dc.html */
+
+.dc-OpeningDesktop{margin:0;background:#102A20}
+.dc-OpeningDesktop .stage{position:relative;width:1440px;height:900px;overflow:hidden;background:#102A20;font-family:'Nunito',system-ui,sans-serif;color:#F5EBD5}
+.dc-OpeningDesktop .layer{position:absolute;inset:0;pointer-events:none}
+.dc-OpeningDesktop .cam,.dc-OpeningDesktop .idle{position:absolute;inset:0;will-change:transform}
+.dc-OpeningDesktop .paint{background-image:url(/art/forest-sleeping.webp);background-size:cover;background-position:50% 50%;background-repeat:no-repeat}
+.dc-OpeningDesktop .awake{background-image:url(/art/forest-awake.webp);background-size:cover;background-position:50% 50%;background-repeat:no-repeat;opacity:0;
+-webkit-mask-image:radial-gradient(200px 175px at 742px 560px,#000 55%,transparent 100%);mask-image:radial-gradient(200px 175px at 742px 560px,#000 55%,transparent 100%)}
+
+/* depth planes */
+.dc-OpeningDesktop .farCam{transform-origin:50% 50%}
+.dc-OpeningDesktop .canopyCam{transform-origin:50% 0%}
+.dc-OpeningDesktop .canopy{-webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 12%,transparent 28%);mask-image:linear-gradient(to bottom,#000 0%,#000 12%,transparent 28%);filter:brightness(.93) saturate(1.05)}
+.dc-OpeningDesktop .foreLCam{transform-origin:0% 100%}
+.dc-OpeningDesktop .foreRCam{transform-origin:100% 100%}
+.dc-OpeningDesktop .foreL{-webkit-mask-image:radial-gradient(34% 70% at 0% 100%,#000 50%,transparent 80%);mask-image:radial-gradient(34% 70% at 0% 100%,#000 50%,transparent 80%);filter:brightness(.86) saturate(1.08);transform-origin:0% 100%}
+.dc-OpeningDesktop .foreR{-webkit-mask-image:radial-gradient(34% 70% at 100% 100%,#000 50%,transparent 80%);mask-image:radial-gradient(34% 70% at 100% 100%,#000 50%,transparent 80%);filter:brightness(.86) saturate(1.08);transform-origin:100% 100%}
+
+/* atmosphere */
+.dc-OpeningDesktop .halo{position:absolute;left:742px;top:565px;width:420px;height:300px;margin:-150px 0 0 -210px;border-radius:50%;background:radial-gradient(closest-side,rgba(230,245,170,.42),rgba(176,200,124,.16) 55%,rgba(176,200,124,0));mix-blend-mode:screen;filter:blur(4px)}
+.dc-OpeningDesktop .glow{position:absolute;left:742px;top:540px;width:520px;height:520px;margin:-260px 0 0 -260px;border-radius:50%;background:radial-gradient(circle,rgba(240,250,200,.6),rgba(176,200,124,.22) 40%,rgba(176,200,124,0) 70%);opacity:0;mix-blend-mode:screen;pointer-events:none}
+.dc-OpeningDesktop .mistA{position:absolute;left:-200px;top:640px;width:1000px;height:240px;border-radius:50%;background:radial-gradient(closest-side,rgba(169,214,223,.2),rgba(169,214,223,0));filter:blur(8px)}
+.dc-OpeningDesktop .mistB{position:absolute;left:760px;top:700px;width:900px;height:220px;border-radius:50%;background:radial-gradient(closest-side,rgba(245,235,213,.16),rgba(245,235,213,0));filter:blur(8px)}
+.dc-OpeningDesktop .mote{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(255,246,220,1),rgba(230,240,170,.55) 45%,rgba(230,240,170,0) 72%)}
+.dc-OpeningDesktop .bfly{position:absolute;width:12px;height:12px}
+.dc-OpeningDesktop .ffh{position:absolute;left:-9px;top:-9px;width:30px;height:30px;border-radius:50%;background:radial-gradient(circle,rgba(255,244,170,.95) 0,rgba(214,240,120,.55) 30%,rgba(200,235,110,0) 70%);mix-blend-mode:screen}
+.dc-OpeningDesktop .ffc{position:absolute;left:3px;top:3px;width:6px;height:6px;border-radius:50%;background:#FFFBD6;box-shadow:0 0 6px 2px rgba(240,250,150,.9)}
+
+.dc-OpeningDesktop .bin{position:absolute;inset:0;filter:drop-shadow(0 2px 3px rgba(16,42,32,.35))}
+.dc-OpeningDesktop .bin svg{width:100%;height:100%;display:block;overflow:visible}
+.dc-OpeningDesktop .wing{transform-box:fill-box}
+.dc-OpeningDesktop .wingL{transform-origin:100% 50%}
+.dc-OpeningDesktop .wingR{transform-origin:0% 50%}
+.dc-OpeningDesktop .topshade{background:linear-gradient(to bottom,rgba(16,42,32,.82) 0%,rgba(16,42,32,.55) 22%,rgba(16,42,32,0) 42%)}
+.dc-OpeningDesktop .botshade{background:linear-gradient(to top,rgba(16,42,32,.65) 0%,rgba(16,42,32,0) 18%)}
+.dc-OpeningDesktop .shade2{background:linear-gradient(to right,rgba(16,42,32,.92) 0%,rgba(16,42,32,.82) 32%,rgba(16,42,32,.35) 48%,rgba(16,42,32,0) 58%);opacity:0}
+
+/* type + controls */
+.dc-OpeningDesktop .script{font-family:'Pinyon Script',cursive;font-weight:400}
+.dc-OpeningDesktop .display{font-family:'IM Fell English',Georgia,serif;font-weight:400}
+.dc-OpeningDesktop .lift{text-shadow:0 2px 16px rgba(16,42,32,.85),0 0 2px rgba(16,42,32,.6)}
+.dc-OpeningDesktop .magic{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:56px;padding:0 34px;border-radius:999px;border:1px solid rgba(245,214,138,.7);background:rgba(16,42,32,.55);color:#F5EBD5;font-family:'IM Fell English',Georgia,serif;font-size:21px;letter-spacing:.04em;cursor:pointer;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);box-shadow:0 0 22px rgba(245,214,138,.35),inset 0 0 12px rgba(245,214,138,.12)}
+.dc-OpeningDesktop .magic:hover{background:rgba(38,77,53,.8)}
+.dc-OpeningDesktop .magic:focus-visible{outline:2px solid #F5D68A;outline-offset:4px}
+.dc-OpeningDesktop .ghost{min-height:44px;padding:0 18px;border:1px solid rgba(245,235,213,.35);background:rgba(16,42,32,.45);color:#F5EBD5;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;letter-spacing:.04em;cursor:pointer;border-radius:999px}
+.dc-OpeningDesktop .ghost:hover{background:rgba(38,77,53,.7)}
+.dc-OpeningDesktop .ghost:focus-visible{outline:2px solid #F5D68A}
+.dc-OpeningDesktop .intro{position:absolute;left:0;right:0;top:64px;display:flex;flex-direction:column;align-items:center;text-align:center}
+.dc-OpeningDesktop .openwrap{position:absolute;left:0;right:0;bottom:56px;display:flex;justify-content:center}
+.dc-OpeningDesktop .welcome{position:absolute;top:0;bottom:0;left:0;width:620px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;text-align:left;padding:0 0 0 96px;box-sizing:border-box;visibility:hidden}
+.dc-OpeningDesktop .wi{opacity:0}
+/* safety net: once the welcome has arrived, every line of it stays visible even if the page re-renders a line */
+.dc-OpeningDesktop .ph-welcome .welcome .wi{opacity:1 !important;filter:none !important;transform:none !important}
+.dc-OpeningDesktop .nextlink{position:absolute;left:0;top:0;width:1px;height:1px;opacity:0;pointer-events:none}
+/* storybook page turn: this page curls away from the bottom-right corner, revealing Chapter 2's countryside */
+.dc-OpeningDesktop .under{position:absolute;inset:0;z-index:70;pointer-events:none;display:none;background-color:#A9D6DF;background-repeat:no-repeat;
+background-image:linear-gradient(115deg,rgba(16,42,32,.7) 0%,rgba(16,42,32,.32) 20%,rgba(16,42,32,0) 34%),linear-gradient(to left,rgba(16,42,32,.42) 0%,rgba(16,42,32,.15) 45%,rgba(16,42,32,0) 56%),url(/art/c85cec7f7ff2834c55b9210bfdb7fec0.webp),url(/art/0a06b84a8b2824ef6369f00717801e42.webp),url(/art/a1c09cf21a45538a9b091e259bb0707c.webp),url(/art/f2d3d418be179c15558fe0f46df41dba.webp),url(/art/e63248ac61b255880a418b902963d7aa.webp),url(/art/9ff413efc90b8d9aa2232fb97ef3b2fd.webp);
+background-size:100% 100%,100% 100%,cover,cover,cover,cover,cover,cover;background-position:0 0,0 0,85% 50%,85% 50%,85% 50%,85% 50%,85% 50%,85% 50%}
+.dc-OpeningDesktop .pflapwrap{position:absolute;inset:0;z-index:71;pointer-events:none;display:none;filter:drop-shadow(-10px -10px 20px rgba(16,42,32,.45))}
+.dc-OpeningDesktop .pflap{position:absolute;inset:0;background:linear-gradient(135deg,#E9DCBC 0%,#F8EFD9 55%,#E0D0A8 100%)}
+.dc-OpeningDesktop .dot{width:6px;height:6px;border-radius:50%;background:rgba(245,235,213,.4)}
+.dc-OpeningDesktop .dot.on{width:22px;border-radius:3px;background:#F5D68A}
+
+.dc-OpeningDesktop .nogsap.ph-welcome .intro,.dc-OpeningDesktop .nogsap.ph-welcome .openwrap{visibility:hidden}
+.dc-OpeningDesktop .nogsap.ph-welcome .welcome{visibility:visible}
+.dc-OpeningDesktop .nogsap.ph-welcome .wi,.dc-OpeningDesktop .nogsap.ph-welcome .shade2,.dc-OpeningDesktop .nogsap.ph-welcome .awake{opacity:1}
+/* bunny pointer + a trail of tiny leaves and sparkles (mouse/trackpad only) */
+@media (hover:hover) and (pointer:fine){.dc-OpeningDesktop .stage,.dc-OpeningDesktop .stage *{cursor:none !important}.dc-OpeningDesktop .stage input,.dc-OpeningDesktop .stage textarea{cursor:text !important}}
+.dc-OpeningDesktop .bunnycur{position:absolute;left:0;top:0;width:52px;height:73px;margin:-15px 0 0 -1px;background:url(/art/dbadbf2c44d41f6a5e3b3e01c5391ca4.webp) 0 0/100% 100% no-repeat;pointer-events:none;z-index:96;opacity:0;transform-origin:50% 30%;filter:drop-shadow(0 4px 6px rgba(20,30,20,.3));will-change:transform}
+.dc-OpeningDesktop .trailp{position:absolute;left:0;top:0;pointer-events:none;z-index:95;will-change:transform,opacity}
+.dc-OpeningDesktop .trailp.tl{width:9px;height:9px;border-radius:80% 0 80% 0}
+.dc-OpeningDesktop .trailp.ts{width:6px;height:6px;border-radius:50%;background:#FFF3C4;box-shadow:0 0 8px 3px rgba(247,216,115,.75)}

@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Dylan — Chapter 7, Thank You</title>
+<script src="./support.js"></script>
+<script src="/_blob/17d4179414200efbabee22c7746b97ba"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&amp;family=Nunito:wght@400;600;700&amp;family=Pinyon+Script&amp;display=swap">
+<style>
+body{margin:0;background:#2E3F2A}
+.stage{position:relative;width:100vw;height:100vh;height:100dvh;container-type:size;overflow:hidden;background:#8FB6E0;font-family:'Nunito',system-ui,sans-serif;color:#2A2A3E}
+.layer{position:absolute;inset:0;pointer-events:none}
+/* responsive scene: the tall picnic painting (941x1672) always covers the screen like a photo set to "fill".
+   The front of the blanket (63.4% down the painting) sits at the top of the panel, so the family, cake, balloons and sunrise are all in view */
+.scenefit{position:absolute;--sh:max(105cqh, calc(100cqw * 1672 / 941));--sw:calc(var(--sh) * 941 / 1672);width:var(--sw);height:var(--sh);
+left:clamp(calc(100cqw - var(--sw)), calc(50cqw - var(--sw) * 0.5), 0px);
+top:clamp(calc(100cqh - var(--sh)), calc(50cqh - var(--sh) * 0.634), 0px)}
+.ly{position:absolute;inset:0;background-size:100% 100%;background-repeat:no-repeat;will-change:transform}
+.plate{background-image:url(/_blob/74556d8f7db172e556722cad89049125)}
+/* the rising sun's glow gently breathes */
+.sun{position:absolute;left:65.9%;top:28.73%;width:34%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(255,236,170,.55),rgba(255,200,120,.2) 40%,rgba(255,200,120,0) 70%);mix-blend-mode:screen}
+.clouds{background-image:url(/_blob/0ffe128ca41cfce563cddfac792c1c88)}
+.balloons{position:absolute;left:6.695%;top:25.359%;width:24.548%;height:27.691%;background:url(/_blob/2b969a7142ee042a18c63474723b9bcc) 0 0/100% 100% no-repeat;transform-origin:23.8% 68.7%;will-change:transform}
+.flowers{background-image:url(/_blob/4da35732d8af64ee09c8e72804706b19);transform-origin:50% 100%}
+.flame{position:absolute;left:27.91%;top:50.40%;width:9%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(255,226,140,.85),rgba(255,190,90,.25) 40%,rgba(255,190,90,0) 70%);mix-blend-mode:screen}
+.petal{position:absolute;left:0;top:0;width:10px;height:7px;border-radius:80% 10% 80% 10%;background:linear-gradient(135deg,#FFFFFF,#F3EEE6);box-shadow:0 1px 3px rgba(90,80,60,.3);opacity:0;pointer-events:none}
+.seed{position:absolute;left:0;top:0;width:8px;height:8px;border-radius:50%;background:radial-gradient(circle,#fff 0,rgba(255,255,255,.85) 25%,rgba(255,255,255,0) 70%);opacity:0;pointer-events:none}
+.conf{position:absolute;left:0;top:0;width:10px;height:14px;border-radius:2px;opacity:0;pointer-events:none;z-index:6}
+.script{font-family:'Pinyon Script',cursive;font-weight:400}
+.msg{margin:0;font-size:14.5px;line-height:1.55;color:#33354F}
+.ph{color:#7A6D8E;font-style:italic}
+.sig{margin:10px 0 0;font-family:'Pinyon Script',cursive;font-size:30px;line-height:1.15;color:#3A4A7A}
+.acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.act{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 14px;border-radius:999px;border:1px solid rgba(58,74,122,.25);background:rgba(255,253,248,.6);color:#2E3A6B;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;text-decoration:none;cursor:pointer;transition:transform .2s ease,background-color .2s ease}
+.act:hover{transform:translateY(-2px);background:rgba(255,253,248,.85)}
+.act.primary{background:linear-gradient(135deg,#E9A7A7,#D97A5E);border-color:transparent;color:#FFF9F0;box-shadow:0 8px 18px rgba(217,122,94,.35)}
+.act:focus-visible{outline:2px solid #3A4A7A;outline-offset:3px}
+.dot{width:6px;height:6px;border-radius:50%;background:rgba(46,58,107,.28)}
+.dot.on{width:20px;border-radius:4px;background:#3A4A7A}
+.scroll::-webkit-scrollbar{width:10px}
+.scroll::-webkit-scrollbar-track{margin:14px 0;background:linear-gradient(to right,transparent 4px,rgba(58,74,122,.22) 4px,rgba(58,74,122,.22) 6px,transparent 6px)}
+.scroll::-webkit-scrollbar-thumb{border-radius:999px;border:2px solid transparent;background:linear-gradient(180deg,#E9A7A7,#6D8F62) padding-box;box-shadow:inset 0 0 0 1px rgba(255,250,240,.55)}
+@supports not selector(::-webkit-scrollbar){.scroll{scrollbar-width:thin;scrollbar-color:#6D8F62 transparent}}
+/* short phones (iPhone SE and smaller): a slightly smaller title */
+@container (max-height: 720px){
+.chtitle{top:8px !important}
+.chtitle h1{font-size:44px !important}
+}
+.chtitle{position:absolute;left:0;right:0;top:14px;display:flex;flex-direction:column;align-items:center;text-align:center;color:#FFF9F0;z-index:3}
+.lift{text-shadow:0 2px 12px rgba(40,50,80,.7),0 0 2px rgba(40,50,80,.5)}
+.topshade{background:linear-gradient(to bottom,rgba(40,50,80,.5) 0%,rgba(40,50,80,.12) 12%,rgba(40,50,80,0) 18%)}
+.sheet{position:absolute;left:0;right:0;bottom:0;height:clamp(270px, 40cqh, 480px);display:flex;flex-direction:column;background:rgba(255,250,242,.6);backdrop-filter:blur(7px) saturate(1.1);-webkit-backdrop-filter:blur(7px) saturate(1.1);clip-path:polygon(0.00% 14.0px, 3.85% 11.5px, 7.74% 11.3px, 11.70% 12.2px, 15.76% 13.4px, 19.97% 13.7px, 24.36% 12.0px, 28.75% 9.2px, 33.00% 7.0px, 37.18% 5.5px, 41.36% 5.0px, 45.61% 5.8px, 50.00% 8.0px, 54.43% 9.8px, 58.78% 9.8px, 63.11% 8.8px, 67.45% 7.6px, 71.87% 7.0px, 76.41% 8.0px, 80.47% 9.1px, 84.46% 9.0px, 88.40% 8.4px, 92.29% 8.0px, 96.15% 8.6px, 100.00% 11.0px, 100% 100%, 0% 100%)}
+.scroll{flex:1;min-height:0;overflow-y:auto;padding:24px 18px 12px;text-align:center}
+.scroll .acts{justify-content:center}
+.foot{flex:none;display:flex;align-items:center;justify-content:space-between;padding:10px 16px 14px;border-top:1px solid rgba(46,58,107,.14)}
+/* bunny pointer + a trail of tiny leaves and sparkles (mouse/trackpad only) */
+@media (hover:hover) and (pointer:fine){.stage,.stage *{cursor:none !important}.stage input,.stage textarea{cursor:text !important}}
+.bunnycur{position:absolute;left:0;top:0;width:52px;height:73px;margin:-15px 0 0 -1px;background:url(/_blob/dbadbf2c44d41f6a5e3b3e01c5391ca4) 0 0/100% 100% no-repeat;pointer-events:none;z-index:96;opacity:0;transform-origin:50% 30%;filter:drop-shadow(0 4px 6px rgba(20,30,20,.3));will-change:transform}
+.trailp{position:absolute;left:0;top:0;pointer-events:none;z-index:95;will-change:transform,opacity}
+.trailp.tl{width:9px;height:9px;border-radius:80% 0 80% 0}
+.trailp.ts{width:6px;height:6px;border-radius:50%;background:#FFF3C4;box-shadow:0 0 8px 3px rgba(247,216,115,.75)}
+</style>
+</helmet>
+
+<div class="stage" ref="{{setRoot}}">
+<div class="scene layer" aria-hidden="true">
+<div class="scenefit">
+<div class="ly plate"></div>
+<span class="sun"></span>
+<div class="ly clouds"></div>
+<span class="balloons"></span>
+<span class="flame"></span>
+<div class="ly flowers"></div>
+</div>
+<span class="petal"></span>
+<span class="petal"></span>
+<span class="petal"></span>
+<span class="petal"></span>
+<span class="petal"></span>
+<span class="petal"></span>
+<span class="petal"></span>
+<span class="petal"></span>
+<span class="seed"></span>
+<span class="seed"></span>
+<span class="seed"></span>
+<span class="seed"></span>
+<span class="seed"></span>
+<span class="seed"></span>
+</div>
+<div class="layer confl" aria-hidden="true" style="z-index: 40">
+<span class="conf" style="background: #74B7E5"></span>
+<span class="conf" style="background: #FFF3DD"></span>
+<span class="conf" style="background: #6D8F62"></span>
+<span class="conf" style="background: #D97A5E"></span>
+<span class="conf" style="background: #F7D873"></span>
+<span class="conf" style="background: #E9A7A7"></span>
+<span class="conf" style="background: #74B7E5"></span>
+<span class="conf" style="background: #FFF3DD"></span>
+<span class="conf" style="background: #6D8F62"></span>
+<span class="conf" style="background: #D97A5E"></span>
+<span class="conf" style="background: #F7D873"></span>
+<span class="conf" style="background: #E9A7A7"></span>
+<span class="conf" style="background: #74B7E5"></span>
+<span class="conf" style="background: #FFF3DD"></span>
+<span class="conf" style="background: #6D8F62"></span>
+<span class="conf" style="background: #D97A5E"></span>
+<span class="conf" style="background: #F7D873"></span>
+<span class="conf" style="background: #E9A7A7"></span>
+<span class="conf" style="background: #74B7E5"></span>
+<span class="conf" style="background: #FFF3DD"></span>
+<span class="conf" style="background: #6D8F62"></span>
+<span class="conf" style="background: #D97A5E"></span>
+<span class="conf" style="background: #F7D873"></span>
+<span class="conf" style="background: #E9A7A7"></span>
+<span class="conf" style="background: #74B7E5"></span>
+<span class="conf" style="background: #FFF3DD"></span>
+<span class="conf" style="background: #6D8F62"></span>
+<span class="conf" style="background: #D97A5E"></span>
+<span class="conf" style="background: #F7D873"></span>
+<span class="conf" style="background: #E9A7A7"></span>
+<span class="conf" style="background: #74B7E5"></span>
+<span class="conf" style="background: #FFF3DD"></span>
+<span class="conf" style="background: #6D8F62"></span>
+<span class="conf" style="background: #D97A5E"></span>
+<span class="conf" style="background: #F7D873"></span>
+<span class="conf" style="background: #E9A7A7"></span>
+</div>
+<div class="layer topshade"></div>
+<div class="chtitle">
+<p class="lift ca" style="margin: 0; font-size: 11px; font-weight: 700; letter-spacing: .26em; text-transform: uppercase">Chapter VIII · The Morning After</p>
+<h1 class="script lift ca" style="margin: 4px 0 0; font-size: 56px; line-height: 1.05; color: #FFF0C8">Thank you</h1>
+</div>
+<div class="sheet">
+<div class="scroll">
+<p class="msg a">From the bottom of our hearts, thank you for being part of Dylan's very first chapter: his baptism and his first birthday.</p>
+<p class="msg a" style="margin-top: 10px">Your love, prayers and presence are the most beautiful gifts he could ever receive. We can't wait to celebrate with you on December 13!</p>
+<p class="sig a">With love, Dave, Alyana &amp; Dylan</p>
+<div class="acts a">
+<a class="act primary" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Dylan%27s%20Baptism%20%26%20First%20Birthday&amp;dates=20261213T053000Z/20261213T090000Z&amp;location=Santuario%20de%20San%20Antonio%20Parish%2C%203117%20McKinley%20Rd%2C%20Forbes%20Park%2C%20Makati%20City&amp;details=Baptism%201%3A30%20PM%20at%20Santuario%20de%20San%20Antonio%20Parish%2C%20then%20the%20celebration%20at%20the%20Santuario%20de%20San%20Antonio%20Social%20Hall." target="_blank" rel="noopener"><svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M5 5 H19 V20 H5 Z M5 9 H19 M9 3 V7 M15 3 V7 M12 12 V17 M9.5 14.5 H14.5"></path></svg>Add to calendar</a>
+<a class="act" href="https://maps.app.goo.gl/Tag57jheAtuJ8mD97" target="_blank" rel="noopener"><svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M12 21 C8 16 5 12.5 5 9 A7 7 0 0 1 19 9 C19 12.5 16 16 12 21 Z M12 11.5 A2.5 2.5 0 1 0 12.01 6.5"></path></svg>Get directions</a>
+<a class="act" href="Main.dc.html"><svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M4 5 C7 4 10 4 12 6 C14 4 17 4 20 5 V19 C17 18 14 18 12 20 C10 18 7 18 4 19 Z M12 6 V20"></path></svg>Read the story again</a>
+</div>
+</div>
+<div class="foot">
+<div aria-hidden="true" style="display: flex; gap: 6px; align-items: center"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot on"></span></div>
+<p style="margin: 0; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #2E3A6B">The end · 8 of 8</p>
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = {}; this.root = null; this.tweens = []; this.tries = 0; }
+  componentDidMount() { this.initTrailSoon(); this.boot(); }
+  componentWillUnmount() { if (this.onMove && this.root) { this.root.removeEventListener('pointermove', this.onMove); this.root.removeEventListener('pointerleave', this.onLeave); this.root.removeEventListener('pointerdown', this.onDown); } clearTimeout(this.retry); if (this.io) this.io.disconnect(); this.tweens.forEach(function (t) { t.kill(); }); }
+  reduced() { try { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; } }
+  /* a soft burst of confetti in the palette colours, every time the chapter opens */
+  confetti(g, qa) {
+    var c = this.root.offsetWidth / 2, d = this.root.offsetHeight * 0.17;
+    Array.prototype.forEach.call(qa('.conf'), function (el, i) {
+      var a = (Math.PI * 2 * i) / qa('.conf').length + Math.random() * 0.4, sp = 130 + Math.random() * 140;
+      g.killTweensOf(el);
+      g.set(el, { x: c, y: d, opacity: 1, rotation: Math.random() * 360, scale: 0.6 + Math.random() * 0.6 });
+      g.to(el, { x: c + Math.cos(a) * sp, y: d + Math.sin(a) * sp * 0.6 - 60, rotation: '+=' + (180 + Math.random() * 360), duration: 1.3, ease: 'expo.out' });
+      g.to(el, { y: '+=' + (300 + Math.random() * 200), x: '+=' + (Math.random() * 80 - 40), rotation: '+=' + (Math.random() * 540), duration: 3.2 + Math.random() * 1.6, ease: 'sine.in', delay: 1.2 });
+      g.to(el, { opacity: 0, duration: 0.8, delay: 3.6 + Math.random() * 1.2 });
+    });
+  }
+  boot() {
+    var self = this;
+    if (!this.root || !window.gsap) { if (this.tries++ < 25) this.retry = setTimeout(function () { self.boot(); }, 120); return; }
+    var g = window.gsap, r = this.root, t = this.tweens;
+    if (this.reduced()) return;
+    var q = function (s) { return r.querySelector(s); }, qa = function (s) { return r.querySelectorAll(s); };
+    var intro = g.timeline({ paused: true });
+    intro.from(qa('.ca'), { y: -12, opacity: 0, filter: 'blur(5px)', duration: 1, stagger: 0.15, ease: 'expo.out' }, 0.3).from(q('.sheet'), { yPercent: 100, duration: 1.1, ease: 'expo.out' }, 0.45)
+      .from(qa('.a'), { y: 16, opacity: 0, duration: 0.9, stagger: 0.12, ease: 'expo.out' }, 1.0)
+      .call(function () { self.confetti(g, qa); }, null, 1.0)
+      .call(function () { if (!self.alive) { self.alive = true; self.ambient(g, q, qa, t); } }, null, 0.2);
+    t.push(intro);
+    if ('IntersectionObserver' in window) {
+      this.io = new IntersectionObserver(function (es) { es.forEach(function (en) { if (en.isIntersecting) { if (!self.seen) { self.seen = true; intro.restart(); } } else self.seen = false; }); }, { threshold: 0.15 });
+      this.io.observe(r);
+    } else intro.play();
+  }
+  /* the morning after: sun breathes, clouds drift, balloons bob, candle flickers, flowers sway, petals and dandelion seeds float */
+  ambient(g, q, qa, t) {
+    t.push(g.fromTo(q('.sun'), { opacity: 0.85, scale: 0.97 }, { opacity: 1, scale: 1.06, duration: 4.5, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    var r = this.root, W = r.offsetWidth, H = r.offsetHeight, sf = q('.scenefit'), k = sf && sf.offsetWidth ? sf.offsetWidth / 941 : 0.53, f = k / 0.53;
+    var sx = sf ? sf.offsetLeft : 0, sy = sf ? sf.offsetTop : 0;
+    t.push(g.to(q('.clouds'), { x: 16 * f, duration: 26, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    var b = q('.balloons');
+    g.set(b, { rotation: -1.6, y: 0 });
+    t.push(g.to(b, { rotation: 1.6, duration: 3.2, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    t.push(g.to(b, { y: -5 * f, duration: 2.3, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    var fl = q('.flame'), flick = function () { t.push(g.to(fl, { opacity: 0.55 + Math.random() * 0.45, scale: 0.85 + Math.random() * 0.3, duration: 0.12 + Math.random() * 0.2, ease: 'sine.inOut', onComplete: flick })); }; flick();
+    var f = q('.flowers'); g.set(f, { skewX: -0.8 });
+    t.push(g.to(f, { skewX: 0.8, duration: 3, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    var rnd = function (a, b) { return a + Math.random() * (b - a); };
+    Array.prototype.forEach.call(qa('.petal'), function (p, i) {
+      (function drift(first) {
+        var y = rnd(H * 0.07, H * 0.48);
+        g.set(p, { x: -20, y: y, opacity: 0, rotation: rnd(0, 360) });
+        var tl = g.timeline({ delay: first ? i * 1.3 : rnd(0.5, 4), onComplete: function () { drift(false); } });
+        var d = rnd(9, 14);
+        tl.to(p, { opacity: 0.9, duration: 0.8 }, 0)
+          .to(p, { x: W + 20, duration: d, ease: 'none' }, 0)
+          .to(p, { y: y + rnd(60, 180), duration: d, ease: 'sine.inOut' }, 0)
+          .to(p, { rotation: '+=' + rnd(240, 540), duration: d, ease: 'none' }, 0);
+        t.push(tl);
+      })(true);
+    });
+    // dandelion seeds lift off the painted dandelions and float up
+    var dd = [[760, 1440], [692, 1497], [760, 1440]].map(function (p) { return [sx + p[0] * k, sy + p[1] * k]; });
+    Array.prototype.forEach.call(qa('.seed'), function (s, i) {
+      (function fly(first) {
+        var p = dd[Math.floor(Math.random() * dd.length)];
+        g.set(s, { x: p[0], y: p[1], opacity: 0, scale: rnd(0.6, 1.1) });
+        var tl = g.timeline({ delay: first ? i * 1.1 + 1 : rnd(1, 5), onComplete: function () { fly(false); } });
+        var d = rnd(6, 10);
+        tl.to(s, { opacity: 0.95, duration: 0.6 }, 0)
+          .to(s, { x: p[0] - rnd(40, 200), duration: d, ease: 'sine.out' }, 0)
+          .to(s, { y: p[1] - rnd(H * 0.35, H * 0.6), duration: d, ease: 'sine.inOut' }, 0)
+          .to(s, { opacity: 0, duration: 1.5 }, d - 1.5);
+        t.push(tl);
+      })(true);
+    });
+  }
+  /* bunny pointer trail: tiny leaves and golden sparkles drift down from the pointer */
+  initTrail() {
+    var self = this;
+    try { if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches || this.reduced()) return; } catch (e) { return; }
+    var r = this.root; if (!r || this.trailOn) return; this.trailOn = true;
+    var cols = ['#A8CF7E', '#6D8F62', '#94B85E', '#E9A7A7', '#C9C46A'], last = 0, n = 0, live = 0;
+    this.onTrail = function (ev) {
+      var g = window.gsap; if (!g) return;
+      var now = Date.now(); if (now - last < 28 || live > 46) return; last = now;
+      var rr = r.getBoundingClientRect(), sc = rr.width / r.offsetWidth || 1;
+      var x = (ev.clientX - rr.left) / sc, y = (ev.clientY - rr.top) / sc;
+      var leaf = (n++ % 3) !== 2, p = document.createElement('span');
+      p.className = 'trailp ' + (leaf ? 'tl' : 'ts');
+      if (leaf) p.style.background = cols[n % cols.length];
+      r.appendChild(p); live++;
+      g.set(p, { x: x + 18 + Math.random() * 16, y: y + 52, rotation: Math.random() * 360, scale: 0.6 + Math.random() * 0.6, opacity: 0.95 });
+      g.to(p, { x: '+=' + (Math.random() * 40 - 20), y: '+=' + (leaf ? 30 + Math.random() * 40 : 10 + Math.random() * 20), rotation: '+=' + (Math.random() * 220 - 110), scale: leaf ? 0.4 : 0.2, opacity: 0, duration: leaf ? 1.1 + Math.random() * 0.6 : 0.7 + Math.random() * 0.4, ease: 'sine.out', onComplete: function () { if (p.parentNode) p.parentNode.removeChild(p); live--; } });
+    };
+    /* the bunny follows the pointer, leaning into the direction it moves */
+    var bun = document.createElement('span'); bun.className = 'bunnycur'; bun.setAttribute('aria-hidden', 'true'); r.appendChild(bun); this.bun = bun;
+    var g0 = window.gsap, mx = g0.quickTo(bun, 'x', { duration: 0.18, ease: 'power3.out' }), my = g0.quickTo(bun, 'y', { duration: 0.18, ease: 'power3.out' }), rot = g0.quickTo(bun, 'rotation', { duration: 0.5, ease: 'power2.out' }), px = null;
+    this.onMove = function (ev) {
+      var rr = r.getBoundingClientRect(), sc = rr.width / r.offsetWidth || 1;
+      var x = (ev.clientX - rr.left) / sc, y = (ev.clientY - rr.top) / sc;
+      if (px === null) { g0.set(bun, { x: x, y: y }); }
+      mx(x); my(y); rot(px === null ? 0 : Math.max(-14, Math.min(14, (x - px) * 1.2))); px = x;
+      g0.to(bun, { opacity: 1, duration: 0.2, overwrite: 'auto' });
+      clearTimeout(self.rotT); self.rotT = setTimeout(function () { rot(0); }, 120);
+      self.onTrail(ev);
+    };
+    this.onLeave = function () { px = null; g0.to(bun, { opacity: 0, duration: 0.2, overwrite: 'auto' }); };
+    this.onDown = function () { g0.fromTo(bun, { scaleX: 1.12, scaleY: 0.86 }, { scaleX: 1, scaleY: 1, duration: 0.5, ease: 'elastic.out(1, 0.4)' }); };
+    r.addEventListener('pointermove', this.onMove);
+    r.addEventListener('pointerleave', this.onLeave);
+    r.addEventListener('pointerdown', this.onDown);
+  }
+  initTrailSoon() { var self = this, tries = 0; (function go() { if (self.root && window.gsap) self.initTrail(); else if (tries++ < 30) setTimeout(go, 150); })(); }
+
+  renderVals() { var self = this; return { setRoot: function (el) { self.root = el; } }; }
+}
+</script>
+</body>
+</html>

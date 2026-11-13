@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Dylan — Chapter 4, Dress Code and Gifts</title>
+<script src="./support.js"></script>
+<script src="/_blob/17d4179414200efbabee22c7746b97ba"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&amp;family=Nunito:wght@400;600;700&amp;family=Pinyon+Script&amp;display=swap">
+<style>
+body{margin:0;background:#102A20}
+.stage{position:relative;width:100vw;height:100vh;height:100dvh;container-type:size;overflow:hidden;background:#C9B8E6;font-family:'Nunito',system-ui,sans-serif;color:#2A2238}
+.layer{position:absolute;inset:0;pointer-events:none}
+/* responsive scene: the tall sky-garden painting (941x1672) always covers the screen like a photo set to "fill".
+   The island is centred, with the compass on its roof (17.3% down the painting) sitting 13% down the screen */
+.scenefit{position:absolute;--sh:max(105cqh, calc(100cqw * 1672 / 941));--sw:calc(var(--sh) * 941 / 1672);width:var(--sw);height:var(--sh);
+left:clamp(calc(100cqw - var(--sw)), calc(50cqw - var(--sw) * 0.5), 0px);
+top:clamp(calc(100cqh - var(--sh)), calc(13cqh - var(--sh) * 0.173), 0px)}
+/* the floating island and sky gently bob together; the cloud sea stays in front */
+.back{position:absolute;inset:0;will-change:transform}
+.lyr{position:absolute;inset:0;background-size:100% 100%;background-repeat:no-repeat;will-change:transform}
+.far{background-image:url(/_blob/935eb1bd4066cd965e742a3fe5763cfb)}
+.clouds{background-image:url(/_blob/c89540fc79fb7ca4586f18d4f2324f53);transform:scale(1.05);transform-origin:50% 100%}
+/* moving parts, placed in % of the painting so they scale with it */
+.part{position:absolute;background-size:100% 100%;background-repeat:no-repeat;will-change:transform}
+.wind{left:13.0712%;top:25.7177%;width:12.9649%;height:7.8947%;background-image:url(/_blob/46eb2cac96322850af50faf70aea0335);transform-origin:54.34% 50.15%}
+.flag{left:62.4867%;top:17.8828%;width:17.9596%;height:3.3493%;background-image:url(/_blob/968d2082b5d6416347d324b6487e0a6d);transform-origin:0% 25%}
+.smoke{left:4.3571%;top:10.945%;width:32.1998%;height:9.5096%;background-image:url(/_blob/9c8f310fa9c24a51a69b326be321109a);transform-origin:92.7% 92.5%}
+/* waterfall shimmer: streaks of light run down inside the waterfall's shape */
+.water2{background-image:url(/_blob/953bd7caa5e105b44d0f66810f86a79b);filter:brightness(1.35) saturate(1.2);opacity:.6;
+clip-path:polygon(70.563% 46.950%, 76.089% 46.770%, 76.939% 53.828%, 77.790% 59.809%, 77.683% 65.789%, 68.225% 65.789%, 68.438% 58.612%, 70.988% 51.435%);
+-webkit-mask-image:repeating-linear-gradient(to bottom,transparent 0,#000 8px,transparent 16px);mask-image:repeating-linear-gradient(to bottom,transparent 0,#000 8px,transparent 16px);
+-webkit-mask-size:100% 32px;mask-size:100% 32px;animation:flow 0.9s linear infinite}
+@keyframes flow{from{-webkit-mask-position:0 0;mask-position:0 0}to{-webkit-mask-position:0 32px;mask-position:0 32px}}
+.lantern{position:absolute;width:7.4%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(255,226,150,.85),rgba(255,200,110,.3) 40%,rgba(255,200,110,0) 70%);mix-blend-mode:screen}
+.ribbon{position:absolute;left:0;top:0}
+.ribbon svg{display:block;width:100%;height:100%;overflow:visible}
+.ribbon{width:70px;height:30px}
+.topshade{background:linear-gradient(to bottom,rgba(70,50,100,.45) 0%,rgba(70,50,100,.12) 9%,rgba(70,50,100,0) 14%)}
+
+.script{font-family:'Pinyon Script',cursive;font-weight:400}
+.lift{text-shadow:0 2px 12px rgba(60,40,90,.6),0 0 2px rgba(60,40,90,.4)}
+.chtitle{position:absolute;left:0;right:0;top:14px;display:flex;flex-direction:column;align-items:center;text-align:center;color:#FFF9F0;z-index:3}
+
+.sheet{position:absolute;left:0;right:0;bottom:0;height:clamp(300px, 47.4cqh, 560px);display:flex;flex-direction:column;background:rgba(255,250,244,.6);backdrop-filter:blur(7px) saturate(1.1);-webkit-backdrop-filter:blur(7px) saturate(1.1);clip-path:polygon(0.00% 14.0px, 3.85% 11.5px, 7.74% 11.3px, 11.70% 12.2px, 15.76% 13.4px, 19.97% 13.7px, 24.36% 12.0px, 28.75% 9.2px, 33.00% 7.0px, 37.18% 5.5px, 41.36% 5.0px, 45.61% 5.8px, 50.00% 8.0px, 54.43% 9.8px, 58.78% 9.8px, 63.11% 8.8px, 67.45% 7.6px, 71.87% 7.0px, 76.41% 8.0px, 80.47% 9.1px, 84.46% 9.0px, 88.40% 8.4px, 92.29% 8.0px, 96.15% 8.6px, 100.00% 11.0px, 100% 100%, 0% 100%)}
+.tabs{position:relative;display:flex;gap:6px;padding:22px 16px 10px;flex:none}
+.ind{position:absolute;left:0;top:22px;height:44px;width:170px;border-radius:999px;background:#5B4A7A;box-shadow:0 6px 16px rgba(70,50,100,.28)}
+.tab{position:relative;z-index:1;flex:1;display:flex;align-items:center;justify-content:center;gap:6px;min-height:44px;border-radius:999px;border:1px solid rgba(91,74,122,.25);background:transparent;color:#4A3B66;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:color .3s ease,border-color .3s ease}
+.tab.on{color:#FFF9F0;border-color:transparent}
+.tab:focus-visible{outline:2px solid #C9A24E;outline-offset:2px}
+.scroll{flex:1;min-height:0;overflow-y:auto;padding:4px 20px 16px}
+.lbl{margin:0;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#6A4E6E}
+.title{margin:4px 0 0;font-family:'IM Fell English',Georgia,serif;font-size:26px;line-height:1.12;color:#2A2238}
+.p{margin:6px 0 0;font-size:14.5px;line-height:1.55;color:#3E3352}
+.ph{color:#8A6D8E;font-style:italic}
+.swatches{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin-top:10px}
+.sw{display:flex;flex-direction:column;align-items:center;gap:4px}
+.chip{display:block;flex:none;border:1px solid rgba(91,74,122,.18);box-sizing:border-box;width:42px;height:42px;border-radius:50%;box-shadow:inset 0 0 0 2px rgba(255,255,255,.7),0 4px 10px rgba(70,50,100,.2)}
+.swname{margin:0;text-align:center;line-height:1.2;font-size:10.5px;font-weight:700;color:#3E3352}
+.tag{display:inline-block;margin-left:6px;padding:2px 7px;border-radius:999px;background:rgba(201,162,78,.2);font-size:9.5px;font-weight:700;letter-spacing:.04em;text-transform:none;color:#7A5E2A;vertical-align:middle}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
+.card{padding:12px 13px;border-radius:16px;background:rgba(255,255,255,.62);box-shadow:inset 0 0 0 1px rgba(91,74,122,.14)}
+.card h3{margin:6px 0 0;font-family:'IM Fell English',Georgia,serif;font-size:18px;font-weight:400;color:#2A2238}
+.card p{margin:3px 0 0;font-size:13px;line-height:1.45;color:#3E3352}
+.ico{width:32px;height:32px;border-radius:50%;background:rgba(201,184,230,.45);display:flex;align-items:center;justify-content:center}
+.note{display:flex;gap:10px;align-items:flex-start;margin-top:12px;padding:12px 14px;border-radius:16px;background:rgba(245,214,138,.35);border:1px solid rgba(201,162,78,.45)}
+.quote{margin:2px 0 0;font-family:'Pinyon Script',cursive;font-size:28px;line-height:1.2;color:#5B4A7A;text-align:center}
+.foot{flex:none;display:flex;align-items:center;justify-content:space-between;padding:10px 16px 14px;border-top:1px solid rgba(91,74,122,.15)}
+.dot{width:6px;height:6px;border-radius:50%;background:rgba(91,74,122,.3)}
+.dot.on{width:20px;border-radius:3px;background:#5B4A7A}
+.next{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border:0;border-radius:999px;background:#5B4A7A;color:#FFF9F0;font-family:'IM Fell English',Georgia,serif;font-size:16px;cursor:pointer}
+.next:focus-visible{outline:2px solid #C9A24E;outline-offset:3px}
+.swhex{margin:0;font-size:9.5px;font-weight:600;letter-spacing:.03em;color:#6A5E78;text-align:center}
+.nowhite{display:flex;gap:10px;align-items:center;margin-top:14px;padding:9px 12px;border-radius:14px;background:rgba(233,167,167,.22);border:1px solid rgba(217,122,94,.35)}
+/* short phones (iPhone SE and smaller): a slightly smaller title */
+@container (max-height: 720px){
+.chtitle{top:10px}
+.chtitle h1{font-size:32px !important}
+}
+/* page turn to Chapter 5: this page curls away, revealing the lantern village */
+.nextlink{position:absolute;left:0;top:0;width:1px;height:1px;opacity:0;pointer-events:none}
+.under5{position:absolute;inset:0;z-index:70;pointer-events:none;display:none;background-color:#3D4A8C;background-repeat:no-repeat;
+--sh:max(111cqh, calc(100cqw * 1672 / 941));--sw:calc(var(--sh) * 941 / 1672);
+background-image:linear-gradient(to bottom,rgba(28,30,70,.55) 0%,rgba(28,30,70,.15) 12%,rgba(28,30,70,0) 18%),url(/_blob/c7ac9efed23dd7c78a0d0f53631d91d2);
+background-size:100% 100%,var(--sw) var(--sh);
+background-position:0 0,clamp(calc(100cqw - var(--sw)), calc(50cqw - var(--sw) * 0.56), 0px) clamp(calc(100cqh - var(--sh)), calc(45.5cqh - var(--sh) * 0.496), 0px)}
+.tflapwrap{position:absolute;inset:0;z-index:71;pointer-events:none;display:none;filter:drop-shadow(-8px -8px 16px rgba(16,42,32,.45))}
+.tflap{position:absolute;inset:0;background:linear-gradient(135deg,#E9DCBC 0%,#F8EFD9 55%,#E0D0A8 100%)}
+/* storybook scrollbar: a slim vine line with a glowing pill */
+.scroll::-webkit-scrollbar{width:10px;height:10px}
+.scroll::-webkit-scrollbar-track{margin:14px 0;background:linear-gradient(to right,transparent 4px,rgba(91,74,122,.22) 4px,rgba(91,74,122,.22) 6px,transparent 6px)}
+.scroll::-webkit-scrollbar-thumb{border-radius:999px;border:2px solid transparent;background:linear-gradient(180deg,#E9A7A7,#5B4A7A) padding-box;box-shadow:inset 0 0 0 1px rgba(255,250,240,.55)}
+.scroll::-webkit-scrollbar-thumb:hover{border-width:1px}
+.scroll::-webkit-scrollbar-corner{background:transparent}
+@supports not selector(::-webkit-scrollbar){.scroll{scrollbar-width:thin;scrollbar-color:#5B4A7A transparent}}
+/* bunny pointer + a trail of tiny leaves and sparkles (mouse/trackpad only) */
+@media (hover:hover) and (pointer:fine){.stage,.stage *{cursor:none !important}.stage input,.stage textarea{cursor:text !important}}
+.bunnycur{position:absolute;left:0;top:0;width:52px;height:73px;margin:-15px 0 0 -1px;background:url(/_blob/dbadbf2c44d41f6a5e3b3e01c5391ca4) 0 0/100% 100% no-repeat;pointer-events:none;z-index:96;opacity:0;transform-origin:50% 30%;filter:drop-shadow(0 4px 6px rgba(20,30,20,.3));will-change:transform}
+.trailp{position:absolute;left:0;top:0;pointer-events:none;z-index:95;will-change:transform,opacity}
+.trailp.tl{width:9px;height:9px;border-radius:80% 0 80% 0}
+.trailp.ts{width:6px;height:6px;border-radius:50%;background:#FFF3C4;box-shadow:0 0 8px 3px rgba(247,216,115,.75)}
+/* until the sliding pill is measured, the selected tab paints its own fill so it always reads correctly */
+.tabs:not(.ready) .tab.on{background:#5B4A7A}
+.outfit{display:block;width:100%;height:168px;background:center bottom/contain no-repeat;margin:6px 0 2px;filter:drop-shadow(0 6px 8px rgba(70,50,100,.18));transition:transform .35s ease}
+.card:hover .outfit{transform:translateY(-3px) scale(1.03)}
+/* palette: each colour glows in its own hue on hover, focus or tap */
+.sw{cursor:pointer;outline:none;border-radius:14px;padding:4px 0}
+.chip{position:relative;overflow:hidden;transition:transform .35s cubic-bezier(.3,1.6,.5,1),box-shadow .35s ease}
+.chip::after{content:'';position:absolute;top:-30%;left:-80%;width:50%;height:160%;background:linear-gradient(100deg,rgba(255,255,255,0),rgba(255,255,255,.75),rgba(255,255,255,0));transform:rotate(18deg);transition:left .6s ease}
+.sw:hover .chip,.sw:focus-visible .chip,.sw:active .chip{transform:translateY(-5px) scale(1.14);box-shadow:inset 0 0 0 2px rgba(255,255,255,.75),0 0 0 4px color-mix(in srgb,var(--c) 30%,transparent),0 0 18px 6px var(--c)}
+.sw:hover .chip::after,.sw:focus-visible .chip::after,.sw:active .chip::after{left:130%}
+.sw:hover .swname,.sw:focus-visible .swname{color:#2A2238}
+.sw:focus-visible{box-shadow:0 0 0 2px #C9A24E}
+.swname{transition:color .3s ease}
+/* palette as little flame friends: they sway gently, and dance when hovered or tapped */
+.chip{width:40px !important;height:52px !important;background:none !important;border:0 !important;border-radius:0 !important;box-shadow:none !important;overflow:visible !important}
+.chip::after{display:none !important}
+.fl{display:block;width:100%;height:100%;overflow:visible;background:center bottom/contain no-repeat;transform-origin:50% 96%;animation:flIdle 3.2s ease-in-out infinite;filter:drop-shadow(0 4px 6px rgba(60,50,40,.2));transition:filter .3s ease}
+.fo{fill:var(--c);stroke:rgba(70,60,50,.28);stroke-width:1}
+@keyframes flIdle{0%,100%{transform:rotate(-2deg) scaleY(1)}50%{transform:rotate(2deg) scaleY(1.03)}}
+@keyframes flDance{0%{transform:scaleY(1) skewX(0)}25%{transform:scaleY(1.14) skewX(-7deg)}50%{transform:scaleY(.94) skewX(4deg)}75%{transform:scaleY(1.1) skewX(6deg)}100%{transform:scaleY(1) skewX(0)}}
+.sw:hover .chip,.sw:focus-visible .chip,.sw:active .chip{box-shadow:none !important}
+.sw:hover .fl,.sw:focus-visible .fl,.sw:active .fl{animation:flDance .55s ease-in-out infinite;filter:drop-shadow(0 0 9px var(--c)) drop-shadow(0 4px 6px rgba(60,50,40,.2))}
+.swatches .sw:nth-child(2) .fl{animation-delay:-.6s}.swatches .sw:nth-child(3) .fl{animation-delay:-1.2s}.swatches .sw:nth-child(4) .fl{animation-delay:-1.8s}.swatches .sw:nth-child(5) .fl{animation-delay:-2.4s}
+@media (prefers-reduced-motion: reduce){.fl{animation:none !important}}
+</style>
+</helmet>
+
+<div class="stage" ref="{{setRoot}}">
+
+<div class="scene layer" aria-hidden="true">
+<div class="scenefit">
+<div class="back">
+<div class="lyr far"></div>
+<span class="part smoke"></span>
+<div class="lyr water2"></div>
+<span class="part wind"></span>
+<span class="part flag"></span>
+<span class="lantern" style="left: 15.62%; top: 38.28%"></span>
+<span class="lantern" style="left: 74.39%; top: 25.12%"></span>
+<span class="lantern" style="left: 83.63%; top: 37.80%"></span>
+</div>
+<div class="lyr clouds"></div>
+</div>
+<span class="ribbon rb1"><svg viewBox="0 0 90 40"><path d="M2 20 C14 2 26 38 40 20 S 66 2 88 22" fill="none" stroke="#EFA9B8" style="stroke-width: 4; stroke-linecap: round"></path></svg></span>
+</div>
+<div class="layer topshade"></div>
+
+<div class="chtitle">
+<p class="lift ca" style="margin: 0; font-size: 11px; font-weight: 700; letter-spacing: .26em; text-transform: uppercase">Chapter IV · Up in the Clouds</p>
+<h1 class="script lift ca" style="margin: 0; font-size: 38px; line-height: 1.1; color: #FFF0C8">Dress Code &amp; Gifts</h1>
+</div>
+
+<div class="sheet">
+<div class="tabs" role="group" aria-label="Dress code or gift guide">
+<span class="ind" aria-hidden="true"></span>
+<button class="tab t-dress {{tabDress}}" type="button" aria-pressed="{{pressDress}}" onClick="{{showDress}}">
+<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" style="stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"><path d="M9 3 L12 6 L15 3 L19 6 L17 10 L16 9 V21 H8 V9 L7 10 L5 6 Z"></path></svg>
+Dress code
+</button>
+<button class="tab t-gifts {{tabGifts}}" type="button" aria-pressed="{{pressGifts}}" onClick="{{showGifts}}">
+<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" style="stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"><rect x="3" y="9" width="18" height="12" rx="2"></rect><path d="M2 9 H22 M12 9 V21 M12 9 C9 3 5 5 8 9 M12 9 C15 3 19 5 16 9"></path></svg>
+Gift guide
+</button>
+</div>
+
+<div class="scroll">
+<sc-if value="{{isDress}}" hint-placeholder-val="{{ true }}">
+<div class="panel">
+<p class="lbl a">The dress code</p>
+<h2 class="title a">Smart Casual</h2>
+<p class="p a">Come in smart casual, or whatever you feel most comfortable in. Light, soft colors from our palette are always lovely.</p>
+<p class="lbl a" style="margin-top: 16px">Our palette</p>
+<div class="swatches a" role="list" aria-label="Suggested colors">
+<sc-for list="{{palette}}" as="c" hint-placeholder-count="6">
+<div class="sw" role="listitem" tabindex="0"><span class="chip" style="{{c.style}}"><span class="fl" style="{{c.img}}"></span></span><p class="swname">{{c.name}}</p></div>
+</sc-for>
+</div>
+<div class="nowhite a"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#B5583D" style="stroke-width: 1.8; stroke-linecap: round; flex: none"><circle cx="12" cy="12" r="9"></circle><path d="M5.6 5.6 L18.4 18.4"></path></svg><p style="margin: 0; font-size: 13px; line-height: 1.45; color: #2A2238">Kindly <strong>avoid wearing white</strong>. It's reserved for Dylan's godparents.</p></div>
+<div class="cards">
+<div class="card a"><span class="ico"><svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#5B4A7A" style="stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"><path d="M9 3 L12 6 L15 3 L19 6 L17 10 L16 9 V21 H8 V9 L7 10 L5 6 Z"></path></svg></span><h3>Grown-ups</h3><div class="outfit" role="img" aria-label="A woman in a cream blouse and dusty-blue skirt, and a man in a cream shirt and gray trousers" style="background-image:url(/_blob/a17405541fae2dcf71eee78bf2f51710)"></div></div>
+<div class="card a"><span class="ico"><svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#5B4A7A" style="stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"><circle cx="12" cy="6" r="3"></circle><path d="M7 21 V14 L5 12 L8 9 H16 L19 12 L17 14 V21"></path></svg></span><h3>Little ones</h3><div class="outfit" role="img" aria-label="A girl in a cream blouse and peach skirt, and a boy in a sage-green shirt and gray trousers" style="background-image:url(/_blob/c10ebbcbcf58f8147419366536d6126f);background-size:auto 72%"></div></div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{isGifts}}" hint-placeholder-val="{{ false }}">
+<div class="panel">
+<p class="quote a">Your presence, love, and prayers are the greatest gifts we could ask for.</p>
+<p class="p a" style="text-align: center; font-size: 13.5px">Gifts are never expected. If you'd still like to bring something, here are a few ideas:</p>
+<div class="cards">
+<sc-for list="{{gifts}}" as="g" hint-placeholder-count="4">
+<div class="card a"><span class="ico"><svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#5B4A7A" style="stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"><path d="{{g.icon}}"></path></svg></span><h3>{{g.title}}</h3><p>{{g.text}}</p></div>
+</sc-for>
+</div>
+</div>
+</sc-if>
+</div>
+
+<div class="foot">
+<div style="display: flex; flex-direction: column; gap: 5px">
+<div aria-hidden="true" style="display: flex; gap: 6px; align-items: center"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot on"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+<p style="margin: 0; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #4A3B66">Chapter 4 of 8</p>
+</div>
+<button class="next" type="button" onClick="{{goNext}}">Do's &amp; Don'ts
+<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8 H12 M8.5 4 L12.5 8 L8.5 12" fill="none" stroke="#F5D68A" style="stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"></path></svg>
+</button>
+<a class="nextlink" href="Ch5.dc.html" tabindex="-1" aria-hidden="true">Chapter 5</a>
+</div>
+</div>
+
+
+<!-- page turn to Chapter 5 -->
+<div class="under5" aria-hidden="true"></div>
+<div class="tflapwrap" aria-hidden="true"><div class="tflap"></div></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { tab: 'dress', dir: 1 };
+    this.root = null;
+    this.tweens = [];
+    this.tries = 0;
+  }
+  componentDidMount() { this.initTrailSoon(); this.boot(); }
+  componentWillUnmount() { if (this.indRO) this.indRO.disconnect(); if (this.onMove && this.root) { this.root.removeEventListener('pointermove', this.onMove); this.root.removeEventListener('pointerleave', this.onLeave); this.root.removeEventListener('pointerdown', this.onDown); } clearTimeout(this.retry); if (this.io) this.io.disconnect(); this.tweens.forEach(function (t) { t.kill(); }); }
+  reduced() { try { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; } }
+  moveIndicator(animate) {
+    var btn = this.root && this.root.querySelector('.t-' + this.state.tab), ind = this.root && this.root.querySelector('.ind');
+    if (!btn || !ind || !window.gsap) return;
+    /* wait until the tabs are really laid out (the board can mount while hidden), then keep the pill in sync if they resize */
+    if (!btn.offsetWidth) { var me = this; if ((this.indTries = (this.indTries || 0) + 1) < 60) setTimeout(function () { me.moveIndicator(false); }, 150); return; }
+    this.indTries = 0;
+    if (btn.parentNode && btn.parentNode.classList) btn.parentNode.classList.add('ready');
+    if (!this.indRO && window.ResizeObserver && btn.parentNode) { var me2 = this; this.indRO = new ResizeObserver(function () { me2.moveIndicator(false); }); this.indRO.observe(btn.parentNode); }
+    var p = { x: btn.offsetLeft, width: btn.offsetWidth };
+    if (animate && !this.reduced()) window.gsap.to(ind, Object.assign(p, { duration: 0.55, ease: 'expo.out' })); else window.gsap.set(ind, p);
+  }
+  afterTab() {
+    if (!this.root || !window.gsap) return;
+    this.moveIndicator(true);
+    if (this.reduced()) return;
+    window.gsap.fromTo(this.root.querySelectorAll('.panel .a, .panel .sw'), { x: 22 * this.state.dir, opacity: 0 }, { x: 0, opacity: 1, duration: 0.55, stagger: 0.04, ease: 'expo.out', clearProps: 'transform' });
+    var sc = this.root.querySelector('.scroll'); if (sc) sc.scrollTop = 0;
+  }
+  boot() {
+    var self = this;
+    if (!this.root || !window.gsap) { if (this.tries++ < 25) this.retry = setTimeout(function () { self.boot(); }, 120); return; }
+    var g = window.gsap, r = this.root, t = this.tweens;
+    this.moveIndicator(false);
+    try { document.fonts.ready.then(function () { self.moveIndicator(false); }); } catch (e) {}
+    if (this.reduced()) return;
+    var q = function (s) { return r.querySelector(s); }, qa = function (s) { return r.querySelectorAll(s); };
+    var intro = g.timeline({ paused: true });
+    intro.from(qa('.ca'), { y: -12, opacity: 0, filter: 'blur(4px)', duration: 0.9, stagger: 0.12, ease: 'expo.out' }, 0.3)
+      .from(q('.sheet'), { yPercent: 100, duration: 1.1, ease: 'expo.out' }, 0.4)
+      .from(qa('.tab, .ind'), { y: 12, opacity: 0, duration: 0.7, stagger: 0.06, ease: 'expo.out' }, 0.8)
+      .from(qa('.panel .a, .foot'), { y: 14, opacity: 0, duration: 0.8, stagger: 0.05, ease: 'expo.out' }, 0.95)
+      .fromTo(qa('.chip'), { scale: 0 }, { scale: 1, duration: 0.6, stagger: 0.07, ease: 'back.out(2.2)', clearProps: 'transform', immediateRender: false }, 1.1)
+      .call(function () { if (!self.alive) { self.alive = true; self.ambient(g, q, qa, t); } }, null, 0.2);
+    t.push(intro);
+    if ('IntersectionObserver' in window) {
+      this.io = new IntersectionObserver(function (es) { es.forEach(function (en) { if (en.isIntersecting) { if (!self.seen) { self.seen = true; intro.restart(); } } else self.seen = false; }); }, { threshold: 0.15 });
+      this.io.observe(r);
+    } else intro.play();
+  }
+  ambient(g, q, qa, t) {
+    var W = this.root.offsetWidth, sf = q('.scenefit'), f = sf && sf.offsetHeight ? sf.offsetHeight / 886 : 1;
+    // the island and sky float up and down behind the cloud sea
+    t.push(g.to(q('.back'), { y: -6 * f, duration: 4.2, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    t.push(g.to(q('.wind'), { rotation: 360, duration: 16, ease: 'none', repeat: -1 }));
+    t.push(g.fromTo(q('.smoke'), { opacity: 1, scale: 1, x: 0, y: 0 }, { opacity: 0.6, scale: 1.1, x: -6 * f, y: -5 * f, duration: 5, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    var flag = q('.flag');
+    var fl = g.timeline({ repeat: -1 });
+    fl.to(flag, { skewY: 6, scaleX: 0.94, duration: 0.7, ease: 'sine.inOut' }).to(flag, { skewY: -4, scaleX: 1.02, duration: 0.8, ease: 'sine.inOut' }).to(flag, { skewY: 3, scaleX: 0.97, duration: 0.6, ease: 'sine.inOut' }).to(flag, { skewY: 0, scaleX: 1, duration: 0.7, ease: 'sine.inOut' });
+    t.push(fl);
+    t.push(g.to(q('.clouds'), { x: 14 * f, duration: 22, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    Array.prototype.forEach.call(qa('.lantern'), function (l, i) {
+      t.push(g.fromTo(l, { opacity: 0.55, scale: 0.9 }, { opacity: 1, scale: 1.12, duration: 1.8 + i * 0.4, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    });
+    t.push(g.fromTo(q('.rb1'), { x: -90, y: 70, rotation: -10 }, { x: W + 30, y: 30, rotation: 20, duration: 24, ease: 'sine.inOut', repeat: -1, repeatDelay: 6 }));
+    t.push(g.to(q('.rb1'), { scaleY: -1, duration: 1.6, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+  }
+  /* storybook page turn to Chapter 5: curls from the bottom-right corner, revealing the lantern village */
+  goNext() {
+    var self = this, r = this.root;
+    if (!r) return;
+    var link = r.querySelector('.nextlink'), g = window.gsap;
+    if (!g || this.reduced()) { if (link) link.click(); return; }
+    if (this.turning) return;
+    this.turning = true;
+    var W = r.offsetWidth, H = r.offsetHeight;
+    var under = r.querySelector('.under5'), wrap = r.querySelector('.tflapwrap'), flap = r.querySelector('.tflap');
+    function clip(poly, c) {
+      var out = [];
+      for (var i = 0; i < poly.length; i++) {
+        var a = poly[i], b = poly[(i + 1) % poly.length];
+        var fa = a[0] + a[1] - c, fb = b[0] + b[1] - c, inA = fa >= 0, inB = fb >= 0;
+        if (inA) out.push(a);
+        if (inA !== inB) { var k = fa / (fa - fb); out.push([a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k]); }
+      }
+      return out;
+    }
+    function css(pts) {
+      if (pts.length < 3) return 'polygon(0px 0px, 0px 0px, 0px 0px)';
+      return 'polygon(' + pts.map(function (p) { return p[0].toFixed(1) + 'px ' + p[1].toFixed(1) + 'px'; }).join(', ') + ')';
+    }
+    var rect = [[0, 0], [W, 0], [W, H], [0, H]], st = { c: W + H };
+    function draw() {
+      var c = st.c, turned = clip(rect, c);
+      under.style.clipPath = css(turned);
+      flap.style.clipPath = css(turned.map(function (p) { return [c - p[1], c - p[0]]; }));
+    }
+    draw();
+    under.style.display = 'block';
+    wrap.style.display = 'block';
+    g.set(r, { pointerEvents: 'none' });
+    g.to(st, { c: -40, duration: 2.0, ease: 'power2.inOut', onUpdate: draw, onComplete: function () {
+      if (link) link.click();
+      setTimeout(function () { under.style.display = 'none'; wrap.style.display = 'none'; g.set(r, { pointerEvents: 'auto' }); self.turning = false; }, 800);
+    } });
+  }
+  /* bunny pointer trail: tiny leaves and golden sparkles drift down from the pointer */
+  initTrail() {
+    var self = this;
+    try { if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches || this.reduced()) return; } catch (e) { return; }
+    var r = this.root; if (!r || this.trailOn) return; this.trailOn = true;
+    var cols = ['#A8CF7E', '#6D8F62', '#94B85E', '#E9A7A7', '#C9C46A'], last = 0, n = 0, live = 0;
+    this.onTrail = function (ev) {
+      var g = window.gsap; if (!g) return;
+      var now = Date.now(); if (now - last < 28 || live > 46) return; last = now;
+      var rr = r.getBoundingClientRect(), sc = rr.width / r.offsetWidth || 1;
+      var x = (ev.clientX - rr.left) / sc, y = (ev.clientY - rr.top) / sc;
+      var leaf = (n++ % 3) !== 2, p = document.createElement('span');
+      p.className = 'trailp ' + (leaf ? 'tl' : 'ts');
+      if (leaf) p.style.background = cols[n % cols.length];
+      r.appendChild(p); live++;
+      g.set(p, { x: x + 18 + Math.random() * 16, y: y + 52, rotation: Math.random() * 360, scale: 0.6 + Math.random() * 0.6, opacity: 0.95 });
+      g.to(p, { x: '+=' + (Math.random() * 40 - 20), y: '+=' + (leaf ? 30 + Math.random() * 40 : 10 + Math.random() * 20), rotation: '+=' + (Math.random() * 220 - 110), scale: leaf ? 0.4 : 0.2, opacity: 0, duration: leaf ? 1.1 + Math.random() * 0.6 : 0.7 + Math.random() * 0.4, ease: 'sine.out', onComplete: function () { if (p.parentNode) p.parentNode.removeChild(p); live--; } });
+    };
+    /* the bunny follows the pointer, leaning into the direction it moves */
+    var bun = document.createElement('span'); bun.className = 'bunnycur'; bun.setAttribute('aria-hidden', 'true'); r.appendChild(bun); this.bun = bun;
+    var g0 = window.gsap, mx = g0.quickTo(bun, 'x', { duration: 0.18, ease: 'power3.out' }), my = g0.quickTo(bun, 'y', { duration: 0.18, ease: 'power3.out' }), rot = g0.quickTo(bun, 'rotation', { duration: 0.5, ease: 'power2.out' }), px = null;
+    this.onMove = function (ev) {
+      var rr = r.getBoundingClientRect(), sc = rr.width / r.offsetWidth || 1;
+      var x = (ev.clientX - rr.left) / sc, y = (ev.clientY - rr.top) / sc;
+      if (px === null) { g0.set(bun, { x: x, y: y }); }
+      mx(x); my(y); rot(px === null ? 0 : Math.max(-14, Math.min(14, (x - px) * 1.2))); px = x;
+      g0.to(bun, { opacity: 1, duration: 0.2, overwrite: 'auto' });
+      clearTimeout(self.rotT); self.rotT = setTimeout(function () { rot(0); }, 120);
+      self.onTrail(ev);
+    };
+    this.onLeave = function () { px = null; g0.to(bun, { opacity: 0, duration: 0.2, overwrite: 'auto' }); };
+    this.onDown = function () { g0.fromTo(bun, { scaleX: 1.12, scaleY: 0.86 }, { scaleX: 1, scaleY: 1, duration: 0.5, ease: 'elastic.out(1, 0.4)' }); };
+    r.addEventListener('pointermove', this.onMove);
+    r.addEventListener('pointerleave', this.onLeave);
+    r.addEventListener('pointerdown', this.onDown);
+  }
+  initTrailSoon() { var self = this, tries = 0; (function go() { if (self.root && window.gsap) self.initTrail(); else if (tries++ < 30) setTimeout(go, 150); })(); }
+
+  renderVals() {
+    var self = this, tab = this.state.tab;
+    function set(tb) { return function () { if (self.state.tab === tb) return; self.setState({ tab: tb, dir: tb === 'gifts' ? 1 : -1 }); setTimeout(function () { self.afterTab(); }, 30); }; }
+    /* palette: suggested pastels taken from the painting (replace with the confirmed colors) */
+    var palette = [['Sage Green', '#A8B99A', '/_blob/4d45ed9f94515f99facf33e4a2717c01'], ['Gray', '#9B9D9A', '/_blob/ead0cd8c27d2b2f4ab060bc90bad6cb7'], ['Cream', '#F5E8CF', '/_blob/bc0f5ba5e81e3d2d750f80d0049c1a2e'], ['Dusty Blue', '#A7C5D3', '/_blob/0a4c9af0397910570352f9088ae80655'], ['Peach', '#E9B7A5', '/_blob/410afe69b70f928e941d1b7bd1ca6aa0']].map(function (c) { return { name: c[0], hex: c[1], style: '--c:' + c[1], img: 'background-image:url(' + c[2] + ')' }; });
+    var gifts = [
+      { title: "Children's books", text: 'Stories we can read together at bedtime.', icon: 'M4 5 C7 4 10 4 12 6 C14 4 17 4 20 5 V19 C17 18 14 18 12 20 C10 18 7 18 4 19 Z M12 6 V20' },
+      { title: 'Educational toys', text: 'Toys that help him learn while he plays.', icon: 'M4 14 H10 V20 H4 Z M14 14 H20 V20 H14 Z M9 4 H15 V10 H9 Z' },
+      { title: 'Baby essentials', text: 'Practical everyday things for a growing toddler.', icon: 'M9 3 H15 V6 L17 9 V20 A1 1 0 0 1 16 21 H8 A1 1 0 0 1 7 20 V9 L9 6 Z M7 13 H17' },
+      { title: 'Toward his future', text: 'A small contribution to Dylan\'s savings.', icon: 'M12 21 V11 M12 11 C12 7 9 5 5 5 C5 9 8 11 12 11 Z M12 13 C12 9 15 7 19 7 C19 11 16 13 12 13 Z' }
+    ];
+    return {
+      setRoot: function (el) { self.root = el; },
+      goNext: function () { self.goNext(); },
+      isDress: tab === 'dress', isGifts: tab === 'gifts',
+      tabDress: tab === 'dress' ? 'on' : '', tabGifts: tab === 'gifts' ? 'on' : '',
+      pressDress: tab === 'dress' ? 'true' : 'false', pressGifts: tab === 'gifts' ? 'true' : 'false',
+      showDress: set('dress'), showGifts: set('gifts'),
+      palette: palette, gifts: gifts
+    };
+  }
+}
+</script>
+</body>
+</html>

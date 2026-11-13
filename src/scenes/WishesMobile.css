@@ -1,0 +1,46 @@
+/* WishesMobile: ported from Wishes.dc.html */
+
+.dc-WishesMobile{margin:0;background:#3A3260}
+.dc-WishesMobile .stage{position:relative;width:390px;height:844px;overflow:hidden;background:#B9B6E6;font-family:'Nunito',system-ui,sans-serif;color:#2E2A4A}
+.dc-WishesMobile .layer{position:absolute;inset:0;pointer-events:none}
+.dc-WishesMobile .bg{position:absolute;inset:-20px;background-size:auto 844px;background-position:22% 0;background-repeat:no-repeat;will-change:transform}
+.dc-WishesMobile .far{background-image:url(/art/sky-wishes.webp)}
+.dc-WishesMobile .near{background-image:url(/art/6d67634339c2ed30c2c70f27381a024c.webp)}
+.dc-WishesMobile .puff{position:absolute;left:0;top:0;border-radius:50%;background:radial-gradient(ellipse at 50% 60%,rgba(255,246,240,.95),rgba(255,226,222,.6) 45%,rgba(255,226,222,0) 70%);filter:blur(1px);pointer-events:none}
+.dc-WishesMobile .topshade{background:linear-gradient(to bottom,rgba(60,50,100,.35) 0%,rgba(60,50,100,0) 18%)}
+.dc-WishesMobile .script{font-family:'Pinyon Script',cursive;font-weight:400}
+.dc-WishesMobile .lift{text-shadow:0 2px 14px rgba(16,42,32,.75),0 0 2px rgba(16,42,32,.55)}
+.dc-WishesMobile .head{position:absolute;left:0;right:0;top:16px;text-align:center;color:#F5EBD5;z-index:3}
+/* the flyer: girl on her broom, a ribbon from the broom's end, and the wish card hanging from it */
+.dc-WishesMobile .flyer{position:absolute;left:0;top:140px;width:390px;height:600px;z-index:2;will-change:transform}
+.dc-WishesMobile .girl{position:absolute;left:88px;top:0;width:300px;height:175px;background:url(/art/girl-broom.webp) 0 0/100% 100% no-repeat;transform-origin:60% 70%;will-change:transform}
+.dc-WishesMobile .ribbon{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.dc-WishesMobile .wcard{position:absolute;left:8px;top:214px;width:300px;box-sizing:border-box;padding:20px 20px 16px;border-radius:22px;background:linear-gradient(160deg,var(--c1,rgba(255,250,240,.72)),var(--c2,rgba(255,240,228,.66)));backdrop-filter:blur(6px) saturate(1.1);-webkit-backdrop-filter:blur(6px) saturate(1.1);transition:background .4s ease;box-shadow:0 22px 46px rgba(60,50,100,.3),inset 0 0 0 1px rgba(255,255,255,.8),0 0 0 1px rgba(233,167,167,.45);transform-origin:295px 1px;pointer-events:auto}
+.dc-WishesMobile .wcard::before{content:'';position:absolute;right:-2px;top:-6px;width:14px;height:14px;border-radius:50%;background:var(--pin,#E9A7A7);box-shadow:0 0 0 3px #FFF3DD}
+.dc-WishesMobile .wq{display:block;color:var(--pin,#E9A7A7) !important;font-family:'IM Fell English',Georgia,serif;font-size:52px;line-height:.6;color:#E9A7A7;height:20px}
+.dc-WishesMobile .wtext{margin:0;font-family:'IM Fell English',Georgia,serif;font-size:18px;line-height:1.38;color:#2E2A4A;min-height:76px}
+.dc-WishesMobile .wname{margin:8px 0 0;font-family:'Pinyon Script',cursive;font-size:26px;line-height:1.1;color:#5B4A7A;text-align:right}
+.dc-WishesMobile .wnav{display:flex;align-items:center;justify-content:space-between;margin-top:8px;padding-top:8px;border-top:1px dashed rgba(91,74,122,.25)}
+.dc-WishesMobile .warrow{width:44px;height:44px;border-radius:50%;border:1px solid rgba(91,74,122,.25);background:rgba(255,255,255,.7);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.dc-WishesMobile .warrow:focus-visible,.dc-WishesMobile .next:focus-visible,.dc-WishesMobile .leave:focus-visible{outline:2px solid #5B4A7A;outline-offset:3px}
+.dc-WishesMobile .wcount{margin:0;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#5B4A7A}
+.dc-WishesMobile .spark{position:absolute;left:0;top:0;width:8px;height:8px;border-radius:50%;background:#FFF6D6;box-shadow:0 0 10px 4px rgba(247,216,115,.7);opacity:0;pointer-events:none}
+.dc-WishesMobile .foot{position:absolute;left:0;right:0;bottom:0;padding:12px 16px 16px;background:rgba(255,249,242,.6);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);border-top:1px solid rgba(255,255,255,.6);display:flex;align-items:center;justify-content:space-between;gap:10px;z-index:4}
+.dc-WishesMobile .dots{display:flex;gap:6px;align-items:center}
+.dc-WishesMobile .dot{width:6px;height:6px;border-radius:50%;background:rgba(46,42,74,.28)}
+.dc-WishesMobile .dot.on{width:20px;border-radius:4px;background:#5B4A7A}
+.dc-WishesMobile .chap{margin:0;text-shadow:none;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#2E2A4A}
+.dc-WishesMobile .next{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 18px;border:0;border-radius:999px;background:#5B4A7A;color:#FFF9F0;font-family:'IM Fell English',Georgia,serif;font-size:16px;cursor:pointer;box-shadow:0 8px 18px rgba(60,50,100,.3)}
+.dc-WishesMobile .leave{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 12px;border-radius:999px;border:1px solid rgba(255,255,255,.7);background:rgba(255,250,242,.55);color:#3E3466;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;text-decoration:none}
+.dc-WishesMobile .nextlink{position:absolute;left:0;top:0;width:1px;height:1px;opacity:0;pointer-events:none}
+.dc-WishesMobile .under8{position:absolute;inset:0;z-index:70;pointer-events:none;display:none;background-color:#8FB6E0;background-repeat:no-repeat;
+background-image:linear-gradient(to bottom,rgba(40,50,80,.5) 0%,rgba(40,50,80,.12) 12%,rgba(40,50,80,0) 18%),url(/art/picnic-full.webp);
+background-size:100% 100%,auto 844px;background-position:0 0,-54px 0}
+.dc-WishesMobile .tflapwrap{position:absolute;inset:0;z-index:71;pointer-events:none;display:none;filter:drop-shadow(-8px -8px 16px rgba(16,42,32,.45))}
+.dc-WishesMobile .tflap{position:absolute;inset:0;background:linear-gradient(135deg,#E9DCBC 0%,#F8EFD9 55%,#E0D0A8 100%)}
+/* bunny pointer + a trail of tiny leaves and sparkles (mouse/trackpad only) */
+@media (hover:hover) and (pointer:fine){.dc-WishesMobile .stage,.dc-WishesMobile .stage *{cursor:none !important}.dc-WishesMobile .stage input,.dc-WishesMobile .stage textarea{cursor:text !important}}
+.dc-WishesMobile .bunnycur{position:absolute;left:0;top:0;width:52px;height:73px;margin:-15px 0 0 -1px;background:url(/art/dbadbf2c44d41f6a5e3b3e01c5391ca4.webp) 0 0/100% 100% no-repeat;pointer-events:none;z-index:96;opacity:0;transform-origin:50% 30%;filter:drop-shadow(0 4px 6px rgba(20,30,20,.3));will-change:transform}
+.dc-WishesMobile .trailp{position:absolute;left:0;top:0;pointer-events:none;z-index:95;will-change:transform,opacity}
+.dc-WishesMobile .trailp.tl{width:9px;height:9px;border-radius:80% 0 80% 0}
+.dc-WishesMobile .trailp.ts{width:6px;height:6px;border-radius:50%;background:#FFF3C4;box-shadow:0 0 8px 3px rgba(247,216,115,.75)}

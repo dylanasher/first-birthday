@@ -1,0 +1,73 @@
+/* OpeningMobile: ported from Main.dc.html */
+
+.dc-OpeningMobile{margin:0;background:#102A20}
+.dc-OpeningMobile .stage{position:relative;width:390px;height:844px;overflow:hidden;background:#102A20;font-family:'Nunito',system-ui,sans-serif;color:#F5EBD5}
+.dc-OpeningMobile .layer{position:absolute;inset:0;pointer-events:none}
+.dc-OpeningMobile .cam,.dc-OpeningMobile .idle{position:absolute;inset:0;will-change:transform}
+.dc-OpeningMobile .paint{background-image:url(/art/forest-sleeping.webp);background-size:cover;background-position:52% 50%;background-repeat:no-repeat}
+.dc-OpeningMobile .awake{background-image:url(/art/forest-awake.webp);background-size:cover;background-position:52% 50%;background-repeat:no-repeat;opacity:0;
+-webkit-mask-image:radial-gradient(160px 140px at 200px 520px,#000 55%,transparent 100%);mask-image:radial-gradient(160px 140px at 200px 520px,#000 55%,transparent 100%)}
+
+/* depth planes: masked copies of the painting */
+.dc-OpeningMobile .farCam{transform-origin:50% 50%}
+.dc-OpeningMobile .canopyCam{transform-origin:50% 0%}
+.dc-OpeningMobile .canopy{-webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 12%,transparent 26%);mask-image:linear-gradient(to bottom,#000 0%,#000 12%,transparent 26%);filter:brightness(.93) saturate(1.05)}
+.dc-OpeningMobile .foreLCam{transform-origin:0% 100%}
+.dc-OpeningMobile .foreRCam{transform-origin:100% 100%}
+.dc-OpeningMobile .foreL{-webkit-mask-image:radial-gradient(75% 48% at 0% 100%,#000 48%,transparent 78%);mask-image:radial-gradient(75% 48% at 0% 100%,#000 48%,transparent 78%);filter:brightness(.86) saturate(1.08);transform-origin:0% 100%}
+.dc-OpeningMobile .foreR{-webkit-mask-image:radial-gradient(80% 50% at 100% 100%,#000 48%,transparent 78%);mask-image:radial-gradient(80% 50% at 100% 100%,#000 48%,transparent 78%);filter:brightness(.86) saturate(1.08);transform-origin:100% 100%}
+
+/* atmosphere */
+.dc-OpeningMobile .halo{position:absolute;left:200px;top:520px;width:300px;height:240px;margin:-120px 0 0 -150px;border-radius:50%;background:radial-gradient(closest-side,rgba(230,245,170,.45),rgba(176,200,124,.18) 55%,rgba(176,200,124,0));mix-blend-mode:screen;filter:blur(4px)}
+.dc-OpeningMobile .mistA{position:absolute;left:-120px;top:600px;width:520px;height:200px;border-radius:50%;background:radial-gradient(closest-side,rgba(169,214,223,.22),rgba(169,214,223,0));filter:blur(6px)}
+.dc-OpeningMobile .mote{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(255,246,220,1),rgba(230,240,170,.55) 45%,rgba(230,240,170,0) 72%)}
+.dc-OpeningMobile .bfly{position:absolute;width:12px;height:12px}
+.dc-OpeningMobile .ffh{position:absolute;left:-9px;top:-9px;width:30px;height:30px;border-radius:50%;background:radial-gradient(circle,rgba(255,244,170,.95) 0,rgba(214,240,120,.55) 30%,rgba(200,235,110,0) 70%);mix-blend-mode:screen}
+.dc-OpeningMobile .ffc{position:absolute;left:3px;top:3px;width:6px;height:6px;border-radius:50%;background:#FFFBD6;box-shadow:0 0 6px 2px rgba(240,250,150,.9)}
+
+.dc-OpeningMobile .bin{position:absolute;inset:0;filter:drop-shadow(0 2px 3px rgba(16,42,32,.35))}
+.dc-OpeningMobile .bin svg{width:100%;height:100%;display:block;overflow:visible}
+.dc-OpeningMobile .wing{transform-box:fill-box}
+.dc-OpeningMobile .wingL{transform-origin:100% 50%}
+.dc-OpeningMobile .wingR{transform-origin:0% 50%}
+.dc-OpeningMobile .topshade{background:linear-gradient(to bottom,rgba(16,42,32,.86) 0%,rgba(16,42,32,.62) 22%,rgba(16,42,32,0) 40%)}
+.dc-OpeningMobile .botshade{background:linear-gradient(to top,rgba(16,42,32,.7) 0%,rgba(16,42,32,0) 16%)}
+.dc-OpeningMobile .shade2{background:linear-gradient(to bottom,rgba(16,42,32,.92) 0%,rgba(16,42,32,.8) 50%,rgba(16,42,32,.3) 66%,rgba(16,42,32,0) 74%);opacity:0}
+.dc-OpeningMobile .glow{position:absolute;left:200px;top:500px;width:360px;height:360px;margin:-180px 0 0 -180px;border-radius:50%;background:radial-gradient(circle,rgba(240,250,200,.6),rgba(176,200,124,.22) 40%,rgba(176,200,124,0) 70%);opacity:0;mix-blend-mode:screen;pointer-events:none}
+
+/* type + controls */
+.dc-OpeningMobile .script{font-family:'Pinyon Script',cursive;font-weight:400}
+.dc-OpeningMobile .display{font-family:'IM Fell English',Georgia,serif;font-weight:400}
+.dc-OpeningMobile .lift{text-shadow:0 2px 14px rgba(16,42,32,.85),0 0 2px rgba(16,42,32,.6)}
+.dc-OpeningMobile .magic{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:52px;padding:0 30px;border-radius:999px;border:1px solid rgba(245,214,138,.7);background:rgba(16,42,32,.55);color:#F5EBD5;font-family:'IM Fell English',Georgia,serif;font-size:19px;letter-spacing:.04em;cursor:pointer;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);box-shadow:0 0 22px rgba(245,214,138,.35),inset 0 0 12px rgba(245,214,138,.12)}
+.dc-OpeningMobile .magic:hover{background:rgba(38,77,53,.8)}
+.dc-OpeningMobile .magic:focus-visible{outline:2px solid #F5D68A;outline-offset:4px}
+.dc-OpeningMobile .ghost{min-height:44px;padding:0 16px;border:1px solid rgba(245,235,213,.35);background:rgba(16,42,32,.45);color:#F5EBD5;font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;letter-spacing:.04em;cursor:pointer;border-radius:999px}
+.dc-OpeningMobile .ghost:hover{background:rgba(38,77,53,.7)}
+.dc-OpeningMobile .ghost:focus-visible{outline:2px solid #F5D68A}
+.dc-OpeningMobile .intro{position:absolute;left:0;right:0;top:54px;display:flex;flex-direction:column;align-items:center;text-align:center}
+.dc-OpeningMobile .openwrap{position:absolute;left:0;right:0;bottom:40px;display:flex;justify-content:center}
+.dc-OpeningMobile .welcome{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;text-align:center;padding:84px 32px 0;box-sizing:border-box;visibility:hidden}
+.dc-OpeningMobile .wi{opacity:0}
+/* safety net: once the welcome has arrived, every line of it stays visible even if the page re-renders a line */
+.dc-OpeningMobile .ph-welcome .welcome .wi{opacity:1 !important;filter:none !important;transform:none !important}
+.dc-OpeningMobile .nextlink{position:absolute;left:0;top:0;width:1px;height:1px;opacity:0;pointer-events:none}
+/* storybook page turn: this page curls away from the bottom-right corner, revealing Chapter 2's countryside */
+.dc-OpeningMobile .under{position:absolute;inset:0;z-index:70;pointer-events:none;display:none;background-color:#A9D6DF;background-repeat:no-repeat;
+background-image:linear-gradient(to bottom,rgba(16,42,32,.7) 0%,rgba(16,42,32,.3) 16%,rgba(16,42,32,0) 26%),url(/art/c85cec7f7ff2834c55b9210bfdb7fec0.webp),url(/art/0a06b84a8b2824ef6369f00717801e42.webp),url(/art/a1c09cf21a45538a9b091e259bb0707c.webp),url(/art/f2d3d418be179c15558fe0f46df41dba.webp),url(/art/e63248ac61b255880a418b902963d7aa.webp),url(/art/9ff413efc90b8d9aa2232fb97ef3b2fd.webp);
+background-size:100% 100%,auto 844px,auto 844px,auto 844px,auto 844px,auto 844px,auto 844px;background-position:0 0,-459px 0,-459px 0,-459px 0,-459px 0,-459px 0,-459px 0}
+.dc-OpeningMobile .pflapwrap{position:absolute;inset:0;z-index:71;pointer-events:none;display:none;filter:drop-shadow(-8px -8px 16px rgba(16,42,32,.45))}
+.dc-OpeningMobile .pflap{position:absolute;inset:0;background:linear-gradient(135deg,#E9DCBC 0%,#F8EFD9 55%,#E0D0A8 100%)}
+.dc-OpeningMobile .dot{width:6px;height:6px;border-radius:50%;background:rgba(245,235,213,.4)}
+.dc-OpeningMobile .dot.on{width:20px;border-radius:3px;background:#F5D68A}
+
+/* fallback when the animation library is unavailable */
+.dc-OpeningMobile .nogsap.ph-welcome .intro,.dc-OpeningMobile .nogsap.ph-welcome .openwrap{visibility:hidden}
+.dc-OpeningMobile .nogsap.ph-welcome .welcome{visibility:visible}
+.dc-OpeningMobile .nogsap.ph-welcome .wi,.dc-OpeningMobile .nogsap.ph-welcome .shade2,.dc-OpeningMobile .nogsap.ph-welcome .awake{opacity:1}
+/* bunny pointer + a trail of tiny leaves and sparkles (mouse/trackpad only) */
+@media (hover:hover) and (pointer:fine){.dc-OpeningMobile .stage,.dc-OpeningMobile .stage *{cursor:none !important}.dc-OpeningMobile .stage input,.dc-OpeningMobile .stage textarea{cursor:text !important}}
+.dc-OpeningMobile .bunnycur{position:absolute;left:0;top:0;width:52px;height:73px;margin:-15px 0 0 -1px;background:url(/art/dbadbf2c44d41f6a5e3b3e01c5391ca4.webp) 0 0/100% 100% no-repeat;pointer-events:none;z-index:96;opacity:0;transform-origin:50% 30%;filter:drop-shadow(0 4px 6px rgba(20,30,20,.3));will-change:transform}
+.dc-OpeningMobile .trailp{position:absolute;left:0;top:0;pointer-events:none;z-index:95;will-change:transform,opacity}
+.dc-OpeningMobile .trailp.tl{width:9px;height:9px;border-radius:80% 0 80% 0}
+.dc-OpeningMobile .trailp.ts{width:6px;height:6px;border-radius:50%;background:#FFF3C4;box-shadow:0 0 8px 3px rgba(247,216,115,.75)}

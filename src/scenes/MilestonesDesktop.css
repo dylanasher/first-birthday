@@ -1,0 +1,117 @@
+/* MilestonesDesktop: ported from Ch3Desktop.dc.html */
+
+.dc-MilestonesDesktop{margin:0;background:#102A20}
+.dc-MilestonesDesktop .stage{position:relative;width:1440px;height:900px;overflow:hidden;background:#8EC6E6;font-family:'Nunito',system-ui,sans-serif;color:#102A20}
+.dc-MilestonesDesktop .layer{position:absolute;inset:0;pointer-events:none}
+.dc-MilestonesDesktop .lyr{position:absolute;inset:0;background-size:cover;background-position:50% 50%;background-repeat:no-repeat;will-change:transform}
+.dc-MilestonesDesktop .far{background-image:url(/art/2bb637fac4c16bb39c3f3c009ad7d4ff.webp)}
+.dc-MilestonesDesktop .laundry{background-image:url(/art/8ee1b855de1fb8ecb9a37badef302a5e.webp);transform-origin:288px 325px}
+.dc-MilestonesDesktop .boat1{background-image:url(/art/9a6db4a65f366384df0af13ef9ff2df2.webp);transform-origin:1053px 564px}
+.dc-MilestonesDesktop .boat2{background-image:url(/art/aa7c52e861eeaf0aab7f7d85881223aa.webp);transform-origin:1286px 612px}
+.dc-MilestonesDesktop .wall{background-image:url(/art/014446d475ba3dda05bc0e8e6c885e2b.webp);transform-origin:50% 100%}
+.dc-MilestonesDesktop .topshade{background:linear-gradient(to bottom,rgba(16,42,32,.45) 0%,rgba(16,42,32,.12) 12%,rgba(16,42,32,0) 20%)}
+.dc-MilestonesDesktop .rightshade{background:linear-gradient(to left,rgba(16,42,32,.32) 0%,rgba(16,42,32,.1) 30%,rgba(16,42,32,0) 40%)}
+.dc-MilestonesDesktop .gull{position:absolute;left:0;top:0;width:30px;height:15px}
+.dc-MilestonesDesktop .gull svg,.dc-MilestonesDesktop .env svg,.dc-MilestonesDesktop .star svg{display:block;width:100%;height:100%;overflow:visible}
+.dc-MilestonesDesktop .wu{animation:MilestonesDesktop-flapA .5s steps(1) infinite}
+.dc-MilestonesDesktop .wd{animation:MilestonesDesktop-flapB .5s steps(1) infinite}
+@keyframes MilestonesDesktop-flapA{0%{opacity:1}50%{opacity:0}}
+@keyframes MilestonesDesktop-flapB{0%{opacity:0}50%{opacity:1}}
+.dc-MilestonesDesktop .env{position:absolute;left:0;top:0;width:34px;height:23px;filter:drop-shadow(0 2px 3px rgba(16,42,32,.25))}
+
+.dc-MilestonesDesktop .script{font-family:'Pinyon Script',cursive;font-weight:400}
+.dc-MilestonesDesktop .display{font-family:'IM Fell English',Georgia,serif;font-weight:400}
+.dc-MilestonesDesktop .lift{text-shadow:0 2px 14px rgba(16,42,32,.7),0 0 2px rgba(16,42,32,.5)}
+.dc-MilestonesDesktop .chtitle{position:absolute;left:470px;width:520px;top:40px;display:flex;flex-direction:column;align-items:center;text-align:center;color:#FFFCF4}
+
+.dc-MilestonesDesktop .card{position:absolute;left:515px;top:192px;width:430px;padding:16px 16px 12px;box-sizing:border-box;background:#FFFCF4;border-radius:8px;box-shadow:0 22px 40px rgba(16,42,32,.32),0 0 0 1px rgba(201,162,78,.25);transform:rotate(-3deg);z-index:5}
+.dc-MilestonesDesktop .card .ph,.dc-MilestonesDesktop .card img{display:block;width:398px;height:450px;border-radius:4px;object-fit:cover}
+.dc-MilestonesDesktop .cardcap{display:flex;justify-content:space-between;align-items:center;margin-top:6px}
+.dc-MilestonesDesktop .stamp{position:absolute;right:-10px;top:-12px;width:42px;height:50px;background:#F6E7C1;border:2px dotted #C9A24E;border-radius:3px;display:flex;align-items:center;justify-content:center;transform:rotate(8deg);box-shadow:0 2px 4px rgba(16,42,32,.2)}
+.dc-MilestonesDesktop .ph{background:linear-gradient(135deg,#F3E6C8 0%,#EAD5B2 60%,#E2C9A2 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#7A5E42;text-align:center}
+.dc-MilestonesDesktop .ph p{margin:0;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.dc-MilestonesDesktop .star{position:absolute;left:730px;top:424px;width:18px;height:18px;margin:-9px 0 0 -9px;opacity:0;z-index:6;pointer-events:none}
+
+.dc-MilestonesDesktop .sheet{position:absolute;right:48px;top:44px;bottom:44px;width:420px;display:flex;flex-direction:column;border-radius:30px;background:rgba(255,250,238,.6);backdrop-filter:blur(7px) saturate(1.1);-webkit-backdrop-filter:blur(7px) saturate(1.1);box-shadow:0 30px 70px rgba(16,42,32,.3),inset 0 0 0 1px rgba(255,250,235,.6),0 0 0 1px rgba(201,162,78,.3);overflow:hidden}
+.dc-MilestonesDesktop .body{flex:1;min-height:0;overflow-y:auto;padding:32px 34px 10px}
+.dc-MilestonesDesktop .row{display:flex;justify-content:space-between;align-items:center}
+.dc-MilestonesDesktop .lbl{margin:0;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#5E4A36}
+.dc-MilestonesDesktop .bar{height:7px;border-radius:4px;background:rgba(38,77,53,.15);margin-top:10px;overflow:hidden}
+.dc-MilestonesDesktop .barfill{height:100%;border-radius:4px;background:linear-gradient(90deg,#C9A24E,#E5A85A);transition:width .6s cubic-bezier(.22,1,.36,1)}
+.dc-MilestonesDesktop .feedback{margin:16px 0 0;min-height:24px;font-size:17px;font-weight:700;text-align:center}
+.dc-MilestonesDesktop .months{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:14px}
+.dc-MilestonesDesktop .mbtn{min-height:52px;border-radius:16px;border:1.5px solid rgba(38,77,53,.28);background:rgba(255,252,244,.7);color:#264D35;font-family:'Nunito',sans-serif;font-size:16px;font-weight:700;cursor:pointer;transition:background .25s ease,color .25s ease,border-color .25s ease,transform .15s ease}
+.dc-MilestonesDesktop .mbtn:hover{background:#FFFCF4;transform:translateY(-2px)}
+.dc-MilestonesDesktop .mbtn:focus-visible{outline:2px solid #C9A24E;outline-offset:2px}
+.dc-MilestonesDesktop .mbtn.right{background:#3E7A4C;border-color:#3E7A4C;color:#FFFCF4}
+.dc-MilestonesDesktop .mbtn.wrong{background:#E7B7A6;border-color:#C98A74;color:#5A2A1C}
+.dc-MilestonesDesktop .mbtn.dim{opacity:.45}
+.dc-MilestonesDesktop .primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 26px;border:0;border-radius:999px;background:#264D35;color:#F5EBD5;font-family:'IM Fell English',Georgia,serif;font-size:19px;cursor:pointer;box-shadow:0 8px 18px rgba(16,42,32,.25);transition:transform .2s ease}
+.dc-MilestonesDesktop .primary:hover{transform:translateY(-2px)}
+.dc-MilestonesDesktop .primary:focus-visible,.dc-MilestonesDesktop .ghost:focus-visible,.dc-MilestonesDesktop .next:focus-visible,.dc-MilestonesDesktop .thumb:focus-visible,.dc-MilestonesDesktop .arrow:focus-visible{outline:2px solid #C9A24E;outline-offset:3px}
+.dc-MilestonesDesktop .ghost{min-height:44px;padding:0 14px;border:0;background:transparent;color:#264D35;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.dc-MilestonesDesktop .foot{flex:none;display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:96px;box-sizing:border-box;padding:22px 34px 26px;border-top:1px solid rgba(94,74,54,.18)}
+.dc-MilestonesDesktop .dot{width:7px;height:7px;border-radius:50%;background:rgba(38,77,53,.3)}
+.dc-MilestonesDesktop .dot.on{width:22px;border-radius:4px;background:#264D35}
+.dc-MilestonesDesktop .next{display:inline-flex;align-items:center;gap:10px;min-height:54px;padding:0 24px;white-space:nowrap;flex:none;border:0;border-radius:999px;background:#264D35;color:#F5EBD5;font-family:'IM Fell English',Georgia,serif;font-size:18px;cursor:pointer}
+/* gallery view: the photos take centre stage, the info panel becomes a slim bar underneath */
+.dc-MilestonesDesktop .v-gallery .sheet{left:50%;right:auto;width:1040px;margin-left:-520px;top:auto;bottom:26px;flex-direction:row;align-items:center;border-radius:26px}
+.dc-MilestonesDesktop .v-gallery .sheet .body{flex:1;padding:16px 30px;overflow:visible}
+.dc-MilestonesDesktop .v-gallery .sheet .foot{border-top:0;border-left:1px solid rgba(94,74,54,.18);padding:22px 30px;gap:24px}
+.dc-MilestonesDesktop .v-gallery .chtitle{left:40px;width:1360px;top:30px}
+/* photoshoot strip */
+.dc-MilestonesDesktop .stripwrap{position:absolute;left:40px;width:1360px;top:112px;height:610px;z-index:5}
+.dc-MilestonesDesktop .strip{display:flex;gap:28px;overflow-x:auto;scroll-snap-type:x mandatory;height:100%;align-items:center;padding:0 485px;box-sizing:border-box;scrollbar-width:none}
+.dc-MilestonesDesktop .strip::-webkit-scrollbar{display:none}
+.dc-MilestonesDesktop .thumb{flex:none;scroll-snap-align:center;width:390px;padding:14px 14px 16px;border:0;border-radius:8px;background:#FFFCF4;box-shadow:0 18px 34px rgba(16,42,32,.3);cursor:pointer;text-align:left;transition:transform .25s ease}
+.dc-MilestonesDesktop .thumb:hover{transform:translateY(-4px) rotate(-1deg)}
+.dc-MilestonesDesktop .thumb .ph,.dc-MilestonesDesktop .thumb img{display:block;width:362px;height:480px;border-radius:4px;object-fit:cover}
+.dc-MilestonesDesktop .thumb p{margin:8px 2px 0;min-height:16px;font-size:13px;color:#5E4A36}
+.dc-MilestonesDesktop .arrow{position:absolute;top:50%;width:52px;height:52px;margin-top:-26px;border-radius:50%;border:1px solid rgba(245,235,213,.6);background:rgba(16,42,32,.55);color:#F5EBD5;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:6}
+.dc-MilestonesDesktop .lb{position:absolute;inset:0;z-index:40;background:rgba(16,42,32,.86);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px}
+.dc-MilestonesDesktop .lb .ph,.dc-MilestonesDesktop .lb img{width:520px;height:660px;border-radius:8px;object-fit:cover;box-shadow:0 24px 50px rgba(0,0,0,.45)}
+.dc-MilestonesDesktop .lbtn{width:52px;height:52px;border-radius:50%;border:1px solid rgba(245,235,213,.5);background:rgba(16,42,32,.5);color:#F5EBD5;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.dc-MilestonesDesktop .lbtn:focus-visible{outline:2px solid #F5D68A}
+/* page turn to Chapter 4: this page curls away, revealing the sky garden */
+.dc-MilestonesDesktop .nextlink{position:absolute;left:0;top:0;width:1px;height:1px;opacity:0;pointer-events:none}
+.dc-MilestonesDesktop .under4{position:absolute;inset:0;z-index:70;pointer-events:none;display:none;background-color:#C9B8E6;background-repeat:no-repeat;
+background-image:linear-gradient(to left,rgba(70,50,100,.22) 0%,rgba(70,50,100,0) 45%),url(/art/c26b9fdece174e831448602e75dd3023.webp),url(/art/0d58ec7798beecd868b60eada641e786.webp),url(/art/1314fd11052d00425fa4e7a840da03fd.webp),url(/art/900fb868ae88739a3f0d328f2cec93f0.webp);
+background-size:100% 100%,cover,cover,cover,cover;background-position:0 0,50% 50%,50% 50%,50% 50%,50% 50%}
+.dc-MilestonesDesktop .tflapwrap{position:absolute;inset:0;z-index:71;pointer-events:none;display:none;filter:drop-shadow(-10px -10px 20px rgba(16,42,32,.45))}
+.dc-MilestonesDesktop .tflap{position:absolute;inset:0;background:linear-gradient(135deg,#E9DCBC 0%,#F8EFD9 55%,#E0D0A8 100%)}
+/* storybook scrollbar: a slim vine line with a glowing pill */
+.dc-MilestonesDesktop .body::-webkit-scrollbar{width:10px;height:10px}
+.dc-MilestonesDesktop .body::-webkit-scrollbar-track{margin:14px 0;background:linear-gradient(to right,transparent 4px,rgba(47,107,62,.22) 4px,rgba(47,107,62,.22) 6px,transparent 6px)}
+.dc-MilestonesDesktop .body::-webkit-scrollbar-thumb{border-radius:999px;border:2px solid transparent;background:linear-gradient(180deg,#E5A85A,#2F6B3E) padding-box;box-shadow:inset 0 0 0 1px rgba(255,250,240,.55)}
+.dc-MilestonesDesktop .body::-webkit-scrollbar-thumb:hover{border-width:1px}
+.dc-MilestonesDesktop .body::-webkit-scrollbar-corner{background:transparent}
+@supports not selector(::-webkit-scrollbar){.dc-MilestonesDesktop .body{scrollbar-width:thin;scrollbar-color:#2F6B3E transparent}}
+/* bunny pointer + a trail of tiny leaves and sparkles (mouse/trackpad only) */
+@media (hover:hover) and (pointer:fine){.dc-MilestonesDesktop .stage,.dc-MilestonesDesktop .stage *{cursor:none !important}.dc-MilestonesDesktop .stage input,.dc-MilestonesDesktop .stage textarea{cursor:text !important}}
+.dc-MilestonesDesktop .bunnycur{position:absolute;left:0;top:0;width:52px;height:73px;margin:-15px 0 0 -1px;background:url(/art/dbadbf2c44d41f6a5e3b3e01c5391ca4.webp) 0 0/100% 100% no-repeat;pointer-events:none;z-index:96;opacity:0;transform-origin:50% 30%;filter:drop-shadow(0 4px 6px rgba(20,30,20,.3));will-change:transform}
+.dc-MilestonesDesktop .trailp{position:absolute;left:0;top:0;pointer-events:none;z-index:95;will-change:transform,opacity}
+.dc-MilestonesDesktop .trailp.tl{width:9px;height:9px;border-radius:80% 0 80% 0}
+.dc-MilestonesDesktop .trailp.ts{width:6px;height:6px;border-radius:50%;background:#FFF3C4;box-shadow:0 0 8px 3px rgba(247,216,115,.75)}
+.dc-MilestonesDesktop .mbtn.soon{opacity:.5;border-style:dashed;cursor:default;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.1}
+.dc-MilestonesDesktop .mbtn.soon:hover{transform:none;background:rgba(255,252,244,.7)}
+.dc-MilestonesDesktop .mbtn.soon::after{content:'soon';font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#8A6D4F}
+.dc-MilestonesDesktop .soonbox{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;border-radius:22px;background:linear-gradient(135deg,rgba(243,230,200,.92),rgba(234,213,178,.92));box-shadow:inset 0 0 0 2px rgba(255,252,244,.7),0 14px 34px rgba(40,50,30,.25);color:#5E4A36}
+.dc-MilestonesDesktop .soonbox .sooncam{display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,252,244,.75);box-shadow:0 6px 14px rgba(94,74,54,.18)}
+.dc-MilestonesDesktop .soonbox .soont{margin:4px 0 0;font-family:'Pinyon Script',cursive;line-height:1.05;color:#3E6E3A}
+.dc-MilestonesDesktop .soonbox .soonp{margin:0;line-height:1.55;color:#4A3A2A}
+.dc-MilestonesDesktop .soonwrap{position:absolute;left:50%;top:170px;width:560px;margin-left:-280px;z-index:5}
+.dc-MilestonesDesktop .soonbox{padding:34px 40px 30px}
+.dc-MilestonesDesktop .soonbox .sooncam{width:78px;height:78px}
+.dc-MilestonesDesktop .soonbox .soont{font-size:58px}
+.dc-MilestonesDesktop .soonbox .soonp{font-size:17px;max-width:420px}
+.dc-MilestonesDesktop .trailbox{margin-top:18px}
+.dc-MilestonesDesktop .vine{display:block;width:100%;height:22px;opacity:.9}
+.dc-MilestonesDesktop .stamps{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:7px;margin-top:10px}
+.dc-MilestonesDesktop .stp{position:relative;aspect-ratio:4/5;border-radius:4px;display:flex;align-items:center;justify-content:center;background:rgba(255,252,244,.55);border:1.5px dashed rgba(94,74,54,.35);color:transparent;transition:background .35s ease,border-color .35s ease,transform .35s ease}
+.dc-MilestonesDesktop .stp svg{width:62%;height:62%}
+.dc-MilestonesDesktop .stp::after{content:'';position:absolute;inset:2px;border-radius:2px;border:1px solid rgba(255,255,255,.45);pointer-events:none}
+.dc-MilestonesDesktop .stp.cur{border-style:solid;border-color:#C9A24E;background:rgba(247,216,115,.35);animation:MilestonesDesktop-stpPulse 1.6s ease-in-out infinite}
+.dc-MilestonesDesktop .stp.right{border-style:solid;border-color:#3E7A4C;background:#6D8F62;color:#FFFCF4;transform:rotate(-4deg)}
+.dc-MilestonesDesktop .stp.wrong{border-style:solid;border-color:#C98A74;background:#E7B7A6;color:#7A3B26;transform:rotate(3deg)}
+@keyframes MilestonesDesktop-stpPulse{0%,100%{box-shadow:0 0 0 0 rgba(247,216,115,.0)}50%{box-shadow:0 0 0 4px rgba(247,216,115,.45)}}
+.dc-MilestonesDesktop .trailtip{margin:12px 0 0;text-align:center;font-family:'Pinyon Script',cursive;font-size:22px;line-height:1.2;color:#5E4A36}

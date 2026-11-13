@@ -1,0 +1,107 @@
+/* DetailsDesktop: ported from Ch2Desktop.dc.html */
+
+.dc-DetailsDesktop{margin:0;background:#102A20}
+.dc-DetailsDesktop .stage{position:relative;width:1440px;height:900px;overflow:hidden;background:#A9D6DF;font-family:'Nunito',system-ui,sans-serif;color:#102A20}
+.dc-DetailsDesktop .layer{position:absolute;inset:0;pointer-events:none}
+.dc-DetailsDesktop .scene{position:absolute;inset:0;transform-origin:42% 44%;will-change:transform}
+/* painted layers, all on the same canvas so they line up exactly */
+.dc-DetailsDesktop .lyr{position:absolute;inset:0;background-size:cover;background-position:85% 50%;background-repeat:no-repeat;will-change:transform}
+.dc-DetailsDesktop .far{background-image:url(/art/9ff413efc90b8d9aa2232fb97ef3b2fd.webp)}
+.dc-DetailsDesktop .trunk{background-image:url(/art/e63248ac61b255880a418b902963d7aa.webp)}
+.dc-DetailsDesktop .lva{background-image:url(/art/0a06b84a8b2824ef6369f00717801e42.webp);transform-origin:50% 0}
+.dc-DetailsDesktop .lvb{background-image:url(/art/a1c09cf21a45538a9b091e259bb0707c.webp);transform-origin:50% 0}
+.dc-DetailsDesktop .lvc{background-image:url(/art/f2d3d418be179c15558fe0f46df41dba.webp);transform-origin:50% 167px}
+.dc-DetailsDesktop .flw{background-image:url(/art/c85cec7f7ff2834c55b9210bfdb7fec0.webp);transform-origin:50% 100%}
+/* church bell hanging in the belfry arch */
+.dc-DetailsDesktop .bell{position:absolute;left:631.8px;top:295.5px;width:29.5px;height:42px;background:url(/art/78e1c483124e31bbd37d3b861cb7fa0f.png) center / 100% 100% no-repeat;transform-origin:50% 4%}
+.dc-DetailsDesktop .leaf svg,.dc-DetailsDesktop .bird svg{display:block;width:100%;height:100%;overflow:visible}
+/* leaf gust: arrives covering the screen, then blows away to reveal the chapter */
+.dc-DetailsDesktop .gust{position:absolute;inset:0;z-index:60;pointer-events:none;overflow:hidden}
+.dc-DetailsDesktop .gust-bg{position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 50%,#3E6B45 0%,#264D35 45%,#102A20 100%)}
+.dc-DetailsDesktop .gleaf{position:absolute;left:0;top:0;opacity:0;filter:drop-shadow(0 1px 1px rgba(16,42,32,.3))}
+.dc-DetailsDesktop .gvein{fill:none;stroke:rgba(38,60,30,.55);stroke-width:.7;stroke-linecap:round}
+.dc-DetailsDesktop .gleaf svg{display:block;width:100%;height:100%}
+/* page turn to Chapter 3: this page curls away, revealing the seaside town */
+.dc-DetailsDesktop .nextlink{position:absolute;left:0;top:0;width:1px;height:1px;opacity:0;pointer-events:none}
+.dc-DetailsDesktop .under3{position:absolute;inset:0;z-index:70;pointer-events:none;display:none;background-color:#8EC6E6;background-repeat:no-repeat;
+background-image:linear-gradient(to bottom,rgba(16,42,32,.45) 0%,rgba(16,42,32,.12) 12%,rgba(16,42,32,0) 20%),linear-gradient(to left,rgba(16,42,32,.32) 0%,rgba(16,42,32,.1) 30%,rgba(16,42,32,0) 40%),url(/art/014446d475ba3dda05bc0e8e6c885e2b.webp),url(/art/8ee1b855de1fb8ecb9a37badef302a5e.webp),url(/art/9a6db4a65f366384df0af13ef9ff2df2.webp),url(/art/aa7c52e861eeaf0aab7f7d85881223aa.webp),url(/art/2bb637fac4c16bb39c3f3c009ad7d4ff.webp);
+background-size:100% 100%,100% 100%,cover,cover,cover,cover,cover;background-position:0 0,0 0,50% 50%,50% 50%,50% 50%,50% 50%,50% 50%}
+.dc-DetailsDesktop .tflapwrap{position:absolute;inset:0;z-index:71;pointer-events:none;display:none;filter:drop-shadow(-10px -10px 20px rgba(16,42,32,.45))}
+.dc-DetailsDesktop .tflap{position:absolute;inset:0;background:linear-gradient(135deg,#E9DCBC 0%,#F8EFD9 55%,#E0D0A8 100%)}
+/* storybook page turn: Chapter 1's page curls away from the bottom-right corner */
+.dc-DetailsDesktop .page{position:absolute;inset:0;z-index:61;pointer-events:none;display:none}
+.dc-DetailsDesktop .pfront{position:absolute;inset:0;background:url(/art/forest-awake.webp) 50% 50% / cover no-repeat}
+.dc-DetailsDesktop .pfront::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(16,42,32,.85) 0%,rgba(16,42,32,.5) 35%,rgba(16,42,32,.1) 60%)}
+.dc-DetailsDesktop .pflapwrap{position:absolute;inset:0;filter:drop-shadow(-10px -10px 20px rgba(16,42,32,.4))}
+.dc-DetailsDesktop .pflap{position:absolute;inset:0;background:linear-gradient(135deg,#E9DCBC 0%,#F8EFD9 55%,#E0D0A8 100%)}
+.dc-DetailsDesktop .leaf{position:absolute;left:0;top:0;width:13px;height:13px;opacity:0;filter:drop-shadow(0 1px 1px rgba(16,42,32,.25))}
+.dc-DetailsDesktop .vein{fill:none;stroke:rgba(38,60,30,.55);stroke-width:.7;stroke-linecap:round}
+.dc-DetailsDesktop .bird{position:absolute;left:0;top:0;width:22px;height:12px;filter:blur(.2px)}
+.dc-DetailsDesktop .wu{animation:DetailsDesktop-flapA .34s steps(1) infinite}
+.dc-DetailsDesktop .wd{animation:DetailsDesktop-flapB .34s steps(1) infinite}
+@keyframes DetailsDesktop-flapA{0%{opacity:1}50%{opacity:0}}
+@keyframes DetailsDesktop-flapB{0%{opacity:0}50%{opacity:1}}
+.dc-DetailsDesktop .leftshade{background:linear-gradient(115deg,rgba(16,42,32,.7) 0%,rgba(16,42,32,.32) 20%,rgba(16,42,32,0) 34%)}
+.dc-DetailsDesktop .rightshade{background:linear-gradient(to left,rgba(16,42,32,.42) 0%,rgba(16,42,32,.15) 45%,rgba(16,42,32,0) 56%)}
+.dc-DetailsDesktop .script{font-family:'Pinyon Script',cursive;font-weight:400}
+.dc-DetailsDesktop .display{font-family:'IM Fell English',Georgia,serif;font-weight:400}
+.dc-DetailsDesktop .lift{text-shadow:0 2px 14px rgba(16,42,32,.8),0 0 2px rgba(16,42,32,.6)}
+.dc-DetailsDesktop .chtitle{position:absolute;left:72px;top:60px;display:flex;flex-direction:column;align-items:flex-start;color:#F5EBD5}
+
+/* large frosted panel */
+.dc-DetailsDesktop .sheet{position:absolute;right:48px;top:40px;bottom:40px;width:700px;display:flex;flex-direction:column;border-radius:32px;background:rgba(245,235,213,.6);backdrop-filter:blur(7px) saturate(1.1);-webkit-backdrop-filter:blur(7px) saturate(1.1);box-shadow:0 30px 70px rgba(16,42,32,.35),inset 0 0 0 1px rgba(255,250,235,.6),0 0 0 1px rgba(201,162,78,.3);overflow:hidden}
+.dc-DetailsDesktop .head{flex:none;padding:30px 40px 6px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.dc-DetailsDesktop .tline{position:relative;flex:none;width:340px;height:56px;display:flex;align-items:center}
+.dc-DetailsDesktop .track{position:absolute;left:57px;right:57px;top:10px;height:2px;background:rgba(38,77,53,.2);border-radius:2px}
+.dc-DetailsDesktop .trackfill{position:absolute;left:0;top:0;bottom:0;width:100%;background:#C9A24E;border-radius:2px;transform-origin:0 50%}
+.dc-DetailsDesktop .step{position:relative;flex:1;display:flex;flex-direction:column;align-items:center;gap:5px}
+.dc-DetailsDesktop .sdot{width:14px;height:14px;border-radius:50%;background:#C9A24E;box-shadow:0 0 0 4px rgba(201,162,78,.2)}
+.dc-DetailsDesktop .stime{margin:0;font-size:13px;font-weight:700;color:#102A20;line-height:1}
+.dc-DetailsDesktop .slbl{margin:0;font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#5E4A36;line-height:1}
+.dc-DetailsDesktop .tabs{position:relative;display:flex;gap:10px;padding:16px 40px 14px;flex:none}
+.dc-DetailsDesktop .ind{position:absolute;left:0;top:16px;height:52px;width:200px;border-radius:999px;background:#264D35;box-shadow:0 8px 18px rgba(16,42,32,.28)}
+.dc-DetailsDesktop .tab{position:relative;z-index:1;flex:1;display:flex;align-items:center;justify-content:center;gap:9px;min-height:52px;border-radius:999px;border:1px solid rgba(38,77,53,.22);background:transparent;color:#264D35;font-family:'Nunito',sans-serif;font-size:16px;font-weight:700;cursor:pointer;transition:color .3s ease,border-color .3s ease,background .2s ease}
+.dc-DetailsDesktop .tab:hover{background:rgba(38,77,53,.06)}
+.dc-DetailsDesktop .tab.on{color:#F5EBD5;border-color:transparent;background:transparent}
+.dc-DetailsDesktop .tab:focus-visible{outline:2px solid #C9A24E;outline-offset:2px}
+.dc-DetailsDesktop .scroll{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;padding:8px 40px 24px}
+.dc-DetailsDesktop .eyebrow{margin:0;font-size:12px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#5E4A36}
+.dc-DetailsDesktop .venue{margin:6px 0 0;font-family:'IM Fell English',Georgia,serif;font-size:42px;line-height:1.08;color:#102A20}
+.dc-DetailsDesktop .sub{margin:4px 0 0;font-size:16px;color:#2F4B2C;font-style:italic}
+.dc-DetailsDesktop .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:28px;margin-top:12px}
+.dc-DetailsDesktop .row{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px dashed rgba(94,74,54,.3)}
+.dc-DetailsDesktop .row.wide{grid-column:1 / -1}
+.dc-DetailsDesktop .ico{flex:none;width:42px;height:42px;border-radius:50%;background:rgba(245,235,213,.8);box-shadow:inset 0 0 0 1px rgba(86,119,71,.3);display:flex;align-items:center;justify-content:center}
+.dc-DetailsDesktop .lbl{margin:0;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#5E4A36}
+.dc-DetailsDesktop .val{margin:3px 0 0;font-size:19px;line-height:1.4;color:#102A20}
+.dc-DetailsDesktop .maps{display:flex;gap:14px;margin-top:20px}
+.dc-DetailsDesktop .btn{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;border-radius:999px;font-family:'Nunito',sans-serif;font-size:16px;font-weight:700;text-decoration:none;transition:transform .2s ease,box-shadow .2s ease,background .2s ease}
+.dc-DetailsDesktop .btn:hover{transform:translateY(-2px)}
+.dc-DetailsDesktop .btn.primary{background:#264D35;color:#F5EBD5;box-shadow:0 8px 18px rgba(16,42,32,.25)}
+.dc-DetailsDesktop .btn.primary:hover{background:#1B3A27;box-shadow:0 12px 24px rgba(16,42,32,.3)}
+.dc-DetailsDesktop .btn.secondary{border:1.5px solid #264D35;color:#264D35;background:rgba(245,235,213,.5)}
+.dc-DetailsDesktop .btn:focus-visible{outline:2px solid #C9A24E;outline-offset:3px}
+.dc-DetailsDesktop .note{position:relative;overflow:hidden;margin-top:22px;padding:18px 22px;border-radius:18px;background:rgba(245,214,138,.45);border:1px solid rgba(201,162,78,.5)}
+.dc-DetailsDesktop .note p{position:relative;margin:0;font-size:17px;line-height:1.55;color:#102A20}
+.dc-DetailsDesktop .shine{position:absolute;top:0;bottom:0;left:-40%;width:30%;background:linear-gradient(100deg,rgba(255,255,255,0),rgba(255,255,255,.55),rgba(255,255,255,0));transform:skewX(-18deg)}
+.dc-DetailsDesktop .foot{flex:none;display:flex;align-items:center;justify-content:space-between;padding:16px 40px 22px;border-top:1px solid rgba(94,74,54,.18)}
+.dc-DetailsDesktop .dot{width:7px;height:7px;border-radius:50%;background:rgba(38,77,53,.3)}
+.dc-DetailsDesktop .dot.on{width:22px;border-radius:4px;background:#264D35}
+.dc-DetailsDesktop .next{display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 26px;border:0;border-radius:999px;background:#264D35;color:#F5EBD5;font-family:'IM Fell English',Georgia,serif;font-size:19px;cursor:pointer;transition:transform .2s ease}
+.dc-DetailsDesktop .next:hover{transform:translateX(3px)}
+.dc-DetailsDesktop .next:focus-visible{outline:2px solid #C9A24E;outline-offset:3px}
+/* storybook scrollbar: a slim vine line with a glowing pill */
+.dc-DetailsDesktop .scroll::-webkit-scrollbar{width:10px;height:10px}
+.dc-DetailsDesktop .scroll::-webkit-scrollbar-track{margin:14px 0;background:linear-gradient(to right,transparent 4px,rgba(47,91,58,.22) 4px,rgba(47,91,58,.22) 6px,transparent 6px)}
+.dc-DetailsDesktop .scroll::-webkit-scrollbar-thumb{border-radius:999px;border:2px solid transparent;background:linear-gradient(180deg,#C9A24E,#2F5B3A) padding-box;box-shadow:inset 0 0 0 1px rgba(255,250,240,.55)}
+.dc-DetailsDesktop .scroll::-webkit-scrollbar-thumb:hover{border-width:1px}
+.dc-DetailsDesktop .scroll::-webkit-scrollbar-corner{background:transparent}
+@supports not selector(::-webkit-scrollbar){.dc-DetailsDesktop .scroll{scrollbar-width:thin;scrollbar-color:#2F5B3A transparent}}
+/* bunny pointer + a trail of tiny leaves and sparkles (mouse/trackpad only) */
+@media (hover:hover) and (pointer:fine){.dc-DetailsDesktop .stage,.dc-DetailsDesktop .stage *{cursor:none !important}.dc-DetailsDesktop .stage input,.dc-DetailsDesktop .stage textarea{cursor:text !important}}
+.dc-DetailsDesktop .bunnycur{position:absolute;left:0;top:0;width:52px;height:73px;margin:-15px 0 0 -1px;background:url(/art/dbadbf2c44d41f6a5e3b3e01c5391ca4.webp) 0 0/100% 100% no-repeat;pointer-events:none;z-index:96;opacity:0;transform-origin:50% 30%;filter:drop-shadow(0 4px 6px rgba(20,30,20,.3));will-change:transform}
+.dc-DetailsDesktop .trailp{position:absolute;left:0;top:0;pointer-events:none;z-index:95;will-change:transform,opacity}
+.dc-DetailsDesktop .trailp.tl{width:9px;height:9px;border-radius:80% 0 80% 0}
+.dc-DetailsDesktop .trailp.ts{width:6px;height:6px;border-radius:50%;background:#FFF3C4;box-shadow:0 0 8px 3px rgba(247,216,115,.75)}
+/* until the sliding pill is measured, the selected tab paints its own fill so it always reads correctly */
+.dc-DetailsDesktop .tabs:not(.ready) .tab.on{background:#264D35}

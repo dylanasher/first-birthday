@@ -1,0 +1,70 @@
+/* Storybook Forest tokens (see /design-system) */
+:root {
+  --forest-black: #071b15;
+  --deep-woodland: #102d23;
+  --moss: #385a3b;
+  --leaf: #6d9561;
+  --sage: #a6c79c;
+  --cream: #f7ebd0;
+  --antique-gold: #dbc77d;
+  --firefly: #f4dd82;
+  --lantern: #e5a85a;
+  --mist: #c2dfe8;
+  --peach: #efc3b4;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  height: 100%;
+}
+body {
+  background: var(--forest-black);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* A chapter: the fixed-size artboard is centred and scaled to fit the screen. Whatever the artboard
+   doesn't cover (when the screen is wider or taller than it) shows the chapter's painting, enlarged to
+   fill and softly blurred, so there are no empty bands. */
+.scene-backdrop {
+  position: fixed;
+  inset: -40px; /* overscan so the blur has no faded edge */
+  background: center / cover no-repeat;
+  filter: blur(16px) saturate(1.08) brightness(0.92);
+}
+.scene-fit > [class^='dc-'] {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background: transparent !important; /* let the backdrop show around the artboard */
+}
+.scene-fit > [class^='dc-'] > * {
+  position: absolute !important;
+  left: 50%;
+  top: 50%;
+  width: var(--scene-w) !important;
+  height: var(--scene-h) !important; /* on phones this follows the screen's height */
+  margin: 0;
+  transform: translate(-50%, -50%) scale(var(--scene-scale));
+  transform-origin: 50% 50%;
+}
+
+/* The design-system reference sheet: scaled to width, scrolls vertically. */
+.sheet-fit {
+  overflow-x: hidden;
+}
+.sheet-fit > [class^='dc-'] > * {
+  zoom: var(--sheet-scale);
+  margin: 0 auto;
+}
+
+/* `overflow: hidden` still lets the browser scroll a box when focus moves inside it, which slid the
+   artboard sideways (seen on the RSVP form). `clip` can't be scrolled at all. */
+@supports (overflow: clip) {
+  .scene-fit > [class^='dc-'],
+  .scene-fit > [class^='dc-'] > * {
+    overflow: clip !important;
+  }
+}

@@ -1,0 +1,40 @@
+/* ThankYouDesktop: ported from Ch7Desktop.dc.html */
+
+.dc-ThankYouDesktop{margin:0;background:#2E3F2A}
+.dc-ThankYouDesktop .stage{position:relative;width:1440px;height:900px;overflow:hidden;background:#8FB6E0;font-family:'Nunito',system-ui,sans-serif;color:#2A2A3E}
+.dc-ThankYouDesktop .layer{position:absolute;inset:0;pointer-events:none}
+.dc-ThankYouDesktop .cv{position:absolute;left:0px;top:0px;width:1672px;height:941px;transform:scale(0.9564);transform-origin:0 0}
+.dc-ThankYouDesktop .ly{position:absolute;inset:0;background-size:100% 100%;background-repeat:no-repeat;will-change:transform}
+.dc-ThankYouDesktop .plate{background-image:url(/art/picnic.webp)}
+.dc-ThankYouDesktop .sun{background-image:url(/art/6e384b0a772427652a4fe0275474ecd9.webp);transform-origin:1270px 548px}
+.dc-ThankYouDesktop .clouds{background-image:url(/art/04061bd3e059830cb0dde9a3248a8e90.webp)}
+.dc-ThankYouDesktop .balloons{background-image:url(/art/f5765947000d52030eb002035f74307d.webp);transform-origin:221px 410px}
+.dc-ThankYouDesktop .flowers{background-image:url(/art/c51ae8905127b15a28d6ca18ca4609a0.webp);transform-origin:0 941px}
+.dc-ThankYouDesktop .flame{position:absolute;left:367px;top:606px;width:80px;height:80px;border-radius:50%;background:radial-gradient(circle,rgba(255,226,140,.85),rgba(255,190,90,.25) 40%,rgba(255,190,90,0) 70%);mix-blend-mode:screen}
+.dc-ThankYouDesktop .petal{position:absolute;left:0;top:0;width:12px;height:8px;border-radius:80% 10% 80% 10%;background:linear-gradient(135deg,#FFFFFF,#F3EEE6);box-shadow:0 1px 3px rgba(90,80,60,.3);opacity:0;pointer-events:none}
+.dc-ThankYouDesktop .seed{position:absolute;left:0;top:0;width:10px;height:10px;border-radius:50%;background:radial-gradient(circle,#fff 0,rgba(255,255,255,.85) 25%,rgba(255,255,255,0) 70%);opacity:0;pointer-events:none}
+.dc-ThankYouDesktop .conf{position:absolute;left:0;top:0;width:11px;height:15px;border-radius:2px;opacity:0;pointer-events:none;z-index:6}
+.dc-ThankYouDesktop .script{font-family:'Pinyon Script',cursive;font-weight:400}
+.dc-ThankYouDesktop .msg{margin:0;font-size:14.5px;line-height:1.5;color:#33354F}
+.dc-ThankYouDesktop .ph{color:#7A6D8E;font-style:italic}
+.dc-ThankYouDesktop .sig{margin:8px 0 0;font-family:'Pinyon Script',cursive;font-size:28px;line-height:1.15;color:#3A4A7A}
+.dc-ThankYouDesktop .acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.dc-ThankYouDesktop .act{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:0 14px;border-radius:999px;border:1px solid rgba(58,74,122,.25);background:rgba(255,253,248,.6);color:#2E3A6B;font-family:'Nunito',sans-serif;font-size:13.5px;font-weight:700;text-decoration:none;cursor:pointer;transition:transform .2s ease,background-color .2s ease}
+.dc-ThankYouDesktop .act:hover{transform:translateY(-2px);background:rgba(255,253,248,.85)}
+.dc-ThankYouDesktop .act.primary{background:linear-gradient(135deg,#E9A7A7,#D97A5E);border-color:transparent;color:#FFF9F0;box-shadow:0 8px 18px rgba(217,122,94,.35)}
+.dc-ThankYouDesktop .act:focus-visible{outline:2px solid #3A4A7A;outline-offset:3px}
+.dc-ThankYouDesktop .dot{width:7px;height:7px;border-radius:50%;background:rgba(46,58,107,.28)}
+.dc-ThankYouDesktop .dot.on{width:22px;border-radius:4px;background:#3A4A7A}
+.dc-ThankYouDesktop .scroll::-webkit-scrollbar{width:10px}
+.dc-ThankYouDesktop .scroll::-webkit-scrollbar-track{margin:14px 0;background:linear-gradient(to right,transparent 4px,rgba(58,74,122,.22) 4px,rgba(58,74,122,.22) 6px,transparent 6px)}
+.dc-ThankYouDesktop .scroll::-webkit-scrollbar-thumb{border-radius:999px;border:2px solid transparent;background:linear-gradient(180deg,#E9A7A7,#6D8F62) padding-box;box-shadow:inset 0 0 0 1px rgba(255,250,240,.55)}
+@supports not selector(::-webkit-scrollbar){.dc-ThankYouDesktop .scroll{scrollbar-width:thin;scrollbar-color:#6D8F62 transparent}}
+.dc-ThankYouDesktop .card{position:absolute;left:860px;top:22px;width:556px;padding:18px 30px 14px;box-sizing:border-box;border-radius:34px;background:rgba(255,250,242,.6);backdrop-filter:blur(7px) saturate(1.1);-webkit-backdrop-filter:blur(7px) saturate(1.1);box-shadow:0 30px 70px rgba(40,50,80,.28),inset 0 0 0 1px rgba(255,250,240,.65),0 0 0 1px rgba(233,167,167,.35);text-align:center}
+.dc-ThankYouDesktop .card .acts{justify-content:center}
+.dc-ThankYouDesktop .foot{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:12px;padding-top:10px;border-top:1px solid rgba(46,58,107,.14)}
+/* bunny pointer + a trail of tiny leaves and sparkles (mouse/trackpad only) */
+@media (hover:hover) and (pointer:fine){.dc-ThankYouDesktop .stage,.dc-ThankYouDesktop .stage *{cursor:none !important}.dc-ThankYouDesktop .stage input,.dc-ThankYouDesktop .stage textarea{cursor:text !important}}
+.dc-ThankYouDesktop .bunnycur{position:absolute;left:0;top:0;width:52px;height:73px;margin:-15px 0 0 -1px;background:url(/art/dbadbf2c44d41f6a5e3b3e01c5391ca4.webp) 0 0/100% 100% no-repeat;pointer-events:none;z-index:96;opacity:0;transform-origin:50% 30%;filter:drop-shadow(0 4px 6px rgba(20,30,20,.3));will-change:transform}
+.dc-ThankYouDesktop .trailp{position:absolute;left:0;top:0;pointer-events:none;z-index:95;will-change:transform,opacity}
+.dc-ThankYouDesktop .trailp.tl{width:9px;height:9px;border-radius:80% 0 80% 0}
+.dc-ThankYouDesktop .trailp.ts{width:6px;height:6px;border-radius:50%;background:#FFF3C4;box-shadow:0 0 8px 3px rgba(247,216,115,.75)}
