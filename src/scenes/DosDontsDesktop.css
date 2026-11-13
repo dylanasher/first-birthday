@@ -6,17 +6,17 @@
 /* the painted village: every layer sits on the same 1672x941 canvas, scaled to the stage */
 .dc-DosDontsDesktop .cv{position:absolute;left:0px;top:0;width:1672px;height:941px;transform:scale(0.9564);transform-origin:0 0}
 .dc-DosDontsDesktop .ly{position:absolute;inset:0;background-size:100% 100%;background-repeat:no-repeat;will-change:transform}
-.dc-DosDontsDesktop .plate{background-image:url(/art/937e9ceabdf5dae8015bc472e750590f.webp)}
-.dc-DosDontsDesktop .stream{background-image:url(/art/533dccdf6fbb96b835ab38f88d1b1352.webp)}
-.dc-DosDontsDesktop .stream2{background-image:url(/art/533dccdf6fbb96b835ab38f88d1b1352.webp);filter:brightness(1.45) saturate(1.1);opacity:.55;
+.dc-DosDontsDesktop .plate{background-image:url(/art/ch5d-base.webp)}
+.dc-DosDontsDesktop .stream{background-image:none}
+.dc-DosDontsDesktop .stream2{background-image:url(/art/ch5d-water.webp);filter:brightness(1.45) saturate(1.1);opacity:.55;
 -webkit-mask-image:repeating-linear-gradient(to bottom,transparent 0,#000 10px,transparent 22px);mask-image:repeating-linear-gradient(to bottom,transparent 0,#000 10px,transparent 22px);
 -webkit-mask-size:100% 44px;mask-size:100% 44px;animation:DosDontsDesktop-flow 1.1s linear infinite}
 @keyframes DosDontsDesktop-flow{from{-webkit-mask-position:0 0;mask-position:0 0}to{-webkit-mask-position:0 44px;mask-position:0 44px}}
-.dc-DosDontsDesktop .mist{background-image:url(/art/64308193ee3f1aadbe13340d6773aa6e.webp)}
-.dc-DosDontsDesktop .ropes{background-image:url(/art/52eec3b03662763936ecba87412b3576.webp)}
-.dc-DosDontsDesktop .plants{background-image:url(/art/e4c67a8237df2e4e71be3745a7fb05ed.webp);transform-origin:0 941px}
-.dc-DosDontsDesktop .lt{position:absolute;background:url(/art/b76f7bb4b9a88e255663fe58f1a3daf3.webp) 0 0/100% 100% no-repeat;transform-origin:50% 4%;will-change:transform}
-.dc-DosDontsDesktop .porch{position:absolute;left:166px;top:240px;width:80px;height:106px;background:url(/art/10ff0ceeb4bb4ddc32e578a521b8f554.webp) 0 0/100% 100% no-repeat;transform-origin:40px 6px}
+.dc-DosDontsDesktop .mist{background-image:radial-gradient(34% 13% at 80% 57%,rgba(205,208,242,.32),rgba(205,208,242,0) 70%),radial-gradient(26% 9% at 93% 69%,rgba(205,208,242,.28),rgba(205,208,242,0) 70%),radial-gradient(22% 8% at 70% 66%,rgba(205,208,242,.2),rgba(205,208,242,0) 70%)}
+.dc-DosDontsDesktop .ropes{background-image:none}
+.dc-DosDontsDesktop .plants{background-image:url(/art/ch5d-plants.webp);transform-origin:0 941px}
+.dc-DosDontsDesktop .lt{position:absolute;background:url(/art/ch5d-lanterns.png) no-repeat;transform-origin:50% 4%;will-change:transform}
+.dc-DosDontsDesktop .porch{position:absolute;left:162px;top:228px;width:76px;height:96px;background:url(/art/ch5d-porch.webp) 0 0/100% 100% no-repeat;transform-origin:50% 3%}
 .dc-DosDontsDesktop .glow{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(255,214,130,.55),rgba(255,190,100,.18) 45%,rgba(255,190,100,0) 70%);mix-blend-mode:screen;pointer-events:none}
 .dc-DosDontsDesktop .ff{position:absolute;left:0;top:0;width:5px;height:5px;border-radius:50%;background:#FFF4B8;box-shadow:0 0 8px 3px rgba(255,226,120,.75);opacity:0}
 .dc-DosDontsDesktop .sky{position:absolute;left:0;top:0;width:14px;height:18px;border-radius:45% 45% 40% 40%;background:radial-gradient(circle at 50% 45%,#FFF1C2,#F7C46A 55%,#D97A5E);box-shadow:0 0 14px 5px rgba(255,200,110,.55);opacity:0}

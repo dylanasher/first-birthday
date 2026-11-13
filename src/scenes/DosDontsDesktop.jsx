@@ -199,41 +199,31 @@ export default class DosDontsDesktop extends React.Component {
             <div className="ly stream2" />
             <div className="ly mist" />
             <div className="ly ropes" />
-            <span className="glow" style={{"left":"420.4px","top":"157.4px","width":"57.2px","height":"57.2px"}} />
-            <i className="lt" style={{"left":"436.6px","top":"168.8px","width":"24.8px","height":"35.1px"}} />
-            <span className="glow" style={{"left":"441.4px","top":"181.4px","width":"57.2px","height":"57.2px"}} />
-            <i className="lt" style={{"left":"457.6px","top":"192.8px","width":"24.8px","height":"35.1px"}} />
-            <span className="glow" style={{"left":"476.4px","top":"204.4px","width":"57.2px","height":"57.2px"}} />
-            <i className="lt" style={{"left":"492.6px","top":"215.8px","width":"24.8px","height":"35.1px"}} />
-            <span className="glow" style={{"left":"512.4px","top":"222.4px","width":"57.2px","height":"57.2px"}} />
-            <i className="lt" style={{"left":"528.6px","top":"233.8px","width":"24.8px","height":"35.1px"}} />
-            <span className="glow" style={{"left":"551.4px","top":"236.4px","width":"57.2px","height":"57.2px"}} />
-            <i className="lt" style={{"left":"567.6px","top":"247.8px","width":"24.8px","height":"35.1px"}} />
-            <span className="glow" style={{"left":"594.4px","top":"242.4px","width":"57.2px","height":"57.2px"}} />
-            <i className="lt" style={{"left":"610.6px","top":"253.8px","width":"24.8px","height":"35.1px"}} />
-            <span className="glow" style={{"left":"638.4px","top":"239.4px","width":"57.2px","height":"57.2px"}} />
-            <i className="lt" style={{"left":"654.6px","top":"250.8px","width":"24.8px","height":"35.1px"}} />
-            <span className="glow" style={{"left":"797.8px","top":"400.8px","width":"36.4px","height":"36.4px"}} />
-            <i className="lt" style={{"left":"808.1px","top":"408.1px","width":"15.8px","height":"22.3px"}} />
-            <span className="glow" style={{"left":"815.8px","top":"406.8px","width":"36.4px","height":"36.4px"}} />
-            <i className="lt" style={{"left":"826.1px","top":"414.1px","width":"15.8px","height":"22.3px"}} />
-            <span className="glow" style={{"left":"838.8px","top":"412.8px","width":"36.4px","height":"36.4px"}} />
-            <i className="lt" style={{"left":"849.1px","top":"420.1px","width":"15.8px","height":"22.3px"}} />
-            <span className="glow" style={{"left":"861.8px","top":"411.8px","width":"36.4px","height":"36.4px"}} />
-            <i className="lt" style={{"left":"872.1px","top":"419.1px","width":"15.8px","height":"22.3px"}} />
-            <span className="glow" style={{"left":"882.8px","top":"405.8px","width":"36.4px","height":"36.4px"}} />
-            <i className="lt" style={{"left":"893.1px","top":"413.1px","width":"15.8px","height":"22.3px"}} />
-            <span className="glow" style={{"left":"901.6px","top":"506.6px","width":"20.8px","height":"20.8px"}} />
-            <i className="lt" style={{"left":"907.5px","top":"510.8px","width":"9.0px","height":"12.8px"}} />
-            <span className="glow" style={{"left":"915.6px","top":"508.6px","width":"20.8px","height":"20.8px"}} />
-            <i className="lt" style={{"left":"921.5px","top":"512.8px","width":"9.0px","height":"12.8px"}} />
-            <span className="glow" style={{"left":"929.6px","top":"509.6px","width":"20.8px","height":"20.8px"}} />
-            <i className="lt" style={{"left":"935.5px","top":"513.8px","width":"9.0px","height":"12.8px"}} />
-            <span className="glow" style={{"left":"942.6px","top":"507.6px","width":"20.8px","height":"20.8px"}} />
-            <i className="lt" style={{"left":"948.5px","top":"511.8px","width":"9.0px","height":"12.8px"}} />
-            <span className="glow" style={{"left":"954.6px","top":"503.6px","width":"20.8px","height":"20.8px"}} />
-            <i className="lt" style={{"left":"960.5px","top":"507.8px","width":"9.0px","height":"12.8px"}} />
-            <span className="glow pglow" style={{"left":"131.0px","top":"223.0px","width":"150px","height":"150px"}} />
+            <span className="glow" style={{"left":"388.1px","top":"142.9px","width":"66.7px","height":"66.7px"}} />
+            <i className="lt" style={{"left":"407px","top":"157px","width":"29px","height":"35px","backgroundPosition":"-0px 0","backgroundSize":"336px 38px"}} />
+            <span className="glow" style={{"left":"405.2px","top":"161.1px","width":"73.6px","height":"73.6px"}} />
+            <i className="lt" style={{"left":"426px","top":"177px","width":"32px","height":"38px","backgroundPosition":"-31px 0","backgroundSize":"336px 38px"}} />
+            <span className="glow" style={{"left":"442.5px","top":"186.3px","width":"69.0px","height":"69.0px"}} />
+            <i className="lt" style={{"left":"462px","top":"201px","width":"30px","height":"36px","backgroundPosition":"-65px 0","backgroundSize":"336px 38px"}} />
+            <span className="glow" style={{"left":"477.5px","top":"204.3px","width":"69.0px","height":"69.0px"}} />
+            <i className="lt" style={{"left":"497px","top":"219px","width":"30px","height":"36px","backgroundPosition":"-97px 0","backgroundSize":"336px 38px"}} />
+            <span className="glow" style={{"left":"515.1px","top":"217.9px","width":"66.7px","height":"66.7px"}} />
+            <i className="lt" style={{"left":"534px","top":"232px","width":"29px","height":"35px","backgroundPosition":"-129px 0","backgroundSize":"336px 38px"}} />
+            <span className="glow" style={{"left":"552.5px","top":"220.3px","width":"69.0px","height":"69.0px"}} />
+            <i className="lt" style={{"left":"572px","top":"235px","width":"30px","height":"36px","backgroundPosition":"-160px 0","backgroundSize":"336px 38px"}} />
+            <span className="glow" style={{"left":"593.5px","top":"217.3px","width":"69.0px","height":"69.0px"}} />
+            <i className="lt" style={{"left":"613px","top":"232px","width":"30px","height":"36px","backgroundPosition":"-192px 0","backgroundSize":"336px 38px"}} />
+            <span className="glow" style={{"left":"748.6px","top":"371.8px","width":"43.7px","height":"43.7px"}} />
+            <i className="lt" style={{"left":"761px","top":"381px","width":"19px","height":"23px","backgroundPosition":"-224px 0","backgroundSize":"336px 38px"}} />
+            <span className="glow" style={{"left":"765.4px","top":"378.6px","width":"48.3px","height":"48.3px"}} />
+            <i className="lt" style={{"left":"779px","top":"389px","width":"21px","height":"25px","backgroundPosition":"-245px 0","backgroundSize":"336px 38px"}} />
+            <span className="glow" style={{"left":"788.4px","top":"382.6px","width":"48.3px","height":"48.3px"}} />
+            <i className="lt" style={{"left":"802px","top":"393px","width":"21px","height":"25px","backgroundPosition":"-268px 0","backgroundSize":"336px 38px"}} />
+            <span className="glow" style={{"left":"811.7px","top":"379.6px","width":"50.6px","height":"50.6px"}} />
+            <i className="lt" style={{"left":"826px","top":"390px","width":"22px","height":"27px","backgroundPosition":"-291px 0","backgroundSize":"336px 38px"}} />
+            <span className="glow" style={{"left":"837.4px","top":"376.6px","width":"48.3px","height":"48.3px"}} />
+            <i className="lt" style={{"left":"851px","top":"387px","width":"21px","height":"25px","backgroundPosition":"-315px 0","backgroundSize":"336px 38px"}} />
+            <span className="glow pglow" style={{"left":"125.0px","top":"205.8px","width":"150px","height":"150px"}} />
             <i className="porch" />
             <div className="ly plants" />
           </div>

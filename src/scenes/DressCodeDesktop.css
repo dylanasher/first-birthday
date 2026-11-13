@@ -63,7 +63,7 @@
 /* page turn to Chapter 5: this page curls away, revealing the lantern village */
 .dc-DressCodeDesktop .nextlink{position:absolute;left:0;top:0;width:1px;height:1px;opacity:0;pointer-events:none}
 .dc-DressCodeDesktop .under5{position:absolute;inset:0;z-index:70;pointer-events:none;display:none;background-color:#3D4A8C;background-repeat:no-repeat;
-background-image:linear-gradient(to left,rgba(28,30,70,.35) 0%,rgba(28,30,70,0) 48%),url(/art/22ccc67ded57a7c30a75430c7ce39721.webp);
+background-image:linear-gradient(to left,rgba(28,30,70,.35) 0%,rgba(28,30,70,0) 48%),url(/art/ch5d-full.webp);
 background-size:100% 100%,1599px 900px;background-position:0 0,0 0}
 .dc-DressCodeDesktop .tflapwrap{position:absolute;inset:0;z-index:71;pointer-events:none;display:none;filter:drop-shadow(-10px -10px 20px rgba(16,42,32,.45))}
 .dc-DressCodeDesktop .tflap{position:absolute;inset:0;background:linear-gradient(135deg,#E9DCBC 0%,#F8EFD9 55%,#E0D0A8 100%)}
