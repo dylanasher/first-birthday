@@ -349,10 +349,7 @@ export default class MilestonesDesktop extends React.Component {
           <>
             <div className="card">
               <span className="stamp" aria-hidden="true">
-                <svg width="24" height="28" viewBox="0 0 20 22">
-                  <path d="M10 3 C6 6 4 10 6 15 C8 19 13 19 15 15 C17 10 14 6 10 3 Z" fill="#7FA552" />
-                  <path d="M10 5 L10 18" stroke="#3E6E3A" style={{"strokeWidth":"1"}} />
-                </svg>
+                <img className="stamp-soot" src="/art/soot-stamp.webp" width="34" height="34" alt="" draggable="false" />
               </span>
               {v.cur?.hasSrc ? (
                 <>

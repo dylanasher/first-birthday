@@ -356,10 +356,7 @@ export default class MilestonesMobile extends React.Component {
           <>
             <div className="card">
               <span className="stamp" aria-hidden="true">
-                <svg width="20" height="22" viewBox="0 0 20 22">
-                  <path d="M10 3 C6 6 4 10 6 15 C8 19 13 19 15 15 C17 10 14 6 10 3 Z" fill="#7FA552" />
-                  <path d="M10 5 L10 18" stroke="#3E6E3A" style={{"strokeWidth":"1"}} />
-                </svg>
+                <img className="stamp-soot" src="/art/soot-stamp.webp" width="28" height="28" alt="" draggable="false" />
               </span>
               {v.cur?.hasSrc ? (
                 <>
