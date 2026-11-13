@@ -73,7 +73,7 @@ clip-path:polygon(70.563% 46.950%, 76.089% 46.770%, 76.939% 53.828%, 77.790% 59.
 .dc-DressCodeMobile .nextlink{position:absolute;left:0;top:0;width:1px;height:1px;opacity:0;pointer-events:none}
 .dc-DressCodeMobile .under5{position:absolute;inset:0;z-index:70;pointer-events:none;display:none;background-color:#3D4A8C;background-repeat:no-repeat;
 --sh:max(111cqh, calc(100cqw * 1672 / 941));--sw:calc(var(--sh) * 941 / 1672);
-background-image:linear-gradient(to bottom,rgba(28,30,70,.55) 0%,rgba(28,30,70,.15) 12%,rgba(28,30,70,0) 18%),url(/art/mobile/ch5m-full.webp);
+background-image:linear-gradient(to bottom,rgba(28,30,70,.55) 0%,rgba(28,30,70,.15) 12%,rgba(28,30,70,0) 18%),url(/art/mobile/ch5m-full-v2.webp);
 background-size:100% 100%,var(--sw) var(--sh);
 background-position:0 0,clamp(calc(100cqw - var(--sw)), calc(50cqw - var(--sw) * 0.56), 0px) clamp(calc(100cqh - var(--sh)), calc(45.5cqh - var(--sh) * 0.496), 0px)}
 .dc-DressCodeMobile .tflapwrap{position:absolute;inset:0;z-index:71;pointer-events:none;display:none;filter:drop-shadow(-8px -8px 16px rgba(16,42,32,.45))}
