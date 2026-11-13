@@ -133,6 +133,7 @@ export default class ThankYouDesktop extends React.Component {
             <div className="ly clouds" />
             <div className="ly balloons" />
             <span className="flame" />
+            <img className="totoro" src="/art/totoro-leaf.webp" alt="" draggable="false" />
             <div className="ly flowers" />
           </div>
           <span className="petal" />
