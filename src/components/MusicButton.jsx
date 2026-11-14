@@ -22,9 +22,21 @@ export const hasMusicSpot = (variant) => Boolean(lastSpot[variant]);
 
 export default function MusicButton({ variant, scene, opening }) {
   const [on, setOn] = useState(music.isOn);
+  const [tip, setTip] = useState(music.tip);
+  const [leaving, setLeaving] = useState(false);
+  const [side, setSide] = useState('left'); // the bubble opens toward the middle of the screen
   const btn = useRef(null);
   const spot = useRef(null);
   useEffect(() => music.subscribe(setOn), []);
+  useEffect(() => music.subscribeTip((t) => { setLeaving(false); setTip(t); }), []);
+  // the bubble stays for a few seconds (carrying on across a page turn), then fades out
+  useEffect(() => {
+    if (!tip) return undefined;
+    const left = tip.until - Date.now();
+    const fade = setTimeout(() => setLeaving(true), Math.max(0, left - 400));
+    const gone = setTimeout(() => { setTip(null); setLeaving(false); }, Math.max(0, left));
+    return () => { clearTimeout(fade); clearTimeout(gone); };
+  }, [tip]);
   // Chapter 1 waits for "Open Invitation"; every other chapter may start the music straight away
   useEffect(() => { music.enter(!opening); }, [opening]);
 
@@ -34,6 +46,7 @@ export default function MusicButton({ variant, scene, opening }) {
     if (!b || !s) return undefined;
     const place = (glide) => {
       const to = `translate(${s.offsetLeft}px, ${s.offsetTop}px)`;
+      setSide(s.offsetLeft + s.offsetWidth / 2 > b.parentElement.clientWidth / 2 ? 'left' : 'right');
       const from = lastSpot[variant];
       lastSpot[variant] = to;
       b.style.transition = 'none';
@@ -70,6 +83,11 @@ export default function MusicButton({ variant, scene, opening }) {
         onClick={() => music.toggle()}
       >
         <span className="egg" aria-hidden="true" />
+        {tip ? (
+          <span className={`mus-tip mus-tip--${side}${leaving ? ' is-leaving' : ''}`} role="status">
+            {tip.kind === 'on' ? <>♪ Music on!<br />Tap me to turn it off</> : <>Tap me for music ♪</>}
+          </span>
+        ) : null}
       </button>
     </div>
   );

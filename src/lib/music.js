@@ -8,12 +8,15 @@
 // - The on/off choice is remembered (localStorage 'dylanMusic' = 'on' | 'off'); 'off' never auto-starts.
 // - The song position is remembered across reloads for 20 minutes ('dylanMusicT' = '<seconds>|<time>').
 // - Pauses while the tab or app is hidden; only one tab plays at a time.
+// - On a guest's first visit, a speech bubble beside the button says what it does ('dylanMusicTip').
 
 const SRC = `${import.meta.env.BASE_URL}music/background.mp3`;
 const KEY = 'dylanMusic';
 const TKEY = 'dylanMusicT';
 const VOL = 0.35;
 const FADE_MS = 900;
+const TIP_KEY = 'dylanMusicTip';
+const TIP_MS = 4500;
 
 const get = (k) => { try { return localStorage.getItem(k); } catch (e) { return null; } };
 const set = (k, v) => { try { localStorage.setItem(k, v); } catch (e) { /* private mode */ } };
@@ -27,6 +30,21 @@ let raf = 0;
 let bc = null;
 const me = Math.random();
 const listeners = new Set();
+let tip = null; // { kind: 'on' | 'off', until } while the first-visit bubble shows
+const tipListeners = new Set();
+
+// the first time the music starts (or the browser blocks it), explain the button, once ever
+function showTip(kind) {
+  if (get(TIP_KEY)) return;
+  set(TIP_KEY, '1');
+  tip = { kind, until: Date.now() + TIP_MS };
+  tipListeners.forEach((fn) => fn(tip));
+}
+function hideTip() {
+  if (!tip) return;
+  tip = null;
+  tipListeners.forEach((fn) => fn(null));
+}
 
 function ui(next) {
   if (on === next) return;
@@ -99,9 +117,9 @@ function play() {
   if (!Number.isNaN(t) && Date.now() - (at || 0) < 1200000 && audio.currentTime < 0.5) {
     try { audio.currentTime = t; } catch (e) { /* not seekable yet */ }
   }
-  const ok = () => { ui(true); ramp(VOL); if (bc) bc.postMessage(me); };
+  const ok = () => { ui(true); ramp(VOL); if (bc) bc.postMessage(me); showTip('on'); };
   const p = audio.play();
-  if (p && p.then) p.then(ok).catch(() => { ui(false); arm(); });
+  if (p && p.then) p.then(ok).catch(() => { ui(false); arm(); showTip('off'); });
   else ok();
 }
 
@@ -123,6 +141,8 @@ export const music = {
     if (get(KEY) !== 'off') play();
   },
   toggle() {
+    hideTip();
+    set(TIP_KEY, '1'); // they've found the button, no need to explain it
     const next = !on;
     set(KEY, next ? 'on' : 'off');
     allowed = true;
@@ -130,6 +150,11 @@ export const music = {
     else stop();
   },
   isOn: () => on,
+  tip: () => (tip && tip.until > Date.now() ? tip : null),
+  subscribeTip(fn) {
+    tipListeners.add(fn);
+    return () => tipListeners.delete(fn);
+  },
   subscribe(fn) {
     listeners.add(fn);
     return () => listeners.delete(fn);
