@@ -55,7 +55,7 @@ export default function Scene({ chapter }) {
     </div>
   ) : null;
   // the music sprite stays on screen through page turns (it waits only on the very first chapter)
-  const musicBtn = shown || hasMusicSpot(variant) ? <MusicButton variant={variant} scene={key} opening={chapter.path === '/'} /> : null;
+  const musicBtn = shown || hasMusicSpot(variant) ? <MusicButton variant={variant} scene={key} /> : null;
 
   if (variant === 'mobile') {
     return (

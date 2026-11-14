@@ -2,50 +2,31 @@
 // The site is a single-page app, so there is ONE audio element for the whole visit: it keeps playing
 // across page turns. The soot-sprite button on every chapter turns it on and off.
 //
-// - Never plays before the guest's first tap (browsers block autoplay).
-// - Chapter 1: starts when the guest taps "Open Invitation" (or the button). Other chapters: starts
-//   right away if the browser allows it, otherwise on the first tap anywhere.
+// - Music is on from the start: it plays as soon as the site opens if the browser allows it.
+//   Most browsers (always on iPhone) hold sound back until the guest's first tap, so until then the
+//   button already shows "on" and the music starts on the first tap anywhere (or on the button).
 // - The on/off choice is remembered (localStorage 'dylanMusic' = 'on' | 'off'); 'off' never auto-starts.
 // - The song position is remembered across reloads for 20 minutes ('dylanMusicT' = '<seconds>|<time>').
 // - Pauses while the tab or app is hidden; only one tab plays at a time.
-// - On a guest's first visit, a speech bubble beside the button says what it does ('dylanMusicTip').
 
 const SRC = `${import.meta.env.BASE_URL}music/background.mp3`;
 const KEY = 'dylanMusic';
 const TKEY = 'dylanMusicT';
 const VOL = 0.35;
 const FADE_MS = 900;
-const TIP_KEY = 'dylanMusicTip';
-const TIP_MS = 4500;
 
 const get = (k) => { try { return localStorage.getItem(k); } catch (e) { return null; } };
 const set = (k, v) => { try { localStorage.setItem(k, v); } catch (e) { /* private mode */ } };
 
 let audio = null;
-let on = false; // what the button shows
-let allowed = false; // Chapter 1 waits for "Open Invitation"; any other chapter allows it
+let on = get(KEY) !== 'off'; // what the button shows: the guest's choice (on unless they turned it off)
+let playing = false;
 let armed = false;
 let wasPlaying = false;
 let raf = 0;
 let bc = null;
 const me = Math.random();
 const listeners = new Set();
-let tip = null; // { kind: 'on' | 'off', until } while the first-visit bubble shows
-const tipListeners = new Set();
-
-// the first time the music starts (or the browser blocks it), explain the button, once ever
-function showTip(kind) {
-  if (get(TIP_KEY)) return;
-  set(TIP_KEY, '1');
-  tip = { kind, until: Date.now() + TIP_MS };
-  tipListeners.forEach((fn) => fn(tip));
-}
-function hideTip() {
-  if (!tip) return;
-  tip = null;
-  tipListeners.forEach((fn) => fn(null));
-}
-
 function ui(next) {
   if (on === next) return;
   on = next;
@@ -90,7 +71,7 @@ function init() {
   });
   try {
     bc = new BroadcastChannel('dylan-music');
-    bc.onmessage = (e) => { if (e.data !== me && !audio.paused) { ui(false); audio.pause(); } };
+    bc.onmessage = (e) => { if (e.data !== me && !audio.paused) { playing = false; ui(false); audio.pause(); } };
   } catch (e) { /* older browsers: no cross-tab handoff */ }
 }
 
@@ -103,7 +84,7 @@ function arm() {
     document.removeEventListener('pointerdown', h, true);
     document.removeEventListener('keydown', h, true);
     armed = false;
-    if (get(KEY) !== 'off' && allowed) play();
+    if (get(KEY) !== 'off') play();
   };
   document.addEventListener('pointerdown', h, true);
   document.addEventListener('keydown', h, true);
@@ -111,50 +92,44 @@ function arm() {
 
 function play() {
   init();
-  if (!audio.paused && on) return;
+  if (playing && !audio.paused) return;
   // pick up where the song was before a reload (if that was in the last 20 minutes)
   const [t, at] = String(get(TKEY) || '').split('|').map(Number);
   if (!Number.isNaN(t) && Date.now() - (at || 0) < 1200000 && audio.currentTime < 0.5) {
     try { audio.currentTime = t; } catch (e) { /* not seekable yet */ }
   }
-  const ok = () => { ui(true); ramp(VOL); if (bc) bc.postMessage(me); showTip('on'); };
+  const ok = () => { playing = true; ui(true); ramp(VOL); if (bc) bc.postMessage(me); };
   const p = audio.play();
-  if (p && p.then) p.then(ok).catch(() => { ui(false); arm(); showTip('off'); });
+  // blocked until the guest taps: keep showing "on" and start on their first tap
+  if (p && p.then) p.then(ok).catch(() => { playing = false; arm(); });
   else ok();
 }
 
 function stop() {
+  playing = false;
   ui(false);
   if (audio) ramp(0, () => audio.pause());
 }
 
 export const music = {
-  // a chapter mounted: Chapter 1 passes false (it waits for Open Invitation), the rest pass true
-  enter(allow) {
+  // a chapter mounted: start the music if it isn't playing yet (and the guest hasn't turned it off)
+  enter() {
     init();
-    if (allow) allowed = true;
-    if (allowed && get(KEY) !== 'off') play();
+    if (get(KEY) !== 'off') play();
   },
-  // the guest tapped "Open Invitation" (inside the tap, so the browser lets it play)
+  // the guest tapped "Open Invitation": a tap, so the browser lets the music start now if it hadn't
   unlock() {
-    allowed = true;
     if (get(KEY) !== 'off') play();
   },
   toggle() {
-    hideTip();
-    set(TIP_KEY, '1'); // they've found the button, no need to explain it
+    // showing "on" but still waiting for a first tap: this tap starts it rather than turning it off
+    if (on && !playing) { set(KEY, 'on'); play(); return; }
     const next = !on;
     set(KEY, next ? 'on' : 'off');
-    allowed = true;
     if (next) play();
     else stop();
   },
   isOn: () => on,
-  tip: () => (tip && tip.until > Date.now() ? tip : null),
-  subscribeTip(fn) {
-    tipListeners.add(fn);
-    return () => tipListeners.delete(fn);
-  },
   subscribe(fn) {
     listeners.add(fn);
     return () => listeners.delete(fn);

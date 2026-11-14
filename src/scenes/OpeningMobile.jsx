@@ -220,7 +220,7 @@ export default class OpeningMobile extends React.Component {
       goNext: function () { self.goNext(); },
       open: function () {
         if (self.state.phase !== 'idle') return;
-        music.unlock(); // the tap on Open Invitation starts the background music
+        music.unlock(); // if the browser was still holding the music back, this tap starts it
         if (!self.tl) { self.setState({ phase: 'welcome' }); return; }
         self.setState({ phase: 'opening' });
         self.tl.timeScale(1).play();
