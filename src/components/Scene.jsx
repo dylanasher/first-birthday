@@ -5,7 +5,7 @@ import { chapters } from '../chapters.js';
 import MusicButton, { hasMusicSpot } from './MusicButton.jsx';
 
 // the off-state sprite is shown first, so have both ready before the button appears
-for (const n of ['music-off', 'music-on']) new Image().src = `${import.meta.env.BASE_URL}art/ui/${n}.webp`;
+for (const n of ['music-off', 'music-on', 'music-zz']) new Image().src = `${import.meta.env.BASE_URL}art/ui/${n}.webp`;
 
 // Desktop chapters are painted on a fixed 1440×900 artboard, scaled to fit the window. Any space
 // around it shows a soft, blurred copy of the chapter's painting so the screen is always filled.
