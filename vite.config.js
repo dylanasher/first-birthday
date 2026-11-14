@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import wishesCsv from './dev/wishes-csv.js';
+import sceneArt from './dev/scene-art.js';
 
 // The site is published on GitHub Pages at https://dylanasher.github.io/first-birthday/, so production
 // builds live under /first-birthday/. Local development stays at the root (http://localhost:5173/).
@@ -24,6 +25,6 @@ export default defineConfig(({ command }) => {
   const base = command === 'build' ? (process.env.BASE_PATH ?? BASE) : '/';
   return {
     base,
-    plugins: [react(), wishesCsv(), artUnderBase(base)],
+    plugins: [react(), wishesCsv(), sceneArt(), artUnderBase(base)],
   };
 });
