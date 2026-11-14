@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useViewport } from '../lib/useViewport.js';
 import { loadScene, prefetchScene, sceneIfReady } from '../lib/sceneLoader.js';
 import { chapters } from '../chapters.js';
-import MusicButton from './MusicButton.jsx';
+import MusicButton, { hasMusicSpot } from './MusicButton.jsx';
 
 // the off-state sprite is shown first, so have both ready before the button appears
 for (const n of ['music-off', 'music-on']) new Image().src = `${import.meta.env.BASE_URL}art/ui/${n}.webp`;
@@ -54,7 +54,8 @@ export default function Scene({ chapter }) {
       <shown.comp />
     </div>
   ) : null;
-  const musicBtn = shown ? <MusicButton variant={variant} scene={key} opening={chapter.path === '/'} /> : null;
+  // the music sprite stays on screen through page turns (it waits only on the very first chapter)
+  const musicBtn = shown || hasMusicSpot(variant) ? <MusicButton variant={variant} scene={key} opening={chapter.path === '/'} /> : null;
 
   if (variant === 'mobile') {
     return (

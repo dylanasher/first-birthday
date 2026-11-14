@@ -5,14 +5,21 @@
 .mus-layer--mobile{inset:0;container-type:size}
 /* desktop: sits on the scaled 1440×900 artboard, like the chapter */
 .mus-layer--desktop{left:50%;top:50%;width:var(--scene-w);height:var(--scene-h);transform:translate(-50%,-50%) scale(var(--scene-scale));transform-origin:50% 50%}
-.mus{pointer-events:auto;position:absolute;z-index:90;width:46px;height:46px;padding:0;border:0;border-radius:50%;background:transparent;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.mus{pointer-events:auto;position:absolute;left:0;top:0;transition:transform .9s cubic-bezier(.45,0,.2,1);z-index:90;width:46px;height:46px;padding:0;border:0;border-radius:50%;background:transparent;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .mus::before{content:"";position:absolute;inset:-6px;border-radius:50%;background:radial-gradient(closest-side,rgba(16,24,48,.42),rgba(16,24,48,.22) 62%,rgba(16,24,48,0));pointer-events:none}
-.mus .egg{position:absolute;inset:0;background:url(/art/ui/music-off.webp) center / contain no-repeat;filter:drop-shadow(0 2px 3px rgba(10,16,40,.45)) drop-shadow(0 0 6px rgba(255,240,200,.35));transform-origin:50% 92%;animation:eggdoze 3.6s ease-in-out infinite;transition:transform .2s}
+.mus .egg{position:absolute;inset:0;z-index:1;background:url(/art/ui/music-off.webp) center / contain no-repeat;filter:drop-shadow(0 2px 3px rgba(10,16,40,.45)) drop-shadow(0 0 6px rgba(255,240,200,.35));transform-origin:50% 92%;animation:eggdoze 3.6s ease-in-out infinite;transition:transform .2s}
 .mus.on .egg{background-image:url(/art/ui/music-on.webp);animation:eggbop .9s ease-in-out infinite}
 .mus:hover .egg{transform:scale(1.08)}
 .mus:active .egg{transform:scale(.94)}
 .mus:focus-visible{outline:2px solid #F5D68A;outline-offset:3px}
 @keyframes eggbop{0%,100%{transform:rotate(-6deg) translateY(0)}25%{transform:rotate(0) translateY(-3px)}50%{transform:rotate(6deg) translateY(0)}75%{transform:rotate(0) translateY(-3px)}}
 @keyframes eggdoze{0%,100%{transform:scale(1,1)}50%{transform:scale(1.03,.97)}}
-.mus.bl{left:18px;bottom:18px;width:58px;height:58px}
-@media (prefers-reduced-motion: reduce){.mus .egg,.mus.on .egg{animation:none}}
+/* an invisible marker at the chapter's spot; the button is moved onto it (and glides between chapters) */
+.mus-spot{position:absolute;width:46px;height:46px;visibility:hidden;pointer-events:none}
+.mus-spot.bl{left:18px;bottom:18px}
+.mus.bl,.mus-spot.bl{width:58px;height:58px}
+/* music off: a soft golden glow pulses every few seconds so the dozing sprite still catches the eye */
+.mus::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid rgba(255,221,128,.95);background:radial-gradient(closest-side,rgba(255,226,140,.55),rgba(255,214,120,0));box-shadow:0 0 14px 4px rgba(255,205,95,.75),inset 0 0 10px rgba(255,220,130,.6);opacity:0;pointer-events:none}
+.mus:not(.on)::after{animation:musglow 3s ease-out infinite}
+@keyframes musglow{0%{opacity:0;transform:scale(.85)}18%{opacity:1;transform:scale(1)}60%{opacity:0;transform:scale(1.45)}100%{opacity:0;transform:scale(1.45)}}
+@media (prefers-reduced-motion: reduce){.mus .egg,.mus.on .egg{animation:none}.mus{transition-duration:.01s}.mus:not(.on)::after{animation:none;opacity:.8;transform:none}}
