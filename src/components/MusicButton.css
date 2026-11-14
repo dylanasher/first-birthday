@@ -1,0 +1,18 @@
+/* Background music button: a soot sprite with headphones on every chapter. Music on: it bops along.
+   Off: it dozes with the headphones down. */
+.mus-layer{position:fixed;z-index:90;pointer-events:none}
+/* phone: fills the screen like the chapter does, so the cqh positions match the chapter's panels */
+.mus-layer--mobile{inset:0;container-type:size}
+/* desktop: sits on the scaled 1440×900 artboard, like the chapter */
+.mus-layer--desktop{left:50%;top:50%;width:var(--scene-w);height:var(--scene-h);transform:translate(-50%,-50%) scale(var(--scene-scale));transform-origin:50% 50%}
+.mus{pointer-events:auto;position:absolute;z-index:90;width:46px;height:46px;padding:0;border:0;border-radius:50%;background:transparent;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.mus::before{content:"";position:absolute;inset:-6px;border-radius:50%;background:radial-gradient(closest-side,rgba(16,24,48,.42),rgba(16,24,48,.22) 62%,rgba(16,24,48,0));pointer-events:none}
+.mus .egg{position:absolute;inset:0;background:url(/art/ui/music-off.webp) center / contain no-repeat;filter:drop-shadow(0 2px 3px rgba(10,16,40,.45)) drop-shadow(0 0 6px rgba(255,240,200,.35));transform-origin:50% 92%;animation:eggdoze 3.6s ease-in-out infinite;transition:transform .2s}
+.mus.on .egg{background-image:url(/art/ui/music-on.webp);animation:eggbop .9s ease-in-out infinite}
+.mus:hover .egg{transform:scale(1.08)}
+.mus:active .egg{transform:scale(.94)}
+.mus:focus-visible{outline:2px solid #F5D68A;outline-offset:3px}
+@keyframes eggbop{0%,100%{transform:rotate(-6deg) translateY(0)}25%{transform:rotate(0) translateY(-3px)}50%{transform:rotate(6deg) translateY(0)}75%{transform:rotate(0) translateY(-3px)}}
+@keyframes eggdoze{0%,100%{transform:scale(1,1)}50%{transform:scale(1.03,.97)}}
+.mus.bl{left:18px;bottom:18px;width:58px;height:58px}
+@media (prefers-reduced-motion: reduce){.mus .egg,.mus.on .egg{animation:none}}

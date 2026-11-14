@@ -1,6 +1,7 @@
 /* eslint-disable */
 // OpeningDesktop: desktop layout, 1440×900. Ported from the "Desktop.dc.html" design board.
 import React from 'react';
+import { music } from '../lib/music.js';
 import { gsap } from 'gsap';
 import { Link } from 'react-router-dom';
 import { css } from '../lib/css.js';
@@ -220,6 +221,7 @@ export default class OpeningDesktop extends React.Component {
       goNext: function () { self.goNext(); },
       open: function () {
         if (self.state.phase !== 'idle') return;
+        music.unlock(); // the tap on Open Invitation starts the background music
         if (!self.tl) { self.setState({ phase: 'welcome' }); return; }
         self.setState({ phase: 'opening' });
         self.tl.timeScale(1).play();

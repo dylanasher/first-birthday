@@ -1,6 +1,7 @@
 /* eslint-disable */
 // OpeningMobile: phone & tablet-portrait layout, fills the screen. Ported from the handoff's "ch1-phone.dc.html".
 import React from 'react';
+import { music } from '../lib/music.js';
 import { gsap } from 'gsap';
 import { Link } from 'react-router-dom';
 import { css } from '../lib/css.js';
@@ -219,6 +220,7 @@ export default class OpeningMobile extends React.Component {
       goNext: function () { self.goNext(); },
       open: function () {
         if (self.state.phase !== 'idle') return;
+        music.unlock(); // the tap on Open Invitation starts the background music
         if (!self.tl) { self.setState({ phase: 'welcome' }); return; }
         self.setState({ phase: 'opening' });
         self.tl.timeScale(1).play();
