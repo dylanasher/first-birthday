@@ -132,6 +132,10 @@ export default class ThankYouMobile extends React.Component {
         <div className="scene layer" aria-hidden="true">
           <div className="scenefit">
             <div className="ly plate" />
+            {/* the blossoms on the tree sway in the breeze: short looping clips of just those bits of the painting */}
+            <i className="blossom" style={{"left":"0.0%","top":"0.0%","width":"34.006%","height":"14.354%","backgroundImage":"url(/art/mobile/ch8m-blossom-a.webp)"}} />
+            <i className="blossom" style={{"left":"40.383%","top":"11.364%","width":"20.723%","height":"12.56%","backgroundImage":"url(/art/mobile/ch8m-blossom-b.webp)"}} />
+            <i className="blossom" style={{"left":"65.887%","top":"8.971%","width":"18.066%","height":"11.364%","backgroundImage":"url(/art/mobile/ch8m-blossom-c.webp)"}} />
             <span className="sun" />
             <div className="ly clouds" />
             <span className="balloons" />

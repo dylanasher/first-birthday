@@ -129,6 +129,11 @@ export default class ThankYouDesktop extends React.Component {
         <div className="scene layer" aria-hidden="true">
           <div className="cv">
             <div className="ly plate" />
+            {/* the blossoms on the tree sway in the breeze: short looping clips of just those bits of the painting */}
+            <i className="blossom" style={{"left":"0.0%","top":"0.0%","width":"14.952%","height":"20.723%","backgroundImage":"url(/art/ch8d-blossom-a.webp)"}} />
+            <i className="blossom" style={{"left":"21.83%","top":"0.0%","width":"6.28%","height":"9.033%","backgroundImage":"url(/art/ch8d-blossom-b.webp)"}} />
+            <i className="blossom" style={{"left":"26.914%","top":"18.597%","width":"11.663%","height":"13.815%","backgroundImage":"url(/art/ch8d-blossom-c.webp)"}} />
+            <i className="blossom" style={{"left":"39.653%","top":"12.327%","width":"8.194%","height":"15.515%","backgroundImage":"url(/art/ch8d-blossom-d.webp)"}} />
             <div className="ly sun" />
             <div className="ly clouds" />
             <div className="ly balloons" />

@@ -56,3 +56,6 @@ top:clamp(calc(100cqh - var(--sh)), calc(50cqh - var(--sh) * 0.634), 0px)}
 /* Totoro sits on the blanket at the family's backs (on the blanket in front of the dad's legs, clear of the child), holding his leaf.
    Low enough to stay above the message card. Positioned in % of the painting so it holds at every size. */
 .dc-ThankYouMobile .totoro{position:absolute;left:65.9%;top:50.1%;width:18.52%;height:auto;pointer-events:none;user-select:none;filter:drop-shadow(0 6px 5px rgba(40,50,20,.28));transform-origin:50% 100%}
+
+/* swaying blossoms: animated tiles cut from the painting, lined up exactly over it */
+.dc-ThankYouMobile .blossom{position:absolute;background-size:100% 100%;background-repeat:no-repeat;pointer-events:none}

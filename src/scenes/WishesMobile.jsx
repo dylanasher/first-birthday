@@ -71,7 +71,7 @@ export default class WishesMobile extends React.Component {
   ambient(g, q, qa, t) {
     var r = this.root, W = r.offsetWidth, H = r.offsetHeight, sf = q('.scenefit'), f = sf && sf.offsetHeight ? sf.offsetHeight / 886 : 1;
     // the front cloud bank drifts slowly back and forth
-    t.push(g.fromTo(q('.near'), { x: -10 * f }, { x: 10 * f, duration: 18, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    t.push(g.fromTo(q('.near'), { x: -28 * f, scale: 1.12 }, { x: 28 * f, scale: 1.12, duration: 14, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
     var fl = q('.flyer');
     t.push(g.to(fl, { y: -10, duration: 2.6, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
     t.push(g.fromTo(fl, { rotation: -0.8 }, { rotation: 0.8, duration: 3.4, ease: 'sine.inOut', yoyo: true, repeat: -1 }));

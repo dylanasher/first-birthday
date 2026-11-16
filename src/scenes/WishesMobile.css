@@ -9,7 +9,7 @@
 left:clamp(calc(100cqw - var(--sw)), calc(50cqw - var(--sw) * 0.42), 0px);top:calc(100cqh - var(--sh))}
 .dc-WishesMobile .bg{position:absolute;inset:0;background-size:100% 100%;background-repeat:no-repeat;will-change:transform}
 .dc-WishesMobile .far{background-image:url(/art/mobile/ch7m-base.webp)}
-.dc-WishesMobile .near{background-image:url(/art/mobile/ch7m-clouds.webp);transform:scale(1.06);transform-origin:50% 100%}
+.dc-WishesMobile .near{background-image:url(/art/mobile/ch7m-clouds.webp);transform:scale(1.12);transform-origin:50% 100%}
 .dc-WishesMobile .puff{position:absolute;left:0;top:0;border-radius:50%;background:radial-gradient(ellipse at 50% 60%,rgba(255,246,240,.95),rgba(255,226,222,.6) 45%,rgba(255,226,222,0) 70%);filter:blur(1px);pointer-events:none}
 .dc-WishesMobile .topshade{background:linear-gradient(to bottom,rgba(60,50,100,.35) 0%,rgba(60,50,100,0) 18%)}
 .dc-WishesMobile .script{font-family:'Pinyon Script',cursive;font-weight:400}
