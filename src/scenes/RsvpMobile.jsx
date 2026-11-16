@@ -10,9 +10,12 @@ import './RsvpMobile.css';
 export default class RsvpMobile extends React.Component {
   static defaultProps = {};
 
+  // "Add yours" on Chapter 7 links here with ?tab=wish to open the Leave a wish tab
+  static openTab() { try { return new URLSearchParams(window.location.search).get('tab') === 'wish' ? 'wish' : 'rsvp'; } catch (e) { return 'rsvp'; } }
+
   constructor(props) {
     super(props);
-    this.state = { tab: 'rsvp', dir: 1, attend: 'yes', count: 1, sent: false, sentName: '', sentAttend: 'yes', sentCount: 1, err: '', werr: '', wishes: [] };
+    this.state = { tab: RsvpMobile.openTab(), dir: 1, attend: 'yes', count: 1, sent: false, sentName: '', sentAttend: 'yes', sentCount: 1, err: '', werr: '', wishes: [] };
     this.root = null;
     this.tweens = [];
     this.tries = 0;
@@ -95,7 +98,7 @@ export default class RsvpMobile extends React.Component {
   /* the shore at night: clouds drift, moonlight ripples, waves wash in, jars sway and glow, stars twinkle, wish-lights rise */
   ambient(g, q, qa, t) {
     var sf = q('.scenefit'), SW = sf ? sf.offsetWidth : 499, SH = sf ? sf.offsetHeight : 886, f = SH / 886;
-    t.push(g.to(q('.clouds'), { x: 24 * f, duration: 30, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    t.push(g.to(q('.clouds'), { x: 46 * f, duration: 20, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
     t.push(g.fromTo(q('.foam'), { x: 0, y: 0, opacity: 0.8 }, { x: -3 * f, y: 3 * f, opacity: 1, duration: 3.4, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
     t.push(g.fromTo(q('.sea'), { y: 0 }, { y: 1.2 * f, duration: 3.4, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
     // each jar swings on its own string, slightly out of step with the others
@@ -278,6 +281,11 @@ export default class RsvpMobile extends React.Component {
             <div className="ly sea" />
             <div className="ly sea2" />
             <div className="ly foam" />
+            {/* the ribbons on the tree flutter: short looping clips of just those bits of the painting */}
+            <i className="ribsway" style={{"left":"5.526%","top":"28.349%","width":"6.376%","height":"7.536%","backgroundImage":"url(/art/mobile/ch6m-ribbon-a.webp)"}} />
+            <i className="ribsway" style={{"left":"14.878%","top":"31.699%","width":"6.908%","height":"7.536%","backgroundImage":"url(/art/mobile/ch6m-ribbon-b.webp)"}} />
+            <i className="ribsway" style={{"left":"24.442%","top":"30.981%","width":"9.139%","height":"8.732%","backgroundImage":"url(/art/mobile/ch6m-ribbon-c.webp)"}} />
+            <i className="ribsway" style={{"left":"34.219%","top":"28.11%","width":"9.883%","height":"8.971%","backgroundImage":"url(/art/mobile/ch6m-ribbon-d.webp)"}} />
             <span className="jglow" style={{"left":"24.12%","top":"28.46%"}} />
             <span className="jglow" style={{"left":"3.19%","top":"34.90%"}} />
             <span className="jglow" style={{"left":"33.53%","top":"32.82%"}} />

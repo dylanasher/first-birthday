@@ -10,9 +10,12 @@ import './RsvpDesktop.css';
 export default class RsvpDesktop extends React.Component {
   static defaultProps = {};
 
+  // "Add yours" on Chapter 7 links here with ?tab=wish to open the Leave a wish tab
+  static openTab() { try { return new URLSearchParams(window.location.search).get('tab') === 'wish' ? 'wish' : 'rsvp'; } catch (e) { return 'rsvp'; } }
+
   constructor(props) {
     super(props);
-    this.state = { tab: 'rsvp', dir: 1, attend: 'yes', count: 1, sent: false, sentName: '', sentAttend: 'yes', sentCount: 1, err: '', werr: '', wishes: [] };
+    this.state = { tab: RsvpDesktop.openTab(), dir: 1, attend: 'yes', count: 1, sent: false, sentName: '', sentAttend: 'yes', sentCount: 1, err: '', werr: '', wishes: [] };
     this.root = null;
     this.tweens = [];
     this.tries = 0;

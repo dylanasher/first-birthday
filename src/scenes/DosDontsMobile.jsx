@@ -195,6 +195,8 @@ export default class DosDontsMobile extends React.Component {
           <div className="scenefit">
             <div className="ly plate" />
             <div className="ly stream2" />
+            <span className="footshadow nf" aria-hidden="true" />
+            <span className="footshadow ch" aria-hidden="true" />
             <img className="noface" src="/art/mobile/ch5m-noface.webp" alt="" draggable="false" />
             <img className="chihiro" src="/art/mobile/ch5m-chihiro.webp" alt="" draggable="false" />
             <span className="mistb m1" style={{"left":"58%","top":"37%","width":"50%","height":"9%"}} />

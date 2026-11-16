@@ -77,11 +77,36 @@ export async function sendWish(wish) {
   else if (import.meta.env.DEV) data = await getJson(WISH_DEV, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body });
   else throw new Error('Wishes aren\'t connected yet. Please try again later.');
   if (!data.ok) throw new Error(str(data.error) || 'We couldn\'t send your wish. Please try again.');
+  const saved = cleanWish({ name: str(data.name) || str(w.name), text: str(data.text) || str(w.text) });
+  if (saved && wishCache) wishCache = { at: wishCache.at, list: wishCache.list.concat(saved) };
   return { ...data, name: str(data.name), text: str(data.text) };
 }
 
+// The wishes are fetched once and kept for a minute, so Chapter 7 can show them straight away
+// (Chapter 6 starts the fetch). A wish sent from this browser is added to the kept list.
+let wishCache = null; // { at, list }
+let wishInflight = null;
+const WISH_TTL = 60000;
+
+// the wishes already loaded (oldest first), or null if they haven't been fetched yet
+export function peekWishes() {
+  return wishCache ? wishCache.list : null;
+}
+
 // never throws: if the wishes can't be loaded, the chapter just shows its "no wishes yet" card
-export async function getWishes() {
+export function getWishes() {
+  if (wishCache && Date.now() - wishCache.at < WISH_TTL) return Promise.resolve(wishCache.list);
+  if (!wishInflight) {
+    wishInflight = fetchWishes().then((list) => {
+      wishCache = { at: Date.now(), list };
+      wishInflight = null;
+      return list;
+    });
+  }
+  return wishInflight;
+}
+
+async function fetchWishes() {
   try {
     let data;
     if (ENDPOINT) data = await getJson(`${ENDPOINT}?action=wishes`);

@@ -4,7 +4,7 @@ import React from 'react';
 import { gsap } from 'gsap';
 import { Link } from 'react-router-dom';
 import { css } from '../lib/css.js';
-import { getWishes } from '../lib/rsvpApi.js';
+import { getWishes, peekWishes } from '../lib/rsvpApi.js';
 import './WishesMobile.css';
 
 export default class WishesMobile extends React.Component {
@@ -13,12 +13,13 @@ export default class WishesMobile extends React.Component {
   constructor(props) {
     super(props);
     /* wishes sent from Chapter 6, loaded from the Google Sheet (wishes.csv in local dev) */
-    this.wishes = [];
-    this.state = { i: 0 };
+    var known = peekWishes(); // already loaded (e.g. on Chapter 6): show them straight away
+    this.wishes = known ? known.slice().reverse() : []; /* newest first */
+    this.state = { i: 0, loaded: !!known };
     this.root = null; this.tweens = []; this.tries = 0;
   }
   componentDidMount() {
-    var selfW = this; getWishes().then(function (list) { if (selfW.gone) return; selfW.wishes = list.slice().reverse(); selfW.setState({ i: 0 }); }).catch(function () {});  /* newest first */ this.initTrailSoon(); this.fit(); this.boot(); }
+    var selfW = this; getWishes().then(function (list) { if (selfW.gone) return; var same = selfW.state.loaded && list.length === selfW.wishes.length; selfW.wishes = list.slice().reverse(); if (same) selfW.setState({ loaded: true }); else selfW.setState({ i: 0, loaded: true }); }).catch(function () { if (!selfW.gone) selfW.setState({ loaded: true }); });  /* newest first */ this.initTrailSoon(); this.fit(); this.boot(); }
   /* scale the girl and her wish card to the screen: fit the width, and leave room for the title above and the footer below */
   fit() {
     var self = this, r = this.root;
@@ -181,7 +182,7 @@ export default class WishesMobile extends React.Component {
   initTrailSoon() { var self = this, tries = 0; (function go() { if (self.root && gsap) self.initTrail(); else if (tries++ < 30) setTimeout(go, 150); })(); }
 
   renderVals() {
-    var self = this, n = this.wishes.length, w = this.wishes[this.state.i] || { text: 'No wishes yet. Be the first to leave one!', name: 'Dylan' };
+    var self = this, n = this.wishes.length, w = this.wishes[this.state.i] || (this.state.loaded ? { text: 'No wishes yet. Be the first to leave one!', name: 'Dylan' } : { text: 'Gathering the wishes…', name: 'Dylan' });
     return {
       setRoot: function (el) { self.root = el; },
       goNext: function () { self.goNext(); },
@@ -280,7 +281,7 @@ export default class WishesMobile extends React.Component {
               Chapter 7 of 8
             </p>
           </div>
-          <Link to="/rsvp" className="leave">
+          <Link to={{ pathname: '/rsvp', search: '?tab=wish' }} className="leave">
             Add yours
           </Link>
           <button className="next" type="button" onClick={v.goNext}>

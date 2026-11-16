@@ -72,8 +72,9 @@ export default class DressCodeMobile extends React.Component {
     Array.prototype.forEach.call(qa('.lantern'), function (l, i) {
       t.push(g.fromTo(l, { opacity: 0.55, scale: 0.9 }, { opacity: 1, scale: 1.12, duration: 1.8 + i * 0.4, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
     });
-    t.push(g.fromTo(q('.rb1'), { x: -90, y: 70, rotation: -10 }, { x: W + 30, y: 30, rotation: 20, duration: 24, ease: 'sine.inOut', repeat: -1, repeatDelay: 6 }));
-    t.push(g.to(q('.rb1'), { scaleY: -1, duration: 1.6, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    t.push(g.fromTo(q('.rb1'), { x: -60, y: 118 }, { x: W + 30, y: 86, duration: 16, ease: 'none', repeat: -1, repeatDelay: 7 }));
+    // a little bird crosses the sky, bobbing gently as it flaps
+    t.push(g.fromTo(q('.rb1 svg'), { y: -3, rotation: -4 }, { y: 4, rotation: 3, duration: 1.3, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
   }
   /* storybook page turn to Chapter 5: curls from the bottom-right corner, revealing the lantern village */
   goNext() {
@@ -193,9 +194,16 @@ export default class DressCodeMobile extends React.Component {
             </div>
             <div className="lyr clouds" />
           </div>
-          <span className="ribbon rb1">
-            <svg viewBox="0 0 90 40">
-              <path d="M2 20 C14 2 26 38 40 20 S 66 2 88 22" fill="none" stroke="#EFA9B8" style={{"strokeWidth":"4","strokeLinecap":"round"}} />
+          <span className="bird rb1" aria-hidden="true">
+            <svg viewBox="0 0 60 32">
+              <g className="wing far"><path d="M30 16 C26 7 19 3 11 3 C17 7 22 11 27 17 Z" fill="#7C7FA6" /></g>
+              <path d="M21 17.5 L12 13.5 L14.5 17.5 L12 21.5 Z" fill="#4C4E72" />
+              <ellipse cx="29" cy="18" rx="9.5" ry="4.2" fill="#4C4E72" />
+              <path d="M22 19.5 C27 23 34 22.5 37 19.5 C33 21 27 21 22 19.5 Z" fill="#F4E6D8" />
+              <circle cx="38.5" cy="16" r="3.4" fill="#4C4E72" />
+              <path d="M41.5 15.4 L45.5 16.4 L41.5 17.4 Z" fill="#E8B35A" />
+              <circle cx="39.6" cy="15.2" r=".7" fill="#F4E6D8" />
+              <g className="wing near"><path d="M31 16 C28 5 21 0 12 0 C19 5 24 11 28 18 Z" fill="#5A5D86" /></g>
             </svg>
           </span>
         </div>

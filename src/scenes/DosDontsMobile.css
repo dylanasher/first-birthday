@@ -83,5 +83,9 @@ background-position:0 0,clamp(calc(100cqw - var(--sw)), calc(50cqw - var(--sw) *
 /* Chihiro and No-Face stand on the stone steps at the left end of the bridge. On phones the bridge deck
    sits under the card's top edge, so the steps keep them fully visible, feet included. % of the painting. */
 .dc-DosDontsMobile .chihiro,.dc-DosDontsMobile .noface{position:absolute;height:auto;pointer-events:none;user-select:none}
-.dc-DosDontsMobile .noface{left:32.944%;top:35.407%;width:7.545%;filter:drop-shadow(0 4px 3px rgba(30,30,60,.25))}
-.dc-DosDontsMobile .chihiro{left:29.649%;top:37.799%;width:4.888%;filter:drop-shadow(0 4px 3px rgba(30,30,60,.25))}
+.dc-DosDontsMobile .noface{left:32.944%;top:36.12%;width:7.545%;filter:drop-shadow(0 1px 2px rgba(30,30,60,.3))}
+.dc-DosDontsMobile .chihiro{left:29.649%;top:37.92%;width:4.888%;filter:drop-shadow(0 1px 2px rgba(30,30,60,.3))}
+/* soft contact shadows on the step, so both stand on it rather than hover */
+.dc-DosDontsMobile .footshadow{position:absolute;border-radius:50%;background:rgba(18,14,38,.85);filter:blur(3px);pointer-events:none}
+.dc-DosDontsMobile .footshadow.nf{left:31.6%;top:48.45%;width:10.6%;height:1.6%}
+.dc-DosDontsMobile .footshadow.ch{left:30.0%;top:48.9%;width:5.2%;height:1.25%}
