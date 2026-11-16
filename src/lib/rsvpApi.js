@@ -6,20 +6,61 @@ const ENDPOINT = import.meta.env.VITE_RSVP_ENDPOINT || '';
 
 export const rsvpConnected = Boolean(ENDPOINT);
 
+const OFFLINE = 'We couldn\'t reach the invitation. Please check your connection and try again.';
+const BUSY = 'The invitation is busy right now. Please try again in a moment.';
+
+// fetch + read JSON, turning network failures and non-JSON replies (a Google error page, a
+// timeout) into a friendly message instead of a technical one
+async function getJson(url, init, timeoutMs = 20000) {
+  const ctrl = typeof AbortController === 'function' ? new AbortController() : null;
+  const timer = ctrl ? setTimeout(() => ctrl.abort(), timeoutMs) : 0;
+  let res;
+  try {
+    res = await fetch(url, ctrl ? { ...init, signal: ctrl.signal } : init);
+  } catch (e) {
+    throw new Error(OFFLINE);
+  } finally {
+    clearTimeout(timer);
+  }
+  let data = null;
+  try { data = await res.json(); } catch (e) { /* not JSON */ }
+  if (!data || typeof data !== 'object') throw new Error(BUSY);
+  return data;
+}
+
+const str = (v) => (typeof v === 'string' ? v : v == null ? '' : String(v));
+const list = (v) => (Array.isArray(v) ? v.map(str).filter(Boolean) : []);
+
+// a search result with every field present and the right type
+function cleanResult(r) {
+  if (!r || typeof r !== 'object' || !str(r.name).trim()) return null;
+  const extras = list(r.extras);
+  const seats = Math.max(1, parseInt(r.seats, 10) || 1 + extras.length);
+  return { ...r, name: str(r.name).trim(), extras, seats, matchedOn: str(r.matchedOn) || str(r.name), score: Number(r.score) || 0 };
+}
+
+// a wish with a name and some text; anything else is skipped
+function cleanWish(w) {
+  if (!w || typeof w !== 'object') return null;
+  const text = str(w.text).trim();
+  return text ? { name: str(w.name).trim() || 'A friend', text } : null;
+}
+
 export async function searchGuests(query) {
-  if (!ENDPOINT) return mock.search(query);
-  const res = await fetch(`${ENDPOINT}?action=search&q=${encodeURIComponent(query)}`);
-  const data = await res.json();
-  if (!data.ok) throw new Error(data.error || 'Search failed.');
-  return data.results;
+  const raw = ENDPOINT
+    ? await getJson(`${ENDPOINT}?action=search&q=${encodeURIComponent(str(query))}`).then((data) => {
+      if (!data.ok) throw new Error(str(data.error) || 'Search failed. Please try again.');
+      return data.results;
+    })
+    : await mock.search(query);
+  return (Array.isArray(raw) ? raw : []).map(cleanResult).filter(Boolean);
 }
 
 export async function sendRsvp(reply) {
   if (!ENDPOINT) return mock.send(reply);
   // text/plain keeps this a "simple" request, which Apps Script accepts from another site
-  const res = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(reply) });
-  const data = await res.json();
-  if (!data.ok) throw new Error(data.error || 'Could not save your RSVP.');
+  const data = await getJson(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(reply) });
+  if (!data.ok) throw new Error(str(data.error) || 'We couldn\'t save your RSVP. Please try again.');
   return data;
 }
 
@@ -29,23 +70,27 @@ export async function sendRsvp(reply) {
 const WISH_DEV = '/__dev/wishes';
 
 export async function sendWish(wish) {
-  const body = JSON.stringify({ action: 'wish', name: wish.name || '', text: wish.text || '' });
-  let res;
-  if (ENDPOINT) res = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body });
-  else if (import.meta.env.DEV) res = await fetch(WISH_DEV, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body });
+  const w = wish || {};
+  const body = JSON.stringify({ action: 'wish', name: str(w.name), text: str(w.text) });
+  let data;
+  if (ENDPOINT) data = await getJson(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body });
+  else if (import.meta.env.DEV) data = await getJson(WISH_DEV, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body });
   else throw new Error('Wishes aren\'t connected yet. Please try again later.');
-  const data = await res.json();
-  if (!data.ok) throw new Error(data.error || 'We couldn\'t send your wish. Please try again.');
-  return data;
+  if (!data.ok) throw new Error(str(data.error) || 'We couldn\'t send your wish. Please try again.');
+  return { ...data, name: str(data.name), text: str(data.text) };
 }
 
+// never throws: if the wishes can't be loaded, the chapter just shows its "no wishes yet" card
 export async function getWishes() {
-  let res;
-  if (ENDPOINT) res = await fetch(`${ENDPOINT}?action=wishes`);
-  else if (import.meta.env.DEV) res = await fetch(WISH_DEV);
-  else return [];
-  const data = await res.json();
-  return data.ok ? data.wishes || [] : [];
+  try {
+    let data;
+    if (ENDPOINT) data = await getJson(`${ENDPOINT}?action=wishes`);
+    else if (import.meta.env.DEV) data = await getJson(WISH_DEV);
+    else return [];
+    return data.ok && Array.isArray(data.wishes) ? data.wishes.map(cleanWish).filter(Boolean) : [];
+  } catch (e) {
+    return [];
+  }
 }
 
 // ---- local development stand-in -------------------------------------------------------------

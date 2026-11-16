@@ -62,7 +62,8 @@ export default class RsvpMobile extends React.Component {
     var rr = r.getBoundingClientRect(), b = btn.getBoundingClientRect(), sc = rr.width / r.offsetWidth || 1;
     var x0 = (b.left - rr.left) / sc + b.width / 2, y0 = (b.top - rr.top) / sc;
     var st = document.createElement('span'); st.className = 'wishstar'; st.setAttribute('aria-hidden', 'true');
-    r.querySelector('.scene').appendChild(st);
+    var host = r.querySelector('.scene'); if (!host) return;
+    host.appendChild(st);
     var tx = 40 + Math.random() * 330, ty = 24 + Math.random() * 110;
     if (!g || this.reduced()) { st.style.transform = 'translate(' + tx + 'px,' + ty + 'px)'; return; }
     g.set(st, { x: x0, y: y0, scale: 0.4 });
@@ -238,14 +239,16 @@ export default class RsvpMobile extends React.Component {
         var name = self.val('.in-wname'), text = self.val('.in-wtext');
         if (!text) { self.setState({ werr: 'Write a little wish first.' }); return; }
         if (self.state.wsending) return;
-        var btn = (e && e.currentTarget && e.currentTarget.getBoundingClientRect) ? e.currentTarget : self.root.querySelector('.panel .send');
+        var btn = (e && e.currentTarget && e.currentTarget.getBoundingClientRect) ? e.currentTarget : (self.root && self.root.querySelector('.panel .send'));
         self.setState({ werr: '', wsending: true });
         /* saved to the Google Sheet's Wishes tab (wishes.csv in local dev); Chapter 7 shows them */
         sendWishApi({ name: name, text: text }).then(function (saved) {
+          if (self.gone) return; // the guest turned the page before the sheet replied
           self.flyWish(btn);
           self.setState({ wsending: false, wishes: [{ name: saved.name || name || 'A friend', text: saved.text || text }].concat(self.state.wishes) });
           var t1 = self.root && self.root.querySelector('.in-wtext'); if (t1) t1.value = '';
         }).catch(function (ex) {
+          if (self.gone) return;
           self.setState({ wsending: false, werr: (ex && ex.message) || 'We couldn\'t send your wish. Please try again.' });
         });
       }
