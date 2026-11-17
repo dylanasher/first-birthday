@@ -43,5 +43,3 @@
    In front of the painting, behind the foreground flowers. Positioned in % of the painting so it stays put at every size. */
 .dc-ThankYouDesktop .totoro{position:absolute;left:26.63%;top:70.99%;width:7.12%;height:auto;pointer-events:none;user-select:none;filter:drop-shadow(0 6px 5px rgba(40,50,20,.28));transform-origin:50% 100%}
 
-/* swaying blossoms: animated tiles cut from the painting, lined up exactly over it */
-.dc-ThankYouDesktop .blossom{position:absolute;background-size:100% 100%;background-repeat:no-repeat;pointer-events:none}

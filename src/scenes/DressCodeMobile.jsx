@@ -72,9 +72,12 @@ export default class DressCodeMobile extends React.Component {
     Array.prototype.forEach.call(qa('.lantern'), function (l, i) {
       t.push(g.fromTo(l, { opacity: 0.55, scale: 0.9 }, { opacity: 1, scale: 1.12, duration: 1.8 + i * 0.4, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
     });
-    t.push(g.fromTo(q('.rb1'), { x: -60, y: 118 }, { x: W + 30, y: 86, duration: 16, ease: 'none', repeat: -1, repeatDelay: 7 }));
-    // a little bird crosses the sky, bobbing gently as it flaps
-    t.push(g.fromTo(q('.rb1 svg'), { y: -3, rotation: -4 }, { y: 4, rotation: 3, duration: 1.3, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    // a small flock crosses the sky in loose formation (the same birds as Chapter 2)
+    [[q('.b1'), 0, 0, 1], [q('.b2'), -26, 12, 0.82], [q('.b3'), -46, -4, 0.7]].forEach(function (b) {
+      g.set(b[0], { scale: b[3] * 0.9 });
+      t.push(g.fromTo(b[0], { x: -60 + b[1], y: 118 + b[2] }, { x: W + 30 + b[1], y: 86 + b[2] - 40, duration: 16, ease: 'none', repeat: -1, repeatDelay: 6, delay: 1 }));
+      t.push(g.to(b[0], { yPercent: 'random(-40,40)', duration: 'random(1.2,2)', ease: 'sine.inOut', yoyo: true, repeat: -1, repeatRefresh: true }));
+    });
   }
   /* storybook page turn to Chapter 5: curls from the bottom-right corner, revealing the lantern village */
   goNext() {
@@ -194,16 +197,22 @@ export default class DressCodeMobile extends React.Component {
             </div>
             <div className="lyr clouds" />
           </div>
-          <span className="bird rb1" aria-hidden="true">
-            <svg viewBox="0 0 60 32">
-              <g className="wing far"><path d="M30 16 C26 7 19 3 11 3 C17 7 22 11 27 17 Z" fill="#7C7FA6" /></g>
-              <path d="M21 17.5 L12 13.5 L14.5 17.5 L12 21.5 Z" fill="#4C4E72" />
-              <ellipse cx="29" cy="18" rx="9.5" ry="4.2" fill="#4C4E72" />
-              <path d="M22 19.5 C27 23 34 22.5 37 19.5 C33 21 27 21 22 19.5 Z" fill="#F4E6D8" />
-              <circle cx="38.5" cy="16" r="3.4" fill="#4C4E72" />
-              <path d="M41.5 15.4 L45.5 16.4 L41.5 17.4 Z" fill="#E8B35A" />
-              <circle cx="39.6" cy="15.2" r=".7" fill="#F4E6D8" />
-              <g className="wing near"><path d="M31 16 C28 5 21 0 12 0 C19 5 24 11 28 18 Z" fill="#5A5D86" /></g>
+          <span className="bird b1" aria-hidden="true">
+            <svg viewBox="0 0 20 11">
+              <path className="wu" d="M0 3.5 C3 1 6.5 1.2 9.2 5.4 C9.6 3 10.4 3 10.8 5.4 C13.5 1.2 17 1 20 3.5 C16.5 3.4 13.5 4.8 11 7.6 C10.4 8.6 9.6 8.6 9 7.6 C6.5 4.8 3.5 3.4 0 3.5 Z" fill="#3E4A50" />
+              <path className="wd" d="M0 8.8 C3.4 8 6.5 7 9 5.6 C9.6 4.2 10.4 4.2 11 5.6 C13.5 7 16.6 8 20 8.8 C16.4 9.8 13.4 9.4 11 8.2 C10.4 9.2 9.6 9.2 9 8.2 C6.6 9.4 3.6 9.8 0 8.8 Z" fill="#3E4A50" />
+            </svg>
+          </span>
+          <span className="bird b2" aria-hidden="true">
+            <svg viewBox="0 0 20 11">
+              <path className="wu" d="M0 3.5 C3 1 6.5 1.2 9.2 5.4 C9.6 3 10.4 3 10.8 5.4 C13.5 1.2 17 1 20 3.5 C16.5 3.4 13.5 4.8 11 7.6 C10.4 8.6 9.6 8.6 9 7.6 C6.5 4.8 3.5 3.4 0 3.5 Z" fill="#46525A" style={{"animationDelay":"-.12s"}} />
+              <path className="wd" d="M0 8.8 C3.4 8 6.5 7 9 5.6 C9.6 4.2 10.4 4.2 11 5.6 C13.5 7 16.6 8 20 8.8 C16.4 9.8 13.4 9.4 11 8.2 C10.4 9.2 9.6 9.2 9 8.2 C6.6 9.4 3.6 9.8 0 8.8 Z" fill="#46525A" style={{"animationDelay":"-.12s"}} />
+            </svg>
+          </span>
+          <span className="bird b3" aria-hidden="true">
+            <svg viewBox="0 0 20 11">
+              <path className="wu" d="M0 3.5 C3 1 6.5 1.2 9.2 5.4 C9.6 3 10.4 3 10.8 5.4 C13.5 1.2 17 1 20 3.5 C16.5 3.4 13.5 4.8 11 7.6 C10.4 8.6 9.6 8.6 9 7.6 C6.5 4.8 3.5 3.4 0 3.5 Z" fill="#4C585E" style={{"animationDelay":"-.22s"}} />
+              <path className="wd" d="M0 8.8 C3.4 8 6.5 7 9 5.6 C9.6 4.2 10.4 4.2 11 5.6 C13.5 7 16.6 8 20 8.8 C16.4 9.8 13.4 9.4 11 8.2 C10.4 9.2 9.6 9.2 9 8.2 C6.6 9.4 3.6 9.8 0 8.8 Z" fill="#4C585E" style={{"animationDelay":"-.22s"}} />
             </svg>
           </span>
         </div>

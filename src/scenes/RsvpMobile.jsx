@@ -281,11 +281,6 @@ export default class RsvpMobile extends React.Component {
             <div className="ly sea" />
             <div className="ly sea2" />
             <div className="ly foam" />
-            {/* the ribbons on the tree flutter: short looping clips of just those bits of the painting */}
-            <i className="ribsway" style={{"left":"5.526%","top":"28.349%","width":"6.376%","height":"7.536%","backgroundImage":"url(/art/mobile/ch6m-ribbon-a.webp)"}} />
-            <i className="ribsway" style={{"left":"14.878%","top":"31.699%","width":"6.908%","height":"7.536%","backgroundImage":"url(/art/mobile/ch6m-ribbon-b.webp)"}} />
-            <i className="ribsway" style={{"left":"24.442%","top":"30.981%","width":"9.139%","height":"8.732%","backgroundImage":"url(/art/mobile/ch6m-ribbon-c.webp)"}} />
-            <i className="ribsway" style={{"left":"34.219%","top":"28.11%","width":"9.883%","height":"8.971%","backgroundImage":"url(/art/mobile/ch6m-ribbon-d.webp)"}} />
             <span className="jglow" style={{"left":"24.12%","top":"28.46%"}} />
             <span className="jglow" style={{"left":"3.19%","top":"34.90%"}} />
             <span className="jglow" style={{"left":"33.53%","top":"32.82%"}} />
