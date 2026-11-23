@@ -21,10 +21,16 @@ left:clamp(calc(100cqw - var(--sw)), calc(50cqw - var(--sw) * 0.42), 0px);top:ca
 .dc-WishesMobile .flyer{position:absolute;inset:0;will-change:transform}
 .dc-WishesMobile .girl{position:absolute;left:88px;top:0;width:300px;height:175px;background:url(/art/girl-broom.webp) 0 0/100% 100% no-repeat;transform-origin:60% 70%;will-change:transform}
 .dc-WishesMobile .ribbon{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;pointer-events:none}
-.dc-WishesMobile .wcard{position:absolute;left:8px;top:214px;width:300px;box-sizing:border-box;padding:20px 20px 16px;border-radius:22px;background:linear-gradient(160deg,var(--c1,rgba(255,250,240,.72)),var(--c2,rgba(255,240,228,.66)));backdrop-filter:blur(6px) saturate(1.1);-webkit-backdrop-filter:blur(6px) saturate(1.1);transition:background .4s ease;box-shadow:0 22px 46px rgba(60,50,100,.3),inset 0 0 0 1px rgba(255,255,255,.8),0 0 0 1px rgba(233,167,167,.45);transform-origin:295px 1px;pointer-events:auto}
+.dc-WishesMobile .wcard{position:absolute;left:38px;top:214px;width:340px;box-sizing:border-box;padding:20px 20px 16px;border-radius:22px;background:linear-gradient(160deg,var(--c1,rgba(255,250,240,.72)),var(--c2,rgba(255,240,228,.66)));backdrop-filter:blur(6px) saturate(1.1);-webkit-backdrop-filter:blur(6px) saturate(1.1);transition:background .4s ease;box-shadow:0 22px 46px rgba(60,50,100,.3),inset 0 0 0 1px rgba(255,255,255,.8),0 0 0 1px rgba(233,167,167,.45);transform-origin:335px 1px;pointer-events:auto}
 .dc-WishesMobile .wcard::before{content:'';position:absolute;right:-2px;top:-6px;width:14px;height:14px;border-radius:50%;background:var(--pin,#E9A7A7);box-shadow:0 0 0 3px #FFF3DD}
 .dc-WishesMobile .wq{display:block;color:var(--pin,#E9A7A7) !important;font-family:'IM Fell English',Georgia,serif;font-size:52px;line-height:.6;color:#E9A7A7;height:20px}
 .dc-WishesMobile .wtext{margin:0;font-family:'IM Fell English',Georgia,serif;font-size:18px;line-height:1.38;color:#2E2A4A;min-height:76px}
+/* long wishes: smaller type, and the text scrolls inside the card instead of shrinking the whole scene */
+.dc-WishesMobile .wtext{max-height:250px;overflow-y:auto;overscroll-behavior:contain;padding-right:6px;margin-right:-6px;scrollbar-width:thin;scrollbar-color:rgba(91,74,122,.4) transparent}
+.dc-WishesMobile .wtext.long{font-size:16.5px}
+.dc-WishesMobile .wtext.xlong{font-size:15.5px;line-height:1.42}
+.dc-WishesMobile .wtext:focus-visible{outline:2px solid #5B4A7A;outline-offset:4px;border-radius:6px}
+.dc-WishesMobile .wcard.turning .wtext{overflow:visible;clip-path:inset(0 -8px 0 0)}
 .dc-WishesMobile .wname{margin:8px 0 0;font-family:'Pinyon Script',cursive;font-size:26px;line-height:1.1;color:#5B4A7A;text-align:right}
 .dc-WishesMobile .wnav{display:flex;align-items:center;justify-content:space-between;margin-top:8px;padding-top:8px;border-top:1px dashed rgba(91,74,122,.25)}
 .dc-WishesMobile .warrow{width:44px;height:44px;border-radius:50%;border:1px solid rgba(91,74,122,.25);background:rgba(255,255,255,.7);display:flex;align-items:center;justify-content:center;cursor:pointer}

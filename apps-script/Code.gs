@@ -53,7 +53,7 @@ function readWishes() {
   if (!sheet || sheet.getLastRow() < 2) return [];
   var rows = sheet.getRange(2, 1, sheet.getLastRow() - 1, 4).getValues(), out = [];
   for (var i = 0; i < rows.length; i++) {
-    var text = cleanText(rows[i][2], 400);
+    var text = cleanText(rows[i][2], 1000);
     var show = rows[i][3];
     if (!text || show === false || String(show).toUpperCase() === 'FALSE') continue;
     out.push({ name: cleanText(rows[i][1], 40) || 'A friend', text: text });
@@ -63,7 +63,7 @@ function readWishes() {
 
 // { action: 'wish', name, text }
 function saveWish(body) {
-  var text = cleanText(body.text, 400), name = cleanText(body.name, 40) || 'A friend';
+  var text = cleanText(body.text, 1000), name = cleanText(body.name, 40) || 'A friend';
   if (!text) return json({ ok: false, error: 'Write a little wish first.' });
   var lock = LockService.getScriptLock();
   lock.waitLock(10000);

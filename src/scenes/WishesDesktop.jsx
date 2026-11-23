@@ -20,7 +20,7 @@ export default class WishesDesktop extends React.Component {
   }
   componentDidMount() {
     var selfW = this; getWishes().then(function (list) { if (selfW.gone) return; var same = selfW.state.loaded && list.length === selfW.wishes.length; selfW.wishes = list.slice().reverse(); if (same) selfW.setState({ loaded: true }); else selfW.setState({ i: 0, loaded: true }); }).catch(function () { if (!selfW.gone) selfW.setState({ loaded: true }); });  /* newest first */ this.initTrailSoon(); this.boot(); }
-  componentWillUnmount() { this.gone = true; if (this.onMove && this.root) { this.root.removeEventListener('pointermove', this.onMove); this.root.removeEventListener('pointerleave', this.onLeave); this.root.removeEventListener('pointerdown', this.onDown); } clearTimeout(this.retry); clearInterval(this.auto); if (this.io) this.io.disconnect(); this.tweens.forEach(function (t) { t.kill(); }); }
+  componentWillUnmount() { this.gone = true; if (this.onMove && this.root) { this.root.removeEventListener('pointermove', this.onMove); this.root.removeEventListener('pointerleave', this.onLeave); this.root.removeEventListener('pointerdown', this.onDown); } clearTimeout(this.retry); clearTimeout(this.auto); if (this.io) this.io.disconnect(); this.tweens.forEach(function (t) { t.kill(); }); }
   reduced() { try { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; } }
   /* the card flutters over like a page in the wind as it shows the next wish */
   show(i, dir) {
@@ -28,12 +28,20 @@ export default class WishesDesktop extends React.Component {
     var to = (i + n) % n, card = this.root && this.root.querySelector('.wcard'), g = gsap;
     if (!card || !g || this.reduced()) { this.setState({ i: to }); return; }
     if (this.flipping) return; this.flipping = true;
+    /* a scrolling box inside the card breaks Chrome's 3D flip, so the text is only clipped while it turns */
+    card.classList.add('turning');
     g.to(card, { rotationY: 90 * dir, duration: 0.35, ease: 'power2.in', onComplete: function () {
       self.setState({ i: to });
-      g.fromTo(card, { rotationY: -90 * dir }, { rotationY: 0, duration: 0.55, ease: 'back.out(1.6)', onComplete: function () { self.flipping = false; } });
+      var tx = card.querySelector('.wtext'); if (tx) tx.scrollTop = 0;
+      g.fromTo(card, { rotationY: -90 * dir }, { rotationY: 0, duration: 0.55, ease: 'back.out(1.6)', onComplete: function () { self.flipping = false; card.classList.remove('turning'); } });
     } });
   }
-  restartAuto() { var self = this; clearInterval(this.auto); this.auto = setInterval(function () { self.show(self.state.i + 1, 1); }, 8000); }
+  /* auto-advance; long wishes stay up longer so there's time to read them (idx = the wish about to show) */
+  restartAuto(idx) {
+    var self = this, n = this.wishes.length || 1; clearTimeout(this.auto);
+    var at = idx == null ? this.state.i : ((idx % n) + n) % n, w = this.wishes[at], len = w && w.text ? w.text.length : 0;
+    this.auto = setTimeout(function () { var nx = self.state.i + 1; self.show(nx, 1); self.restartAuto(nx); }, Math.max(8000, len * 60));
+  }
   boot() {
     var self = this;
     if (!this.root || !gsap) { if (this.tries++ < 25) this.retry = setTimeout(function () { self.boot(); }, 120); return; }
@@ -41,7 +49,7 @@ export default class WishesDesktop extends React.Component {
     this.restartAuto();
     if (this.reduced()) return;
     var q = function (s) { return r.querySelector(s); }, qa = function (s) { return r.querySelectorAll(s); };
-    g.set(q('.wcard'), { transformPerspective: 900 });
+    g.set(q('.wcard'), { transformPerspective: 1100 }); /* scaled with the wider card */
     var intro = g.timeline({ paused: true });
     intro.from(qa('.ca'), { y: -14, opacity: 0, filter: 'blur(5px)', duration: 1, stagger: 0.14, ease: 'expo.out' }, 0.2).from(q('.flyer'), { x: -700, y: 120, rotation: -6, duration: 2.2, ease: 'power3.out' }, 0.3).from(q('.foot'), { y: 20, opacity: 0, duration: 0.8, ease: 'expo.out' }, 1.6)
       .call(function () { if (!self.alive) { self.alive = true; self.ambient(g, q, qa, t); } }, null, 0.2);
@@ -174,9 +182,9 @@ export default class WishesDesktop extends React.Component {
         var c = tints[self.state.i % tints.length];
         return '--c1:' + c[0] + ';--c2:' + c[1] + ';--pin:' + c[2];
       })(),
-      wishText: w.text, wishName: w.name, wishNum: Math.min(this.state.i + 1, n || 1), wishTotal: n || 1,
-      prevWish: function () { self.show(self.state.i - 1, -1); self.restartAuto(); },
-      nextWish: function () { self.show(self.state.i + 1, 1); self.restartAuto(); }
+      wishText: w.text, wishSize: 'wtext' + (w.text.length > 320 ? ' xlong' : w.text.length > 160 ? ' long' : ''), holdAuto: function () { self.restartAuto(self.state.i); }, wishName: w.name, wishNum: Math.min(this.state.i + 1, n || 1), wishTotal: n || 1,
+      prevWish: function () { var to = self.state.i - 1; self.show(to, -1); self.restartAuto(to); },
+      nextWish: function () { var to = self.state.i + 1; self.show(to, 1); self.restartAuto(to); }
     };
   }
 
@@ -217,7 +225,7 @@ export default class WishesDesktop extends React.Component {
             <span className="wq" aria-hidden="true">
               “
             </span>
-            <p className="wtext">
+            <p className={v.wishSize} onScroll={v.holdAuto} tabIndex={0}>
               {v.wishText}
             </p>
             <p className="wname">

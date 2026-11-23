@@ -52,6 +52,7 @@ top:clamp(calc(100cqh - var(--sh)), calc(25cqh - var(--sh) * 0.30), 0px)}
 .dc-RsvpMobile .lbl{display:block;margin:12px 0 6px;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#2B3770}
 .dc-RsvpMobile .in{box-sizing:border-box;width:100%;min-height:44px;padding:10px 14px;border-radius:14px;border:1px solid rgba(28,37,84,.22);background:rgba(255,253,248,.75);font-family:'Nunito',sans-serif;font-size:16px;color:#1C2554}
 .dc-RsvpMobile textarea.in{min-height:76px;resize:none;line-height:1.45}
+.dc-RsvpMobile textarea.in-wtext{min-height:150px;resize:vertical}
 .dc-RsvpMobile .in::placeholder{color:#7C7A98}
 .dc-RsvpMobile .choices{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .dc-RsvpMobile .choice{display:flex;align-items:center;justify-content:center;gap:8px;min-height:44px;border-radius:14px;border:1px solid rgba(28,37,84,.22);background:rgba(255,253,248,.55);color:#1C2554;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:background-color .25s ease,color .25s ease,border-color .25s ease}

@@ -11,7 +11,7 @@ const PHONE_SPOT = {
   DressCodeMobile: { right: 12, bottom: 'calc(clamp(300px, 47.4cqh, 560px) + 14px)' },
   DosDontsMobile: { right: 12, bottom: 'calc(clamp(300px, 51cqh, 580px) + 14px)' },
   RsvpMobile: { right: 12, bottom: 'calc(clamp(330px, 61.6cqh, 640px) + 14px)' },
-  WishesMobile: { right: 12, bottom: 88 },
+  WishesMobile: { left: 12, top: 'max(100px, 13cqh)' }, // the sky left of the flyer, clear of the wish card
   ThankYouMobile: { right: 12, top: '27cqh' },
 };
 

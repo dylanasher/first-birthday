@@ -377,7 +377,7 @@ export default class RsvpDesktop extends React.Component {
                   <label className="lbl a" htmlFor="ws-text">
                     Your wish
                   </label>
-                  <textarea className="in a in-wtext" id="ws-text" placeholder="May you always…" />
+                  <textarea className="in a in-wtext" id="ws-text" placeholder="May you always…" maxLength={1000} rows={6} />
                   <button className="send a" type="button" onClick={v.sendWish}>
                     {"Send my wish "}
                     <svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" style={{"strokeWidth":"2","strokeLinecap":"round","strokeLinejoin":"round"}}>

@@ -33,8 +33,8 @@ export default function wishesCsv() {
         if (!fs.existsSync(file)) fs.writeFileSync(file, HEADER);
         if (req.method === 'GET') {
           const wishes = parseCsv(fs.readFileSync(file, 'utf8').replace(/^﻿/, '')).slice(1)
-            .filter((r) => clean(r[2], 400) && String(r[3] || '').toUpperCase() !== 'FALSE')
-            .map((r) => ({ name: clean(r[1], 40) || 'A friend', text: clean(r[2], 400) }));
+            .filter((r) => clean(r[2], 1000) && String(r[3] || '').toUpperCase() !== 'FALSE')
+            .map((r) => ({ name: clean(r[1], 40) || 'A friend', text: clean(r[2], 1000) }));
           return send(200, { ok: true, wishes });
         }
         if (req.method === 'POST') {
@@ -42,7 +42,7 @@ export default function wishesCsv() {
           req.on('data', (c) => { body += c; if (body.length > 10000) req.destroy(); });
           req.on('end', () => {
             let b; try { b = JSON.parse(body); } catch { return send(400, { ok: false, error: 'Bad request.' }); }
-            const text = clean(b.text, 400), name = clean(b.name, 40) || 'A friend';
+            const text = clean(b.text, 1000), name = clean(b.name, 40) || 'A friend';
             if (!text) return send(200, { ok: false, error: 'Write a little wish first.' });
             const existing = fs.readFileSync(file, 'utf8');
             fs.appendFileSync(file, (existing.endsWith('\n') ? '' : '\n') + [new Date().toISOString(), name, text, 'TRUE'].map(csvCell).join(',') + '\n');

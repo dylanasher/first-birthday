@@ -15,10 +15,16 @@
 .dc-WishesDesktop .flyer{position:absolute;left:180px;top:40px;width:1100px;height:700px;z-index:2;will-change:transform}
 .dc-WishesDesktop .girl{position:absolute;left:470px;top:0;width:600px;height:349px;background:url(/art/girl-broom.webp) 0 0/100% 100% no-repeat;transform-origin:60% 70%;will-change:transform}
 .dc-WishesDesktop .ribbon{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;pointer-events:none}
-.dc-WishesDesktop .wcard{position:absolute;left:0;top:330px;width:460px;box-sizing:border-box;padding:30px 34px 22px;border-radius:22px;background:linear-gradient(160deg,var(--c1,rgba(255,250,240,.72)),var(--c2,rgba(255,240,228,.66)));backdrop-filter:blur(6px) saturate(1.1);-webkit-backdrop-filter:blur(6px) saturate(1.1);transition:background .4s ease;box-shadow:0 22px 46px rgba(60,50,100,.3),inset 0 0 0 1px rgba(255,255,255,.8),0 0 0 1px rgba(233,167,167,.45);transform-origin:455px 1px;pointer-events:auto}
+.dc-WishesDesktop .wcard{position:absolute;left:-100px;top:330px;width:560px;box-sizing:border-box;padding:30px 34px 22px;border-radius:22px;background:linear-gradient(160deg,var(--c1,rgba(255,250,240,.72)),var(--c2,rgba(255,240,228,.66)));backdrop-filter:blur(6px) saturate(1.1);-webkit-backdrop-filter:blur(6px) saturate(1.1);transition:background .4s ease;box-shadow:0 22px 46px rgba(60,50,100,.3),inset 0 0 0 1px rgba(255,255,255,.8),0 0 0 1px rgba(233,167,167,.45);transform-origin:555px 1px;pointer-events:auto}
 .dc-WishesDesktop .wcard::before{content:'';position:absolute;right:-2px;top:-6px;width:14px;height:14px;border-radius:50%;background:var(--pin,#E9A7A7);box-shadow:0 0 0 3px #FFF3DD}
 .dc-WishesDesktop .wq{display:block;color:var(--pin,#E9A7A7) !important;font-family:'IM Fell English',Georgia,serif;font-size:70px;line-height:.6;color:#E9A7A7;height:26px}
 .dc-WishesDesktop .wtext{margin:0;font-family:'IM Fell English',Georgia,serif;font-size:25px;line-height:1.38;color:#2E2A4A;min-height:104px}
+/* long wishes: smaller type, and the text scrolls inside the card instead of running off the screen */
+.dc-WishesDesktop .wtext{max-height:300px;overflow-y:auto;overscroll-behavior:contain;padding-right:6px;margin-right:-6px;scrollbar-width:thin;scrollbar-color:rgba(91,74,122,.4) transparent}
+.dc-WishesDesktop .wtext.long{font-size:21px}
+.dc-WishesDesktop .wtext.xlong{font-size:19px;line-height:1.42}
+.dc-WishesDesktop .wtext:focus-visible{outline:2px solid #5B4A7A;outline-offset:4px;border-radius:6px}
+.dc-WishesDesktop .wcard.turning .wtext{overflow:visible;clip-path:inset(0 -8px 0 0)}
 .dc-WishesDesktop .wname{margin:10px 0 0;font-family:'Pinyon Script',cursive;font-size:34px;line-height:1.1;color:#5B4A7A;text-align:right}
 .dc-WishesDesktop .wnav{display:flex;align-items:center;justify-content:space-between;margin-top:12px;padding-top:12px;border-top:1px dashed rgba(91,74,122,.25)}
 .dc-WishesDesktop .warrow{width:44px;height:44px;border-radius:50%;border:1px solid rgba(91,74,122,.25);background:rgba(255,255,255,.7);display:flex;align-items:center;justify-content:center;cursor:pointer}
